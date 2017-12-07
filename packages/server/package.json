@@ -1,0 +1,43 @@
+{
+  "name": "sistract-server",
+  "version": "0.0.0",
+  "description": "Sistrac - server",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "babel src -d lib",
+    "start": "node lib/index.js",
+    "debug": "node --inspect-brk lib/index.js",
+    "lint": "eslint --ext .jsx,.js . || exit 0"
+  },
+  "keywords": ["rastreo", "control", "trenes", "ferroviario"],
+  "author": "Daniel Barreiro",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "babel-preset-stage-1": "^6.24.1",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.4",
+    "md5": "^2.2.1",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0",
+    "node-mysql-promise2": "^0.1.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1"
+  }
+}
