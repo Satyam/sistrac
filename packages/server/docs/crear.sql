@@ -1,36 +1,47 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Dec 08, 2017 at 07:11 PM
+-- Server version: 5.7.20-0ubuntu0.16.04.1
+-- PHP Version: 7.0.22-0ubuntu0.16.04.1
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `sistrac`
 --
 DROP DATABASE IF EXISTS `sistrac`;
-CREATE DATABASE IF NOT EXISTS `sistrac` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+CREATE DATABASE IF NOT EXISTS `sistrac` DEFAULT CHARACTER SET utf8 ;
 USE `sistrac`;
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `escalas`
+-- Table structure for table `Escalas`
 --
 
-DROP TABLE IF EXISTS `escalas`;
-CREATE TABLE IF NOT EXISTS `escalas` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Estacion` int(11) NOT NULL DEFAULT '0',
-  `Llega` int(11) NOT NULL DEFAULT '0',
-  `Itinerario` int(11) NOT NULL DEFAULT '0',
-  `Orden` int(11) NOT NULL DEFAULT '0',
-  `Sale` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 ;
+CREATE TABLE `Escalas` (
+  `idEscala` int(11) NOT NULL,
+  `idEstacion` int(11) NOT NULL DEFAULT '0',
+  `llega` int(11) NOT NULL DEFAULT '0',
+  `idItinerario` int(11) NOT NULL DEFAULT '0',
+  `orden` int(11) NOT NULL DEFAULT '0',
+  `sale` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `escalas`
+-- Dumping data for table `Escalas`
 --
 
-INSERT INTO `escalas` (`ID`, `Estacion`, `Llega`, `Itinerario`, `Orden`, `Sale`) VALUES
+INSERT INTO `Escalas` (`idEscala`, `idEstacion`, `llega`, `idItinerario`, `orden`, `sale`) VALUES
 (1, 1, 0, 1, 1, 0),
 (2, 9, 60, 1, 2, 65),
 (3, 10, 97, 1, 3, 102),
@@ -43,24 +54,22 @@ INSERT INTO `escalas` (`ID`, `Estacion`, `Llega`, `Itinerario`, `Orden`, `Sale`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estaciones`
+-- Table structure for table `Estaciones`
 --
 
-DROP TABLE IF EXISTS `estaciones`;
-CREATE TABLE IF NOT EXISTS `estaciones` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(100) NOT NULL DEFAULT '',
-  `Latitud` double NOT NULL DEFAULT '0',
-  `Sigla` varchar(100) NOT NULL DEFAULT '',
-  `Longitud` double NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 ;
+CREATE TABLE `Estaciones` (
+  `idEstacion` int(11) NOT NULL,
+  `nombre` varchar(100)  NOT NULL DEFAULT '',
+  `latitud` double NOT NULL DEFAULT '0',
+  `sigla` varchar(100)  NOT NULL DEFAULT '',
+  `longitud` double NOT NULL DEFAULT '0'
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `estaciones`
+-- Dumping data for table `Estaciones`
 --
 
-INSERT INTO `estaciones` (`ID`, `Nombre`, `Latitud`, `Sigla`, `Longitud`) VALUES
+INSERT INTO `Estaciones` (`idEstacion`, `nombre`, `latitud`, `sigla`, `longitud`) VALUES
 (1, 'Retiro', -34.590672, 'RET', -58.377158),
 (2, '3 de Febrero', -34.5719, '3FB', -58.425296),
 (3, 'Carranza', -34.57584, 'CRZ', -58.435669),
@@ -71,174 +80,162 @@ INSERT INTO `estaciones` (`ID`, `Nombre`, `Latitud`, `Sigla`, `Longitud`) VALUES
 (11, 'San Nicolás', -33.344411, 'SNC', -60.226147),
 (12, 'Miguelete Tecnotrén', -34.581334, 'MGT', -58.516368),
 (13, 'Tornavía Tecnotrén', -34.578076, 'TNV', -58.52605),
-(14, 'Sociales Tecnotrén', -34.58084, 'SCT', -58.521459),
-(15, 'Ecuatorlal', 0, 'ECT', 0),
-(16, 'Ecuatorial', 0, 'ECT', 0);
+(14, 'Sociales Tecnotrén', -34.58084, 'SCT', -58.521459);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `eventos`
+-- Table structure for table `Eventos`
 --
 
-DROP TABLE IF EXISTS `eventos`;
-CREATE TABLE IF NOT EXISTS `eventos` (
-  `Fecha` bigint(20) NOT NULL DEFAULT '0',
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Usuario` int(11) NOT NULL DEFAULT '0',
-  `Funcion` int(11) NOT NULL DEFAULT '0',
-  `Tren` int(11) NOT NULL DEFAULT '0',
-  `Estacion` int(11) NOT NULL DEFAULT '0',
-  `Combustible` int(11) NOT NULL DEFAULT '0',
-  `Observaciones` blob NOT NULL,
-  `Longitud` double NOT NULL DEFAULT '0',
-  `Velocidad` double NOT NULL DEFAULT '0',
-  `Latitud` double NOT NULL DEFAULT '0',
-  `TipoEmergencia` int(11) NOT NULL DEFAULT '0',
-  `Tipo` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=41 ;
+CREATE TABLE `Eventos` (
+  `idEvento` int(11) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idUsuario` int(11) NOT NULL DEFAULT '0',
+  `funcion` int(11) NOT NULL DEFAULT '0',
+  `idTren` int(11) NOT NULL DEFAULT '0',
+  `idEstacion` int(11) NOT NULL DEFAULT '0',
+  `combustible` int(11) NOT NULL DEFAULT '0',
+  `observaciones` blob NOT NULL,
+  `longitud` double NOT NULL DEFAULT '0',
+  `velocidad` double NOT NULL DEFAULT '0',
+  `latitud` double NOT NULL DEFAULT '0',
+  `idTipoEmergencia` int(11) NOT NULL DEFAULT '0',
+  `idTipoEvento` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `eventos`
+-- Dumping data for table `Eventos`
 --
 
-INSERT INTO `eventos` (`Fecha`, `ID`, `Usuario`, `Funcion`, `Tren`, `Estacion`, `Combustible`, `Observaciones`, `Longitud`, `Velocidad`, `Latitud`, `TipoEmergencia`, `Tipo`) VALUES
-(1473564966, 7, 7, 3, 2, 9, 0, '', -59.038071, 0, -34.097548, 0, 3),
-(1473564585, 5, 7, 3, 2, 1, 0, '', -58.377158, 0, -34.590672, 0, 1),
-(1473564776, 6, 7, 3, 2, 9, 0, '', -59.038071, 0, -34.097548, 0, 2),
-(1473565229, 8, 7, 3, 2, 10, 0, '', -59.680496, 0, -33.694033, 0, 2),
-(1473565417, 9, 7, 3, 2, 10, 0, '', -59.680496, 0, -33.694033, 0, 3),
-(1473565846, 10, 7, 3, 2, 11, 0, '', -60.226147, 0, -33.344411, 0, 2),
-(1473565974, 11, 7, 3, 2, 11, 0, '', -60.226147, 0, -33.344411, 0, 3),
-(1473566355, 12, 7, 3, 2, 8, 0, 0x46696e616c, -60.657509, 0, -32.930863, 0, 4),
-(1474053643, 13, 2, 1, 8, 1, 0, 0x53616c65206465206c61207465726d696e616c, -58.377158, 0, -34.590672, 0, 1),
-(1474053954, 14, 2, 1, 8, 9, 0, '', -59.038071, 0, -34.097548, 0, 2),
-(1474054020, 15, 2, 1, 8, 9, 0, '', -59.038071, 0, -34.097548, 0, 3),
-(1474054265, 16, 2, 1, 8, 10, 0, '', -59.680496, 0, -33.694033, 0, 2),
-(1474054390, 17, 2, 1, 8, 10, 0, '', -59.680496, 0, -33.694033, 0, 3),
-(1474054457, 18, 2, 1, 8, 11, 0, '', -60.226147, 0, -33.344411, 0, 2),
-(1474054826, 19, 2, 1, 8, 11, 0, '', -60.226147, 0, -33.344411, 0, 3),
-(1474056935, 20, 2, 1, 8, 8, 0, '', -60.657509, 0, -32.930863, 0, 4),
-(1474055831, 21, 7, 3, 7, 1, 0, 0x53616c652064652052657469726f, -58.377158, 0, -34.590672, 0, 1),
-(1474056559, 22, 7, 3, 7, 9, 0, 0x4c6c6567612061205ac3a172617465, -59.038071, 0, -34.097548, 0, 2),
-(1474598264, 23, 2, 1, 1, 1, 0, 0x416361626f2064652073616c69722c206c6f636f, -58.4344687, 0, -34.6176428, 0, 1),
-(1474598396, 24, 2, 1, 1, 9, 0, 0x44616c652c20666f72726f, -58.4344687, 0, -34.6176428, 0, 2),
-(1474726109, 25, 2, 1, 1, 9, 0, 0x506973c3a920756e206368616e63686f, -58.4344687, 0, -34.6176428, 3, 7),
-(1474726636, 26, 2, 1, 1, 9, 0, 0x4d652073616cc3ad, -58.4344687, 0, -34.6176428, 4, 7),
-(1474728889, 27, 2, 1, 1, 9, 0, 0x412076657220736920616e646120746f646f, -58.4344687, 0, -34.6176428, 8, 7),
-(1474728917, 28, 2, 1, 1, 9, 0, 0x546f646f2061727265676c61646f, -58.4344687, 0, -34.6176428, 7, 8),
-(1474773682, 29, 2, 1, 1, 9, 0, 0x457870657269656d6e746f, -58.4344687, 0, -34.6176428, 1, 7),
-(1474774240, 30, 2, 1, 1, 9, 0, '', -58.4344687, 0, -34.6176428, 7, 8),
-(1474774303, 31, 2, 1, 1, 9, 0, 0x4f747261206dc3a173, -58.4344687, 0, -34.6176428, 1, 7),
-(1474774325, 32, 2, 1, 1, 9, 0, 0x546f646f2072657375656c746f, -58.4344687, 0, -34.6176428, 7, 8),
-(1475074415, 33, 2, 1, 1, 9, 0, '', 1.8039035, 0, 41.2382201, 7, 3),
-(1475074616, 34, 2, 1, 1, 10, 0, 0x536f6e616d6f730d0a, 1.8038793, 0, 41.2381851, 1, 7),
-(1475074998, 35, 2, 1, 1, 10, 0, '', 1.8038871, 0, 41.2382194, 7, 8),
-(1475206871, 36, 2, 1, 9, 1, 0, 0x426c61, 0, 0, 0, 7, 1),
-(1475189410, 37, 2, 1, 9, 9, 0, 0x4c6c65677565, 0, 0, 0, 7, 2),
-(1475189525, 38, 2, 1, 9, 9, 0, 0x486f6c61, -58.3807908, 0, -34.6288901, 2, 7),
-(1475777618, 39, 2, 1, 10, 1, 0, 0x53616c696d6f732064652052657469726f, 0, 0, 0, 7, 1),
-(1475796051, 40, 2, 1, 10, 9, 0, '', -58.3807693, 0, -34.6288651, 2, 7);
+INSERT INTO `Eventos` (`idEvento`, `fecha`, `idUsuario`, `funcion`, `idTren`, `idEstacion`, `combustible`, `observaciones`, `longitud`, `velocidad`, `latitud`, `idTipoEmergencia`, `idTipoEvento`) VALUES
+(7, '2016-09-11 03:36:06', 7, 3, 2, 9, 0, '', -59.038071, 0, -34.097548, 0, 3),
+(5, '2016-09-11 03:29:45', 7, 3, 2, 1, 0, '', -58.377158, 0, -34.590672, 0, 1),
+(6, '2016-09-11 03:32:56', 7, 3, 2, 9, 0, '', -59.038071, 0, -34.097548, 0, 2),
+(8, '2016-09-11 03:40:29', 7, 3, 2, 10, 0, '', -59.680496, 0, -33.694033, 0, 2),
+(9, '2016-09-11 03:43:37', 7, 3, 2, 10, 0, '', -59.680496, 0, -33.694033, 0, 3),
+(10, '2016-09-11 03:50:46', 7, 3, 2, 11, 0, '', -60.226147, 0, -33.344411, 0, 2),
+(11, '2016-09-11 03:52:54', 7, 3, 2, 11, 0, '', -60.226147, 0, -33.344411, 0, 3),
+(12, '2016-09-11 03:59:15', 7, 3, 2, 8, 0, 0x46696e616c, -60.657509, 0, -32.930863, 0, 4),
+(13, '2016-09-16 19:20:43', 2, 1, 8, 1, 0, 0x53616c65206465206c61207465726d696e616c, -58.377158, 0, -34.590672, 0, 1),
+(14, '2016-09-16 19:25:54', 2, 1, 8, 9, 0, '', -59.038071, 0, -34.097548, 0, 2),
+(15, '2016-09-16 19:27:00', 2, 1, 8, 9, 0, '', -59.038071, 0, -34.097548, 0, 3),
+(16, '2016-09-16 19:31:05', 2, 1, 8, 10, 0, '', -59.680496, 0, -33.694033, 0, 2),
+(17, '2016-09-16 19:33:10', 2, 1, 8, 10, 0, '', -59.680496, 0, -33.694033, 0, 3),
+(18, '2016-09-16 19:34:17', 2, 1, 8, 11, 0, '', -60.226147, 0, -33.344411, 0, 2),
+(19, '2016-09-16 19:40:26', 2, 1, 8, 11, 0, '', -60.226147, 0, -33.344411, 0, 3),
+(20, '2016-09-16 20:15:35', 2, 1, 8, 8, 0, '', -60.657509, 0, -32.930863, 0, 4),
+(21, '2016-09-16 19:57:11', 7, 3, 7, 1, 0, 0x53616c652064652052657469726f, -58.377158, 0, -34.590672, 0, 1),
+(22, '2016-09-16 20:09:19', 7, 3, 7, 9, 0, 0x4c6c6567612061205ac3a172617465, -59.038071, 0, -34.097548, 0, 2),
+(23, '2016-09-23 02:37:44', 2, 1, 1, 1, 0, 0x416361626f2064652073616c69722c206c6f636f, -58.4344687, 0, -34.6176428, 0, 1),
+(24, '2016-09-23 02:39:56', 2, 1, 1, 9, 0, 0x44616c652c20666f72726f, -58.4344687, 0, -34.6176428, 0, 2),
+(25, '2016-09-24 14:08:29', 2, 1, 1, 9, 0, 0x506973c3a920756e206368616e63686f, -58.4344687, 0, -34.6176428, 3, 7),
+(26, '2016-09-24 14:17:16', 2, 1, 1, 9, 0, 0x4d652073616cc3ad, -58.4344687, 0, -34.6176428, 4, 7),
+(27, '2016-09-24 14:54:49', 2, 1, 1, 9, 0, 0x412076657220736920616e646120746f646f, -58.4344687, 0, -34.6176428, 8, 7),
+(28, '2016-09-24 14:55:17', 2, 1, 1, 9, 0, 0x546f646f2061727265676c61646f, -58.4344687, 0, -34.6176428, 7, 8),
+(29, '2016-09-25 03:21:22', 2, 1, 1, 9, 0, 0x457870657269656d6e746f, -58.4344687, 0, -34.6176428, 1, 7),
+(30, '2016-09-25 03:30:40', 2, 1, 1, 9, 0, '', -58.4344687, 0, -34.6176428, 7, 8),
+(31, '2016-09-25 03:31:43', 2, 1, 1, 9, 0, 0x4f747261206dc3a173, -58.4344687, 0, -34.6176428, 1, 7),
+(32, '2016-09-25 03:32:05', 2, 1, 1, 9, 0, 0x546f646f2072657375656c746f, -58.4344687, 0, -34.6176428, 7, 8),
+(33, '2016-09-28 14:53:35', 2, 1, 1, 9, 0, '', 1.8039035, 0, 41.2382201, 7, 3),
+(34, '2016-09-28 14:56:56', 2, 1, 1, 10, 0, 0x536f6e616d6f730d0a, 1.8038793, 0, 41.2381851, 1, 7),
+(35, '2016-09-28 15:03:18', 2, 1, 1, 10, 0, '', 1.8038871, 0, 41.2382194, 7, 8),
+(36, '2016-09-30 03:41:11', 2, 1, 9, 1, 0, 0x426c61, 0, 0, 0, 7, 1),
+(37, '2016-09-29 22:50:10', 2, 1, 9, 9, 0, 0x4c6c65677565, 0, 0, 0, 7, 2),
+(38, '2016-09-29 22:52:05', 2, 1, 9, 9, 0, 0x486f6c61, -58.3807908, 0, -34.6288901, 2, 7),
+(39, '2016-10-06 18:13:38', 2, 1, 10, 1, 0, 0x53616c696d6f732064652052657469726f, 0, 0, 0, 7, 1),
+(40, '2016-10-06 23:20:51', 2, 1, 10, 9, 0, '', -58.3807693, 0, -34.6288651, 2, 7);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `itinerarios`
+-- Table structure for table `Itinerarios`
 --
 
-DROP TABLE IF EXISTS `itinerarios`;
-CREATE TABLE IF NOT EXISTS `itinerarios` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 ;
+CREATE TABLE `Itinerarios` (
+  `idItinerario` int(11) NOT NULL,
+  `nombre` varchar(100)  NOT NULL DEFAULT ''
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `itinerarios`
+-- Dumping data for table `Itinerarios`
 --
 
-INSERT INTO `itinerarios` (`ID`, `Nombre`) VALUES
+INSERT INTO `Itinerarios` (`idItinerario`, `nombre`) VALUES
 (1, 'Retiro-Rosario'),
 (2, 'Probador');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pings`
+-- Table structure for table `Pings`
 --
 
-DROP TABLE IF EXISTS `pings`;
-CREATE TABLE IF NOT EXISTS `pings` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Usuario` int(11) NOT NULL DEFAULT '0',
-  `Tiempo` bigint(20) NOT NULL DEFAULT '0',
-  `Latitud` double NOT NULL DEFAULT '0',
-  `Velocidad` int(11) NOT NULL DEFAULT '0',
-  `Direccion` int(11) NOT NULL DEFAULT '0',
-  `TiempoAgregado` bigint(20) NOT NULL DEFAULT '0',
-  `Longitud` double NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 ;
+CREATE TABLE `Pings` (
+  `idPing` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL DEFAULT '0',
+  `tiempo` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `latitud` double NOT NULL DEFAULT '0',
+  `velocidad` int(11) NOT NULL DEFAULT '0',
+  `direccion` int(11) NOT NULL DEFAULT '0',
+  `tiempoAgregado` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `longitud` double NOT NULL DEFAULT '0'
+) ENGINE=MyISAM ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `revisiones`
+-- Table structure for table `Revisiones`
 --
 
-DROP TABLE IF EXISTS `revisiones`;
-CREATE TABLE IF NOT EXISTS `revisiones` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Observaciones` blob NOT NULL,
-  `Usuario` int(11) NOT NULL DEFAULT '0',
-  `Fecha` bigint(20) NOT NULL DEFAULT '0',
-  `Apto` tinyint(1) NOT NULL DEFAULT '0',
-  `Chapa` int(11) NOT NULL DEFAULT '0',
-  `Combustible` int(11) NOT NULL DEFAULT '0',
-  `Estacion` int(11) NOT NULL DEFAULT '0',
-  `Numero` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 ;
+CREATE TABLE `Revisiones` (
+  `idRevision` int(11) NOT NULL,
+  `observaciones` blob NOT NULL,
+  `idUsuario` int(11) NOT NULL DEFAULT '0',
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `apto` tinyint(1) NOT NULL DEFAULT '0',
+  `chapa` int(11) NOT NULL DEFAULT '0',
+  `combustible` int(11) NOT NULL DEFAULT '0',
+  `idEstacion` int(11) NOT NULL DEFAULT '0',
+  `numero` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `revisiones`
+-- Dumping data for table `Revisiones`
 --
 
-INSERT INTO `revisiones` (`ID`, `Observaciones`, `Usuario`, `Fecha`, `Apto`, `Chapa`, `Combustible`, `Estacion`, `Numero`) VALUES
-(1, 0x73646667, 0, 1474753063, 1, 0, 0, 1, 9069),
-(2, 0x73646667, 0, 1474753063, 1, 45, 0, 2, 0),
-(3, 0x43686f72726561206772617361, 0, 1474753185, 0, 0, 0, 3, 9069),
-(4, 0x73646667, 0, 1474753185, 1, 45, 0, 1, 0),
-(5, 0x546f646f206269656e2d746f, 5, 1474755644, 1, 0, 5000, 1, 9084),
-(6, 0x546f646f206d616c2d746f, 5, 1474755768, 0, 0, 6, 1, 9084),
-(7, 0x41727265676c616461, 5, 1474757991, 1, 0, 43, 1, 9084),
-(8, 0x4f6b, 5, 1475075353, 1, 0, 100, 1, 9069),
-(9, '', 5, 1475075353, 1, 45, 0, 1, 0),
-(10, 0x4f6b, 5, 1475075373, 1, 0, 100, 1, 9069),
-(11, 0x426f6e69746f0d0a, 5, 1475075373, 1, 45, 0, 1, 0),
-(12, 0x4f6b, 5, 1475075433, 1, 0, 100, 1, 9069),
-(13, 0x426f6e69746f0d0a, 5, 1475075433, 1, 45, 0, 1, 0),
-(14, 0x6e616461, 5, 1475795941, 1, 0, 500, 1, 9069);
+INSERT INTO `Revisiones` (`idRevision`, `observaciones`, `idUsuario`, `fecha`, `apto`, `chapa`, `combustible`, `idEstacion`, `numero`) VALUES
+(1, 0x73646667, 0, '2016-09-24 21:37:43', 1, 0, 0, 1, 9069),
+(2, 0x73646667, 0, '2016-09-24 21:37:43', 1, 45, 0, 2, 0),
+(3, 0x43686f72726561206772617361, 0, '2016-09-24 21:39:45', 0, 0, 0, 3, 9069),
+(4, 0x73646667, 0, '2016-09-24 21:39:45', 1, 45, 0, 1, 0),
+(5, 0x546f646f206269656e2d746f, 5, '2016-09-24 22:20:44', 1, 0, 5000, 1, 9084),
+(6, 0x546f646f206d616c2d746f, 5, '2016-09-24 22:22:48', 0, 0, 6, 1, 9084),
+(7, 0x41727265676c616461, 5, '2016-09-24 22:59:51', 1, 0, 43, 1, 9084),
+(8, 0x4f6b, 5, '2016-09-28 15:09:13', 1, 0, 100, 1, 9069),
+(9, '', 5, '2016-09-28 15:09:13', 1, 45, 0, 1, 0),
+(10, 0x4f6b, 5, '2016-09-28 15:09:33', 1, 0, 100, 1, 9069),
+(11, 0x426f6e69746f0d0a, 5, '2016-09-28 15:09:33', 1, 45, 0, 1, 0),
+(12, 0x4f6b, 5, '2016-09-28 15:10:33', 1, 0, 100, 1, 9069),
+(13, 0x426f6e69746f0d0a, 5, '2016-09-28 15:10:33', 1, 45, 0, 1, 0),
+(14, 0x6e616461, 5, '2016-10-06 23:19:01', 1, 0, 500, 1, 9069);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipoemergencias`
+-- Table structure for table `TipoEmergencias`
 --
 
-DROP TABLE IF EXISTS `tipoemergencias`;
-CREATE TABLE IF NOT EXISTS `tipoemergencias` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Tipo` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 ;
+CREATE TABLE `TipoEmergencias` (
+  `idTipoEmergencia` int(11) NOT NULL,
+  `tipo` varchar(100)  NOT NULL DEFAULT ''
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `tipoemergencias`
+-- Dumping data for table `TipoEmergencias`
 --
 
-INSERT INTO `tipoemergencias` (`ID`, `Tipo`) VALUES
+INSERT INTO `TipoEmergencias` (`idTipoEmergencia`, `tipo`) VALUES
 (1, 'Choque con vehículo'),
 (2, 'Atropello de persona'),
 (3, 'Atropello de ganado'),
@@ -251,22 +248,20 @@ INSERT INTO `tipoemergencias` (`ID`, `Tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipoevento`
+-- Table structure for table `TipoEvento`
 --
 
-DROP TABLE IF EXISTS `tipoevento`;
-CREATE TABLE IF NOT EXISTS `tipoevento` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Preposicion` varchar(100) NOT NULL DEFAULT '',
-  `Tipo` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 ;
+CREATE TABLE `TipoEvento` (
+  `idTipoEvento` int(11) NOT NULL,
+  `preposicion` varchar(100)  NOT NULL DEFAULT '',
+  `tipo` varchar(100)  NOT NULL DEFAULT ''
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `tipoevento`
+-- Dumping data for table `TipoEvento`
 --
 
-INSERT INTO `tipoevento` (`ID`, `Preposicion`, `Tipo`) VALUES
+INSERT INTO `TipoEvento` (`idTipoEvento`, `preposicion`, `tipo`) VALUES
 (1, 'de', 'Sale de terminal'),
 (2, 'a', 'Llega'),
 (3, 'de', 'Sale'),
@@ -279,67 +274,63 @@ INSERT INTO `tipoevento` (`ID`, `Preposicion`, `Tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `trenes`
+-- Table structure for table `Trenes`
 --
 
-DROP TABLE IF EXISTS `trenes`;
-CREATE TABLE IF NOT EXISTS `trenes` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Itinerario` int(11) NOT NULL DEFAULT '0',
-  `Fecha` bigint(20) NOT NULL DEFAULT '0',
-  `Chapa` int(11) NOT NULL DEFAULT '0',
-  `Guarda` int(11) NOT NULL DEFAULT '0',
-  `Ayudante` int(11) NOT NULL DEFAULT '0',
-  `Conductor` int(11) NOT NULL DEFAULT '0',
-  `Locomotora` int(11) NOT NULL DEFAULT '0',
-  `Estado` int(11) NOT NULL DEFAULT '0',
-  `EstadoAnterior` int(11) NOT NULL DEFAULT '0',
-  `Numero` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 ;
+CREATE TABLE `Trenes` (
+  `idTren` int(11) NOT NULL,
+  `idItinerario` int(11) NOT NULL DEFAULT '0',
+  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `chapa` int(11) NOT NULL DEFAULT '0',
+  `idGuarda` int(11) NOT NULL DEFAULT '0',
+  `idAyudante` int(11) NOT NULL DEFAULT '0',
+  `idConductor` int(11) NOT NULL DEFAULT '0',
+  `locomotora` int(11) NOT NULL DEFAULT '0',
+  `estado` int(11) NOT NULL DEFAULT '0',
+  `estadoAnterior` int(11) NOT NULL DEFAULT '0',
+  `numero` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `trenes`
+-- Dumping data for table `Trenes`
 --
 
-INSERT INTO `trenes` (`ID`, `Itinerario`, `Fecha`, `Chapa`, `Guarda`, `Ayudante`, `Conductor`, `Locomotora`, `Estado`, `EstadoAnterior`, `Numero`) VALUES
-(1, 1, 1475056800, 45, 2, 7, 3, 9069, 3, 1, 303),
-(2, 1, 1473564300, 11, 9, 7, 8, 8447, 3, 0, 300),
-(3, 0, 1474053600, 45, 9, 7, 3, 9069, 0, 0, 303),
-(4, 0, 1474053600, 45, 9, 7, 8, 9069, 0, 0, 303),
-(5, 0, 1474053600, 45, 9, 7, 8, 9069, 0, 0, 303),
-(6, 0, 1474052940, 45, 9, 7, 8, 9069, 0, 0, 303),
-(7, 1, 1474053600, 45, 9, 7, 8, 9069, 2, 0, 303),
-(8, 1, 1474055400, 45, 2, 4, 3, 9069, 3, 0, 305),
-(9, 1, 1475166600, 13, 9, 7, 3, 9096, -1, 2, 309),
-(10, 1, 1475770500, 12, 2, 7, 8, 9069, 7, 2, 507);
+INSERT INTO `Trenes` (`idTren`, `idItinerario`, `fecha`, `chapa`, `idGuarda`, `idAyudante`, `idConductor`, `locomotora`, `estado`, `estadoAnterior`, `numero`) VALUES
+(1, 1, '2016-09-28 10:00:00', 45, 2, 7, 3, 9069, 3, 1, 303),
+(2, 1, '2016-09-11 03:25:00', 11, 9, 7, 8, 8447, 3, 0, 300),
+(3, 0, '2016-09-16 19:20:00', 45, 9, 7, 3, 9069, 0, 0, 303),
+(4, 0, '2016-09-16 19:20:00', 45, 9, 7, 8, 9069, 0, 0, 303),
+(5, 0, '2016-09-16 19:20:00', 45, 9, 7, 8, 9069, 0, 0, 303),
+(6, 0, '2016-09-16 19:09:00', 45, 9, 7, 8, 9069, 0, 0, 303),
+(7, 1, '2016-09-16 19:20:00', 45, 9, 7, 8, 9069, 2, 0, 303),
+(8, 1, '2016-09-16 19:50:00', 45, 2, 4, 3, 9069, 3, 0, 305),
+(9, 1, '2016-09-29 16:30:00', 13, 9, 7, 3, 9096, -1, 2, 309),
+(10, 1, '2016-10-06 16:15:00', 12, 2, 7, 8, 9069, 7, 2, 507);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `Usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Password` varchar(100) NOT NULL DEFAULT '',
-  `Usuario` varchar(100) NOT NULL DEFAULT '',
-  `Nivel` int(11) NOT NULL DEFAULT '0',
-  `RolGuarda` tinyint(1) NOT NULL DEFAULT '0',
-  `RolDios` tinyint(1) NOT NULL DEFAULT '0',
-  `RolSupervisor` tinyint(1) NOT NULL DEFAULT '0',
-  `RolMecanico` tinyint(1) NOT NULL DEFAULT '0',
-  `Funcion` int(11) NOT NULL DEFAULT '0',
-  `Nombre` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 ;
+CREATE TABLE `Usuarios` (
+  `idUsuario` int(11) NOT NULL,
+  `password` varchar(100)  NOT NULL DEFAULT '',
+  `usuario` varchar(100)  NOT NULL DEFAULT '',
+  `nivel` int(11) NOT NULL DEFAULT '0',
+  `rolGuarda` tinyint(1) NOT NULL DEFAULT '0',
+  `rolDios` tinyint(1) NOT NULL DEFAULT '0',
+  `rolSupervisor` tinyint(1) NOT NULL DEFAULT '0',
+  `rolMecanico` tinyint(1) NOT NULL DEFAULT '0',
+  `funcion` int(11) NOT NULL DEFAULT '0',
+  `nombre` varchar(100)  NOT NULL DEFAULT ''
+) ENGINE=MyISAM ;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `Usuarios`
 --
 
-INSERT INTO `usuarios` (`ID`, `Password`, `Usuario`, `Nivel`, `RolGuarda`, `RolDios`, `RolSupervisor`, `RolMecanico`, `Funcion`, `Nombre`) VALUES
+INSERT INTO `Usuarios` (`idUsuario`, `password`, `usuario`, `nivel`, `rolGuarda`, `rolDios`, `rolSupervisor`, `rolMecanico`, `funcion`, `nombre`) VALUES
 (1, 'e24fa5f1901c2c38540e9adef2e3b0a1', 'themistocles', 1, 1, 1, 1, 1, 0, 'Ricardo Barreiro'),
 (2, '54e8a1106eeb36711ecb8c94598bcc70', 'juanperez', 0, 1, 0, 0, 0, 1, 'Juan Pérez'),
 (3, '013d3a82435fe0809d1e6396b3e4f69c', 'franciscosavio', 0, 1, 0, 0, 0, 2, 'Francisco Savio'),
@@ -350,4 +341,127 @@ INSERT INTO `usuarios` (`ID`, `Password`, `Usuario`, `Nivel`, `RolGuarda`, `RolD
 (8, 'afa27acf2e8fc7161ee993c421502674', 'caseyjones', 0, 1, 0, 0, 0, 2, 'Casey Jones'),
 (9, 'cd616f2f57739f3831531950d63c7d2f', 'juanmajic', 0, 1, 0, 0, 0, 1, 'Juan Majic');
 
-CREATE UNIQUE INDEX `usuarios-Usuario` ON usuarios (Usuario);
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Escalas`
+--
+ALTER TABLE `Escalas`
+  ADD PRIMARY KEY (`idEscala`);
+
+--
+-- Indexes for table `Estaciones`
+--
+ALTER TABLE `Estaciones`
+  ADD PRIMARY KEY (`idEstacion`),
+  ADD UNIQUE KEY `Estaciones-Nombre` (`nombre`),
+  ADD UNIQUE KEY `Estaciones-Sigla` (`sigla`);
+
+--
+-- Indexes for table `Eventos`
+--
+ALTER TABLE `Eventos`
+  ADD PRIMARY KEY (`idEvento`);
+
+--
+-- Indexes for table `Itinerarios`
+--
+ALTER TABLE `Itinerarios`
+  ADD PRIMARY KEY (`idItinerario`);
+
+--
+-- Indexes for table `Pings`
+--
+ALTER TABLE `Pings`
+  ADD PRIMARY KEY (`idPing`);
+
+--
+-- Indexes for table `Revisiones`
+--
+ALTER TABLE `Revisiones`
+  ADD PRIMARY KEY (`idRevision`);
+
+--
+-- Indexes for table `TipoEmergencias`
+--
+ALTER TABLE `TipoEmergencias`
+  ADD PRIMARY KEY (`idTipoEmergencia`);
+
+--
+-- Indexes for table `TipoEvento`
+--
+ALTER TABLE `TipoEvento`
+  ADD PRIMARY KEY (`idTipoEvento`);
+
+--
+-- Indexes for table `Trenes`
+--
+ALTER TABLE `Trenes`
+  ADD PRIMARY KEY (`idTren`);
+
+--
+-- Indexes for table `Usuarios`
+--
+ALTER TABLE `Usuarios`
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD UNIQUE KEY `Usuarios-Usuario` (`usuario`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Escalas`
+--
+ALTER TABLE `Escalas`
+  MODIFY `idEscala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `Estaciones`
+--
+ALTER TABLE `Estaciones`
+  MODIFY `idEstacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `Eventos`
+--
+ALTER TABLE `Eventos`
+  MODIFY `idEvento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+--
+-- AUTO_INCREMENT for table `Itinerarios`
+--
+ALTER TABLE `Itinerarios`
+  MODIFY `idItinerario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `Pings`
+--
+ALTER TABLE `Pings`
+  MODIFY `idPing` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Revisiones`
+--
+ALTER TABLE `Revisiones`
+  MODIFY `idRevision` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `TipoEmergencias`
+--
+ALTER TABLE `TipoEmergencias`
+  MODIFY `idTipoEmergencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `TipoEvento`
+--
+ALTER TABLE `TipoEvento`
+  MODIFY `idTipoEvento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `Trenes`
+--
+ALTER TABLE `Trenes`
+  MODIFY `idTren` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `Usuarios`
+--
+ALTER TABLE `Usuarios`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

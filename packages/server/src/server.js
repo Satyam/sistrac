@@ -11,7 +11,7 @@ import { PORT, ROOT_DIR, REST_API_PATH } from '../config';
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
 
-import { userRoutes, setStrategy, authenticate } from './user';
+import { userRoutes, setStrategy, authenticate } from './usuarios';
 
 const absPath = relPath => join(ROOT_DIR, relPath);
 
@@ -58,4 +58,3 @@ export async function start() {
   await setStrategy();
   await listen(PORT);
 }
-

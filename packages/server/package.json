@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "build": "babel src -d lib",
+    "debugTest": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "build": "rm lib -rf & babel src -d lib -s --ignore __tests__",
     "start": "node lib/index.js",
     "debug": "node --inspect-brk lib/index.js",
     "lint": "eslint --ext .jsx,.js . || exit 0"
