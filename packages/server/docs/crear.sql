@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 -- Database: `sistrac`
 --
 DROP DATABASE IF EXISTS `sistrac`;
-CREATE DATABASE IF NOT EXISTS `sistrac` DEFAULT CHARACTER SET utf8 ;
+CREATE DATABASE IF NOT EXISTS `sistrac` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `sistrac`;
 -- --------------------------------------------------------
 
@@ -35,7 +35,7 @@ CREATE TABLE `Escalas` (
   `idItinerario` int(11) NOT NULL DEFAULT '0',
   `orden` int(11) NOT NULL DEFAULT '0',
   `sale` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM ;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `Escalas`
@@ -59,11 +59,11 @@ INSERT INTO `Escalas` (`idEscala`, `idEstacion`, `llega`, `idItinerario`, `orden
 
 CREATE TABLE `Estaciones` (
   `idEstacion` int(11) NOT NULL,
-  `nombre` varchar(100)  NOT NULL DEFAULT '',
+  `nombre` varchar(100) NOT NULL DEFAULT '',
   `latitud` double NOT NULL DEFAULT '0',
-  `sigla` varchar(100)  NOT NULL DEFAULT '',
+  `sigla` varchar(100) NOT NULL DEFAULT '',
   `longitud` double NOT NULL DEFAULT '0'
-) ENGINE=MyISAM ;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `Estaciones`
@@ -96,13 +96,13 @@ CREATE TABLE `Eventos` (
   `idTren` int(11) NOT NULL DEFAULT '0',
   `idEstacion` int(11) NOT NULL DEFAULT '0',
   `combustible` int(11) NOT NULL DEFAULT '0',
-  `observaciones` blob NOT NULL,
+  `observaciones` text NOT NULL,
   `longitud` double NOT NULL DEFAULT '0',
   `velocidad` double NOT NULL DEFAULT '0',
   `latitud` double NOT NULL DEFAULT '0',
   `idTipoEmergencia` int(11) NOT NULL DEFAULT '0',
   `idTipoEvento` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM ;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `Eventos`
@@ -116,8 +116,8 @@ INSERT INTO `Eventos` (`idEvento`, `fecha`, `idUsuario`, `funcion`, `idTren`, `i
 (9, '2016-09-11 03:43:37', 7, 3, 2, 10, 0, '', -59.680496, 0, -33.694033, 0, 3),
 (10, '2016-09-11 03:50:46', 7, 3, 2, 11, 0, '', -60.226147, 0, -33.344411, 0, 2),
 (11, '2016-09-11 03:52:54', 7, 3, 2, 11, 0, '', -60.226147, 0, -33.344411, 0, 3),
-(12, '2016-09-11 03:59:15', 7, 3, 2, 8, 0, 0x46696e616c, -60.657509, 0, -32.930863, 0, 4),
-(13, '2016-09-16 19:20:43', 2, 1, 8, 1, 0, 0x53616c65206465206c61207465726d696e616c, -58.377158, 0, -34.590672, 0, 1),
+(12, '2016-09-11 03:59:15', 7, 3, 2, 8, 0, 'Final', -60.657509, 0, -32.930863, 0, 4),
+(13, '2016-09-16 19:20:43', 2, 1, 8, 1, 0, 'Sale de la Terminal', -58.377158, 0, -34.590672, 0, 1),
 (14, '2016-09-16 19:25:54', 2, 1, 8, 9, 0, '', -59.038071, 0, -34.097548, 0, 2),
 (15, '2016-09-16 19:27:00', 2, 1, 8, 9, 0, '', -59.038071, 0, -34.097548, 0, 3),
 (16, '2016-09-16 19:31:05', 2, 1, 8, 10, 0, '', -59.680496, 0, -33.694033, 0, 2),
@@ -125,25 +125,25 @@ INSERT INTO `Eventos` (`idEvento`, `fecha`, `idUsuario`, `funcion`, `idTren`, `i
 (18, '2016-09-16 19:34:17', 2, 1, 8, 11, 0, '', -60.226147, 0, -33.344411, 0, 2),
 (19, '2016-09-16 19:40:26', 2, 1, 8, 11, 0, '', -60.226147, 0, -33.344411, 0, 3),
 (20, '2016-09-16 20:15:35', 2, 1, 8, 8, 0, '', -60.657509, 0, -32.930863, 0, 4),
-(21, '2016-09-16 19:57:11', 7, 3, 7, 1, 0, 0x53616c652064652052657469726f, -58.377158, 0, -34.590672, 0, 1),
-(22, '2016-09-16 20:09:19', 7, 3, 7, 9, 0, 0x4c6c6567612061205ac3a172617465, -59.038071, 0, -34.097548, 0, 2),
-(23, '2016-09-23 02:37:44', 2, 1, 1, 1, 0, 0x416361626f2064652073616c69722c206c6f636f, -58.4344687, 0, -34.6176428, 0, 1),
-(24, '2016-09-23 02:39:56', 2, 1, 1, 9, 0, 0x44616c652c20666f72726f, -58.4344687, 0, -34.6176428, 0, 2),
-(25, '2016-09-24 14:08:29', 2, 1, 1, 9, 0, 0x506973c3a920756e206368616e63686f, -58.4344687, 0, -34.6176428, 3, 7),
-(26, '2016-09-24 14:17:16', 2, 1, 1, 9, 0, 0x4d652073616cc3ad, -58.4344687, 0, -34.6176428, 4, 7),
-(27, '2016-09-24 14:54:49', 2, 1, 1, 9, 0, 0x412076657220736920616e646120746f646f, -58.4344687, 0, -34.6176428, 8, 7),
-(28, '2016-09-24 14:55:17', 2, 1, 1, 9, 0, 0x546f646f2061727265676c61646f, -58.4344687, 0, -34.6176428, 7, 8),
-(29, '2016-09-25 03:21:22', 2, 1, 1, 9, 0, 0x457870657269656d6e746f, -58.4344687, 0, -34.6176428, 1, 7),
+(21, '2016-09-16 19:57:11', 7, 3, 7, 1, 0, 'Sale de Retiro', -58.377158, 0, -34.590672, 0, 1),
+(22, '2016-09-16 20:09:19', 7, 3, 7, 9, 0, 'Llega a Zárate', -59.038071, 0, -34.097548, 0, 2),
+(23, '2016-09-23 02:37:44', 2, 1, 1, 1, 0, 'Acabo de salir, loco', -58.4344687, 0, -34.6176428, 0, 1),
+(24, '2016-09-23 02:39:56', 2, 1, 1, 9, 0, 'Dale, forro', -58.4344687, 0, -34.6176428, 0, 2),
+(25, '2016-09-24 14:08:29', 2, 1, 1, 9, 0, 'Pisé un chancho', -58.4344687, 0, -34.6176428, 3, 7),
+(26, '2016-09-24 14:17:16', 2, 1, 1, 9, 0, 'Me salí', -58.4344687, 0, -34.6176428, 4, 7),
+(27, '2016-09-24 14:54:49', 2, 1, 1, 9, 0, 'A ver si anda todo', -58.4344687, 0, -34.6176428, 8, 7),
+(28, '2016-09-24 14:55:17', 2, 1, 1, 9, 0, 'Todo Arreglado', -58.4344687, 0, -34.6176428, 7, 8),
+(29, '2016-09-25 03:21:22', 2, 1, 1, 9, 0, 'Experimento', -58.4344687, 0, -34.6176428, 1, 7),
 (30, '2016-09-25 03:30:40', 2, 1, 1, 9, 0, '', -58.4344687, 0, -34.6176428, 7, 8),
-(31, '2016-09-25 03:31:43', 2, 1, 1, 9, 0, 0x4f747261206dc3a173, -58.4344687, 0, -34.6176428, 1, 7),
-(32, '2016-09-25 03:32:05', 2, 1, 1, 9, 0, 0x546f646f2072657375656c746f, -58.4344687, 0, -34.6176428, 7, 8),
+(31, '2016-09-25 03:31:43', 2, 1, 1, 9, 0, 'Otra más', -58.4344687, 0, -34.6176428, 1, 7),
+(32, '2016-09-25 03:32:05', 2, 1, 1, 9, 0, 'Todo resuelto', -58.4344687, 0, -34.6176428, 7, 8),
 (33, '2016-09-28 14:53:35', 2, 1, 1, 9, 0, '', 1.8039035, 0, 41.2382201, 7, 3),
-(34, '2016-09-28 14:56:56', 2, 1, 1, 10, 0, 0x536f6e616d6f730d0a, 1.8038793, 0, 41.2381851, 1, 7),
+(34, '2016-09-28 14:56:56', 2, 1, 1, 10, 0, 'Sonamos', 1.8038793, 0, 41.2381851, 1, 7),
 (35, '2016-09-28 15:03:18', 2, 1, 1, 10, 0, '', 1.8038871, 0, 41.2382194, 7, 8),
-(36, '2016-09-30 03:41:11', 2, 1, 9, 1, 0, 0x426c61, 0, 0, 0, 7, 1),
-(37, '2016-09-29 22:50:10', 2, 1, 9, 9, 0, 0x4c6c65677565, 0, 0, 0, 7, 2),
-(38, '2016-09-29 22:52:05', 2, 1, 9, 9, 0, 0x486f6c61, -58.3807908, 0, -34.6288901, 2, 7),
-(39, '2016-10-06 18:13:38', 2, 1, 10, 1, 0, 0x53616c696d6f732064652052657469726f, 0, 0, 0, 7, 1),
+(36, '2016-09-30 03:41:11', 2, 1, 9, 1, 0, 'Bla', 0, 0, 0, 7, 1),
+(37, '2016-09-29 22:50:10', 2, 1, 9, 9, 0, 'Llegue', 0, 0, 0, 7, 2),
+(38, '2016-09-29 22:52:05', 2, 1, 9, 9, 0, 'Hola', -58.3807908, 0, -34.6288901, 2, 7),
+(39, '2016-10-06 18:13:38', 2, 1, 10, 1, 0, 'Salimos de Retiro', 0, 0, 0, 7, 1),
 (40, '2016-10-06 23:20:51', 2, 1, 10, 9, 0, '', -58.3807693, 0, -34.6288651, 2, 7);
 
 -- --------------------------------------------------------
@@ -154,8 +154,8 @@ INSERT INTO `Eventos` (`idEvento`, `fecha`, `idUsuario`, `funcion`, `idTren`, `i
 
 CREATE TABLE `Itinerarios` (
   `idItinerario` int(11) NOT NULL,
-  `nombre` varchar(100)  NOT NULL DEFAULT ''
-) ENGINE=MyISAM ;
+  `nombre` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `Itinerarios`
@@ -180,7 +180,7 @@ CREATE TABLE `Pings` (
   `direccion` int(11) NOT NULL DEFAULT '0',
   `tiempoAgregado` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `longitud` double NOT NULL DEFAULT '0'
-) ENGINE=MyISAM ;
+) ENGINE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -190,7 +190,7 @@ CREATE TABLE `Pings` (
 
 CREATE TABLE `Revisiones` (
   `idRevision` int(11) NOT NULL,
-  `observaciones` blob NOT NULL,
+  `observaciones` text NOT NULL,
   `idUsuario` int(11) NOT NULL DEFAULT '0',
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `apto` tinyint(1) NOT NULL DEFAULT '0',
@@ -198,27 +198,27 @@ CREATE TABLE `Revisiones` (
   `combustible` int(11) NOT NULL DEFAULT '0',
   `idEstacion` int(11) NOT NULL DEFAULT '0',
   `numero` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM ;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `Revisiones`
 --
 
 INSERT INTO `Revisiones` (`idRevision`, `observaciones`, `idUsuario`, `fecha`, `apto`, `chapa`, `combustible`, `idEstacion`, `numero`) VALUES
-(1, 0x73646667, 0, '2016-09-24 21:37:43', 1, 0, 0, 1, 9069),
-(2, 0x73646667, 0, '2016-09-24 21:37:43', 1, 45, 0, 2, 0),
-(3, 0x43686f72726561206772617361, 0, '2016-09-24 21:39:45', 0, 0, 0, 3, 9069),
-(4, 0x73646667, 0, '2016-09-24 21:39:45', 1, 45, 0, 1, 0),
-(5, 0x546f646f206269656e2d746f, 5, '2016-09-24 22:20:44', 1, 0, 5000, 1, 9084),
-(6, 0x546f646f206d616c2d746f, 5, '2016-09-24 22:22:48', 0, 0, 6, 1, 9084),
-(7, 0x41727265676c616461, 5, '2016-09-24 22:59:51', 1, 0, 43, 1, 9084),
-(8, 0x4f6b, 5, '2016-09-28 15:09:13', 1, 0, 100, 1, 9069),
+(1, 'sdfg', 0, '2016-09-24 21:37:43', 1, 0, 0, 1, 9069),
+(2, 'sdfg', 0, '2016-09-24 21:37:43', 1, 45, 0, 2, 0),
+(3, 'Chorrea grasa', 0, '2016-09-24 21:39:45', 0, 0, 0, 3, 9069),
+(4, 'sdfg', 0, '2016-09-24 21:39:45', 1, 45, 0, 1, 0),
+(5, 'Todo bien-to', 5, '2016-09-24 22:20:44', 1, 0, 5000, 1, 9084),
+(6, 'Todo mal-to', 5, '2016-09-24 22:22:48', 0, 0, 6, 1, 9084),
+(7, 'Arreglada', 5, '2016-09-24 22:59:51', 1, 0, 43, 1, 9084),
+(8, 'Ok', 5, '2016-09-28 15:09:13', 1, 0, 100, 1, 9069),
 (9, '', 5, '2016-09-28 15:09:13', 1, 45, 0, 1, 0),
-(10, 0x4f6b, 5, '2016-09-28 15:09:33', 1, 0, 100, 1, 9069),
-(11, 0x426f6e69746f0d0a, 5, '2016-09-28 15:09:33', 1, 45, 0, 1, 0),
-(12, 0x4f6b, 5, '2016-09-28 15:10:33', 1, 0, 100, 1, 9069),
-(13, 0x426f6e69746f0d0a, 5, '2016-09-28 15:10:33', 1, 45, 0, 1, 0),
-(14, 0x6e616461, 5, '2016-10-06 23:19:01', 1, 0, 500, 1, 9069);
+(10, 'Ok', 5, '2016-09-28 15:09:33', 1, 0, 100, 1, 9069),
+(11, 'Bonito', 5, '2016-09-28 15:09:33', 1, 45, 0, 1, 0),
+(12, 'Ok', 5, '2016-09-28 15:10:33', 1, 0, 100, 1, 9069),
+(13, 'Bonito', 5, '2016-09-28 15:10:33', 1, 45, 0, 1, 0),
+(14, 'nada', 5, '2016-10-06 23:19:01', 1, 0, 500, 1, 9069);
 
 -- --------------------------------------------------------
 
@@ -228,8 +228,8 @@ INSERT INTO `Revisiones` (`idRevision`, `observaciones`, `idUsuario`, `fecha`, `
 
 CREATE TABLE `TipoEmergencias` (
   `idTipoEmergencia` int(11) NOT NULL,
-  `tipo` varchar(100)  NOT NULL DEFAULT ''
-) ENGINE=MyISAM ;
+  `tipo` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `TipoEmergencias`
@@ -253,9 +253,9 @@ INSERT INTO `TipoEmergencias` (`idTipoEmergencia`, `tipo`) VALUES
 
 CREATE TABLE `TipoEvento` (
   `idTipoEvento` int(11) NOT NULL,
-  `preposicion` varchar(100)  NOT NULL DEFAULT '',
-  `tipo` varchar(100)  NOT NULL DEFAULT ''
-) ENGINE=MyISAM ;
+  `preposicion` varchar(100) NOT NULL DEFAULT '',
+  `tipo` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `TipoEvento`
@@ -289,7 +289,7 @@ CREATE TABLE `Trenes` (
   `estado` int(11) NOT NULL DEFAULT '0',
   `estadoAnterior` int(11) NOT NULL DEFAULT '0',
   `numero` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM ;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `Trenes`
@@ -315,16 +315,16 @@ INSERT INTO `Trenes` (`idTren`, `idItinerario`, `fecha`, `chapa`, `idGuarda`, `i
 
 CREATE TABLE `Usuarios` (
   `idUsuario` int(11) NOT NULL,
-  `password` varchar(100)  NOT NULL DEFAULT '',
-  `usuario` varchar(100)  NOT NULL DEFAULT '',
+  `password` varchar(100) NOT NULL DEFAULT '',
+  `usuario` varchar(100) NOT NULL DEFAULT '',
   `nivel` int(11) NOT NULL DEFAULT '0',
   `rolGuarda` tinyint(1) NOT NULL DEFAULT '0',
   `rolDios` tinyint(1) NOT NULL DEFAULT '0',
   `rolSupervisor` tinyint(1) NOT NULL DEFAULT '0',
   `rolMecanico` tinyint(1) NOT NULL DEFAULT '0',
   `funcion` int(11) NOT NULL DEFAULT '0',
-  `nombre` varchar(100)  NOT NULL DEFAULT ''
-) ENGINE=MyISAM ;
+  `nombre` varchar(100) NOT NULL DEFAULT ''
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `Usuarios`
@@ -339,7 +339,8 @@ INSERT INTO `Usuarios` (`idUsuario`, `password`, `usuario`, `nivel`, `rolGuarda`
 (6, '154ce8c1bd53ea5afa066f92b3c60683', 'lich', 0, 0, 0, 1, 0, 0, 'Lisandro Iturralde'),
 (7, '067391c21645e28c9ead2c41f5308b0c', 'leandromelluso', 0, 1, 0, 0, 0, 3, 'Leandro Melluso'),
 (8, 'afa27acf2e8fc7161ee993c421502674', 'caseyjones', 0, 1, 0, 0, 0, 2, 'Casey Jones'),
-(9, 'cd616f2f57739f3831531950d63c7d2f', 'juanmajic', 0, 1, 0, 0, 0, 1, 'Juan Majic');
+(9, 'cd616f2f57739f3831531950d63c7d2f', 'juanmajic', 0, 1, 0, 0, 0, 1, 'Juan Majic'),
+(10, '94964d16964622c8a5f605bf7f82bc73', 'satyam', 1, 1, 1, 1, 1, 0, 'Daniel Barreiro');
 
 --
 -- Indexes for dumped tables
@@ -461,7 +462,7 @@ ALTER TABLE `Trenes`
 -- AUTO_INCREMENT for table `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
