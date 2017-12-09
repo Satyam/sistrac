@@ -193,7 +193,7 @@ CREATE TABLE `Revisiones` (
   `observaciones` text NOT NULL,
   `idUsuario` int(11) NOT NULL DEFAULT '0',
   `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `apto` tinyint(1) NOT NULL DEFAULT '0',
+  `apto` boolean NOT NULL DEFAULT false,
   `chapa` int(11) NOT NULL DEFAULT '0',
   `combustible` int(11) NOT NULL DEFAULT '0',
   `idEstacion` int(11) NOT NULL DEFAULT '0',
@@ -318,10 +318,10 @@ CREATE TABLE `Usuarios` (
   `password` varchar(100) NOT NULL DEFAULT '',
   `usuario` varchar(100) NOT NULL DEFAULT '',
   `nivel` int(11) NOT NULL DEFAULT '0',
-  `rolGuarda` tinyint(1) NOT NULL DEFAULT '0',
-  `rolDios` tinyint(1) NOT NULL DEFAULT '0',
-  `rolSupervisor` tinyint(1) NOT NULL DEFAULT '0',
-  `rolMecanico` tinyint(1) NOT NULL DEFAULT '0',
+  `rolGuarda` boolean NOT NULL DEFAULT false,
+  `rolDios` boolean NOT NULL DEFAULT false,
+  `rolSupervisor` boolean NOT NULL DEFAULT false,
+  `rolMecanico` boolean NOT NULL DEFAULT false,
   `funcion` int(11) NOT NULL DEFAULT '0',
   `nombre` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM;
