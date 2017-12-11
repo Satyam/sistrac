@@ -8,4 +8,7 @@ module.exports = {
   DB_NAME: 'sistrac',
   SQL_USER: 'root',
   SQL_PASSWORD: '',
+  SECRET: 'Sistrac clave secreta: pepino',
+  LOGIN_TIMEOUT: '1h',
+  COOKIE_NAME: 'user',
 };

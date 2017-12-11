@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dbOps.usuarios with mock db createUsuario fail 1`] = `"insert into Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez'"`;
+
+exports[`dbOps.usuarios with mock db createUsuario success 1`] = `"insert into Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez'"`;
+
+exports[`dbOps.usuarios with mock db deleteUsuario fail 1`] = `"delete from Usuarios where idUsuario = 42"`;
+
+exports[`dbOps.usuarios with mock db deleteUsuario success 1`] = `"delete from Usuarios where idUsuario = 42"`;
+
+exports[`dbOps.usuarios with mock db readUsuario fail 1`] = `"select * from Usuarios where idUsuario = \`idUsuario\` = 42"`;
+
+exports[`dbOps.usuarios with mock db readUsuario success 1`] = `"select * from Usuarios where idUsuario = \`idUsuario\` = 42"`;
+
+exports[`dbOps.usuarios with mock db readUsuarioPorUsuario fail 1`] = `"select * from Usuarios where usuario = \`usuario\` = 'pepe'"`;
+
+exports[`dbOps.usuarios with mock db readUsuarioPorUsuario success 1`] = `"select * from Usuarios where usuario = \`usuario\` = 'pepe'"`;
+
+exports[`dbOps.usuarios with mock db readUsuarios 1`] = `"select * from Usuarios"`;
+
+exports[`dbOps.usuarios with mock db updateUsuario fail 1`] = `"update Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez' where idUsuario = 42"`;
+
+exports[`dbOps.usuarios with mock db updateUsuario success 1`] = `"update Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez' where idUsuario = 42"`;

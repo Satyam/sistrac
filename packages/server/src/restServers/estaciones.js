@@ -8,9 +8,18 @@ import {
   readEstacionPorNombre,
   readEstacionPorSigla,
   createEstacion,
-} from '../dbOps';
+  deleteEstacion,
+} from '../dbOps/estaciones';
 
-export default async function (dataRouter, path) {
+import {
+  OK,
+  CREATED,
+  NOT_FOUND,
+  NO_CONTENT,
+  CONFLICT,
+} from './httpStatusCodes';
+
+export default async function(dataRouter, path) {
   const relPath = extra => join(path, extra);
 
   dataRouter.get(relPath('/'), async (req, res) => {
@@ -19,37 +28,49 @@ export default async function (dataRouter, path) {
   });
 
   dataRouter.get(relPath('/:idEstacion'), async (req, res) => {
-    const resp = await readEstacion(req.params.idEstacion);
-    res.json(resp);
+    const resp = await readEstacion(parseInt(req.params.idEstacion, 10));
+    if (resp) res.json(resp);
+    else res.status(NOT_FOUND).end();
   });
 
   dataRouter.get(relPath('/nombre/:nombre'), async (req, res) => {
     const resp = await readEstacionPorNombre(req.params.nombre);
-    res.json(resp);
+    if (resp) res.json(resp);
+    else res.status(NOT_FOUND).end();
   });
 
   dataRouter.get(relPath('/sigla/:sigla'), async (req, res) => {
     const resp = await readEstacionPorSigla(req.params.sigla);
-    res.json(resp);
+    if (resp) res.json(resp);
+    else res.status(NOT_FOUND).end();
   });
 
   dataRouter.get(relPath('/existe/nombre/:nombre'), async (req, res) => {
     const resp = await existeEstacionPorNombre(req.params.nombre);
-    res.json(resp);
+    res.status(resp ? OK : NOT_FOUND).end();
   });
 
   dataRouter.get(relPath('/existe/sigla/:sigla'), async (req, res) => {
     const resp = await existeEstacionPorSigla(req.params.sigla);
-    res.json(resp);
+    res.status(resp ? OK : NOT_FOUND).end();
   });
 
   dataRouter.put(relPath('/:idEstacion'), async (req, res) => {
-    const resp = await updateEstacion(req.params.idEstacion, req.body);
-    res.json(resp);
+    const resp = await updateEstacion(
+      parseInt(req.params.idEstacion, 10),
+      req.body,
+    );
+    res.status(resp ? NO_CONTENT : NOT_FOUND).end();
   });
 
   dataRouter.post(relPath('/'), async (req, res) => {
     const resp = await createEstacion(req.body);
-    res.json(resp);
+    if (resp) res.status(CREATED).json({ idEstacion: resp });
+    else res.status(CONFLICT).end();
+  });
+
+  dataRouter.delete(relPath('/:idEstacion'), async (req, res) => {
+    const resp = await deleteEstacion(parseInt(req.params.idEstacion, 10));
+    res.status(resp ? NO_CONTENT : NOT_FOUND).end();
   });
 }

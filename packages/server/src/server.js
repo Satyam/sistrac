@@ -11,7 +11,7 @@ import { PORT, ROOT_DIR, REST_API_PATH } from '../config';
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
 
-import { userRoutes, setStrategy, authenticate } from './usuarios';
+import { authenticate } from './restServers/usuarios';
 
 const absPath = relPath => join(ROOT_DIR, relPath);
 
@@ -31,11 +31,12 @@ app.use(morgan('dev'));
 // To make this server CORS-ENABLEd
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
   next();
 });
-
-userRoutes(app, `${REST_API_PATH}/user`);
 
 const dataRouter = createRouter();
 
@@ -55,6 +56,5 @@ app.get('*', (req, res) => res.sendFile(absPath('webServer/index.html')));
 export async function start() {
   await dbInit();
   await restServers(dataRouter);
-  await setStrategy();
   await listen(PORT);
 }

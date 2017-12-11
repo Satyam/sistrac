@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`restServers/estaciones login fail 1`] = `"select * from Usuarios where usuario = 'pepe'"`;
+
+exports[`restServers/estaciones login success 1`] = `"select * from Usuarios where usuario = 'pepe'"`;
