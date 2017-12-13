@@ -1,35 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`restServers/estaciones / should provide a list of estaciones 1`] = `"select * from Estaciones order by nombre"`;
+exports[`restServers/estaciones / should provide a list of estaciones 1`] = `Object {}`;
 
-exports[`restServers/estaciones delete /25 success 1`] = `"delete from Estaciones where idEstacion = 25"`;
+exports[`restServers/estaciones / should provide a list of estaciones 2`] = `"select * from Estaciones order by nombre"`;
 
-exports[`restServers/estaciones delete /9999 fail 1`] = `"delete from Estaciones where idEstacion = 9999"`;
+exports[`restServers/estaciones delete /25 success 1`] = `Object {}`;
 
-exports[`restServers/estaciones get /25 fail 1`] = `"select * from Estaciones where idEstacion = 25"`;
+exports[`restServers/estaciones delete /25 success 2`] = `"delete from Estaciones where idEstacion = 25"`;
 
-exports[`restServers/estaciones get /25 success 1`] = `"select * from Estaciones where idEstacion = 25"`;
+exports[`restServers/estaciones delete /9999 fail 1`] = `Object {}`;
 
-exports[`restServers/estaciones get /existe/nombre /Retiro success 1`] = `"select count(*) as hay from Estaciones where nombre = 'Retiro'"`;
+exports[`restServers/estaciones delete /9999 fail 2`] = `"delete from Estaciones where idEstacion = 9999"`;
 
-exports[`restServers/estaciones get /existe/nombre /YYYY fail 1`] = `"select count(*) as hay from Estaciones where nombre = 'YYYY'"`;
+exports[`restServers/estaciones get /25 fail 1`] = `Object {}`;
 
-exports[`restServers/estaciones get /existe/sigla /RET success 1`] = `"select count(*) as hay from Estaciones where sigla = 'RET'"`;
+exports[`restServers/estaciones get /25 fail 2`] = `"select * from Estaciones where idEstacion = 25"`;
 
-exports[`restServers/estaciones get /existe/sigla /YYY fail 1`] = `"select count(*) as hay from Estaciones where sigla = 'YYY'"`;
+exports[`restServers/estaciones get /25 success 1`] = `Object {}`;
 
-exports[`restServers/estaciones get /nombre/nombre fail 1`] = `"select * from Estaciones where nombre = 'Retiro'"`;
+exports[`restServers/estaciones get /25 success 2`] = `"select * from Estaciones where idEstacion = 25"`;
 
-exports[`restServers/estaciones get /nombre/nombre success 1`] = `"select * from Estaciones where nombre = 'Retiro'"`;
+exports[`restServers/estaciones get /existe/nombre /Retiro success 1`] = `Object {}`;
 
-exports[`restServers/estaciones get /sigla/sigla fail 1`] = `"select * from Estaciones where sigla = 'RET'"`;
+exports[`restServers/estaciones get /existe/nombre /Retiro success 2`] = `"select count(*) as hay from Estaciones where nombre = 'Retiro'"`;
 
-exports[`restServers/estaciones get /sigla/sigla success 1`] = `"select * from Estaciones where sigla = 'RET'"`;
+exports[`restServers/estaciones get /existe/nombre /YYYY fail 1`] = `Object {}`;
 
-exports[`restServers/estaciones post duplicate 1`] = `"insert into Estaciones set ?"`;
+exports[`restServers/estaciones get /existe/nombre /YYYY fail 2`] = `"select count(*) as hay from Estaciones where nombre = 'YYYY'"`;
 
-exports[`restServers/estaciones post success 1`] = `"insert into Estaciones set ?"`;
+exports[`restServers/estaciones get /existe/sigla /RET success 1`] = `Object {}`;
 
-exports[`restServers/estaciones put /25 success 1`] = `"update Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET' where idEstacion = 25"`;
+exports[`restServers/estaciones get /existe/sigla /RET success 2`] = `"select count(*) as hay from Estaciones where sigla = 'RET'"`;
 
-exports[`restServers/estaciones put /9999 fail 1`] = `"update Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET' where idEstacion = 9999"`;
+exports[`restServers/estaciones get /existe/sigla /YYY fail 1`] = `Object {}`;
+
+exports[`restServers/estaciones get /existe/sigla /YYY fail 2`] = `"select count(*) as hay from Estaciones where sigla = 'YYY'"`;
+
+exports[`restServers/estaciones get /nombre/nombre fail 1`] = `Object {}`;
+
+exports[`restServers/estaciones get /nombre/nombre fail 2`] = `"select * from Estaciones where nombre = 'Retiro'"`;
+
+exports[`restServers/estaciones get /nombre/nombre success 1`] = `Object {}`;
+
+exports[`restServers/estaciones get /nombre/nombre success 2`] = `"select * from Estaciones where nombre = 'Retiro'"`;
+
+exports[`restServers/estaciones get /sigla/sigla fail 1`] = `Object {}`;
+
+exports[`restServers/estaciones get /sigla/sigla fail 2`] = `"select * from Estaciones where sigla = 'RET'"`;
+
+exports[`restServers/estaciones get /sigla/sigla success 1`] = `Object {}`;
+
+exports[`restServers/estaciones get /sigla/sigla success 2`] = `"select * from Estaciones where sigla = 'RET'"`;
+
+exports[`restServers/estaciones post duplicate 1`] = `Object {}`;
+
+exports[`restServers/estaciones post duplicate 2`] = `"insert into Estaciones set ?"`;
+
+exports[`restServers/estaciones post success 1`] = `Object {}`;
+
+exports[`restServers/estaciones post success 2`] = `"insert into Estaciones set ?"`;
+
+exports[`restServers/estaciones put /25 success 1`] = `Object {}`;
+
+exports[`restServers/estaciones put /25 success 2`] = `"update Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET' where idEstacion = 25"`;
+
+exports[`restServers/estaciones put /9999 fail 1`] = `Object {}`;
+
+exports[`restServers/estaciones put /9999 fail 2`] = `"update Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET' where idEstacion = 9999"`;

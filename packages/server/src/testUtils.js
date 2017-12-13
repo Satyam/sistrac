@@ -1,5 +1,6 @@
 import { format } from 'mysql';
 import { Router as createRouter } from 'express';
+import jwt from 'jsonwebtoken';
 
 import { init as initDb } from './dbOps';
 import initRouter from './restServers';
@@ -48,16 +49,20 @@ export class Response {
     return this;
   }
   json(value) {
-    this.done(this.statusCode, value);
+    this.done(this.statusCode, value, this.cookies);
   }
   send(value) {
-    this.done(this.statusCode, value);
+    this.done(this.statusCode, value, this.cookies);
   }
   end() {
-    this.done(this.statusCode);
+    this.done(this.statusCode, null, this.cookies);
   }
-  cookie(name, value, opts) {
-    this.cookies[name] = value;
+  cookie(name, value /* opts */) {
+    const decoded = jwt.decode(value);
+    if (decoded) {
+      delete decoded.iat;
+      this.cookies[name] = decoded;
+    } else this.cookies[name] = value;
   }
   clearCookie(name) {
     delete this.cookies[name];
@@ -70,18 +75,19 @@ export function initRoutes() {
   initRouter(dataRouter);
 }
 
-export const testREST = (
+export const testREST = ({
   method,
   path,
   queryResult,
-  status,
+  statusCode,
   restResult,
   body,
-) => async done => {
+}) => async done => {
   const mockDb = new MockDb(queryResult);
-  const res = new Response((st, resp) => {
-    expect(st).toBe(status);
-    expect(resp).toEqual(restResult);
+  const res = new Response((status, resp, cookies) => {
+    expect(status).toBe(statusCode);
+    expect(resp).toEqual(restResult || null);
+    expect(cookies).toMatchSnapshot();
     expect(mockDb.sql).toMatchSnapshot();
     done();
   });

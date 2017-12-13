@@ -31,14 +31,16 @@ const bypassAuthenticationPattern = /\/((login)|(signup))$/;
 export function authenticate(req, res, next) {
   if (req.method === 'GET' && bypassAuthenticationPattern.test(req.path)) {
     next();
+    return;
   }
   const cookie = req.cookies[COOKIE_NAME];
   if (cookie) {
     try {
-      const user = jwt.verify(cookie, SECRET);
+      const {iat, ...user} = jwt.verify(cookie, SECRET);
       setCookie(res, user);
       req.user = user;
       next();
+      return;
     } catch (err) {
       res.status(UNAUTHORIZED).json(err);
     }
@@ -49,7 +51,7 @@ export function authenticate(req, res, next) {
 export default async function(dataRouter, path) {
   dataRouter.put(join(path, '/login'), async (req, res) => {
     const { password, ...user } = await readUsuario(req.body.usuario);
-    if (user) {
+    if (Object.keys(user).length) {
       const isMatch = md5(req.body.password) === password;
       if (isMatch) {
         setCookie(res, user);
@@ -86,7 +88,8 @@ export default async function(dataRouter, path) {
 
   dataRouter.get(join(path, '/:usuario'), async (req, res) => {
     const { password, ...user } = await readUsuario(req.params.usuario);
-    res.json(user);
+    if (Object.keys(user).length) res.json(user);
+    else res.status(NOT_FOUND).end();
   });
 
   dataRouter.delete(join(path, '/:idUsuario'), async (req, res) => {

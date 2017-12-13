@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dbOps.estaciones with mock db createEstacion fail 1`] = `"insert into Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET'"`;
+exports[`dbOps.estaciones with mock db createEstacion fail duplicate record 1`] = `"insert into Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET'"`;
 
 exports[`dbOps.estaciones with mock db createEstacion success 1`] = `"insert into Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET'"`;
 

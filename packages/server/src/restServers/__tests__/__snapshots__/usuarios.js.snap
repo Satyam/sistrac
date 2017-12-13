@@ -1,5 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`restServers/estaciones login fail 1`] = `"select * from Usuarios where usuario = 'pepe'"`;
+exports[`restServers/usuarios delete fail 1`] = `Object {}`;
 
-exports[`restServers/estaciones login success 1`] = `"select * from Usuarios where usuario = 'pepe'"`;
+exports[`restServers/usuarios delete fail 2`] = `"delete from Usuarios where idUsuario = 999"`;
+
+exports[`restServers/usuarios delete success 1`] = `Object {}`;
+
+exports[`restServers/usuarios delete success 2`] = `"delete from Usuarios where idUsuario = 25"`;
+
+exports[`restServers/usuarios login fail password 1`] = `Object {}`;
+
+exports[`restServers/usuarios login fail password 2`] = `"select * from Usuarios where usuario = 'pepe'"`;
+
+exports[`restServers/usuarios login fail usuario 1`] = `Object {}`;
+
+exports[`restServers/usuarios login fail usuario 2`] = `"select * from Usuarios where usuario = 'pepe'"`;
+
+exports[`restServers/usuarios login success 1`] = `
+Object {
+  "user": Object {
+    "nombre": "José Pérez",
+    "rolDios": false,
+    "rolGuarda": false,
+    "rolMecanico": false,
+    "rolSupervisor": false,
+    "usuario": "pepe",
+  },
+}
+`;
+
+exports[`restServers/usuarios login success 2`] = `"select * from Usuarios where usuario = 'pepe'"`;
+
+exports[`restServers/usuarios logout success 1`] = `Object {}`;
+
+exports[`restServers/usuarios logout success 2`] = `undefined`;
+
+exports[`restServers/usuarios signup fail faltan datos 1`] = `Object {}`;
+
+exports[`restServers/usuarios signup fail faltan datos 2`] = `undefined`;
+
+exports[`restServers/usuarios signup fail nombre existe 1`] = `Object {}`;
+
+exports[`restServers/usuarios signup fail nombre existe 2`] = `"insert into Usuarios set \`usuario\` = 'pepe', \`password\` = '25f9e794323b453885f5181f1b624d0b', \`nombre\` = 'José Pérez'"`;
+
+exports[`restServers/usuarios signup success 1`] = `Object {}`;
+
+exports[`restServers/usuarios signup success 2`] = `"insert into Usuarios set \`usuario\` = 'pepe', \`password\` = '25f9e794323b453885f5181f1b624d0b', \`nombre\` = 'José Pérez'"`;
+
+exports[`restServers/usuarios update fail 1`] = `Object {}`;
+
+exports[`restServers/usuarios update fail 2`] = `"update Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez' where idUsuario = 999"`;
+
+exports[`restServers/usuarios update success 1`] = `Object {}`;
+
+exports[`restServers/usuarios update success 2`] = `"update Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez' where idUsuario = 25"`;
+
+exports[`restServers/usuarios userData fail 1`] = `Object {}`;
+
+exports[`restServers/usuarios userData fail 2`] = `"select * from Usuarios where usuario = 'pepe'"`;
+
+exports[`restServers/usuarios userData success 1`] = `Object {}`;
+
+exports[`restServers/usuarios userData success 2`] = `"select * from Usuarios where usuario = 'pepe'"`;

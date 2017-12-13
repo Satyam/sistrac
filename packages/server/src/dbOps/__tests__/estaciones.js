@@ -32,9 +32,13 @@ describe('dbOps.estaciones', () => {
       testMethod(createEstacion, { insertId: 42 }, 42, retiro),
     );
     it(
-      'createEstacion fail',
+      'createEstacion fail duplicate record',
       testMethod(createEstacion, new MysqlError('ER_DUP_ENTRY'), false, retiro),
     );
+    // it('createEstacion fail other error', () => {
+    //   debugger;
+    //   testMethod(createEstacion, new MysqlError('OTHER_ERROR'), false, retiro);
+    // });
     it(
       'existeEstacionPorNombre success',
       testMethod(existeEstacionPorNombre, [{ hay: 1 }], true, 'Retiro'),

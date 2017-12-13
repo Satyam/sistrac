@@ -8,6 +8,14 @@ import {
   DELETE,
 } from '../../testUtils';
 
+import {
+  OK,
+  NOT_FOUND,
+  NO_CONTENT,
+  CONFLICT,
+  CREATED,
+} from '../httpStatusCodes';
+
 describe('restServers/estaciones', () => {
   beforeAll(() => {
     initRoutes();
@@ -15,108 +23,185 @@ describe('restServers/estaciones', () => {
   describe('/', () => {
     it(
       'should provide a list of estaciones',
-      testREST(
-        GET,
-        '/estaciones/',
-        [{ id: 1, dato: 'uno' }, { id: 2, dato: 'dos' }],
-        200,
-        [{ id: 1, dato: 'uno' }, { id: 2, dato: 'dos' }],
-      ),
+      testREST({
+        method: GET,
+        path: '/estaciones/',
+        queryResult: [{ id: 1, dato: 'uno' }, { id: 2, dato: 'dos' }],
+        statusCode: OK,
+        restResult: [{ id: 1, dato: 'uno' }, { id: 2, dato: 'dos' }],
+      }),
     );
   });
   describe('get /25', () => {
     it(
       'success',
-      testREST(
-        GET,
-        '/estaciones/25',
-        [{ idEstacion: 25, nombre: 'Retiro', sigla: 'RET' }],
-        200,
-        { idEstacion: 25, nombre: 'Retiro', sigla: 'RET' },
-      ),
+      testREST({
+        method: GET,
+        path: '/estaciones/25',
+        queryResult: [{ idEstacion: 25, nombre: 'Retiro', sigla: 'RET' }],
+        statusCode: OK,
+        restResult: { idEstacion: 25, nombre: 'Retiro', sigla: 'RET' },
+      }),
     );
-    it('fail', testREST(GET, '/estaciones/25', [], 404));
+    it(
+      'fail',
+      testREST({
+        method: GET,
+        path: '/estaciones/25',
+        queryResult: [],
+        statusCode: NOT_FOUND,
+      }),
+    );
   });
   describe('get /nombre/nombre', () => {
     it(
       'success',
-      testREST(
-        GET,
-        '/estaciones/nombre/Retiro',
-        [{ idEstacion: 25, nombre: 'Retiro', sigla: 'RET' }],
-        200,
-        { idEstacion: 25, nombre: 'Retiro', sigla: 'RET' },
-      ),
+      testREST({
+        method: GET,
+        path: '/estaciones/nombre/Retiro',
+        queryResult: [{ idEstacion: 25, nombre: 'Retiro', sigla: 'RET' }],
+        statusCode: OK,
+        restResult: { idEstacion: 25, nombre: 'Retiro', sigla: 'RET' },
+      }),
     );
-    it('fail', testREST(GET, '/estaciones/nombre/Retiro', [], 404));
+    it(
+      'fail',
+      testREST({
+        method: GET,
+        path: '/estaciones/nombre/Retiro',
+        queryResult: [],
+        statusCode: NOT_FOUND,
+      }),
+    );
   });
   describe('get /sigla/sigla', () => {
     it(
       'success',
-      testREST(
-        GET,
-        '/estaciones/sigla/RET',
-        [{ idEstacion: 25, nombre: 'Retiro', sigla: 'RET' }],
-        200,
-        { idEstacion: 25, nombre: 'Retiro', sigla: 'RET' },
-      ),
+      testREST({
+        method: GET,
+        path: '/estaciones/sigla/RET',
+        queryResult: [{ idEstacion: 25, nombre: 'Retiro', sigla: 'RET' }],
+        statusCode: OK,
+        restResult: { idEstacion: 25, nombre: 'Retiro', sigla: 'RET' },
+      }),
     );
-    it('fail', testREST(GET, '/estaciones/sigla/RET', [], 404));
+    it(
+      'fail',
+      testREST({
+        method: GET,
+        path: '/estaciones/sigla/RET',
+        queryResult: [],
+        statusCode: NOT_FOUND,
+      }),
+    );
   });
   describe('get /existe/nombre', () => {
     it(
       '/Retiro success',
-      testREST(GET, '/estaciones/existe/nombre/Retiro', [{ hay: 1 }], 200),
+      testREST({
+        method: GET,
+        path: '/estaciones/existe/nombre/Retiro',
+        queryResult: [{ hay: 1 }],
+        statusCode: OK,
+      }),
     );
     it(
       '/YYYY fail',
-      testREST(GET, '/estaciones/existe/nombre/YYYY', [{ hay: 0 }], 404),
+      testREST({
+        method: GET,
+        path: '/estaciones/existe/nombre/YYYY',
+        queryResult: [{ hay: 0 }],
+        statusCode: NOT_FOUND,
+      }),
     );
   });
   describe('get /existe/sigla', () => {
     it(
       '/RET success',
-      testREST(GET, '/estaciones/existe/sigla/RET', [{ hay: 1 }], 200),
+      testREST({
+        method: GET,
+        path: '/estaciones/existe/sigla/RET',
+        queryResult: [{ hay: 1 }],
+        statusCode: OK,
+      }),
     );
     it(
       '/YYY fail',
-      testREST(GET, '/estaciones/existe/sigla/YYY', [{ hay: 0 }], 404),
+      testREST({
+        method: GET,
+        path: '/estaciones/existe/sigla/YYY',
+        queryResult: [{ hay: 0 }],
+        statusCode: NOT_FOUND,
+      }),
     );
   });
   describe('put', () => {
     it(
       '/25 success',
-      testREST(PUT, '/estaciones/25', { affectedRows: 1 }, 204, undefined, {
-        nombre: 'Retiro',
-        sigla: 'RET',
+      testREST({
+        method: PUT,
+        path: '/estaciones/25',
+        queryResult: { affectedRows: 1 },
+        statusCode: NO_CONTENT,
+        body: {
+          nombre: 'Retiro',
+          sigla: 'RET',
+        },
       }),
     );
     it(
       '/9999 fail',
-      testREST(PUT, '/estaciones/9999', { affectedRows: 0 }, 404, undefined, {
-        nombre: 'Retiro',
-        sigla: 'RET',
+      testREST({
+        method: PUT,
+        path: '/estaciones/9999',
+        queryResult: { affectedRows: 0 },
+        statusCode: NOT_FOUND,
+        body: {
+          nombre: 'Retiro',
+          sigla: 'RET',
+        },
       }),
     );
   });
   describe('post', () => {
     it(
       'success',
-      testREST(POST, '/estaciones/', { insertId: 42 }, 201, { idEstacion: 42 }),
+      testREST({
+        method: POST,
+        path: '/estaciones/',
+        queryResult: { insertId: 42 },
+        statusCode: CREATED,
+        restResult: { idEstacion: 42 },
+      }),
     );
     it(
       'duplicate',
-      testREST(POST, '/estaciones/', new MysqlError('ER_DUP_ENTRY'), 409),
+      testREST({
+        method: POST,
+        path: '/estaciones/',
+        queryResult: new MysqlError('ER_DUP_ENTRY'),
+        statusCode: CONFLICT,
+      }),
     );
   });
   describe('delete', () => {
     it(
       '/25 success',
-      testREST(DELETE, '/estaciones/25', { affectedRows: 1 }, 204),
+      testREST({
+        method: DELETE,
+        path: '/estaciones/25',
+        queryResult: { affectedRows: 1 },
+        statusCode: NO_CONTENT,
+      }),
     );
     it(
       '/9999 fail',
-      testREST(DELETE, '/estaciones/9999', { affectedRows: 0 }, 404),
+      testREST({
+        method: DELETE,
+        path: '/estaciones/9999',
+        queryResult: { affectedRows: 0 },
+        statusCode: NOT_FOUND,
+      }),
     );
   });
 });
