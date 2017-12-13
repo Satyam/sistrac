@@ -204,6 +204,15 @@ describe('dbOps.usuarios', () => {
           const result = await query;
           expect(result).toBeFalsy();
         });
+        it('should re-throw any other error', done => {
+          createUsuario({})
+            .then(() => {
+              expect('It should not come this way').toBeFalsy();
+            })
+            .catch(() => {
+              done();
+            });
+        });
       });
     });
   });

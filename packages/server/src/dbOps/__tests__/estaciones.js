@@ -35,10 +35,6 @@ describe('dbOps.estaciones', () => {
       'createEstacion fail duplicate record',
       testMethod(createEstacion, new MysqlError('ER_DUP_ENTRY'), false, retiro),
     );
-    // it('createEstacion fail other error', () => {
-    //   debugger;
-    //   testMethod(createEstacion, new MysqlError('OTHER_ERROR'), false, retiro);
-    // });
     it(
       'existeEstacionPorNombre success',
       testMethod(existeEstacionPorNombre, [{ hay: 1 }], true, 'Retiro'),
@@ -231,6 +227,20 @@ describe('dbOps.estaciones', () => {
           expect(query).toBeInstanceOf(Promise);
           const result = await query;
           expect(result).toBeFalsy();
+        });
+        it('should re-throw any other error', done => {
+          createEstacion({
+            nombre1: NOMBRE_ESTACION,
+            sigla1: SIGLA_ESTACION,
+            latitud1: 25,
+            longitud1: 52,
+          })
+            .then(() => {
+              expect('It should not come this way').toBeFalsy();
+            })
+            .catch(() => {
+              done();
+            });
         });
       });
     });
