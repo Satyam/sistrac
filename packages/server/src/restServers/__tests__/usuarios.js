@@ -23,7 +23,14 @@ import {
   CREATED,
 } from '../httpStatusCodes';
 
-import { authenticate } from '../usuarios';
+import {
+  authenticate,
+  esDios,
+  esGuarda,
+  esSupervisor,
+  esMecanico,
+  tieneNivel,
+} from '../usuarios';
 
 const NUEVO_USUARIO = {
   usuario: 'pepe',
@@ -285,6 +292,226 @@ describe('restServers/usuarios', () => {
           expect('Should not come this way').toBeFalsy();
         },
       );
+    });
+  });
+  // esDios,
+  //   esGuarda,
+  //   esSupervisor,
+  //   esMecanico,
+  //   tieneNivel,
+  describe('funciones de seguridad', () => {
+    describe('esDios', () => {
+      it('success', done => {
+        esDios(
+          {
+            user: {
+              rolDios: true,
+            },
+          },
+          new Response(() => {
+            expect('Should not come this way').toBeFalsy();
+          }),
+          () => {
+            done();
+          },
+        );
+      });
+      it('fail no user data', () => {
+        esDios(
+          {},
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+      it('fail: not dios', () => {
+        esDios(
+          {
+            user: {
+              rolDios: false,
+            },
+          },
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+    });
+    describe('esSupervisor', () => {
+      it('success', done => {
+        esSupervisor(
+          {
+            user: {
+              rolSupervisor: true,
+            },
+          },
+          new Response(() => {
+            expect('Should not come this way').toBeFalsy();
+          }),
+          () => {
+            done();
+          },
+        );
+      });
+      it('fail no user data', () => {
+        esSupervisor(
+          {},
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+      it('fail: not supervisor', () => {
+        esSupervisor(
+          {
+            user: {
+              rolSupervisor: false,
+            },
+          },
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+    });
+    describe('esMecanico', () => {
+      it('success', done => {
+        esMecanico(
+          {
+            user: {
+              rolMecanico: true,
+            },
+          },
+          new Response(() => {
+            expect('Should not come this way').toBeFalsy();
+          }),
+          () => {
+            done();
+          },
+        );
+      });
+      it('fail no user data', () => {
+        esMecanico(
+          {},
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+      it('fail: not mecanico', () => {
+        esMecanico(
+          {
+            user: {
+              rolMecanico: false,
+            },
+          },
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+    });
+    describe('esGuarda', () => {
+      it('success', done => {
+        esGuarda(
+          {
+            user: {
+              rolGuarda: true,
+            },
+          },
+          new Response(() => {
+            expect('Should not come this way').toBeFalsy();
+          }),
+          () => {
+            done();
+          },
+        );
+      });
+      it('fail no user data', () => {
+        esGuarda(
+          {},
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+      it('fail: not guarda', () => {
+        esGuarda(
+          {
+            user: {
+              rolGuarda: false,
+            },
+          },
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+    });
+    describe('tieneNivel', () => {
+      it('success: cumple mínimo', done => {
+        tieneNivel(5)(
+          {
+            user: {
+              nivel: 20,
+            },
+          },
+          new Response(() => {
+            expect('Should not come this way').toBeFalsy();
+          }),
+          done,
+        );
+      });
+      it('fail: faltan datos usuario', () => {
+        tieneNivel(5)(
+          {},
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
+      it('fail: no alcanza el minimo', () => {
+        tieneNivel(5)(
+          {
+            user: {
+              nivel: 1,
+            },
+          },
+          new Response(status => {
+            expect(status).toBe(UNAUTHORIZED);
+          }),
+          () => {
+            expect('Should not come this way').toBeFalsy();
+          },
+        );
+      });
     });
   });
 });

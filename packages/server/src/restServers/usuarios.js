@@ -36,7 +36,7 @@ export function authenticate(req, res, next) {
   const cookie = req.cookies[COOKIE_NAME];
   if (cookie) {
     try {
-      const {iat, ...user} = jwt.verify(cookie, SECRET);
+      const { iat, ...user } = jwt.verify(cookie, SECRET);
       setCookie(res, user);
       req.user = user;
       next();
@@ -105,3 +105,46 @@ export default async function(dataRouter, path) {
     res.status(resp ? NO_CONTENT : NOT_FOUND).end();
   });
 }
+
+export function esDios(req, res, next) {
+  if (req.user && req.user.rolDios) {
+    next();
+  } else {
+    res.status(UNAUTHORIZED).end();
+  }
+}
+
+export function esGuarda(req, res, next) {
+  if (req.user && req.user.rolGuarda) {
+    next();
+  } else {
+    res.status(UNAUTHORIZED).end();
+  }
+}
+
+export function esMecanico(req, res, next) {
+  if (req.user && req.user.rolMecanico) {
+    next();
+  } else {
+    res.status(UNAUTHORIZED).end();
+  }
+}
+
+export function esSupervisor(req, res, next) {
+  if (req.user && req.user.rolSupervisor) {
+    next();
+  } else {
+    res.status(UNAUTHORIZED).end();
+  }
+}
+
+export function tieneNivel(minimo) {
+  return (req, res, next) => {
+    if (req.user && req.user.nivel >= minimo) {
+      next();
+    } else {
+      res.status(UNAUTHORIZED).end();
+    }
+  };
+}
+
