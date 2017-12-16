@@ -1,5 +1,11 @@
 {
-	"devDependencies": {
-		"lerna": "^2.5.1"
-	}
+  "scripts": {
+    "start": "lerna run start --parallel --stream",
+    "build": "lerna run build",
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test"
+  },
+  "devDependencies": {
+    "lerna": "^2.5.1"
+  }
 }
