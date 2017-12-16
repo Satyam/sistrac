@@ -5,7 +5,7 @@ import { join } from 'path';
 import { SECRET, LOGIN_TIMEOUT, COOKIE_NAME } from '../../config';
 
 import {
-  readUsuarioPorUsuario as readUsuario,
+  readUsuarioPorUsuario,
   createUsuario,
   deleteUsuario,
   updateUsuario,
@@ -29,7 +29,7 @@ export function setCookie(res, data) {
 const bypassAuthenticationPattern = /\/((login)|(signup))$/;
 
 export function authenticate(req, res, next) {
-  if (req.method === 'GET' && bypassAuthenticationPattern.test(req.path)) {
+  if (bypassAuthenticationPattern.test(req.path)) {
     next();
     return;
   }
@@ -50,7 +50,7 @@ export function authenticate(req, res, next) {
 
 export default async function(dataRouter, path) {
   dataRouter.put(join(path, '/login'), async (req, res) => {
-    const { password, ...user } = await readUsuario(req.body.usuario);
+    const { password, ...user } = await readUsuarioPorUsuario(req.body.usuario);
     if (Object.keys(user).length) {
       const isMatch = md5(req.body.password) === password;
       if (isMatch) {
@@ -87,7 +87,7 @@ export default async function(dataRouter, path) {
   });
 
   dataRouter.get(join(path, '/:usuario'), async (req, res) => {
-    const { password, ...user } = await readUsuario(req.params.usuario);
+    const { password, ...user } = await readUsuarioPorUsuario(req.params.usuario);
     if (Object.keys(user).length) res.json(user);
     else res.status(NOT_FOUND).end();
   });
@@ -147,4 +147,3 @@ export function tieneNivel(minimo) {
     }
   };
 }
-

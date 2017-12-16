@@ -1,19 +1,16 @@
 import http from 'http';
-import { join } from 'path';
 import { promisify } from 'util';
 import express, { Router as createRouter } from 'express';
 import compression from 'compression';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 
-import { PORT, ROOT_DIR, REST_API_PATH } from '../config';
+import { PORT, REST_API_PATH } from '../config';
 
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
 
 import { authenticate } from './restServers/usuarios';
-
-const absPath = relPath => join(ROOT_DIR, relPath);
 
 const app = express();
 const server = http.createServer(app);
@@ -28,13 +25,19 @@ export async function stop() {
 
 app.use(compression());
 app.use(morgan('dev'));
-// To make this server CORS-ENABLEd
+
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   );
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+  );
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Allow', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
   next();
 });
 
@@ -42,16 +45,16 @@ const dataRouter = createRouter();
 
 app.use(REST_API_PATH, authenticate, bodyParser.json(), dataRouter);
 
-app.use(express.static(absPath('public'), { index: false }));
-
 app.get('/kill', (req, res) => {
   res.send('I am dead');
   stop();
   process.exit();
 });
 
-// app.get('*', (req, res) => res.sendFile(absPath('public/index.html')));
-app.get('*', (req, res) => res.sendFile(absPath('webServer/index.html')));
+app.use('/echo', bodyParser.json(), (req, res) => {
+  const { method, path, query, params, body } = req;
+  res.json({ method, path, query, params, body });
+});
 
 export async function start() {
   await dbInit();

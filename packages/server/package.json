@@ -11,12 +11,7 @@
     "debug": "node --inspect-brk lib/index.js",
     "lint": "eslint --ext .jsx,.js . || exit 0"
   },
-  "keywords": [
-    "rastreo",
-    "control",
-    "trenes",
-    "ferroviario"
-  ],
+  "keywords": ["rastreo", "control", "trenes", "ferroviario"],
   "author": "Daniel Barreiro",
   "license": "MIT",
   "devDependencies": {
@@ -42,6 +37,7 @@
     "md5": "^2.2.1",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
+    "node-fetch": "^1.7.3",
     "node-mysql-promise2": "^0.1.2",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1"
