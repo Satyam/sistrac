@@ -1,9 +1,8 @@
 import { NAME } from './constants';
 
-export function selIsLoggedIn(state, username) {
-  return state[NAME].username === username;
-}
-
-export function selUsuario(state) {
-  return state[NAME].usuario;
+export function selUsuarioActivo(state) {
+  const usuarios = state[NAME];
+  if (usuarios.vence < Date.now()) return {};
+  if (!usuarios.activo) return {};
+  return usuarios.hash[usuarios.activo];
 }

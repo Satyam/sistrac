@@ -2,11 +2,11 @@ import restAPI from '../utils/restAPI';
 
 import {
   NAME,
-  GET_USUARIOS,
-  GET_USUARIO,
-  UPDATE_USUARIO,
-  CREATE_USUARIO,
-  DELETE_USUARIO,
+  // GET_USUARIOS,
+  // GET_USUARIO,
+  // UPDATE_USUARIO,
+  // CREATE_USUARIO,
+  // DELETE_USUARIO,
   LOGIN,
 } from './constants';
 

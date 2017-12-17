@@ -13,15 +13,14 @@ import {
 } from 'react-bootstrap';
 
 import { login } from '../../store/actions';
-import { selUsuario } from '../../store/selectors';
+import { selUsuarioActivo } from '../../store/selectors';
 
 import isPlainClick from '../utils/isPlainClick';
 
 export class LoginForm extends Component {
   constructor(props, context) {
     super(props, context);
-    const { usuario = '', password = '' } = props;
-    this.state = { usuario, password };
+    this.state = { usuario: props.usuario.usuario || '', password: '' };
   }
 
   usuarioChange = ev => {
@@ -107,12 +106,12 @@ export class LoginForm extends Component {
   }
 }
 
-export const mapStateToProps = state => ({ usuario: selUsuario(state) });
+export const mapStateToProps = state => ({ usuario: selUsuarioActivo(state) });
 
 export const mapDispatchToProps = (dispatch, { history }) => ({
-  onLogin: async (username, password, signup) => {
+  onLogin: async (username, password) => {
     await dispatch(login(username, password));
-    await history.replace('/');
+    await history.goBack();
   },
 });
 
