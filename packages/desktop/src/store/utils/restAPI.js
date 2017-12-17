@@ -2,30 +2,21 @@ import ServerError from './serverError';
 // import dbg from 'debug';
 import plainJoin from './plainJoin';
 
-import { HOST, PORT, REST_API_PATH, SESSION_TIMEOUT } from '../../config.js';
+import { REST_HOST, REST_PORT, REST_API_PATH } from '../../config.js';
 // dbg.enable('Sistrac:restAPI');
 // const debug = dbg('Sistrac:restAPI');
 
 const clients = {};
 
-export default (base, host = `${HOST}:${PORT}`) => {
+export default (base, host = `${REST_HOST}:${REST_PORT}`) => {
   const key = plainJoin(host, base);
   if (clients[key]) return clients[key];
   const restClient = method => async (path = '/', body) => {
-    if (
-      parseInt(localStorage.getItem('lastAccess'), 10) + SESSION_TIMEOUT <
-      Date.now()
-    ) {
-      localStorage.removeItem('authorization');
-    } else {
-      localStorage.setItem('lastAccess', String(Date.now()));
-    }
     const response = await fetch(plainJoin(host, REST_API_PATH, base, path), {
       method,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('authorization') || '',
       },
       credentials: 'include',
       body: body && JSON.stringify(body),
