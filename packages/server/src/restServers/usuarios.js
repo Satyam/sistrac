@@ -29,11 +29,11 @@ export function setCookie(res, data) {
 const bypassAuthenticationPattern = /\/((login)|(signup))$/;
 
 export function authenticate(req, res, next) {
-  if (bypassAuthenticationPattern.test(req.path)) {
+  if (req.method === 'OPTIONS' || bypassAuthenticationPattern.test(req.path)) {
     next();
     return;
   }
-  const cookie = req.cookies[COOKIE_NAME];
+  const cookie = req.cookies && req.cookies[COOKIE_NAME];
   if (cookie) {
     try {
       const { iat, ...user } = jwt.verify(cookie, SECRET);
@@ -87,7 +87,9 @@ export default async function(dataRouter, path) {
   });
 
   dataRouter.get(join(path, '/:usuario'), async (req, res) => {
-    const { password, ...user } = await readUsuarioPorUsuario(req.params.usuario);
+    const { password, ...user } = await readUsuarioPorUsuario(
+      req.params.usuario,
+    );
     if (Object.keys(user).length) res.json(user);
     else res.status(NOT_FOUND).end();
   });

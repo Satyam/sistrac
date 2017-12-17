@@ -4,8 +4,9 @@ import express, { Router as createRouter } from 'express';
 import compression from 'compression';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
-import { PORT, REST_API_PATH } from '../config';
+import { REST_PORT, REST_API_PATH, APP_HOST, APP_PORT } from '../config';
 
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
@@ -25,9 +26,10 @@ export async function stop() {
 
 app.use(compression());
 app.use(morgan('dev'));
+app.use(cookieParser());
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', `${APP_HOST}:${APP_PORT}`);
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization',
@@ -37,7 +39,6 @@ app.use((req, res, next) => {
     'GET, POST, PATCH, PUT, DELETE, OPTIONS',
   );
   res.header('Access-Control-Allow-Credentials', true);
-  res.header('Allow', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
   next();
 });
 
@@ -59,5 +60,5 @@ app.use('/echo', bodyParser.json(), (req, res) => {
 export async function start() {
   await dbInit();
   await restServers(dataRouter);
-  await listen(PORT);
+  await listen(REST_PORT);
 }

@@ -1,6 +1,5 @@
 import { start, stop } from '../server';
-import { HOST, PORT, REST_API_PATH } from '../../config';
-import md5 from 'md5';
+import { REST_HOST, REST_PORT, REST_API_PATH } from '../../config';
 
 const fetch = require('node-fetch');
 
@@ -8,7 +7,7 @@ describe('server integration test', () => {
   beforeAll(() => start());
   afterAll(stop);
   it('echo', async () => {
-    const resp = await fetch(`${HOST}:${PORT}/echo`);
+    const resp = await fetch(`${REST_HOST}:${REST_PORT}/echo`);
     expect(resp.ok).toBeTruthy();
     expect(resp.status).toBe(200);
     const req = await resp.json();
@@ -16,7 +15,7 @@ describe('server integration test', () => {
     expect(req.path).toBe('/');
   });
   it('login', async () => {
-    const resp = await fetch(`${HOST}:${PORT}${REST_API_PATH}/usuarios/login`, {
+    const resp = await fetch(`${REST_HOST}:${REST_PORT}${REST_API_PATH}/usuarios/login`, {
       method: 'PUT',
       body: JSON.stringify({
         usuario: 'satyam',
