@@ -45,7 +45,6 @@ export class LoginForm extends Component {
   };
   formSubmit = ev => {
     if (isPlainClick(ev)) {
-      console.log(this.state);
       if (this.validatePassword() !== 'success') return;
       if (this.validateUsuario() !== 'success') return;
       const { usuario, password } = this.state;

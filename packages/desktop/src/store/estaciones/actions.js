@@ -27,7 +27,7 @@ export function getEstacion(idEstacion) {
       payload: {
         idEstacion,
       },
-      promise: api.read(`/estacion/${idEstacion}`),
+      promise: api.read(`/${idEstacion}`),
     });
   };
 }

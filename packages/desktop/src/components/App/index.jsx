@@ -56,6 +56,12 @@ export class App extends Component {
           )}
         />
         <Route
+          path="/estacion/:idEstacion"
+          component={loadModule(() =>
+            import(/* webpackChunkName: "estacion" */ '../Estacion'),
+          )}
+        />
+        <Route
           path="/login"
           component={loadModule(() =>
             import(/* webpackChunkName: "login" */ '../LoginForm'),
