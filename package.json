@@ -1,9 +1,10 @@
 {
   "scripts": {
     "start": "lerna run start --parallel --stream",
-    "build": "lerna run build",
+    "build": "lerna run build --parallel --stream",
     "bootstrap": "lerna bootstrap",
-    "test": "lerna run test"
+    "test": "lerna run test --stream",
+    "lint": "lerna run lint --stream"
   },
   "devDependencies": {
     "lerna": "^2.5.1"
