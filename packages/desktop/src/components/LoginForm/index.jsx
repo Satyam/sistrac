@@ -55,10 +55,10 @@ export class LoginForm extends Component {
     return (
       <Form horizontal>
         <FormGroup controlId="usuario" validationState={this.validateUsuario()}>
-          <Col componentClass={ControlLabel} smOffset={2} sm={2}>
+          <Col componentClass={ControlLabel} mdOffset={2} md={2} xs={3}>
             Usuario
           </Col>
-          <Col sm={6}>
+          <Col md={6} xs={9}>
             <FormControl
               type="text"
               placeholder="usuario"
@@ -73,10 +73,10 @@ export class LoginForm extends Component {
           controlId="formHorizontalPassword"
           validationState={this.validatePassword()}
         >
-          <Col componentClass={ControlLabel} smOffset={2} sm={2}>
+          <Col componentClass={ControlLabel} mdOffset={2} md={2} xs={3}>
             Password
           </Col>
-          <Col sm={6}>
+          <Col md={6} xs={9}>
             <FormControl
               type="password"
               placeholder="Password"
@@ -88,13 +88,13 @@ export class LoginForm extends Component {
         </FormGroup>
 
         <FormGroup>
-          <Col smOffset={4} sm={6}>
+          <Col mdOffset={4} md={6} xsOffset={3} xs={9}>
             <Checkbox>Remember me</Checkbox>
           </Col>
         </FormGroup>
 
         <FormGroup>
-          <Col smOffset={4} sm={6}>
+          <Col mdOffset={4} md={6} xsOffset={3} xs={9}>
             <Button type="submit" onClick={this.formSubmit}>
               Sign in
             </Button>

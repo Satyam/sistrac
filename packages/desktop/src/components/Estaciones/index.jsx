@@ -46,22 +46,10 @@ export class Estaciones extends Component {
           <title>Sistrac</title>
         </Helmet>,
         <Row>
-          <Col mdOffset={2} md={8}>
+          <Col mdOffset={2} md={8} xs={12}>
             <Table striped bordered condensed hover>
               <thead style={{ cursor: 'default' }}>
                 <tr>
-                  <th onClick={this.changeSort} name="nombre" width="75%">
-                    {sortField === 'nombre' ? (
-                      <Glyphicon
-                        glyph={
-                          sortAsc ? 'sort-by-alphabet' : 'sort-by-alphabet-alt'
-                        }
-                      />
-                    ) : (
-                      ' '
-                    )}{' '}
-                    Nombre
-                  </th>
                   <th onClick={this.changeSort} name="sigla" width="25%">
                     {sortField === 'sigla' ? (
                       <Glyphicon
@@ -74,6 +62,18 @@ export class Estaciones extends Component {
                     )}{' '}
                     Sigla
                   </th>
+                  <th onClick={this.changeSort} name="nombre" width="75%">
+                    {sortField === 'nombre' ? (
+                      <Glyphicon
+                        glyph={
+                          sortAsc ? 'sort-by-alphabet' : 'sort-by-alphabet-alt'
+                        }
+                      />
+                    ) : (
+                      ' '
+                    )}{' '}
+                    Nombre
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -81,10 +81,10 @@ export class Estaciones extends Component {
                   <tr key={est.idEstacion}>
                     <td>
                       <Link to={`/estacion/${est.idEstacion}`}>
-                        {est.nombre}
+                        {est.sigla}
                       </Link>
                     </td>
-                    <td>{est.sigla}</td>
+                    <td>{est.nombre}</td>
                   </tr>
                 ))}
               </tbody>
