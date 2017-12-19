@@ -26,5 +26,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .jsx,.js . || exit 0"
+  },
+  "devDependencies": {
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest-enzyme": "^4.0.1",
+    "react-test-renderer": "^16.2.0"
   }
 }

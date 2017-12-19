@@ -6,6 +6,7 @@ const fetch = require('node-fetch');
 describe('server integration test', () => {
   beforeAll(() => start());
   afterAll(stop);
+
   it('echo', async () => {
     const resp = await fetch(`${REST_HOST}:${REST_PORT}/echo`);
     expect(resp.ok).toBeTruthy();
@@ -14,6 +15,7 @@ describe('server integration test', () => {
     expect(req.method).toBe('GET');
     expect(req.path).toBe('/');
   });
+
   it('login', async () => {
     const resp = await fetch(
       `${REST_HOST}:${REST_PORT}${REST_API_PATH}/usuarios/login`,
