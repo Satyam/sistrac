@@ -12,6 +12,7 @@ import {
   // CREATE_USUARIO,
   // DELETE_USUARIO,
   LOGIN,
+  LOGOUT,
 } from './constants';
 
 import { SESSION_TIMEOUT } from '../../config';
@@ -29,6 +30,12 @@ export default (state = { hash: {}, activo: null, vence: null }, action) => {
         hash: { ...state.hash, [idUsuario]: usuario },
       };
     }
+    case LOGOUT:
+      return {
+        ...state,
+        activo: null,
+        vence: null,
+      };
     case GET_USUARIO: {
       const usuario = action.payload;
       const idUsuario = usuario.idUsuario;

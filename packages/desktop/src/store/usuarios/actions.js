@@ -8,12 +8,13 @@ import {
   // CREATE_USUARIO,
   // DELETE_USUARIO,
   LOGIN,
+  LOGOUT,
 } from './constants';
 
 const api = restAPI(NAME);
 
 export function login(usuario, password) {
-  return async (dispatch, getState) => {
+  return async dispatch =>
     await dispatch({
       type: LOGIN,
       payload: {
@@ -22,5 +23,12 @@ export function login(usuario, password) {
       },
       promise: api.update('/login', { usuario, password }),
     });
-  };
+}
+
+export function logout() {
+  return async dispatch =>
+    await dispatch({
+      type: LOGOUT,
+      promise: api.read('/logout'),
+    });
 }
