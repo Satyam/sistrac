@@ -29,7 +29,9 @@ export default (base, host = `${REST_HOST}:${REST_PORT}`) => {
         plainJoin(base, path),
       );
     }
-    return response.json();
+    const text = await response.text();
+    if (text) return JSON.parse(text);
+    return {};
   };
   clients[key] = {
     create: restClient('post'),
