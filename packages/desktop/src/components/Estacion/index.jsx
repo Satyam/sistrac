@@ -10,6 +10,8 @@ import initStore from '../utils/initStore';
 import { getEstacion } from '../../store/actions';
 import { selEstacion } from '../../store/selectors';
 
+import { estacionShape } from '../../shapes';
+
 import './styles.css';
 
 export class Estacion extends Component {
@@ -51,6 +53,10 @@ export class Estacion extends Component {
     );
   }
 }
+
+Estacion.propTypes = {
+  estacion: estacionShape,
+};
 
 export const storeInitializer = (dispatch, getState, { match }) => {
   const idEstacion = match && match.params.idEstacion;

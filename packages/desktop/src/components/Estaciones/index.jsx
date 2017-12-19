@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Glyphicon, Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Helmet } from 'react-helmet';
+
 import initStore from '../utils/initStore';
 import isPlainClick from '../utils/isPlainClick';
 import { getEstaciones } from '../../store/actions';
 import { selEstaciones } from '../../store/selectors';
+import { estacionShape } from '../../shapes';
 
 export class Estaciones extends Component {
   constructor(props, context) {
@@ -95,6 +98,10 @@ export class Estaciones extends Component {
     );
   }
 }
+
+Estaciones.propTypes = {
+  estaciones: PropTypes.arrayOf(estacionShape),
+};
 
 export const storeInitializer = dispatch => dispatch(getEstaciones());
 

@@ -17,6 +17,8 @@ import { selUsuarioActivo } from '../../store/selectors';
 
 import isPlainClick from '../utils/isPlainClick';
 
+import { withRouterTypes, usuarioShape } from '../../shapes';
+
 export class LoginForm extends Component {
   constructor(props, context) {
     super(props, context);
@@ -104,6 +106,11 @@ export class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  ...withRouterTypes,
+  usuario: usuarioShape,
+};
 
 export const mapStateToProps = state => ({ usuario: selUsuarioActivo(state) });
 
