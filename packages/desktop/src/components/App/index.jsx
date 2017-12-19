@@ -2,17 +2,36 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { compose } from 'recompose';
 
-import loadModule from '../utils/moduleLoader';
+import MainNav from '../MainNav';
+import loadModule from '../utils/loadModule';
 import { selUsuarioActivo } from '../../store/selectors';
+import { logout } from '../../store/actions';
+
+import { withRouterTypes, usuarioShape } from '../../shapes';
 
 export class App extends Component {
+  constructor(...args) {
+    super(...args);
+    this.state = {};
+  }
   checkLoggedIn = () => {
-    const { usuario, history, location } = this.props;
-    if (location.pathname !== '/login' && !usuario.idUsuario) {
-      history.push('/login');
+    const { usuario, history, location, logout } = this.props;
+    console.log(location.pathname);
+    switch (location.pathname) {
+      case '/login':
+        break;
+      case '/logout':
+        if (this.state.logingOut) break;
+        this.setState({ logingOut: true });
+        logout();
+        // history.go(-history.length);
+        break;
+      default:
+        if (!usuario.idUsuario) {
+          history.push('/login');
+        }
     }
   };
   componentDidMount = () => {
@@ -27,28 +46,7 @@ export class App extends Component {
         <Helmet>
           <title>Sistrac</title>
         </Helmet>
-        <Navbar staticTop>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a href="/">Sistrac</a>
-            </Navbar.Brand>
-          </Navbar.Header>
-          <Nav>
-            <NavItem eventKey={1} href="/estaciones">
-              Estaciones
-            </NavItem>
-            <NavItem eventKey={2} href="#">
-              Link
-            </NavItem>
-            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-              <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={3.4}>Separated link</MenuItem>
-            </NavDropdown>
-          </Nav>
-        </Navbar>
+        <MainNav />
         <Route
           path="/estaciones"
           component={loadModule(() =>
@@ -72,6 +70,21 @@ export class App extends Component {
   }
 }
 
+App.propTypes = {
+  ...withRouterTypes,
+  usuario: usuarioShape,
+};
+
 export const mapStateToProps = state => ({ usuario: selUsuarioActivo(state) });
 
-export default compose(withRouter, connect(mapStateToProps))(App);
+export const mapDispatchToProps = (dispatch, { history }) => ({
+  logout: async () => {
+    await dispatch(logout());
+    await history.replace('/');
+    return null;
+  },
+});
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+)(App);
