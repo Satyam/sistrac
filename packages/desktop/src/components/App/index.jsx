@@ -18,7 +18,6 @@ export class App extends Component {
   }
   checkLoggedIn = () => {
     const { usuario, history, location, logout } = this.props;
-    console.log(location.pathname);
     switch (location.pathname) {
       case '/login':
         break;
