@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { compose } from 'recompose';
 
 import MainNav from '../MainNav';
-import loadModule from '../utils/loadModule';
+import Routes from '../Routes';
 import { selUsuarioActivo } from '../../store/selectors';
 import { logout } from '../../store/actions';
 
@@ -26,7 +26,6 @@ export class App extends Component {
         if (this.state.logingOut) break;
         this.setState({ logingOut: true });
         logout();
-        // history.go(-history.length);
         break;
       default:
         if (!usuario.idUsuario) {
@@ -47,24 +46,7 @@ export class App extends Component {
           <title>Sistrac</title>
         </Helmet>
         <MainNav />
-        <Route
-          path="/estaciones"
-          component={loadModule(() =>
-            import(/* webpackChunkName: "estaciones" */ '../Estaciones'),
-          )}
-        />
-        <Route
-          path="/estacion/:idEstacion"
-          component={loadModule(() =>
-            import(/* webpackChunkName: "estacion" */ '../Estacion'),
-          )}
-        />
-        <Route
-          path="/login"
-          component={loadModule(() =>
-            import(/* webpackChunkName: "login" */ '../LoginForm'),
-          )}
-        />
+        <Routes />
       </div>
     );
   }
@@ -84,6 +66,7 @@ export const mapDispatchToProps = (dispatch, { history }) => ({
     return null;
   },
 });
+
 export default compose(
   withRouter,
   connect(mapStateToProps, mapDispatchToProps),
