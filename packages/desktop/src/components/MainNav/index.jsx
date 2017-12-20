@@ -10,37 +10,39 @@ import { selUsuarioActivo } from '../../store/selectors';
 import { withRouterTypes, usuarioShape } from '../../shapes';
 
 import './styles.css';
-export const MainNav = ({ usuario, location }) => (
-  <div className="MainNav">
-    <Navbar staticTop>
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">Sistrac</Link>
-        </Navbar.Brand>
-      </Navbar.Header>
-      <Nav>
-        <NavItem
-          eventKey={1}
-          href="/estaciones"
-          active={location.pathname === '/estaciones'}
-        >
-          Estaciones
-        </NavItem>
-        <NavItem eventKey={2} href="#">
-          Link
-        </NavItem>
-      </Nav>
-      {usuario.nombre ? (
-        <Nav pullRight>
-          <NavDropdown eventKey={3} title={usuario.nombre} id="userDropdown">
-            <MenuItem href="/logout">Logout</MenuItem>
-            <MenuItem href="/preferences">Preferences</MenuItem>
-          </NavDropdown>
+export function MainNav({ usuario, location }) {
+  return (
+    <div className="MainNav">
+      <Navbar staticTop>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">Sistrac</Link>
+          </Navbar.Brand>
+        </Navbar.Header>
+        <Nav>
+          <NavItem
+            eventKey={1}
+            href="/estaciones"
+            active={location.pathname === '/estaciones'}
+          >
+            Estaciones
+          </NavItem>
+          <NavItem eventKey={2} href="#">
+            Link
+          </NavItem>
         </Nav>
-      ) : null}
-    </Navbar>
-  </div>
-);
+        {usuario.nombre ? (
+          <Nav pullRight>
+            <NavDropdown eventKey={3} title={usuario.nombre} id="userDropdown">
+              <MenuItem href="/logout">Logout</MenuItem>
+              <MenuItem href="/preferences">Preferences</MenuItem>
+            </NavDropdown>
+          </Nav>
+        ) : null}
+      </Navbar>
+    </div>
+  );
+}
 
 MainNav.propTypes = {
   ...withRouterTypes,
