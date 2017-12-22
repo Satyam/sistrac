@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PageHeader, Grid, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
@@ -14,44 +14,39 @@ import { estacionShape } from '../../shapes';
 
 import './styles.css';
 
-export class Estacion extends Component {
-  render() {
-    const { estacion } = this.props;
-    if (!estacion) return null;
-    const { sigla, nombre, latitud, longitud } = estacion;
-    const position = [latitud, longitud];
-    return (
-      <Grid>
-        <Helmet>
-          <title>
-            Sistrac - {sigla} - {nombre}
-          </title>
-        </Helmet>,
-        <Row>
-          <Col mdOffset={2} md={8}>
-            <PageHeader>
-              {sigla} <small>{nombre}</small>
-            </PageHeader>
-            <div height="400px">
-              <Map center={position} zoom={13}>
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                />
-                <Marker position={position}>
-                  <Popup>
-                    <span>
-                      A pretty CSS3 popup.<br />Easily customizable.
-                    </span>
-                  </Popup>
-                </Marker>
-              </Map>
-            </div>
-          </Col>
-        </Row>
-      </Grid>
-    );
-  }
+export function Estacion({ estacion }) {
+  if (!estacion) return null;
+  const { sigla, nombre, latitud, longitud } = estacion;
+  const position = [latitud, longitud];
+  return (
+    <Grid>
+      <Helmet>
+        <title>
+          Sistrac - {sigla} - {nombre}
+        </title>
+      </Helmet>,
+      <Row>
+        <Col xs={12} mdOffset={2} md={8}>
+          <PageHeader>
+            {sigla} <small>{nombre}</small>
+          </PageHeader>
+          <Map center={position} zoom={13}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            />
+            <Marker position={position}>
+              <Popup>
+                <span>
+                  {sigla} - {nombre}
+                </span>
+              </Popup>
+            </Marker>
+          </Map>
+        </Col>
+      </Row>
+    </Grid>
+  );
 }
 
 Estacion.propTypes = {

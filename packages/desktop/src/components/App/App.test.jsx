@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import promiseMiddleware from '../../store/utils/promiseMiddleware';
-import ConnectedApp, { App, mapStateToProps, mapDispatchToProps } from '.';
+import { App, mapStateToProps, mapDispatchToProps } from '.';
 import fetchMock from 'fetch-mock';
 
 import { REST_PORT, REST_HOST, REST_API_PATH } from '../../config';

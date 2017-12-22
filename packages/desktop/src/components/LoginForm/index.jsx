@@ -8,7 +8,6 @@ import {
   Col,
   FormControl,
   ControlLabel,
-  Checkbox,
   Button,
 } from 'react-bootstrap';
 
@@ -63,7 +62,7 @@ export class LoginForm extends Component {
           <Col md={6} xs={9}>
             <FormControl
               type="text"
-              placeholder="usuario"
+              placeholder="Usuario"
               value={this.state.usuario}
               onChange={this.usuarioChange}
             />
@@ -72,7 +71,7 @@ export class LoginForm extends Component {
         </FormGroup>
 
         <FormGroup
-          controlId="formHorizontalPassword"
+          controlId="password"
           validationState={this.validatePassword()}
         >
           <Col componentClass={ControlLabel} mdOffset={2} md={2} xs={3}>
@@ -81,17 +80,11 @@ export class LoginForm extends Component {
           <Col md={6} xs={9}>
             <FormControl
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               value={this.state.password}
               onChange={this.passwordChange}
             />
             <FormControl.Feedback />
-          </Col>
-        </FormGroup>
-
-        <FormGroup>
-          <Col mdOffset={4} md={6} xsOffset={3} xs={9}>
-            <Checkbox>Remember me</Checkbox>
           </Col>
         </FormGroup>
 
