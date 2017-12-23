@@ -1,4 +1,4 @@
-import { join } from 'path';
+import join from './plainJoin';
 import {
   readEstaciones,
   existeEstacionPorNombre,

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import md5 from 'md5';
-import { join } from 'path';
+import join from './plainJoin';
 
 import { SECRET, LOGIN_TIMEOUT, COOKIE_NAME } from '../../config';
 
