@@ -13,7 +13,12 @@
     "debug": "node --inspect-brk lib/index.js",
     "lint": "eslint --ext .jsx,.js . || exit 0"
   },
-  "keywords": ["rastreo", "control", "trenes", "ferroviario"],
+  "keywords": [
+    "rastreo",
+    "control",
+    "trenes",
+    "ferroviario"
+  ],
   "author": "Daniel Barreiro",
   "license": "MIT",
   "devDependencies": {
@@ -27,8 +32,8 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
-    "jest": "^21.2.1",
-    "nodemon": "^1.13.3"
+    "jest": "^22.0.4",
+    "nodemon": "^1.14.2"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
