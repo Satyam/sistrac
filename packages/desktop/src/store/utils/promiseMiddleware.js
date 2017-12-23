@@ -15,11 +15,12 @@ export default function promiseMiddleware() {
           next({
             ...act,
             stage: REPLY_RECEIVED,
-            payload: Object.assign(
-              {},
-              act.payload,
-              Array.isArray(response) ? { list: response } : response,
-            ),
+            payload: Array.isArray(response)
+              ? Object.assign(response, act.payload)
+              : {
+                  ...act.payload,
+                  ...response,
+                },
           }),
         error =>
           next({

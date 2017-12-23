@@ -16,7 +16,7 @@ export default (state = {}, action) => {
   if (action && action.stage && action.stage !== REPLY_RECEIVED) return state;
   switch (action.type) {
     case GET_ESTACIONES:
-      return action.payload.list.reduce(
+      return action.payload.reduce(
         (estaciones, estacion) => ({
           ...estaciones,
           [estacion.idEstacion]: estacion,
