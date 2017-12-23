@@ -16,11 +16,20 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+-- DROP USER 'sistrac'@'localhost';
+CREATE USER 'sistrac'@'localhost' IDENTIFIED BY 'andueza';
+
 --
 -- Database: `sistrac`
 --
 DROP DATABASE IF EXISTS `sistrac`;
 CREATE DATABASE IF NOT EXISTS `sistrac` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES,
+  EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER
+  ON `sistrac`.* TO 'sistrac'@'localhost';
+
+
 USE `sistrac`;
 -- --------------------------------------------------------
 
