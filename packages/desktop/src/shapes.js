@@ -14,10 +14,9 @@ export const usuarioShape = PropTypes.shape({
 });
 
 export const estacionShape = PropTypes.shape({
-  idEstacion: PropTypes.number,
+  idEstacion: PropTypes.string,
   nombre: PropTypes.string,
   latitud: PropTypes.number,
-  sigla: PropTypes.string,
   longitud: PropTypes.number,
 });
 

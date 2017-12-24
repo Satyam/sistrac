@@ -16,26 +16,26 @@ export async function existeEstacionPorNombre(nombre) {
   return result[0].hay === 1;
 }
 
-export async function existeEstacionPorSigla(sigla) {
+export async function existeEstacion(idEstacion) {
   const result = await db.query(
-    'select count(*) as hay from Estaciones where sigla = ?',
-    [sigla],
+    'select count(*) as hay from Estaciones where idEstacion = ?',
+    [idEstacion],
   );
   return result[0].hay === 1;
 }
 
-export async function updateEstacion(id, data) {
+export async function updateEstacion(idEstacion, data) {
   const result = await db.query(
     'update Estaciones set ? where idEstacion = ?',
-    [data, id],
+    [data, idEstacion],
   );
   return result.affectedRows === 1;
 }
 
-export async function readEstacion(id) {
+export async function readEstacion(idEstacion) {
   const result = await db.query(
     'select * from Estaciones where idEstacion = ?',
-    [id],
+    [idEstacion],
   );
   return result[0];
 }
@@ -43,13 +43,6 @@ export async function readEstacion(id) {
 export async function readEstacionPorNombre(nombre) {
   const result = await db.query('select * from Estaciones where nombre = ?', [
     nombre,
-  ]);
-  return result[0];
-}
-
-export async function readEstacionPorSigla(sigla) {
-  const result = await db.query('select * from Estaciones where sigla = ?', [
-    sigla,
   ]);
   return result[0];
 }
@@ -66,9 +59,9 @@ export async function createEstacion(data) {
   }
 }
 
-export async function deleteEstacion(id) {
+export async function deleteEstacion(idEstacion) {
   const result = await db.query('delete from Estaciones where idEstacion = ?', [
-    id,
+    idEstacion,
   ]);
   return result.affectedRows === 1;
 }

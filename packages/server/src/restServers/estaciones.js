@@ -2,11 +2,10 @@ import join from './plainJoin';
 import {
   readEstaciones,
   existeEstacionPorNombre,
-  existeEstacionPorSigla,
+  existeEstacion,
   updateEstacion,
   readEstacion,
   readEstacionPorNombre,
-  readEstacionPorSigla,
   createEstacion,
   deleteEstacion,
 } from '../dbOps/estaciones';
@@ -28,7 +27,7 @@ export default async function(dataRouter, path) {
   });
 
   dataRouter.get(relPath('/:idEstacion'), async (req, res) => {
-    const resp = await readEstacion(parseInt(req.params.idEstacion, 10));
+    const resp = await readEstacion(req.params.idEstacion);
     if (resp) res.json(resp);
     else res.status(NOT_FOUND).end();
   });
@@ -39,27 +38,18 @@ export default async function(dataRouter, path) {
     else res.status(NOT_FOUND).end();
   });
 
-  dataRouter.get(relPath('/sigla/:sigla'), async (req, res) => {
-    const resp = await readEstacionPorSigla(req.params.sigla);
-    if (resp) res.json(resp);
-    else res.status(NOT_FOUND).end();
-  });
-
   dataRouter.get(relPath('/existe/nombre/:nombre'), async (req, res) => {
     const resp = await existeEstacionPorNombre(req.params.nombre);
     res.status(resp ? OK : NOT_FOUND).end();
   });
 
-  dataRouter.get(relPath('/existe/sigla/:sigla'), async (req, res) => {
-    const resp = await existeEstacionPorSigla(req.params.sigla);
+  dataRouter.get(relPath('/existe/:idEstacion'), async (req, res) => {
+    const resp = await existeEstacion(req.params.idEstacion);
     res.status(resp ? OK : NOT_FOUND).end();
   });
 
   dataRouter.put(relPath('/:idEstacion'), async (req, res) => {
-    const resp = await updateEstacion(
-      parseInt(req.params.idEstacion, 10),
-      req.body,
-    );
+    const resp = await updateEstacion(req.params.idEstacion, req.body);
     res.status(resp ? NO_CONTENT : NOT_FOUND).end();
   });
 
@@ -70,7 +60,7 @@ export default async function(dataRouter, path) {
   });
 
   dataRouter.delete(relPath('/:idEstacion'), async (req, res) => {
-    const resp = await deleteEstacion(parseInt(req.params.idEstacion, 10));
+    const resp = await deleteEstacion(req.params.idEstacion);
     res.status(resp ? NO_CONTENT : NOT_FOUND).end();
   });
 }

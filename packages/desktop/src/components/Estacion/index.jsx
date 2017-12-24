@@ -16,19 +16,19 @@ import './styles.css';
 
 export function Estacion({ estacion }) {
   if (!estacion) return null;
-  const { sigla, nombre, latitud, longitud } = estacion;
+  const { idEstacion, nombre, latitud, longitud } = estacion;
   const position = [latitud, longitud];
   return (
     <Grid>
       <Helmet>
         <title>
-          Sistrac - {sigla} - {nombre}
+          Sistrac - {idEstacion} - {nombre}
         </title>
       </Helmet>,
       <Row>
         <Col xs={12} mdOffset={2} md={8}>
           <PageHeader>
-            {sigla} <small>{nombre}</small>
+            {idEstacion} <small>{nombre}</small>
           </PageHeader>
           <Map center={position} zoom={13}>
             <TileLayer
@@ -38,7 +38,7 @@ export function Estacion({ estacion }) {
             <Marker position={position}>
               <Popup>
                 <span>
-                  {sigla} - {nombre}
+                  {idEstacion} - {nombre}
                 </span>
               </Popup>
             </Marker>

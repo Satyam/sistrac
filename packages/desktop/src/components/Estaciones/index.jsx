@@ -84,7 +84,7 @@ export class Estaciones extends Component {
                   <tr key={est.idEstacion}>
                     <td>
                       <Link to={`/estacion/${est.idEstacion}`}>
-                        {est.sigla}
+                        {est.idEstacion}
                       </Link>
                     </td>
                     <td>{est.nombre}</td>
