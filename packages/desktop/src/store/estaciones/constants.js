@@ -7,3 +7,4 @@ export const UPDATE_ESTACION = `${NAME} / update estacion`;
 export const CREATE_ESTACION = `${NAME} / create estacion`;
 export const DELETE_ESTACION = `${NAME} / delete estacion`;
 
+export const GET_ITINERARIOS_ESTACION = `${NAME} / get itinerarios por estacion`;

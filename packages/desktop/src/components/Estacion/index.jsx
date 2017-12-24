@@ -7,14 +7,14 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import initStore from '../utils/initStore';
 
-import { getEstacion } from '../../store/actions';
-import { selEstacion } from '../../store/selectors';
+import { getEstacion, getItinerariosEstacion } from '../../store/actions';
+import { selEstacion, selItinerariosEstacion } from '../../store/selectors';
 
 import { estacionShape } from '../../shapes';
 
 import './styles.css';
 
-export function Estacion({ estacion }) {
+export function Estacion({ estacion, itinerarios }) {
   if (!estacion) return null;
   const { sigla, nombre, latitud, longitud } = estacion;
   const position = [latitud, longitud];
@@ -43,6 +43,7 @@ export function Estacion({ estacion }) {
               </Popup>
             </Marker>
           </Map>
+          <pre>{JSON.stringify(itinerarios)}</pre>
         </Col>
       </Row>
     </Grid>
@@ -57,7 +58,10 @@ export const storeInitializer = (dispatch, getState, { match }) => {
   const idEstacion = match && match.params.idEstacion;
   return (
     idEstacion &&
-    (selEstacion(getState(), idEstacion) || dispatch(getEstacion(idEstacion)))
+    (selEstacion(getState(), idEstacion) ||
+      dispatch(getEstacion(idEstacion)).then(() =>
+        dispatch(getItinerariosEstacion(idEstacion)),
+      ))
   );
 };
 
@@ -65,6 +69,7 @@ export const mapStateToProps = (state, { match }) =>
   match
     ? {
         estacion: selEstacion(state, match.params.idEstacion),
+        itinerarios: selItinerariosEstacion(state, match.params.idEstacion),
       }
     : {};
 

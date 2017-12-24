@@ -4,6 +4,7 @@ import {
   NAME,
   GET_ESTACIONES,
   GET_ESTACION,
+  GET_ITINERARIOS_ESTACION,
   // UPDATE_ESTACION,
   // CREATE_ESTACION,
   // DELETE_ESTACION,
@@ -30,4 +31,15 @@ export function getEstacion(idEstacion) {
       promise: api.read(`/${idEstacion}`),
     });
   };
+}
+
+export function getItinerariosEstacion(idEstacion) {
+  return async dispatch =>
+    await dispatch({
+      type: GET_ITINERARIOS_ESTACION,
+      payload: {
+        idEstacion,
+      },
+      promise: api.read(`/itinerarios/${idEstacion}`),
+    });
 }

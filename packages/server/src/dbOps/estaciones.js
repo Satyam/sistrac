@@ -72,3 +72,10 @@ export async function deleteEstacion(id) {
   ]);
   return result.affectedRows === 1;
 }
+
+export function readEscalasPorIdEstacion(idEstacion) {
+  return db.query(
+    'select idItinerario, nombre, llega, sale from Itinerarios join Escalas using (idItinerario)  where idEstacion=? order by idItinerario, llega',
+    idEstacion,
+  );
+}

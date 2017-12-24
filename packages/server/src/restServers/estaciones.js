@@ -9,6 +9,7 @@ import {
   readEstacionPorSigla,
   createEstacion,
   deleteEstacion,
+  readEscalasPorIdEstacion,
 } from '../dbOps/estaciones';
 
 import {
@@ -72,5 +73,12 @@ export default async function(dataRouter, path) {
   dataRouter.delete(relPath('/:idEstacion'), async (req, res) => {
     const resp = await deleteEstacion(parseInt(req.params.idEstacion, 10));
     res.status(resp ? NO_CONTENT : NOT_FOUND).end();
+  });
+
+  dataRouter.get(relPath('/itinerarios/:idEstacion'), async (req, res) => {
+    const resp = await readEscalasPorIdEstacion(
+      parseInt(req.params.idEstacion, 10),
+    );
+    res.json(resp);
   });
 }
