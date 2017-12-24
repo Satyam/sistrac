@@ -1,5 +1,6 @@
 import http from 'http';
 import { promisify } from 'util';
+import { resolve } from 'path';
 import express, { Router as createRouter } from 'express';
 import compression from 'compression';
 import morgan from 'morgan';
@@ -55,6 +56,14 @@ app.get('/kill', (req, res) => {
 app.use('/echo', bodyParser.json(), (req, res) => {
   const { method, path, query, params, body } = req;
   res.json({ method, path, query, params, body });
+});
+
+app.use(
+  express.static(resolve(__dirname, '../../desktop/build/'), { index: false }),
+);
+
+app.get('*', (req, res) => {
+  res.sendFile(resolve(__dirname, '../../desktop/build/index.html'));
 });
 
 export async function start() {
