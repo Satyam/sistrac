@@ -1,21 +1,27 @@
 import React from 'react';
-import { PageHeader, Grid, Row, Col } from 'react-bootstrap';
+import { PageHeader, Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Helmet } from 'react-helmet';
+import { withRouter } from 'react-router-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
+import TrenesPorEstacion from './TrenesPorEstacion';
+import Sumario from './Sumario';
 import initStore from '../utils/initStore';
 
 import { getEstacion } from '../../store/actions';
 import { selEstacion } from '../../store/selectors';
 
-import { estacionShape } from '../../shapes';
+import { withRouterTypes, estacionShape } from '../../shapes';
 
 import './styles.css';
 
-export function Estacion({ estacion }) {
+export function Estacion({ estacion, match, history }) {
   if (!estacion) return null;
+  const tabClick = activeTab => {
+    history.push(`/estacion/${match.params.idEstacion}/${activeTab}`);
+  };
   const { idEstacion, nombre, latitud, longitud } = estacion;
   const position = [latitud, longitud];
   return (
@@ -43,6 +49,22 @@ export function Estacion({ estacion }) {
               </Popup>
             </Marker>
           </Map>
+          <Tabs
+            activeKey={match.params.activeTab || 'basic'}
+            onSelect={tabClick}
+            id="trenes-por-estacion"
+            mountOnEnter={true}
+          >
+            <Tab eventKey="basic" title="Sumario">
+              <Sumario estacion={estacion} />
+            </Tab>
+            <Tab eventKey="trenes" title="Trenes">
+              <TrenesPorEstacion idEstacion={idEstacion} />
+            </Tab>
+            <Tab eventKey={3} title="Tab 3" disabled>
+              Tab 3 content
+            </Tab>
+          </Tabs>
         </Col>
       </Row>
     </Grid>
@@ -50,6 +72,7 @@ export function Estacion({ estacion }) {
 }
 
 Estacion.propTypes = {
+  ...withRouterTypes,
   estacion: estacionShape,
 };
 
@@ -68,6 +91,8 @@ export const mapStateToProps = (state, { match }) =>
       }
     : {};
 
-export default compose(initStore(storeInitializer), connect(mapStateToProps))(
-  Estacion,
-);
+export default compose(
+  withRouter,
+  initStore(storeInitializer),
+  connect(mapStateToProps),
+)(Estacion);

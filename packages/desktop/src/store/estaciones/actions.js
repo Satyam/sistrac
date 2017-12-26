@@ -4,6 +4,7 @@ import {
   NAME,
   GET_ESTACIONES,
   GET_ESTACION,
+  GET_TRENES_ESTACION,
   // UPDATE_ESTACION,
   // CREATE_ESTACION,
   // DELETE_ESTACION,
@@ -31,3 +32,15 @@ export function getEstacion(idEstacion) {
     });
   };
 }
+
+export function getTrenesEstacion(idEstacion) {
+  return async dispatch =>
+    await dispatch({
+      type: GET_TRENES_ESTACION,
+      payload: {
+        idEstacion,
+      },
+      promise: api.read(`/trenes/${idEstacion}`),
+    });
+}
+

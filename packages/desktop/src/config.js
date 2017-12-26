@@ -9,7 +9,6 @@ module.exports = {
   SQL_USER: 'root',
   SQL_PASSWORD: '',
   SECRET: 'Sistrac clave secreta: pepino',
-  LOGIN_TIMEOUT: '1h',
   COOKIE_NAME: 'user',
   APP_HOST: 'http://localhost',
   APP_PORT: '3000',

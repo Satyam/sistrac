@@ -2,3 +2,11 @@
   height: 400px;
   margin: 0 auto;
 }
+.tab-content {
+  border: solid #ddd 1px;
+  border-top: none;
+  padding: 1em;
+}
+th span {
+  width: 16px;
+}

@@ -7,6 +7,7 @@ import {
 import {
   GET_ESTACIONES,
   GET_ESTACION,
+  GET_TRENES_ESTACION,
   // UPDATE_ESTACION,
   // CREATE_ESTACION,
   // DELETE_ESTACION,
@@ -28,6 +29,16 @@ export default (state = {}, action) => {
       return {
         ...state,
         [estacion.idEstacion]: estacion,
+      };
+    }
+    case GET_TRENES_ESTACION: {
+      const idEstacion = action.payload.idEstacion;
+      return {
+        ...state,
+        [idEstacion]: {
+          ...state[idEstacion],
+          trenes: [].concat(action.payload),
+        },
       };
     }
     default:

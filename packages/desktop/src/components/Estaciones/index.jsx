@@ -43,6 +43,18 @@ export class Estaciones extends Component {
   render() {
     const { sortField, sortAsc } = this.state;
     const estaciones = this.getEstacionesSorted();
+    const th = (name, label) => (
+      <th onClick={this.changeSort} name={name}>
+        <Glyphicon
+          glyph={
+            sortField === name
+              ? sortAsc ? 'sort-by-alphabet' : 'sort-by-alphabet-alt'
+              : ''
+          }
+        />
+        {label}
+      </th>
+    );
     return (
       <Grid>
         <Helmet>
@@ -53,30 +65,8 @@ export class Estaciones extends Component {
             <Table striped bordered condensed hover>
               <thead style={{ cursor: 'default' }}>
                 <tr>
-                  <th onClick={this.changeSort} name="sigla" width="25%">
-                    {sortField === 'sigla' ? (
-                      <Glyphicon
-                        glyph={
-                          sortAsc ? 'sort-by-alphabet' : 'sort-by-alphabet-alt'
-                        }
-                      />
-                    ) : (
-                      ' '
-                    )}{' '}
-                    Sigla
-                  </th>
-                  <th onClick={this.changeSort} name="nombre" width="75%">
-                    {sortField === 'nombre' ? (
-                      <Glyphicon
-                        glyph={
-                          sortAsc ? 'sort-by-alphabet' : 'sort-by-alphabet-alt'
-                        }
-                      />
-                    ) : (
-                      ' '
-                    )}{' '}
-                    Nombre
-                  </th>
+                  {th('sigla', 'Sigla')}
+                  {th('nombre', 'Nombre')}
                 </tr>
               </thead>
               <tbody>

@@ -12,7 +12,7 @@ export default function Routes() {
         )}
       />
       <Route
-        path="/estacion/:idEstacion"
+        path="/estacion/:idEstacion/:activeTab?"
         component={loadModule(() =>
           import(/* webpackChunkName: "estacion" */ '../Estacion'),
         )}
