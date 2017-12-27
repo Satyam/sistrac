@@ -1,29 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`dbOps.estaciones with mock db createEstacion fail duplicate record 1`] = `"insert into Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET'"`;
+exports[`dbOps.estaciones with mock db createEstacion fail duplicate record 1`] = `"insert into Estaciones set \`nombre\` = 'Retiro', \`idEstacion\` = 'RET'"`;
 
-exports[`dbOps.estaciones with mock db createEstacion success 1`] = `"insert into Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET'"`;
+exports[`dbOps.estaciones with mock db createEstacion success 1`] = `"insert into Estaciones set \`nombre\` = 'Retiro', \`idEstacion\` = 'RET'"`;
 
-exports[`dbOps.estaciones with mock db deleteEstacion fail 1`] = `"delete from Estaciones where idEstacion = 25"`;
+exports[`dbOps.estaciones with mock db deleteEstacion fail 1`] = `"delete from Estaciones where idEstacion = 'XXX'"`;
 
-exports[`dbOps.estaciones with mock db deleteEstacion success 1`] = `"delete from Estaciones where idEstacion = 25"`;
+exports[`dbOps.estaciones with mock db deleteEstacion success 1`] = `"delete from Estaciones where idEstacion = 'RET'"`;
 
-exports[`dbOps.estaciones with mock db existeEstacionPorNombre fail 1`] = `"select count(*) as hay from Estaciones where nombre = 'Retiro'"`;
+exports[`dbOps.estaciones with mock db existeEstacion fail 1`] = `"select count(*) as hay from Estaciones where idEstacion = 'XXX'"`;
+
+exports[`dbOps.estaciones with mock db existeEstacion success 1`] = `"select count(*) as hay from Estaciones where idEstacion = 'RET'"`;
+
+exports[`dbOps.estaciones with mock db existeEstacionPorNombre fail 1`] = `"select count(*) as hay from Estaciones where nombre = 'Yyyy'"`;
 
 exports[`dbOps.estaciones with mock db existeEstacionPorNombre success 1`] = `"select count(*) as hay from Estaciones where nombre = 'Retiro'"`;
 
-exports[`dbOps.estaciones with mock db existeEstacionPorSigla fail 1`] = `"select count(*) as hay from Estaciones where sigla = 'RET'"`;
-
-exports[`dbOps.estaciones with mock db existeEstacionPorSigla success 1`] = `"select count(*) as hay from Estaciones where sigla = 'RET'"`;
-
-exports[`dbOps.estaciones with mock db readEstacion 1`] = `"select * from Estaciones where idEstacion = \`idEstacion\` = 25"`;
+exports[`dbOps.estaciones with mock db readEstacion 1`] = `"select * from Estaciones where idEstacion = \`idEstacion\` = 'RET'"`;
 
 exports[`dbOps.estaciones with mock db readEstacionPorNombre 1`] = `"select * from Estaciones where nombre = 'Retiro'"`;
 
-exports[`dbOps.estaciones with mock db readEstacionPorSigla 1`] = `"select * from Estaciones where sigla = 'RET'"`;
-
 exports[`dbOps.estaciones with mock db readEstaciones 1`] = `"select * from Estaciones order by nombre"`;
 
-exports[`dbOps.estaciones with mock db updateEstacion fail  1`] = `"update Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET' where idEstacion = 25"`;
+exports[`dbOps.estaciones with mock db updateEstacion fail  1`] = `"update Estaciones set \`nombre\` = 'Retiro' where idEstacion = 'XXX'"`;
 
-exports[`dbOps.estaciones with mock db updateEstacion success  1`] = `"update Estaciones set \`nombre\` = 'Retiro', \`sigla\` = 'RET' where idEstacion = 25"`;
+exports[`dbOps.estaciones with mock db updateEstacion success  1`] = `"update Estaciones set \`nombre\` = 'Retiro' where idEstacion = 'RET'"`;

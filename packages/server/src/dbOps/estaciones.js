@@ -49,8 +49,8 @@ export async function readEstacionPorNombre(nombre) {
 
 export async function createEstacion(data) {
   try {
-    const result = await db.query('insert into Estaciones set ?', data);
-    return result.insertId;
+    const resp = await db.query('insert into Estaciones set ?', data);
+    return resp.insertId > 0;
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') {
       return false;
@@ -92,4 +92,3 @@ ORDER BY
   );
 }
 // SELECT nombre, llega, sale, Trenes.* FROM Itinerarios JOIN Escalas USING(idItinerario) JOIN Trenes USING(idItinerario) WHERE idEstacion = 'SPD' ORDER BY idItinerario, llega
-

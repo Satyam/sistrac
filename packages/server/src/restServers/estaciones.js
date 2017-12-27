@@ -56,7 +56,7 @@ export default async function(dataRouter, path) {
 
   dataRouter.post(relPath('/'), async (req, res) => {
     const resp = await createEstacion(req.body);
-    if (resp) res.status(CREATED).json({ idEstacion: resp });
+    if (resp) res.status(CREATED).end();
     else res.status(CONFLICT).end();
   });
 
