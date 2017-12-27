@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import md5 from 'md5';
 import join from './plainJoin';
 
-import { SECRET, LOGIN_TIMEOUT, COOKIE_NAME } from '../../config';
+import { SECRET, SESSION_TIMEOUT, COOKIE_NAME } from '../../config';
 
 import {
   readUsuarioPorUsuario,
@@ -22,7 +22,7 @@ import {
 
 export function setCookie(res, data) {
   res.cookie(COOKIE_NAME, jwt.sign(data, SECRET), {
-    expiresIn: LOGIN_TIMEOUT,
+    maxAge: SESSION_TIMEOUT,
   });
 }
 
@@ -87,9 +87,12 @@ export default async function(dataRouter, path) {
   });
 
   dataRouter.get(join(path, '/:usuario'), async (req, res) => {
-    const { password, ...user } = await readUsuarioPorUsuario(
-      req.params.usuario,
-    );
+    let { usuario } = req.params;
+    if (usuario === '__actual') {
+      // eslint-disable-next-line
+      usuario = req.user.usuario;
+    }
+    const { password, ...user } = await readUsuarioPorUsuario(usuario);
     if (Object.keys(user).length) res.json(user);
     else res.status(NOT_FOUND).end();
   });

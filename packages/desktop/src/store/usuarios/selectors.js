@@ -6,3 +6,7 @@ export function selUsuarioActivo(state) {
   if (!usuarios.activo) return {};
   return usuarios.hash[usuarios.activo];
 }
+
+export function selStatusUsuario(state) {
+  return state[NAME].status;
+}

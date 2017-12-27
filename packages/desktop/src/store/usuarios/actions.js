@@ -9,6 +9,7 @@ import {
   // DELETE_USUARIO,
   LOGIN,
   LOGOUT,
+  GET_USUARIO_ACTUAL,
 } from './constants';
 
 const api = restAPI(NAME);
@@ -30,5 +31,13 @@ export function logout() {
     await dispatch({
       type: LOGOUT,
       promise: api.read('/logout'),
+    });
+}
+
+export function getUsuarioActual() {
+  return async dispatch =>
+    await dispatch({
+      type: GET_USUARIO_ACTUAL,
+      promise: api.read('/__actual'),
     });
 }

@@ -93,7 +93,8 @@ Estaciones.propTypes = {
   estaciones: PropTypes.arrayOf(estacionShape),
 };
 
-export const storeInitializer = dispatch => dispatch(getEstaciones());
+export const storeInitializer = (dispatch, getState) =>
+  selEstaciones(getState()).length || dispatch(getEstaciones());
 
 export const mapStateToProps = state => ({ estaciones: selEstaciones(state) });
 

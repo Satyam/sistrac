@@ -2,8 +2,24 @@
   font-weight: bold;
 }
 
-#userDropdown:before {
+.userDropdown > a:before {
   content: '\E008 ';
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 0.5em;
+}
+
+.unauthorized > a {
+  color: red !important;
+}
+.unauthorized > a:before {
+  content: '\e107';
   position: relative;
   top: 1px;
   display: inline-block;

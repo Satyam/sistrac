@@ -8,4 +8,5 @@ export const CREATE_USUARIO = `${NAME} / create usuario`;
 export const DELETE_USUARIO = `${NAME} / delete usuario`;
 
 export const LOGIN = `${NAME} / login`;
+export const GET_USUARIO_ACTUAL = `${NAME} / get usuario actual`;
 export const LOGOUT = `${NAME} / logout`;

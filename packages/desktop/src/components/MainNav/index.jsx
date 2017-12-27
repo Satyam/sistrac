@@ -5,12 +5,18 @@ import { connect } from 'react-redux';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 import { NavItem, MenuItem } from '../BootstrapLink';
-import { selUsuarioActivo } from '../../store/selectors';
-
+import { selUsuarioActivo, selStatusUsuario } from '../../store/selectors';
+import {
+  // STATUS_INITIAL,
+  STATUS_UNAUTHORIZED,
+  // STATUS_LOGGED_IN,
+  // STATUS_GETTING_CURRENT_USER,
+  // STATUS_LOGGED_OUT,
+} from '../../store/usuarios/reducer';
 import { withRouterTypes, usuarioShape } from '../../shapes';
 
 import './styles.css';
-export function MainNav({ usuario, location }) {
+export function MainNav({ usuario, statusUsuario, location }) {
   return (
     <div className="MainNav">
       <Navbar staticTop>
@@ -33,10 +39,19 @@ export function MainNav({ usuario, location }) {
         </Nav>
         {usuario.nombre ? (
           <Nav pullRight>
-            <NavDropdown eventKey={3} title={usuario.nombre} id="userDropdown">
+            <NavDropdown
+              eventKey={3}
+              title={usuario.nombre}
+              className="userDropdown"
+              id="userId"
+            >
               <MenuItem href="/logout">Logout</MenuItem>
               <MenuItem href="/preferences">Preferences</MenuItem>
             </NavDropdown>
+          </Nav>
+        ) : statusUsuario === STATUS_UNAUTHORIZED ? (
+          <Nav pullRight>
+            <NavItem className="unauthorized">No autorizado</NavItem>
           </Nav>
         ) : null}
       </Navbar>
@@ -49,6 +64,9 @@ MainNav.propTypes = {
   usuario: usuarioShape,
 };
 
-export const mapStateToProps = state => ({ usuario: selUsuarioActivo(state) });
+export const mapStateToProps = state => ({
+  usuario: selUsuarioActivo(state),
+  statusUsuario: selStatusUsuario(state),
+});
 
 export default compose(withRouter, connect(mapStateToProps))(MainNav);

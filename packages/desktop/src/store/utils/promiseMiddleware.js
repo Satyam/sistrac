@@ -26,7 +26,8 @@ export default function promiseMiddleware() {
           next({
             ...act,
             stage: FAILURE_RECEIVED,
-            error: error.toString(),
+            error: error.code || error.toString(),
+            errorDetails: error,
           }),
       );
     }

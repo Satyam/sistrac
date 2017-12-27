@@ -6,10 +6,18 @@ import { compose } from 'recompose';
 
 import MainNav from '../MainNav';
 import Routes from '../Routes';
-import { selUsuarioActivo } from '../../store/selectors';
-import { logout } from '../../store/actions';
+import { selUsuarioActivo, selStatusUsuario } from '../../store/selectors';
+import { logout, getUsuarioActual } from '../../store/actions';
 
 import { withRouterTypes, usuarioShape } from '../../shapes';
+
+import {
+  STATUS_INITIAL,
+  STATUS_UNAUTHORIZED,
+  STATUS_LOGGED_OUT,
+  // STATUS_LOGGED_IN,
+  // STATUS_GETTING_CURRENT_USER,
+} from '../../store/usuarios/reducer';
 
 export class App extends Component {
   constructor(...args) {
@@ -17,7 +25,14 @@ export class App extends Component {
     this.state = {};
   }
   checkLoggedIn = () => {
-    const { usuario, history, location, logout } = this.props;
+    const {
+      usuario,
+      location,
+      logout,
+      statusUsuario,
+      getUsuarioActual,
+      history,
+    } = this.props;
     switch (location.pathname) {
       case '/login':
         break;
@@ -27,8 +42,20 @@ export class App extends Component {
         logout();
         break;
       default:
-        if (!usuario.idUsuario) {
-          history.push('/login');
+        switch (statusUsuario) {
+          case STATUS_INITIAL:
+            if (!usuario.idUsuario) {
+              getUsuarioActual();
+            }
+            break;
+          case STATUS_LOGGED_OUT:
+          case STATUS_UNAUTHORIZED:
+            history.push('/login');
+            break;
+          // case STATUS_LOGGED_IN:
+          // case STATUS_GETTING_CURRENT_USER:
+          default:
+            break;
         }
     }
   };
@@ -56,7 +83,10 @@ App.propTypes = {
   usuario: usuarioShape,
 };
 
-export const mapStateToProps = state => ({ usuario: selUsuarioActivo(state) });
+export const mapStateToProps = state => ({
+  usuario: selUsuarioActivo(state),
+  statusUsuario: selStatusUsuario(state),
+});
 
 export const mapDispatchToProps = (dispatch, { history }) => ({
   logout: async () => {
@@ -64,6 +94,7 @@ export const mapDispatchToProps = (dispatch, { history }) => ({
     await history.replace('/');
     return null;
   },
+  getUsuarioActual: async () => await dispatch(getUsuarioActual()),
 });
 
 export default compose(
