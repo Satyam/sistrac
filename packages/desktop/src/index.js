@@ -10,7 +10,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import createStore from './store/createStore';
 import L from 'leaflet';
-
+import ErrorBoundary from './components/ErrorBoundary';
 // patch:
 // See: https://github.com/PaulLeCam/react-leaflet/issues/255
 // L.Icon.Default.imagePath = '.';
@@ -25,11 +25,13 @@ L.Icon.Default.mergeOptions({
 // end patch
 const store = createStore();
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </ErrorBoundary>,
   document.getElementById('root'),
 );
 registerServiceWorker();
