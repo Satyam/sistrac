@@ -37,7 +37,11 @@ export default (
           ...state,
           activo: null,
           vence: null,
-          status: STATUS_UNAUTHORIZED,
+          status:
+            state.prevStatus === STATUS_INITIAL
+              ? STATUS_LOGGED_OUT
+              : STATUS_UNAUTHORIZED,
+          prevStatus: null,
         };
       }
       return state;
@@ -46,6 +50,7 @@ export default (
         return {
           ...state,
           status: STATUS_GETTING_CURRENT_USER,
+          prevStatus: state.status,
         };
       }
       return state;

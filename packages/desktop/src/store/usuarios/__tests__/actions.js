@@ -5,8 +5,8 @@ import promiseMiddleware from '../../utils/promiseMiddleware';
 
 import { REST_PORT, REST_HOST, REST_API_PATH } from '../../../config';
 
-import { LOGIN, LOGOUT } from '../constants';
-import { login, logout } from '../actions';
+import { LOGIN, LOGOUT, GET_USUARIO_ACTUAL } from '../constants';
+import { login, logout, getUsuarioActual } from '../actions';
 import {
   REPLY_RECEIVED,
   REQUEST_SENT,
@@ -110,6 +110,54 @@ describe('usuarios actions', () => {
         payload: {},
         stage: REPLY_RECEIVED,
       });
+      expect(data).toEqual(actions[1]);
+    });
+  });
+  describe('getUsuarioActual', () => {
+    it('should be a function with no arguments', () => {
+      expect(typeof logout).toBe('function');
+      expect(logout.length).toBe(0);
+    });
+    it('succeed', async () => {
+      const mockStore = configureStore([reduxThunk, promiseMiddleware]);
+      const store = mockStore({
+        usuarios: { hash: {}, activo: null, vence: null },
+      });
+      fetchMock.getOnce(`${HOST}/__actual`, {
+        body: { ...usuario, ...roles },
+        headers: { 'content-type': 'application/json' },
+      });
+      const data = await store.dispatch(getUsuarioActual());
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: GET_USUARIO_ACTUAL,
+        stage: REQUEST_SENT,
+      });
+      expect(actions[1]).toEqual({
+        type: GET_USUARIO_ACTUAL,
+        payload: { ...usuario, ...roles },
+        stage: REPLY_RECEIVED,
+      });
+      expect(data).toEqual(actions[1]);
+    });
+    it('fail', async () => {
+      const mockStore = configureStore([reduxThunk, promiseMiddleware]);
+      const store = mockStore({
+        usuarios: { hash: {}, activo: null, vence: null },
+      });
+      fetchMock.getOnce(`${HOST}/__actual`, {
+        status: 401,
+        headers: { 'content-type': 'application/json' },
+      });
+      const data = await store.dispatch(getUsuarioActual());
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: GET_USUARIO_ACTUAL,
+        stage: REQUEST_SENT,
+      });
+      expect(actions[1].stage).toBe(FAILURE_RECEIVED);
+      expect(actions[1].type).toBe(GET_USUARIO_ACTUAL);
+      expect(actions[1].error).not.toBeNull();
       expect(data).toEqual(actions[1]);
     });
   });
