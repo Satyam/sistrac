@@ -79,7 +79,7 @@ export class TrenesPorEstacion extends Component {
               </td>
               <td>{tren.llega}</td>
               <td>{tren.sale}</td>
-              <td>{tren.fecha}</td>
+              <td>{tren.fecha.toLocaleString()}</td>
               <td>
                 <Link to={`/trenes/${tren.idTren}`}>{tren.chapa}</Link>
               </td>

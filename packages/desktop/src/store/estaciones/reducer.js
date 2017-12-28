@@ -37,7 +37,10 @@ export default (state = {}, action) => {
         ...state,
         [idEstacion]: {
           ...state[idEstacion],
-          trenes: [].concat(action.payload),
+          trenes: action.payload.map(tren => ({
+            ...tren,
+            fecha: Date(tren.fecha),
+          })),
         },
       };
     }
