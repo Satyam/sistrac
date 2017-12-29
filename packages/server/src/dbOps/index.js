@@ -2,6 +2,7 @@ import mysql from 'node-mysql-promise2';
 import { SQL_HOST, DB_NAME, SQL_USER, SQL_PASSWORD } from '../../config';
 import { init as initEstaciones } from './estaciones';
 import { init as initUsuarios } from './usuarios';
+import { init as initTipos } from './tipos';
 
 let db;
 
@@ -17,6 +18,7 @@ export async function init(mock) {
     }));
   initEstaciones(db);
   initUsuarios(db);
+  initTipos(db);
   return db;
 }
 
