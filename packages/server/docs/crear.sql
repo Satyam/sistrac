@@ -236,14 +236,14 @@ INSERT INTO `Revisiones` (`idRevision`, `observaciones`, `idUsuario`, `fecha`, `
 
 CREATE TABLE `TipoEmergencias` (
   `idTipoEmergencia` int(11) NOT NULL,
-  `tipo` varchar(100) NOT NULL DEFAULT ''
+  `descr` varchar(100) NOT NULL DEFAULT ''
 );
 
 --
 -- Dumping data for table `TipoEmergencias`
 --
 
-INSERT INTO `TipoEmergencias` (`idTipoEmergencia`, `tipo`) VALUES
+INSERT INTO `TipoEmergencias` (`idTipoEmergencia`, `descr`) VALUES
 (1, 'Choque con vehículo'),
 (2, 'Atropello de persona'),
 (3, 'Atropello de ganado'),
@@ -262,14 +262,14 @@ INSERT INTO `TipoEmergencias` (`idTipoEmergencia`, `tipo`) VALUES
 CREATE TABLE `TipoEvento` (
   `idTipoEvento` int(11) NOT NULL,
   `preposicion` varchar(100) NOT NULL DEFAULT '',
-  `tipo` varchar(100) NOT NULL DEFAULT ''
+  `descr` varchar(100) NOT NULL DEFAULT ''
 );
 
 --
 -- Dumping data for table `TipoEvento`
 --
 
-INSERT INTO `TipoEvento` (`idTipoEvento`, `preposicion`, `tipo`) VALUES
+INSERT INTO `TipoEvento` (`idTipoEvento`, `preposicion`, `descr`) VALUES
 (1, 'de', 'Sale de terminal'),
 (2, 'a', 'Llega'),
 (3, 'de', 'Sale'),
