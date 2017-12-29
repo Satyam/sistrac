@@ -4,6 +4,8 @@ import {
   // FAILURE_RECEIVED,
 } from '../utils/promiseMiddleware';
 
+import indexBy from '../utils/indexBy';
+
 import {
   GET_ESTACIONES,
   GET_ESTACION,
@@ -17,13 +19,7 @@ export default (state = {}, action) => {
   if (action && action.stage && action.stage !== REPLY_RECEIVED) return state;
   switch (action.type) {
     case GET_ESTACIONES:
-      return action.payload.reduce(
-        (estaciones, estacion) => ({
-          ...estaciones,
-          [estacion.idEstacion]: estacion,
-        }),
-        state,
-      );
+      return indexBy(action.payload, 'idEstacion', state);
     case GET_ESTACION: {
       const estacion = action.payload;
       return {
