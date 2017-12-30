@@ -1,8 +1,8 @@
 import mysql from 'node-mysql-promise2';
 import { SQL_HOST, DB_NAME, SQL_USER, SQL_PASSWORD } from '../../config';
-import { init as initEstaciones } from './estaciones';
-import { init as initUsuarios } from './usuarios';
-import { init as initTipos } from './tipos';
+import initEstaciones from './estaciones';
+import initUsuarios from './usuarios';
+import initTipos from './tipos';
 
 let db;
 

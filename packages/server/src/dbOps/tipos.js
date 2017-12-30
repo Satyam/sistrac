@@ -1,6 +1,6 @@
 let db;
 
-export function init(db1) {
+export default function init(db1) {
   db = db1;
 }
 
@@ -11,4 +11,3 @@ export function readTiposEventos() {
 export function readTiposEmergencias() {
   return db.query('select * from TipoEmergencias');
 }
-
