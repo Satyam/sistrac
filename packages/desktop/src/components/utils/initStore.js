@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import setDisplayName from 'recompose/setDisplayName';
 import wrapDisplayName from 'recompose/wrapDisplayName';
 
-const initStore = initializer => (BaseComponent) => {
+const initStore = initializer => BaseComponent => {
   const init = Array.isArray(initializer) ? initializer[0] : initializer;
 
   const StoreInitializer = class extends Component {
@@ -15,37 +15,13 @@ const initStore = initializer => (BaseComponent) => {
       super(props, context);
       this.store = context.store;
     }
-    componentWillMount() {
-      const store = this.store;
-      this.isInitialized(init(store.dispatch, store.getState, this.props));
-    }
     componentDidMount() {
-      this.mounted = true;
+      const { dispatch, getState } = this.store;
+      init(dispatch, getState, this.props);
     }
-    componentWillReceiveProps(nextProps) {
-      const store = this.store;
-      this.isInitialized(init(store.dispatch, store.getState, nextProps, this.props));
-    }
-
-    shouldComponentUpdate() {
-      return this.shouldUpdate;
-    }
-
-    componentWillUnmount() {
-      this.mounted = false;
-    }
-
-    isInitialized(initRet) {
-      this.shouldUpdate = initRet !== false;
-      if (typeof initRet === 'object' && initRet.then) {
-        if (typeof window !== 'undefined') {
-          this.shouldUpdate = false;
-          initRet.then(() => {
-            this.shouldUpdate = true;
-            if (this.mounted) this.forceUpdate();
-          });
-        }
-      }
+    componentDidUpdate() {
+      const { dispatch, getState } = this.store;
+      init(dispatch, getState, this.props);
     }
 
     render() {
@@ -60,7 +36,9 @@ const initStore = initializer => (BaseComponent) => {
     }),
   };
   if (process.env.NODE_ENV !== 'production') {
-    return setDisplayName(wrapDisplayName(BaseComponent, 'initStore'))(StoreInitializer);
+    return setDisplayName(wrapDisplayName(BaseComponent, 'initStore'))(
+      StoreInitializer,
+    );
   }
   return StoreInitializer;
 };
