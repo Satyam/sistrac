@@ -1,7 +1,7 @@
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 
-import { SECRET, COOKIE_NAME } from '../../../config';
+import { SECRET, COOKIE_NAME } from '../../config';
 
 import {
   initRoutes,

@@ -4,9 +4,14 @@
     "build": "lerna run build --parallel --stream",
     "bootstrap": "lerna bootstrap --hoist",
     "test": "lerna run test --stream",
-    "lint": "lerna run lint --stream"
+    "lint": "lerna run lint --stream",
+    "config": "node ./scripts/copyConfig.js",
+    "vroots": "lerna exec node \\$LERNA_ROOT_PATH/scripts/vRoots.js",
+    "postinstall": "npm run config && npm run vroots"
   },
   "devDependencies": {
-    "lerna": "^2.5.1"
+    "lerna": "^2.5.1",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2"
   }
 }

@@ -1,5 +1,5 @@
 import { start, stop } from '../server';
-import { REST_HOST, REST_PORT, REST_API_PATH } from '../../config';
+import { REST_HOST, REST_PORT, REST_API_PATH } from '../config';
 
 const fetch = require('node-fetch');
 

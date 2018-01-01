@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import md5 from 'md5';
 import join from './plainJoin';
 
-import { SECRET, SESSION_TIMEOUT, COOKIE_NAME } from '../../config';
+import { SECRET, SESSION_TIMEOUT, COOKIE_NAME } from '../config';
 
 import {
   readUsuarioPorUsuario,

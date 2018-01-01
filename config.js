@@ -3,7 +3,6 @@ module.exports = {
   REST_HOST: 'http://localhost',
   REST_API_PATH: '/data/v2',
   SESSION_TIMEOUT: 20 * 60 * 1000,
-  ROOT_DIR: __dirname,
   SQL_HOST: 'localhost',
   DB_NAME: 'sistrac',
   SQL_USER: 'sistrac',

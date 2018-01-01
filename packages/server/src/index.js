@@ -1,5 +1,5 @@
 import { start, stop } from './server';
-import { REST_HOST, REST_PORT } from '../config';
+import { REST_HOST, REST_PORT } from './config';
 
 async function startup() {
   try {
