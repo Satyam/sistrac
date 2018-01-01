@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import loadModule from '../utils/loadModule';
+import loadModule from '_components/utils/loadModule';
 
 export default function Routes() {
   return (
@@ -8,19 +8,19 @@ export default function Routes() {
       <Route
         path="/estaciones"
         component={loadModule(() =>
-          import(/* webpackChunkName: "estaciones" */ '../Estaciones'),
+          import(/* webpackChunkName: "estaciones" */ '_components/Estaciones'),
         )}
       />
       <Route
         path="/estacion/:idEstacion/:activeTab?"
         component={loadModule(() =>
-          import(/* webpackChunkName: "estacion" */ '../Estacion'),
+          import(/* webpackChunkName: "estacion" */ '_components/Estacion'),
         )}
       />
       <Route
         path="/login"
         component={loadModule(() =>
-          import(/* webpackChunkName: "login" */ '../LoginForm'),
+          import(/* webpackChunkName: "login" */ '_components/LoginForm'),
         )}
       />
     </div>

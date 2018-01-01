@@ -1,9 +1,9 @@
 import configureStore from 'redux-mock-store';
 import reduxThunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
-import promiseMiddleware from '../../utils/promiseMiddleware';
+import promiseMiddleware from '_store/utils/promiseMiddleware';
 
-import { REST_PORT, REST_HOST, REST_API_PATH } from '../../../config';
+import { REST_PORT, REST_HOST, REST_API_PATH } from '_src/config';
 
 import { LOGIN, LOGOUT, GET_USUARIO_ACTUAL } from '../constants';
 import { login, logout, getUsuarioActual } from '../actions';
@@ -11,7 +11,7 @@ import {
   REPLY_RECEIVED,
   REQUEST_SENT,
   FAILURE_RECEIVED,
-} from '../../utils/promiseMiddleware';
+} from '_store/utils/promiseMiddleware';
 
 const HOST = `${REST_HOST}:${REST_PORT}${REST_API_PATH}/usuarios`;
 

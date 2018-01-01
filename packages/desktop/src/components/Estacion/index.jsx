@@ -7,13 +7,14 @@ import { withRouter } from 'react-router-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import TrenesPorEstacion from './TrenesPorEstacion';
+import EventosEstacion from './EventosEstacion';
 import Sumario from './Sumario';
-import initStore from '../utils/initStore';
+import initStore from '_components/utils/initStore';
 
-import { getEstacion } from '../../store/actions';
-import { selEstacion } from '../../store/selectors';
+import { getEstacion } from '_store/actions';
+import { selEstacion } from '_store/selectors';
 
-import { withRouterTypes, estacionShape } from '../../shapes';
+import { withRouterTypes, estacionShape } from '_src/shapes';
 
 import './styles.css';
 
@@ -61,8 +62,8 @@ export function Estacion({ estacion, match, history }) {
             <Tab eventKey="trenes" title="Trenes">
               <TrenesPorEstacion idEstacion={idEstacion} />
             </Tab>
-            <Tab eventKey={3} title="Tab 3" disabled>
-              Tab 3 content
+            <Tab eventKey="eventos" title="Eventos">
+              <EventosEstacion idEstacion={idEstacion} />
             </Tab>
           </Tabs>
         </Col>

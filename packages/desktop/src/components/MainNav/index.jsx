@@ -4,16 +4,16 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-import { NavItem, MenuItem } from '../BootstrapLink';
-import { selUsuarioActivo, selStatusUsuario } from '../../store/selectors';
+import { NavItem, MenuItem } from '_components/BootstrapLink';
+import { selUsuarioActivo, selStatusUsuario } from '_store/selectors';
 import {
   // STATUS_INITIAL,
   STATUS_UNAUTHORIZED,
   // STATUS_LOGGED_IN,
   // STATUS_GETTING_CURRENT_USER,
   // STATUS_LOGGED_OUT,
-} from '../../store/usuarios/reducer';
-import { withRouterTypes, usuarioShape } from '../../shapes';
+} from '_store/usuarios/reducer';
+import { withRouterTypes, usuarioShape } from '_src/shapes';
 
 import './styles.css';
 export function MainNav({ usuario, statusUsuario, location }) {

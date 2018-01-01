@@ -4,17 +4,14 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
-import promiseMiddleware from '../../store/utils/promiseMiddleware';
+import promiseMiddleware from '_store/utils/promiseMiddleware';
 import { App, mapStateToProps, mapDispatchToProps } from '.';
 import fetchMock from 'fetch-mock';
 
-import { REST_PORT, REST_HOST, REST_API_PATH } from '../../config';
+import { REST_PORT, REST_HOST, REST_API_PATH } from '_src/config';
 
-import { LOGOUT, GET_USUARIO_ACTUAL } from '../../store/usuarios/constants';
-import {
-  REPLY_RECEIVED,
-  REQUEST_SENT,
-} from '../../store/utils/promiseMiddleware';
+import { LOGOUT, GET_USUARIO_ACTUAL } from '_store/usuarios/constants';
+import { REPLY_RECEIVED, REQUEST_SENT } from '_store/utils/promiseMiddleware';
 
 import {
   STATUS_INITIAL,
@@ -22,7 +19,7 @@ import {
   STATUS_LOGGED_OUT,
   STATUS_LOGGED_IN,
   // STATUS_GETTING_CURRENT_USER,
-} from '../../store/usuarios/reducer';
+} from '_store/usuarios/reducer';
 
 const HOST = `${REST_HOST}:${REST_PORT}${REST_API_PATH}/usuarios`;
 const mockStore = configureStore([reduxThunk, promiseMiddleware]);

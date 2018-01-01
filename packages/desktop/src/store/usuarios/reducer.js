@@ -2,7 +2,7 @@ import {
   REPLY_RECEIVED,
   REQUEST_SENT,
   FAILURE_RECEIVED,
-} from '../utils/promiseMiddleware';
+} from '_store/utils/promiseMiddleware';
 
 import {
   // NAME,
@@ -16,7 +16,7 @@ import {
   GET_USUARIO_ACTUAL,
 } from './constants';
 
-import { SESSION_TIMEOUT } from '../../config';
+import { SESSION_TIMEOUT } from '_src/config';
 
 export const STATUS_INITIAL = 0;
 export const STATUS_UNAUTHORIZED = 1;

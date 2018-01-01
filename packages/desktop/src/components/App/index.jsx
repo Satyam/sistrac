@@ -4,12 +4,12 @@ import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { compose } from 'recompose';
 
-import MainNav from '../MainNav';
-import Routes from '../Routes';
-import { selUsuarioActivo, selStatusUsuario } from '../../store/selectors';
-import { logout, getUsuarioActual } from '../../store/actions';
+import MainNav from '_components/MainNav';
+import Routes from '_components/Routes';
+import { selUsuarioActivo, selStatusUsuario } from '_store/selectors';
+import { logout, getUsuarioActual } from '_store/actions';
 
-import { withRouterTypes, usuarioShape } from '../../shapes';
+import { withRouterTypes, usuarioShape } from '_src/shapes';
 
 import {
   STATUS_INITIAL,
@@ -17,7 +17,7 @@ import {
   STATUS_LOGGED_OUT,
   // STATUS_LOGGED_IN,
   // STATUS_GETTING_CURRENT_USER,
-} from '../../store/usuarios/reducer';
+} from '_store/usuarios/reducer';
 
 export class App extends Component {
   constructor(...args) {

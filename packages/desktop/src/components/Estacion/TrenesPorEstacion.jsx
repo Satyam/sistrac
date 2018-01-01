@@ -4,11 +4,11 @@ import { Table, Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
-import initStore from '../utils/initStore';
-import isPlainClick from '../utils/isPlainClick';
+import initStore from '_components/utils/initStore';
+import isPlainClick from '_components/utils/isPlainClick';
 
-import { getTrenesEstacion } from '../../store/actions';
-import { selEstacion } from '../../store/selectors';
+import { getTrenesEstacion } from '_store/actions';
+import { selEstacion } from '_store/selectors';
 
 import './styles.css';
 

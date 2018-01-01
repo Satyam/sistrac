@@ -1,5 +1,5 @@
-import { REPLY_RECEIVED } from '../utils/promiseMiddleware';
-import indexBy from '../utils/indexBy';
+import { REPLY_RECEIVED } from '_store/utils/promiseMiddleware';
+import indexBy from '_store/utils/indexBy';
 
 import { GET_TIPOS_EVENTOS, GET_TIPOS_EMERGENCIAS } from './constants';
 

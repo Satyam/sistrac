@@ -1,4 +1,4 @@
-import restAPI from '../utils/restAPI';
+import restAPI from '_store/utils/restAPI';
 
 import {
   NAME,
@@ -43,4 +43,3 @@ export function getTrenesEstacion(idEstacion) {
       promise: api.read(`/trenes/${idEstacion}`),
     });
 }
-

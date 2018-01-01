@@ -1,4 +1,4 @@
-import restAPI from '../utils/restAPI';
+import restAPI from '_store/utils/restAPI';
 
 import {
   NAME,

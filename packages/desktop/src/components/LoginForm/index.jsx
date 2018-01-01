@@ -11,12 +11,12 @@ import {
   Button,
 } from 'react-bootstrap';
 
-import { login } from '../../store/actions';
-import { selUsuarioActivo } from '../../store/selectors';
+import { login } from '_store/actions';
+import { selUsuarioActivo } from '_store/selectors';
 
-import isPlainClick from '../utils/isPlainClick';
+import isPlainClick from '_components/utils/isPlainClick';
 
-import { withRouterTypes, usuarioShape } from '../../shapes';
+import { withRouterTypes, usuarioShape } from '_src/shapes';
 
 export class LoginForm extends Component {
   constructor(props, context) {

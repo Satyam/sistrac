@@ -7,7 +7,7 @@ export function selUsuarioActivo(state) {
   return usuarios.hash[usuarios.activo];
 }
 */
-import { SESSION_TIMEOUT } from '../../../config';
+import { SESSION_TIMEOUT } from '_src/config';
 
 import { NAME } from '../constants';
 

@@ -2,9 +2,9 @@ import {
   REPLY_RECEIVED,
   // REQUEST_SENT,
   // FAILURE_RECEIVED,
-} from '../utils/promiseMiddleware';
+} from '_store/utils/promiseMiddleware';
 
-import indexBy from '../utils/indexBy';
+import indexBy from '_store/utils/indexBy';
 
 import {
   GET_ESTACIONES,

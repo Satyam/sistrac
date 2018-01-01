@@ -1,4 +1,4 @@
-import restAPI from '../utils/restAPI';
+import restAPI from '_store/utils/restAPI';
 
 import { NAME, GET_TIPOS_EVENTOS, GET_TIPOS_EMERGENCIAS } from './constants';
 
@@ -25,4 +25,3 @@ export function loadTiposEmergencias() {
     });
   };
 }
-

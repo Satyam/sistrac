@@ -4,9 +4,9 @@ import {
   REPLY_RECEIVED,
   REQUEST_SENT,
   FAILURE_RECEIVED,
-} from '../../utils/promiseMiddleware';
+} from '_store/utils/promiseMiddleware';
 
-import { SESSION_TIMEOUT } from '../../../config';
+import { SESSION_TIMEOUT } from '_src/config';
 
 import {
   STATUS_INITIAL,

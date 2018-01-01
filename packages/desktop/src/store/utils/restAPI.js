@@ -2,7 +2,7 @@ import ServerError from './serverError';
 // import dbg from 'debug';
 import plainJoin from './plainJoin';
 
-import { REST_HOST, REST_PORT, REST_API_PATH } from '../../config.js';
+import { REST_HOST, REST_PORT, REST_API_PATH } from '_src/config.js';
 // dbg.enable('Sistrac:restAPI');
 // const debug = dbg('Sistrac:restAPI');
 
