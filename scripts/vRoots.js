@@ -7,7 +7,7 @@ const join = require('path').join;
 const rimraf = promisify(require('rimraf'));
 const mkdirp = promisify(require('mkdirp'));
 
-const env = process.argv[2] || 'default';
+const env = process.argv[2];
 
 const folder = process.cwd();
 const specs = join(folder, 'virtualRoots.js');
@@ -17,20 +17,29 @@ stat(specs)
     else throw err;
   })
   .then(() => {
-    const vRoots = require(specs)[env];
-    if (!vRoots) {
-      console.warn('No config for ' + env + ' in ' + folder);
-      process.exit(1);
+    const vRoots = require(specs);
+    const vMap = vRoots.map[env || vRoots.default];
+    if (!vMap) {
+      throw new Error('No config for ' + env + ' in ' + folder);
     }
-    const _ = join(folder, 'src/_');
-    rimraf(_)
-      .then(() => mkdirp(_))
+
+    const vFolder = join(folder, vRoots.vFolder);
+    return rimraf(vFolder)
+      .then(() => mkdirp(vFolder))
       .then(() =>
         Promise.all(
-          Object.keys(vRoots).map(vRoot =>
-            symlink(join(folder, vRoots[vRoot]), join(_, vRoot), 'junction'),
-          ),
+          Object.keys(vMap).map(vRoot => {
+            console.log(
+              vFolder,
+              join(folder, vMap[vRoot]),
+              join(vFolder, vRoot),
+            );
+            symlink(
+              join(folder, vMap[vRoot]),
+              join(vFolder, vRoot),
+              'junction',
+            );
+          }),
         ),
-      )
-      .catch(err => console.warn(err));
+      );
   });
