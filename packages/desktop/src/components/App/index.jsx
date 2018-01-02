@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { compose } from 'recompose';
 
-import MainNav from '_components/MainNav';
+import MainNav from '_connectors/MainNav';
 import Routes from '_components/Routes';
-import { selUsuarioActivo, selStatusUsuario } from '_store/selectors';
-import { logout, getUsuarioActual } from '_store/actions';
 
 import { withRouterTypes, usuarioShape } from '_src/shapes';
 
@@ -19,7 +14,7 @@ import {
   // STATUS_GETTING_CURRENT_USER,
 } from '_store/usuarios/reducer';
 
-export class App extends Component {
+export default class App extends Component {
   constructor(...args) {
     super(...args);
     this.state = {};
@@ -82,22 +77,3 @@ App.propTypes = {
   ...withRouterTypes,
   usuario: usuarioShape,
 };
-
-export const mapStateToProps = state => ({
-  usuario: selUsuarioActivo(state),
-  statusUsuario: selStatusUsuario(state),
-});
-
-export const mapDispatchToProps = (dispatch, { history }) => ({
-  logout: async () => {
-    await dispatch(logout());
-    await history.replace('/');
-    return null;
-  },
-  getUsuarioActual: async () => await dispatch(getUsuarioActual()),
-});
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
-)(App);

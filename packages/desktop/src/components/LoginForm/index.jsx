@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { withRouter } from 'react-router-dom';
 import {
   Form,
   FormGroup,
@@ -11,14 +8,11 @@ import {
   Button,
 } from 'react-bootstrap';
 
-import { login } from '_store/actions';
-import { selUsuarioActivo } from '_store/selectors';
-
 import isPlainClick from '_components/utils/isPlainClick';
 
 import { withRouterTypes, usuarioShape } from '_src/shapes';
 
-export class LoginForm extends Component {
+export default class LoginForm extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = { usuario: props.usuario.usuario || '', password: '' };
@@ -104,17 +98,3 @@ LoginForm.propTypes = {
   ...withRouterTypes,
   usuario: usuarioShape,
 };
-
-export const mapStateToProps = state => ({ usuario: selUsuarioActivo(state) });
-
-export const mapDispatchToProps = (dispatch, { history }) => ({
-  onLogin: async (username, password) => {
-    await dispatch(login(username, password));
-    await history.goBack();
-  },
-});
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps),
-)(LoginForm);

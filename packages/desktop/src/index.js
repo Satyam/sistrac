@@ -6,9 +6,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import 'leaflet/dist/leaflet.css';
 import './index.css';
-import App from './components/App';
+import App from '_connectors/App';
 import registerServiceWorker from './registerServiceWorker';
-import createStore from './store/createStore';
+import createStore from '_store/createStore';
 import L from 'leaflet';
 import ErrorBoundary from './components/ErrorBoundary';
 // patch:

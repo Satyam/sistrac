@@ -1,24 +1,17 @@
 import React from 'react';
 import { PageHeader, Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
 import { Helmet } from 'react-helmet';
-import { withRouter } from 'react-router-dom';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
-import TrenesPorEstacion from './TrenesPorEstacion';
-import EventosEstacion from './EventosEstacion';
+import TrenesPorEstacion from '_connectors/Estacion/TrenesPorEstacion';
+import EventosEstacion from '_connectors/Estacion/EventosEstacion';
 import Sumario from './Sumario';
-import initStore from '_components/utils/initStore';
-
-import { getEstacion } from '_store/actions';
-import { selEstacion } from '_store/selectors';
 
 import { withRouterTypes, estacionShape } from '_src/shapes';
 
 import './styles.css';
 
-export function Estacion({ estacion, match, history }) {
+export default function Estacion({ estacion, match, history }) {
   if (!estacion) return null;
   const tabClick = activeTab => {
     history.push(`/estacion/${match.params.idEstacion}/${activeTab}`);
@@ -76,24 +69,3 @@ Estacion.propTypes = {
   ...withRouterTypes,
   estacion: estacionShape,
 };
-
-export const storeInitializer = (dispatch, getState, { match }) => {
-  const idEstacion = match && match.params.idEstacion;
-  return (
-    idEstacion &&
-    (selEstacion(getState(), idEstacion) || dispatch(getEstacion(idEstacion)))
-  );
-};
-
-export const mapStateToProps = (state, { match }) =>
-  match
-    ? {
-        estacion: selEstacion(state, match.params.idEstacion),
-      }
-    : {};
-
-export default compose(
-  withRouter,
-  initStore(storeInitializer),
-  connect(mapStateToProps),
-)(Estacion);

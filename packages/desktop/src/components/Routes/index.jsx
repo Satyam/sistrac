@@ -8,19 +8,19 @@ export default function Routes() {
       <Route
         path="/estaciones"
         component={loadModule(() =>
-          import(/* webpackChunkName: "estaciones" */ '_components/Estaciones'),
+          import(/* webpackChunkName: "estaciones" */ '_connectors/Estaciones'),
         )}
       />
       <Route
         path="/estacion/:idEstacion/:activeTab?"
         component={loadModule(() =>
-          import(/* webpackChunkName: "estacion" */ '_components/Estacion'),
+          import(/* webpackChunkName: "estacion" */ '_connectors/Estacion'),
         )}
       />
       <Route
         path="/login"
         component={loadModule(() =>
-          import(/* webpackChunkName: "login" */ '_components/LoginForm'),
+          import(/* webpackChunkName: "login" */ '_connectors/LoginForm'),
         )}
       />
     </div>

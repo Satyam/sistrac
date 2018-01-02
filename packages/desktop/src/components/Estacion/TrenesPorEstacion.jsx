@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Glyphicon } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-
-import initStore from '_components/utils/initStore';
 import isPlainClick from '_components/utils/isPlainClick';
-
-import { getTrenesEstacion } from '_store/actions';
-import { selEstacion } from '_store/selectors';
 
 import './styles.css';
 
-export class TrenesPorEstacion extends Component {
+export default class TrenesPorEstacion extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -93,16 +86,3 @@ export class TrenesPorEstacion extends Component {
     );
   }
 }
-
-export const storeInitializer = (dispatch, getState, { idEstacion }) => {
-  const estacion = selEstacion(getState(), idEstacion);
-  if (estacion && !estacion.trenes) dispatch(getTrenesEstacion(idEstacion));
-};
-export const mapStateToProps = (state, { idEstacion }) => {
-  const estacion = selEstacion(state, idEstacion);
-  return { trenes: estacion ? estacion.trenes : [] };
-};
-
-export default compose(initStore(storeInitializer), connect(mapStateToProps))(
-  TrenesPorEstacion,
-);

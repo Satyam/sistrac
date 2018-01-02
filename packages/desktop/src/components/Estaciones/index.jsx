@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Glyphicon, Grid, Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
 import { Helmet } from 'react-helmet';
 
-import initStore from '_components/utils/initStore';
 import isPlainClick from '_components/utils/isPlainClick';
-import { getEstaciones } from '_store/actions';
-import { selEstaciones } from '_store/selectors';
 import { estacionShape } from '_src/shapes';
 
-export class Estaciones extends Component {
+export default class Estaciones extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -92,12 +87,3 @@ export class Estaciones extends Component {
 Estaciones.propTypes = {
   estaciones: PropTypes.arrayOf(estacionShape),
 };
-
-export const storeInitializer = (dispatch, getState) =>
-  selEstaciones(getState()).length || dispatch(getEstaciones());
-
-export const mapStateToProps = state => ({ estaciones: selEstaciones(state) });
-
-export default compose(initStore(storeInitializer), connect(mapStateToProps))(
-  Estaciones,
-);
