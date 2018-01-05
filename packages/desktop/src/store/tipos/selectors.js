@@ -12,8 +12,27 @@ export function selTipoEvento(state, idTipoEvento) {
   return state[NAME].eventos[idTipoEvento];
 }
 
+export function selDescrEvento(state, idTipoEvento) {
+  const ev = state[NAME].eventos[idTipoEvento];
+  if (ev) {
+    return `${ev.descr} ${ev.preposicion}`;
+  }
+  return '';
+}
+
 export function selTipoEmergencia(state, idTipoEmergencia) {
-  return state[NAME].emergencias[idTipoEmergencia];
+  return idTipoEmergencia
+    ? state[NAME].emergencias[idTipoEmergencia]
+    : { descr: '' };
+}
+
+export function selDescrEmergencia(state, idTipoEmergencia) {
+  if (!idTipoEmergencia) return '';
+  const em = state[NAME].emergencias[idTipoEmergencia];
+  if (em) {
+    return em.descr;
+  }
+  return '';
 }
 
 export function selHayTiposEventos(state) {

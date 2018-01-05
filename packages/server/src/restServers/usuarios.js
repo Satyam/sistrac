@@ -9,6 +9,7 @@ import {
   createUsuario,
   deleteUsuario,
   updateUsuario,
+  readUsuarios,
 } from '../dbOps/usuarios';
 
 import {
@@ -86,15 +87,22 @@ export default async function(dataRouter, path) {
     res.status(NO_CONTENT).end();
   });
 
-  dataRouter.get(join(path, '/:usuario'), async (req, res) => {
-    let { usuario } = req.params;
-    if (usuario === '__actual') {
-      // eslint-disable-next-line
-      usuario = req.user.usuario;
-    }
-    const { password, ...user } = await readUsuarioPorUsuario(usuario);
+  dataRouter.get(join(path, '/_actual'), async (req, res) => {
+    const { password, ...user } = await readUsuarioPorUsuario(req.user.usuario);
     if (Object.keys(user).length) res.json(user);
     else res.status(NOT_FOUND).end();
+  });
+
+  dataRouter.get(join(path, '/:usuario'), async (req, res) => {
+    const { usuario } = req.params;
+    const list = usuario.split(',');
+    if (list.length > 1) {
+      res.json(await readUsuarios(list));
+    } else {
+      const { password, ...user } = await readUsuarioPorUsuario(usuario);
+      if (Object.keys(user).length) res.json(user);
+      else res.status(NOT_FOUND).end();
+    }
   });
 
   dataRouter.delete(join(path, '/:idUsuario'), async (req, res) => {

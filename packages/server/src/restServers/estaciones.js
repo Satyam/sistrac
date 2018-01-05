@@ -64,9 +64,4 @@ export default async function(dataRouter, path) {
     const resp = await deleteEstacion(req.params.idEstacion);
     res.status(resp ? NO_CONTENT : NOT_FOUND).end();
   });
-
-  dataRouter.get(relPath('/trenes/:idEstacion'), async (req, res) => {
-    const resp = await readTrenesPorEstacion(req.params.idEstacion);
-    res.json(resp);
-  });
 }

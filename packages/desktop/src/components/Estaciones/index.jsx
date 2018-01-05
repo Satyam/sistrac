@@ -7,6 +7,8 @@ import { Helmet } from 'react-helmet';
 import isPlainClick from '_components/utils/isPlainClick';
 import { estacionShape } from '_src/shapes';
 
+import './styles.css';
+
 export default class Estaciones extends Component {
   constructor(props, context) {
     super(props, context);

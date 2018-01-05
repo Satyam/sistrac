@@ -15,8 +15,14 @@ function convertToBoolean(row) {
     }
   );
 }
-export async function readUsuarios() {
-  const query = await db.query('select * from Usuarios');
+export async function readUsuarios(idUsuarios) {
+  const where = idUsuarios ? 'where idUsuario in (?)' : '';
+  const query = await db.query(
+    `select idUsuario, usuario, nivel,
+    rolGuarda, rolDios, rolSupervisor,
+    rolMecanico, funcion, nombre from Usuarios ${where}`,
+    [idUsuarios],
+  );
   return query.map(convertToBoolean);
 }
 

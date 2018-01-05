@@ -9,7 +9,7 @@ const api = restAPI(NAME);
 export function loadTiposEventos() {
   return async (dispatch, getState) => {
     if (selHayTiposEventos(getState())) return;
-    await dispatch({
+    return await dispatch({
       type: GET_TIPOS_EVENTOS,
       promise: api.read('/eventos'),
     });
@@ -19,7 +19,7 @@ export function loadTiposEventos() {
 export function loadTiposEmergencias() {
   return async (dispatch, getState) => {
     if (selHayTiposEmergencias(getState())) return;
-    await dispatch({
+    return await dispatch({
       type: GET_TIPOS_EMERGENCIAS,
       promise: api.read('/emergencias'),
     });

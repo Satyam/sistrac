@@ -16,7 +16,11 @@ exports[`dbOps.usuarios with mock db readUsuarioPorUsuario fail 1`] = `"select *
 
 exports[`dbOps.usuarios with mock db readUsuarioPorUsuario success 1`] = `"select * from Usuarios where usuario = \`usuario\` = 'pepe'"`;
 
-exports[`dbOps.usuarios with mock db readUsuarios 1`] = `"select * from Usuarios"`;
+exports[`dbOps.usuarios with mock db readUsuarios 1`] = `
+"select idUsuario, usuario, nivel,
+    rolGuarda, rolDios, rolSupervisor,
+    rolMecanico, funcion, nombre from Usuarios "
+`;
 
 exports[`dbOps.usuarios with mock db updateUsuario fail 1`] = `"update Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez' where idUsuario = 42"`;
 

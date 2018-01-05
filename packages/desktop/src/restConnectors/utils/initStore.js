@@ -14,18 +14,36 @@ const initStore = initializer => BaseComponent => {
     constructor(props, context) {
       super(props, context);
       this.store = context.store;
+      this.state = { render: false, chained: false };
     }
-    componentDidMount() {
+    isInitialized = prevProps => {
       const { dispatch, getState } = this.store;
-      init(dispatch, getState, this.props);
-    }
-    componentDidUpdate() {
-      const { dispatch, getState } = this.store;
-      init(dispatch, getState, this.props);
-    }
+      const { render, chained } = this.state;
+      if (render || chained) return;
 
+      const initialized = init(dispatch, getState, this.props, prevProps);
+
+      if (typeof initialized === 'object' && initialized.then) {
+        initialized.then(resp => {
+          if (this.mounted) this.setState({ render: true });
+        });
+        this.setState({ chained: true });
+      } else if (initialized !== false) {
+        this.setState({ render: true, chained: true });
+      }
+    };
+    componentDidMount() {
+      this.mounted = true;
+      this.isInitialized({});
+    }
+    componentDidUpdate(prevProps) {
+      this.isInitialized(prevProps);
+    }
+    componentWillUnmount() {
+      this.mounted = false;
+    }
     render() {
-      return React.createElement(BaseComponent, this.props);
+      return this.state.render ? <BaseComponent {...this.props} /> : null;
     }
   };
   StoreInitializer.contextTypes = {

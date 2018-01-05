@@ -10,3 +10,7 @@
 th span {
   width: 16px;
 }
+
+th {
+  cursor: ns-resize;
+}

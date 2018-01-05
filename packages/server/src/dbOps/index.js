@@ -3,6 +3,8 @@ import { SQL_HOST, DB_NAME, SQL_USER, SQL_PASSWORD } from '../config';
 import initEstaciones from './estaciones';
 import initUsuarios from './usuarios';
 import initTipos from './tipos';
+import initEventos from './eventos';
+import initTrenes from './trenes';
 
 let db;
 
@@ -19,6 +21,8 @@ export async function init(mock) {
   initEstaciones(db);
   initUsuarios(db);
   initTipos(db);
+  initEventos(db);
+  initTrenes(db);
   return db;
 }
 

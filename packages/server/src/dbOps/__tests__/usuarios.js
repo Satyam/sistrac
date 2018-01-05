@@ -113,7 +113,6 @@ describe('dbOps.usuarios', () => {
           expect(row).toEqual(
             expect.objectContaining({
               idUsuario: expect.any(Number),
-              password: expect.any(String),
               usuario: expect.any(String),
               nivel: expect.any(Number),
               rolGuarda: expect.any(Boolean),
@@ -124,7 +123,6 @@ describe('dbOps.usuarios', () => {
               nombre: expect.any(String),
             }),
           );
-          expect(row.password.length).toBeGreaterThan(0);
           expect(row.usuario.length).toBeGreaterThan(0);
           expect(row.nombre.length).toBeGreaterThan(0);
         });

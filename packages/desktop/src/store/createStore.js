@@ -5,11 +5,15 @@ import promiseMiddleware from './utils/promiseMiddleware';
 import usuarios from './usuarios/reducer';
 import estaciones from './estaciones/reducer';
 import tipos from './tipos/reducer';
+import eventos from './eventos/reducer';
+import trenes from './trenes/reducer';
 
 const reducers = combineReducers({
   usuarios,
   estaciones,
   tipos,
+  eventos,
+  trenes,
 });
 
 export default (history, initialState) => {

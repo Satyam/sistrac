@@ -11,7 +11,7 @@ import Estacion from '_components/Estacion';
 export const storeInitializer = (dispatch, getState, { match }) => {
   const idEstacion = match && match.params.idEstacion;
   return (
-    idEstacion &&
+    !!idEstacion &&
     (selEstacion(getState(), idEstacion) || dispatch(getEstacion(idEstacion)))
   );
 };

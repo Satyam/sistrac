@@ -1,3 +1,5 @@
+import indexBy from '_store/utils/indexBy';
+
 import {
   REPLY_RECEIVED,
   REQUEST_SENT,
@@ -6,7 +8,7 @@ import {
 
 import {
   // NAME,
-  // GET_USUARIOS,
+  GET_USUARIOS,
   GET_USUARIO,
   // UPDATE_USUARIO,
   // CREATE_USUARIO,
@@ -46,14 +48,30 @@ export default (
       }
       return state;
     case REQUEST_SENT:
-      if (action.type === GET_USUARIO_ACTUAL) {
-        return {
-          ...state,
-          status: STATUS_GETTING_CURRENT_USER,
-          prevStatus: state.status,
-        };
+      switch (action.type) {
+        case GET_USUARIO_ACTUAL:
+          return {
+            ...state,
+            status: STATUS_GETTING_CURRENT_USER,
+            prevStatus: state.status,
+          };
+        case GET_USUARIOS: {
+          const idUsuarios = action.payload.faltantes;
+          if (!idUsuarios) return state;
+          return {
+            ...state,
+            hash: idUsuarios.reduce(
+              (hash, idUsuario) => ({
+                ...hash,
+                [idUsuario]: { idUsuario },
+              }),
+              state.hash,
+            ),
+          };
+        }
+        default:
+          return state;
       }
-      return state;
     case REPLY_RECEIVED:
       switch (action.type) {
         case GET_USUARIO_ACTUAL:
@@ -83,6 +101,11 @@ export default (
             hash: { ...state.hash, [idUsuario]: usuario },
           };
         }
+        case GET_USUARIOS:
+          return {
+            ...state,
+            hash: indexBy(action.payload, 'idUsuario', state.hash),
+          };
         default:
           return state;
       }

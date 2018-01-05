@@ -10,26 +10,28 @@ export default function promiseMiddleware() {
         ...act,
         stage: REQUEST_SENT,
       });
-      return promise.then(
-        response =>
-          next({
-            ...act,
-            stage: REPLY_RECEIVED,
-            payload: Array.isArray(response)
-              ? Object.assign(response, act.payload)
-              : {
-                  ...act.payload,
-                  ...response,
-                },
-          }),
-        error =>
-          next({
-            ...act,
-            stage: FAILURE_RECEIVED,
-            error: error.code || error.toString(),
-            errorDetails: error,
-          }),
-      );
+      return promise
+        .then(
+          response =>
+            next({
+              ...act,
+              stage: REPLY_RECEIVED,
+              payload: Array.isArray(response)
+                ? Object.assign(response, act.payload)
+                : {
+                    ...act.payload,
+                    ...response,
+                  },
+            }),
+          error =>
+            next({
+              ...act,
+              stage: FAILURE_RECEIVED,
+              error: error.code || error.toString(),
+              errorDetails: error,
+            }),
+        )
+        .then(() => {});
     }
     return next(action);
   };

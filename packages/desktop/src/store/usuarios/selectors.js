@@ -10,3 +10,7 @@ export function selUsuarioActivo(state) {
 export function selStatusUsuario(state) {
   return state[NAME].status;
 }
+
+export function selUsuario(state, idUsuario) {
+  return state[NAME].hash[idUsuario];
+}

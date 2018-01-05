@@ -1,0 +1,6 @@
+th {
+  cursor: ns-resize;
+}
+th span {
+  width: 16px;
+}
