@@ -7,9 +7,9 @@ import { selHayTiposEventos, selHayTiposEmergencias } from './selectors';
 const api = restAPI(NAME);
 
 export function loadTiposEventos() {
-  return async (dispatch, getState) => {
+  return (dispatch, getState) => {
     if (selHayTiposEventos(getState())) return;
-    return await dispatch({
+    return dispatch({
       type: GET_TIPOS_EVENTOS,
       promise: api.read('/eventos'),
     });
@@ -17,9 +17,9 @@ export function loadTiposEventos() {
 }
 
 export function loadTiposEmergencias() {
-  return async (dispatch, getState) => {
+  return (dispatch, getState) => {
     if (selHayTiposEmergencias(getState())) return;
-    return await dispatch({
+    return dispatch({
       type: GET_TIPOS_EMERGENCIAS,
       promise: api.read('/emergencias'),
     });

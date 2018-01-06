@@ -7,10 +7,10 @@ import { selEstacion } from '_store/selectors';
 const api = restAPI(NAME);
 
 export function getTrenesEstacion(idEstacion) {
-  return async (dispatch, getState) => {
+  return (dispatch, getState) => {
     const estacion = selEstacion(getState(), idEstacion);
     if (estacion.trenes) return;
-    return await dispatch({
+    return dispatch({
       type: GET_TRENES_ESTACION,
       payload: {
         idEstacion,

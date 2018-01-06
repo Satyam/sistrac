@@ -12,16 +12,16 @@ import {
 const api = restAPI(NAME);
 
 export function getEstaciones() {
-  return async (dispatch, getState) =>
-    await dispatch({
+  return dispatch =>
+    dispatch({
       type: GET_ESTACIONES,
       promise: api.read('/'),
     });
 }
 
 export function getEstacion(idEstacion) {
-  return async (dispatch, getState) =>
-    await dispatch({
+  return dispatch =>
+    dispatch({
       type: GET_ESTACION,
       payload: {
         idEstacion,

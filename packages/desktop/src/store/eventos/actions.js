@@ -11,10 +11,10 @@ import { selEstacion } from '_store/selectors';
 const api = restAPI(NAME);
 
 export function getEventosPorEstacion(idEstacion) {
-  return async (dispatch, getState) => {
+  return (dispatch, getState) => {
     const estacion = selEstacion(getState(), idEstacion);
     if (estacion.eventos) return;
-    return await dispatch({
+    return dispatch({
       type: GET_EVENTOS_POR_ESTACION,
       payload: {
         idEstacion,
@@ -25,8 +25,8 @@ export function getEventosPorEstacion(idEstacion) {
 }
 
 export function getEventosPorTren(idTren) {
-  return async (dispatch, getState) =>
-    await dispatch({
+  return dispatch =>
+    dispatch({
       type: GET_EVENTOS_POR_TREN,
       payload: {
         idTren,
