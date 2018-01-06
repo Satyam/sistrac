@@ -51,29 +51,22 @@ describe('dbOps.usuarios', () => {
         readUsuario,
         [NUEVO_USUARIO],
         { ...NUEVO_USUARIO, ...roles },
-        {
-          idUsuario: 42,
-        },
+        42,
       ),
     );
-    it(
-      'readUsuario fail',
-      testMethod(readUsuario, [], false, { idUsuario: 42 }),
-    );
+    it('readUsuario fail', testMethod(readUsuario, [], false, 42));
     it(
       'readUsuarioPorUsuario success',
       testMethod(
         readUsuarioPorUsuario,
         [NUEVO_USUARIO],
         { ...NUEVO_USUARIO, ...roles },
-        {
-          usuario: 'pepe',
-        },
+        'pepe',
       ),
     );
     it(
       'readUsuarioPorUsuario fail',
-      testMethod(readUsuarioPorUsuario, [], false, { usuario: 'pepe' }),
+      testMethod(readUsuarioPorUsuario, [], false, 'pepe'),
     );
     it(
       'updateUsuario success',
@@ -151,7 +144,6 @@ describe('dbOps.usuarios', () => {
           expect(row.idUsuario).toBe(idUsuario);
           expect(row.nombre).toBe(NUEVO_USUARIO.nombre);
           expect(row.usuario).toBe(NUEVO_USUARIO.usuario);
-          expect(row.password).toBe(NUEVO_USUARIO.password);
           expect(row.nivel).toBe(0);
           expect(row.funcion).toBe(0);
           expect(row.rolGuarda).toBeFalsy();
@@ -166,7 +158,6 @@ describe('dbOps.usuarios', () => {
           expect(row.idUsuario).toBe(idUsuario);
           expect(row.nombre).toBe(NUEVO_USUARIO.nombre);
           expect(row.usuario).toBe(NUEVO_USUARIO.usuario);
-          expect(row.password).toBe(NUEVO_USUARIO.password);
         });
         it('should fail on non-existing', async () => {
           const query = readUsuario(0);

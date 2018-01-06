@@ -34,8 +34,11 @@ import {
 
 const NUEVO_USUARIO = {
   usuario: 'pepe',
-  password: '123456789',
   nombre: 'José Pérez',
+};
+
+const PWD = {
+  password: '123456789',
 };
 
 const roles = {
@@ -55,12 +58,10 @@ describe('restServers/usuarios', () => {
       testREST({
         method: PUT,
         path: '/usuarios/login',
-        queryResult: [
-          { ...NUEVO_USUARIO, password: md5(NUEVO_USUARIO.password) },
-        ],
+        queryResult: [NUEVO_USUARIO],
         statusCode: OK,
-        restResult: { ...NUEVO_USUARIO, ...roles, password: undefined },
-        body: NUEVO_USUARIO,
+        restResult: { ...NUEVO_USUARIO, ...roles },
+        body: { ...NUEVO_USUARIO, ...PWD },
       }),
     );
     it(
@@ -68,9 +69,7 @@ describe('restServers/usuarios', () => {
       testREST({
         method: PUT,
         path: '/usuarios/login',
-        queryResult: [
-          { ...NUEVO_USUARIO, password: md5(NUEVO_USUARIO.password) },
-        ],
+        queryResult: [],
         statusCode: UNAUTHORIZED,
         body: { ...NUEVO_USUARIO, password: 0 },
       }),
@@ -94,7 +93,7 @@ describe('restServers/usuarios', () => {
         path: '/usuarios/signup',
         queryResult: { insertId: 25 },
         statusCode: CREATED,
-        body: NUEVO_USUARIO,
+        body: { ...NUEVO_USUARIO, ...PWD },
       }),
     );
     it(
@@ -105,7 +104,7 @@ describe('restServers/usuarios', () => {
         statusCode: BAD_REQUEST,
         restResult:
           'Favor de indicar código de usuario, contraseña y nombre completo.',
-        body: { ...NUEVO_USUARIO, password: 0 },
+        body: NUEVO_USUARIO,
       }),
     );
     it(
@@ -115,7 +114,7 @@ describe('restServers/usuarios', () => {
         path: '/usuarios/signup',
         queryResult: { affectedRows: 0 },
         statusCode: CONFLICT,
-        body: NUEVO_USUARIO,
+        body: { ...NUEVO_USUARIO, ...PWD },
       }),
     );
   });

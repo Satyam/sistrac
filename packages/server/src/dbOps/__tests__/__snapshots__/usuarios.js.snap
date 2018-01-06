@@ -8,19 +8,15 @@ exports[`dbOps.usuarios with mock db deleteUsuario fail 1`] = `"delete from Usua
 
 exports[`dbOps.usuarios with mock db deleteUsuario success 1`] = `"delete from Usuarios where idUsuario = 42"`;
 
-exports[`dbOps.usuarios with mock db readUsuario fail 1`] = `"select * from Usuarios where idUsuario = \`idUsuario\` = 42"`;
+exports[`dbOps.usuarios with mock db readUsuario fail 1`] = `"select * from UsuariosSimple where idUsuario = 42"`;
 
-exports[`dbOps.usuarios with mock db readUsuario success 1`] = `"select * from Usuarios where idUsuario = \`idUsuario\` = 42"`;
+exports[`dbOps.usuarios with mock db readUsuario success 1`] = `"select * from UsuariosSimple where idUsuario = 42"`;
 
-exports[`dbOps.usuarios with mock db readUsuarioPorUsuario fail 1`] = `"select * from Usuarios where usuario = \`usuario\` = 'pepe'"`;
+exports[`dbOps.usuarios with mock db readUsuarioPorUsuario fail 1`] = `"select * from UsuariosSimple where usuario = 'pepe'"`;
 
-exports[`dbOps.usuarios with mock db readUsuarioPorUsuario success 1`] = `"select * from Usuarios where usuario = \`usuario\` = 'pepe'"`;
+exports[`dbOps.usuarios with mock db readUsuarioPorUsuario success 1`] = `"select * from UsuariosSimple where usuario = 'pepe'"`;
 
-exports[`dbOps.usuarios with mock db readUsuarios 1`] = `
-"select idUsuario, usuario, nivel,
-    rolGuarda, rolDios, rolSupervisor,
-    rolMecanico, funcion, nombre from Usuarios "
-`;
+exports[`dbOps.usuarios with mock db readUsuarios 1`] = `"select * from UsuariosSimple "`;
 
 exports[`dbOps.usuarios with mock db updateUsuario fail 1`] = `"update Usuarios set \`usuario\` = 'pepe', \`password\` = '123456789', \`nombre\` = 'José Pérez' where idUsuario = 42"`;
 

@@ -10,6 +10,7 @@ import {
   deleteUsuario,
   updateUsuario,
   readUsuarios,
+  loginUsuario,
 } from '../dbOps/usuarios';
 
 import {
@@ -51,14 +52,11 @@ export function authenticate(req, res, next) {
 
 export default async function(dataRouter, path) {
   dataRouter.put(join(path, '/login'), async (req, res) => {
-    const { password, ...user } = await readUsuarioPorUsuario(req.body.usuario);
-    if (Object.keys(user).length) {
-      const isMatch = md5(req.body.password) === password;
-      if (isMatch) {
-        setCookie(res, user);
-        res.json(user);
-        return;
-      }
+    const user = await loginUsuario(req.body.usuario, md5(req.body.password));
+    if (user) {
+      setCookie(res, user);
+      res.json(user);
+      return;
     }
     res.clearCookie(COOKIE_NAME);
     res.status(UNAUTHORIZED).end();

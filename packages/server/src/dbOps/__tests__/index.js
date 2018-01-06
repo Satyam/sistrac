@@ -1,4 +1,4 @@
-import { init, close  } from '../index';
+import { init, close } from '../index';
 
 describe('dbOps/index', () => {
   describe('init', () => {
@@ -13,12 +13,12 @@ describe('dbOps/index', () => {
       });
       afterAll(() => {
         close();
-      })
+      });
       it('should return a Promise', () => {
         expect(p).toBeInstanceOf(Promise);
       });
       it('should resolve to a connection object', () =>
-        p.then((connection) => {
+        p.then(connection => {
           db = connection;
           expect(typeof db.query).toBe('function');
           expect(typeof db.destroy).toBe('function');
@@ -42,7 +42,8 @@ describe('dbOps/index', () => {
           'TipoEvento',
           'Trenes',
           'Usuarios',
-        ]
+          'UsuariosSimple',
+        ];
         expect(tables.length).toBe(expected.length);
         expect(tables).toEqual(expect.arrayContaining(expected));
       });

@@ -17,12 +17,9 @@ function convertToBoolean(row) {
 }
 export async function readUsuarios(idUsuarios) {
   const where = idUsuarios ? 'where idUsuario in (?)' : '';
-  const query = await db.query(
-    `select idUsuario, usuario, nivel,
-    rolGuarda, rolDios, rolSupervisor,
-    rolMecanico, funcion, nombre from Usuarios ${where}`,
-    [idUsuarios],
-  );
+  const query = await db.query(`select * from UsuariosSimple ${where}`, [
+    idUsuarios,
+  ]);
   return query.map(convertToBoolean);
 }
 
@@ -39,16 +36,28 @@ export async function createUsuario(values) {
 }
 
 export async function readUsuario(id) {
-  const query = await db.query('select * from Usuarios where idUsuario = ?', [
-    id,
-  ]);
+  const query = await db.query(
+    'select * from UsuariosSimple where idUsuario = ?',
+    [id],
+  );
   return convertToBoolean(query[0]);
 }
 
 export async function readUsuarioPorUsuario(usuario) {
-  const query = await db.query('select * from Usuarios where usuario = ?', [
-    usuario,
-  ]);
+  const query = await db.query(
+    'select * from UsuariosSimple where usuario = ?',
+    [usuario],
+  );
+  return convertToBoolean(query[0]);
+}
+
+export async function loginUsuario(usuario, password) {
+  const query = await db.query(
+    `select idUsuario, usuario, nombre, nivel, 
+    rolDios, rolGuarda, rolMecanico, rolSupervisor, funcion 
+    from Usuarios where usuario = ? and password = ?`,
+    [usuario, password],
+  );
   return convertToBoolean(query[0]);
 }
 
