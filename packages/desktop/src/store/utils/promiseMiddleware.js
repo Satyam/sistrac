@@ -30,8 +30,7 @@ export default function promiseMiddleware() {
               error: error.code || error.toString(),
               errorDetails: error,
             }),
-        )
-        .then(() => {});
+        );
     }
     return next(action);
   };
