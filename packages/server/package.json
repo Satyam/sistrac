@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest",
-    "debugTest": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "build": "run-s build:clean build:compile",
     "build:clean": "rimraf lib",
     "build:compile": "babel src -d lib -s --ignore _*",

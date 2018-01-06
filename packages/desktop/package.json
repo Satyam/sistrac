@@ -26,6 +26,7 @@
     "build:clean": "rimraf build",
     "build:compile": "react-scripts build",
     "test": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts test --env=jsdom",
+    "test:debug": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .jsx,.js . || exit 0",
     "analyze": "source-map-explorer build/static/js/main.*"
