@@ -350,6 +350,11 @@ INSERT INTO `Usuarios` (`idUsuario`, `password`, `usuario`, `nivel`, `rolGuarda`
 (9, 'cd616f2f57739f3831531950d63c7d2f', 'juanmajic', 0, 1, 0, 0, 0, 1, 'Juan Majic'),
 (10, '94964d16964622c8a5f605bf7f82bc73', 'satyam', 1, 1, 1, 1, 1, 0, 'Daniel Barreiro');
 
+
+CREATE VIEW `UsuariosSimple`
+AS  select `idUsuario`, `usuario`, `nombre`, `nivel`, `rolDios`, `rolGuarda`,
+`rolMecanico`, `rolSupervisor`, `funcion` from `Usuarios` ;
+
 --
 -- Indexes for dumped tables
 --
