@@ -13,5 +13,8 @@
     "lerna": "^2.5.1",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
   }
 }

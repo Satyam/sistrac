@@ -6,8 +6,11 @@ import compression from 'compression';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 
 import { REST_PORT, REST_API_PATH, APP_HOST, APP_PORT } from './config';
+
+import schema from './graphql';
 
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
@@ -42,6 +45,29 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
+
+app.use('/graphi?ql', (req, res, next) => {
+  if (req.method !== 'OPTIONS') {
+    next();
+    return;
+  }
+  res.status(200).end();
+});
+
+app.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress({
+    schema,
+  }),
+);
+
+app.use(
+  '/graphiql',
+  graphiqlExpress({
+    endpointURL: '/graphql',
+  }),
+);
 
 const dataRouter = createRouter();
 

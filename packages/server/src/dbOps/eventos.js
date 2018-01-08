@@ -10,3 +10,10 @@ export function eventosPorTren(idTren) {
 export function eventosPorEstacion(idEstacion) {
   return db.query('SELECT * FROM `Eventos` WHERE idEstacion = ?', [idEstacion]);
 }
+
+export function readEvento(idEvento) {
+  const query = db.query('select * from Eventos where idEvento = ?', [
+    idEvento,
+  ]);
+  return query.length ? query[0] : null;
+}

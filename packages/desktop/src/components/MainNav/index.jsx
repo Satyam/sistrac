@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  NavDropdown,
+  NavItem as RawNavItem,
+} from 'react-bootstrap';
 
 import { NavItem, MenuItem } from '_components/BootstrapLink';
 
@@ -32,9 +37,9 @@ export default function MainNav({ usuario, statusUsuario, location }) {
           >
             Estaciones
           </NavItem>
-          <NavItem eventKey={2} href="#">
-            Link
-          </NavItem>
+          <RawNavItem eventKey={2} href="http://localhost:8080/graphiql">
+            graphiql
+          </RawNavItem>
         </Nav>
         {usuario.nombre ? (
           <Nav pullRight>
