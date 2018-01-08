@@ -7,10 +7,9 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import buildSchema from './utils/buildSchema';
 
 import { REST_PORT, REST_API_PATH, APP_HOST, APP_PORT } from './config';
-
-import schema from './graphql';
 
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
@@ -58,7 +57,7 @@ app.use(
   '/graphql',
   bodyParser.json(),
   graphqlExpress({
-    schema,
+    schema: buildSchema(resolve(__dirname, './graphql')),
   }),
 );
 
