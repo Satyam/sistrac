@@ -9,19 +9,19 @@ export function readEstaciones() {
 }
 
 export async function existeEstacionPorNombre(nombre) {
-  const result = await db.query(
+  const result = await db.queryRow(
     'select count(*) as hay from Estaciones where nombre = ?',
     [nombre],
   );
-  return result[0].hay === 1;
+  return result.hay === 1;
 }
 
 export async function existeEstacion(idEstacion) {
-  const result = await db.query(
+  const result = await db.queryRow(
     'select count(*) as hay from Estaciones where idEstacion = ?',
     [idEstacion],
   );
-  return result[0].hay === 1;
+  return result.hay === 1;
 }
 
 export async function updateEstacion(idEstacion, data) {
@@ -32,19 +32,14 @@ export async function updateEstacion(idEstacion, data) {
   return result.affectedRows === 1;
 }
 
-export async function readEstacion(idEstacion) {
-  const result = await db.query(
-    'select * from Estaciones where idEstacion = ?',
-    [idEstacion],
-  );
-  return result[0];
+export function readEstacion(idEstacion) {
+  return db.queryRow('select * from Estaciones where idEstacion = ?', [
+    idEstacion,
+  ]);
 }
 
-export async function readEstacionPorNombre(nombre) {
-  const result = await db.query('select * from Estaciones where nombre = ?', [
-    nombre,
-  ]);
-  return result[0];
+export function readEstacionPorNombre(nombre) {
+  return db.queryRow('select * from Estaciones where nombre = ?', [nombre]);
 }
 
 export async function createEstacion(data) {

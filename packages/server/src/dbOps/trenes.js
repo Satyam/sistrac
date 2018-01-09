@@ -6,8 +6,9 @@ export default function init(db1) {
 
 export function readTrenesPorEstacion(idEstacion) {
   return db.query(
-    `SELECT
-    idItinerario,
+    `
+SELECT
+  idItinerario,
   nombre,
   llega,
   sale,

@@ -18,6 +18,8 @@ export async function init(mock) {
       database: DB_NAME,
       charset: 'utf8_spanish_ci',
     }));
+  db.queryRow = (...args) => db.query(...args).then(result => result[0]);
+
   initEstaciones(db);
   initUsuarios(db);
   initTipos(db);

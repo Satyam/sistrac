@@ -12,8 +12,5 @@ export function eventosPorEstacion(idEstacion) {
 }
 
 export function readEvento(idEvento) {
-  const query = db.query('select * from Eventos where idEvento = ?', [
-    idEvento,
-  ]);
-  return query.length ? query[0] : null;
+  return db.queryRow('select * from Eventos where idEvento = ?', [idEvento]);
 }

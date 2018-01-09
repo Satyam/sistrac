@@ -36,29 +36,28 @@ export async function createUsuario(values) {
 }
 
 export async function readUsuario(id) {
-  const query = await db.query(
-    'select * from UsuariosSimple where idUsuario = ?',
-    [id],
+  return convertToBoolean(
+    await db.queryRow('select * from UsuariosSimple where idUsuario = ?', [id]),
   );
-  return convertToBoolean(query[0]);
 }
 
 export async function readUsuarioPorUsuario(usuario) {
-  const query = await db.query(
-    'select * from UsuariosSimple where usuario = ?',
-    [usuario],
+  return convertToBoolean(
+    await db.queryRow('select * from UsuariosSimple where usuario = ?', [
+      usuario,
+    ]),
   );
-  return convertToBoolean(query[0]);
 }
 
 export async function loginUsuario(usuario, password) {
-  const query = await db.query(
-    `select idUsuario, usuario, nombre, nivel, 
+  return convertToBoolean(
+    await db.queryRow(
+      `select idUsuario, usuario, nombre, nivel, 
     rolDios, rolGuarda, rolMecanico, rolSupervisor, funcion 
     from Usuarios where usuario = ? and password = ?`,
-    [usuario, password],
+      [usuario, password],
+    ),
   );
-  return convertToBoolean(query[0]);
 }
 
 export async function deleteUsuario(id) {
