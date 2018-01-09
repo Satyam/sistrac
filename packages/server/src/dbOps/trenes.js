@@ -4,29 +4,34 @@ export default function init(db1) {
   db = db1;
 }
 
-export function readTrenesPorEstacion(idEstacion) {
+export function readTrenesPorItinerario(idItinerario) {
   return db.query(
     `
-SELECT
-  idItinerario,
-  nombre,
-  llega,
-  sale,
-  idTren,
-  fecha,
-  numero,
-  chapa
-FROM
-  Itinerarios
-JOIN
-  Escalas USING(idItinerario)
-JOIN
-  Trenes USING(idItinerario)
-WHERE
-  idEstacion = ?
-ORDER BY
-  idItinerario,
-  llega`,
-    idEstacion,
+    SELECT
+      idItinerario,
+      idEstacion,
+      nombre,
+      llega,
+      sale,
+      idTren,
+      fecha,
+      numero,
+      chapa
+    FROM
+      Escalas
+    JOIN
+      Estaciones USING(idEstacion)
+    JOIN
+      Trenes USING(idItinerario)
+    WHERE
+      idItinerario = ?
+    ORDER BY
+      idItinerario,
+      llega`,
+    idItinerario,
   );
+}
+
+export function readTren(idTren) {
+  return db.query('select * from Trenes where idTren = ?', [idTren]);
 }

@@ -8,3 +8,6 @@ export function selEstacion(state, idEstacion) {
   return state[NAME][idEstacion];
 }
 
+export function selTrenesPorEstacion(state, idEstacion) {
+  return state[NAME][idEstacion].trenes;
+}
