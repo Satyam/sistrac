@@ -8,7 +8,7 @@ import {
   readEstacionPorNombre,
   createEstacion,
   deleteEstacion,
-  readTrenesPorEstacion,
+  readBreveTrenesPorEstacion,
 } from '../dbOps/estaciones';
 
 import {
@@ -66,7 +66,7 @@ export default async function(dataRouter, path) {
   });
 
   dataRouter.get(relPath('/trenes/:idEstacion'), async (req, res) => {
-    const resp = await readTrenesPorEstacion(req.params.idEstacion);
+    const resp = await readBreveTrenesPorEstacion(req.params.idEstacion);
     res.json(resp);
   });
 }

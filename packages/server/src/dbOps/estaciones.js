@@ -61,7 +61,7 @@ export async function deleteEstacion(idEstacion) {
   return result.affectedRows === 1;
 }
 
-export function readTrenesPorEstacion(idEstacion) {
+export function readBreveTrenesPorEstacion(idEstacion) {
   return db.query(
     `
 SELECT
