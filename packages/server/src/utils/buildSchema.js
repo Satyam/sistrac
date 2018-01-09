@@ -8,6 +8,7 @@ export default function buildSchema(dir) {
     readDir(dir).reduce(
       (schema, fileName) => {
         if (extname(fileName) !== '.js') return schema;
+        // eslint-disable-next-line
         const defs = require(join(dir, fileName));
         return {
           typeDefs: schema.typeDefs + (defs.typeDefs || ''),

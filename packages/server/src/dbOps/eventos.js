@@ -4,10 +4,10 @@ export default function init(db1) {
   db = db1;
 }
 
-export function eventosPorTren(idTren) {
+export function readEventosPorTren(idTren) {
   return db.query('SELECT * FROM `Eventos` WHERE idTren = ?', [idTren]);
 }
-export function eventosPorEstacion(idEstacion) {
+export function readEventosPorEstacion(idEstacion) {
   return db.query('SELECT * FROM `Eventos` WHERE idEstacion = ?', [idEstacion]);
 }
 

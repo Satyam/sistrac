@@ -1,4 +1,6 @@
 import { readEstaciones, readEstacion } from '../dbOps/estaciones';
+import { readItinerariosPorEstacion } from '../dbOps/itinerarios';
+import { readTrenesPorEstacion } from '../dbOps/trenes';
 
 export const typeDefs = `
 type Estacion {
@@ -6,6 +8,9 @@ type Estacion {
   nombre: String
   latitud: Float
   longitud: Float
+  itinerarios: [Itinerario]
+  trenes: [Tren]
+  eventos: [Evento]
 }
 
 extend type Query {
@@ -17,9 +22,17 @@ extend type Query {
 export const resolvers = {
   Query: {
     estaciones: () => readEstaciones(),
-    estacion: (parent, { idEstacion }) => {
-      console.log('parent', parent);
-      return readEstacion(idEstacion);
+    estacion: (parent, { idEstacion }) => readEstacion(idEstacion),
+  },
+  Estacion: {
+    itinerarios({ idEstacion }) {
+      return readItinerariosPorEstacion(idEstacion);
+    },
+    trenes({ idEstacion }) {
+      return readTrenesPorEstacion(idEstacion);
+    },
+    eventos({ idEstacion }) {
+      return readreadEventosPorEstacion(idEstacion);
     },
   },
 };

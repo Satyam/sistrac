@@ -5,6 +5,8 @@ import initUsuarios from './usuarios';
 import initTipos from './tipos';
 import initEventos from './eventos';
 import initTrenes from './trenes';
+import initEscalas from './escalas';
+import initItinerarios from './itinerarios';
 
 let db;
 
@@ -25,6 +27,8 @@ export async function init(mock) {
   initTipos(db);
   initEventos(db);
   initTrenes(db);
+  initEscalas(db);
+  initItinerarios(db);
   return db;
 }
 

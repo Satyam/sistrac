@@ -1,10 +1,11 @@
 import {
-  eventosPorTren,
-  eventosPorEstacion,
+  readEventosPorTren,
+  readEventosPorEstacion,
   readEvento,
 } from '../dbOps/eventos';
 import { readUsuario } from '../dbOps/usuarios';
 import { readEstacion } from '../dbOps/estaciones';
+import { readTipoEvento, readTipoEmergencia } from '../dbOps/tipos';
 
 export const typeDefs = `
   type Evento {
@@ -31,26 +32,26 @@ export const typeDefs = `
 export const resolvers = {
   Query: {
     eventos: (parent, { idTren, idEstacion }) => {
-      console.log('query: eventos', parent, idTren, idEstacion);
-      if (idTren) return eventosPorTren(idTren);
-      if (idEstacion) return eventosPorEstacion(idEstacion);
+      if (idTren) return readEventosPorTren(idTren);
+      if (idEstacion) return readEventosPorEstacion(idEstacion);
       return [];
     },
 
-    evento: (parent, { idEvento }) => {
-      console.log('parent', parent);
-      return readEvento(idEvento);
-    },
+    evento: (parent, { idEvento }) => readEvento(idEvento),
   },
 
   Evento: {
     usuario({ idUsuario }) {
-      console.log('Evento:usuario', idUsuario);
       return readUsuario(idUsuario);
     },
     estacion({ idEstacion }) {
-      console.log('Evento:estacion', idEstacion);
       return readEstacion(idEstacion);
+    },
+    tipoEmergencia({ idTipoEmergencia }) {
+      return readTipoEmergencia(idTipoEmergencia);
+    },
+    tipoEvento({ idTipoEvento }) {
+      return readTipoEvento(idTipoEvento);
     },
   },
 };

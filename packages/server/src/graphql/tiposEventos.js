@@ -1,3 +1,5 @@
+import { readTiposEventos, readTipoEvento } from '../dbOps/tipos';
+
 export const typeDefs = `
   type TipoEvento {
     idTipoEvento: Int
@@ -9,3 +11,10 @@ export const typeDefs = `
     tipoEvento(idTipoEvento: ID): TipoEvento
   }
 `;
+
+export const resolvers = {
+  Query: {
+    tiposEventos: () => readTiposEventos(),
+    tipoEvento: (parent, { idTipoEvento }) => readTipoEvento(idTipoEvento),
+  },
+};
