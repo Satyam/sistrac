@@ -1,6 +1,6 @@
 import { init, close } from '../';
 
-import { MysqlError, testMethod } from '../../testUtils';
+import { MysqlError, testMethod } from '../../utils/testUtils';
 
 import {
   readEstaciones,

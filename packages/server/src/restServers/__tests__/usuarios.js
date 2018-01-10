@@ -10,7 +10,7 @@ import {
   POST,
   PUT,
   DELETE,
-} from '../../testUtils';
+} from '../../utils/testUtils';
 
 import {
   OK,
