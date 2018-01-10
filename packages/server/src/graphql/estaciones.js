@@ -1,6 +1,7 @@
 import { readEstaciones, readEstacion } from '../dbOps/estaciones';
 import { readItinerariosPorEstacion } from '../dbOps/itinerarios';
 import { readTrenesPorEstacion } from '../dbOps/trenes';
+import { readEventosPorEstacion } from '../dbOps/eventos';
 
 export const typeDefs = `
 type Estacion {
@@ -32,7 +33,7 @@ export const resolvers = {
       return readTrenesPorEstacion(idEstacion);
     },
     eventos({ idEstacion }) {
-      return readreadEventosPorEstacion(idEstacion);
+      return readEventosPorEstacion(idEstacion);
     },
   },
 };
