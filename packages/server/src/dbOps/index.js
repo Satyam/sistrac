@@ -1,3 +1,6 @@
+// import fs from 'fs';
+// import { resolve } from 'path';
+
 import mysql from 'node-mysql-promise2';
 import { SQL_HOST, DB_NAME, SQL_USER, SQL_PASSWORD } from '../config';
 import initEstaciones from './estaciones';
@@ -10,6 +13,12 @@ import initItinerarios from './itinerarios';
 
 let db;
 
+// let queries = {};
+// const fName = resolve(
+//   __dirname.replace('/lib/', '/src/'),
+//   '../graphql/__tests__/__ignore/queries.json',
+// );
+
 export async function init(mock) {
   db =
     mock ||
@@ -20,8 +29,23 @@ export async function init(mock) {
       database: DB_NAME,
       charset: 'utf8_spanish_ci',
     }));
-  db.queryRow = (...args) => db.query(...args).then(result => result[0]);
 
+  // const f = fs.readFileSync(fName);
+  // if (f) {
+  //   queries = JSON.parse(f);
+  // }
+  //
+  // const q = db.query.bind(db);
+  //
+  // db.query = (...args) => {
+  //   const sql = db.format(...args);
+  //   return q(...args).then(result => {
+  //     queries[sql] = result;
+  //     return result;
+  //   });
+  // };
+
+  db.queryRow = (...args) => db.query(...args).then(result => result[0]);
   initEstaciones(db);
   initUsuarios(db);
   initTipos(db);
@@ -33,5 +57,6 @@ export async function init(mock) {
 }
 
 export function close() {
+  // fs.writeFileSync(fName, JSON.stringify(queries, null, 2));
   db.destroy();
 }

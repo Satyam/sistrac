@@ -1,0 +1,465 @@
+{
+  "select * from Escalas where idEstacion = 'RET'": [
+    {
+      "idEscala": 1,
+      "idEstacion": "RET",
+      "llega": 0,
+      "idItinerario": 1,
+      "orden": 1,
+      "sale": 0
+    }
+  ],
+  "select * from Estaciones where idEstacion = 'RET'": [
+    {
+      "idEstacion": "RET",
+      "nombre": "Retiro",
+      "latitud": -34.590672,
+      "longitud": -58.377158
+    }
+  ],
+  "select * from Itinerarios where idItinerario = 1": [
+    {
+      "idItinerario": 1,
+      "nombre": "Retiro-Rosario"
+    }
+  ],
+  "select * from Escalas where idItinerario = 1": [
+    {
+      "idEscala": 1,
+      "idEstacion": "RET",
+      "llega": 0,
+      "idItinerario": 1,
+      "orden": 1,
+      "sale": 0
+    },
+    {
+      "idEscala": 3,
+      "idEstacion": "SPD",
+      "llega": 97,
+      "idItinerario": 1,
+      "orden": 3,
+      "sale": 102
+    },
+    {
+      "idEscala": 5,
+      "idEstacion": "RSN",
+      "llega": 180,
+      "idItinerario": 1,
+      "orden": 5,
+      "sale": 180
+    }
+  ],
+  "select * from Estaciones where idEstacion = 'SPD'": [
+    {
+      "idEstacion": "SPD",
+      "nombre": "San Pedro",
+      "latitud": -33.694033,
+      "longitud": -59.680496
+    }
+  ],
+  "select * from Estaciones where idEstacion = 'RSN'": [
+    {
+      "idEstacion": "RSN",
+      "nombre": "Rosario norte",
+      "latitud": -32.930863,
+      "longitud": -60.657509
+    }
+  ],
+  "select * from Escalas where idEscala = 1": [
+    {
+      "idEscala": 1,
+      "idEstacion": "RET",
+      "llega": 0,
+      "idItinerario": 1,
+      "orden": 1,
+      "sale": 0
+    }
+  ],
+  "select * from Estaciones order by nombre": [
+    {
+      "idEstacion": "RET",
+      "nombre": "Retiro",
+      "latitud": -34.590672,
+      "longitud": -58.377158
+    },
+    {
+      "idEstacion": "RSN",
+      "nombre": "Rosario norte",
+      "latitud": -32.930863,
+      "longitud": -60.657509
+    },
+    {
+      "idEstacion": "SPD",
+      "nombre": "San Pedro",
+      "latitud": -33.694033,
+      "longitud": -59.680496
+    }
+  ],
+  "SELECT * FROM `Eventos` WHERE idEstacion = 'RET'": [
+    {
+      "idEvento": 23,
+      "fecha": "2016-09-23T00:37:44.000Z",
+      "idUsuario": 2,
+      "funcion": 1,
+      "idTren": 1,
+      "idEstacion": "RET",
+      "combustible": 0,
+      "observaciones": "Acabo de salir, loco",
+      "longitud": -58.4344687,
+      "velocidad": 0,
+      "latitud": -34.6176428,
+      "idTipoEmergencia": 0,
+      "idTipoEvento": 1
+    }
+  ],
+  "SELECT * FROM `Eventos` WHERE idTren = 1": [
+    {
+      "idEvento": 23,
+      "fecha": "2016-09-23T00:37:44.000Z",
+      "idUsuario": 2,
+      "funcion": 1,
+      "idTren": 1,
+      "idEstacion": "RET",
+      "combustible": 0,
+      "observaciones": "Acabo de salir, loco",
+      "longitud": -58.4344687,
+      "velocidad": 0,
+      "latitud": -34.6176428,
+      "idTipoEmergencia": 0,
+      "idTipoEvento": 1
+    },
+    {
+      "idEvento": 34,
+      "fecha": "2016-09-28T12:56:56.000Z",
+      "idUsuario": 2,
+      "funcion": 1,
+      "idTren": 1,
+      "idEstacion": "SPD",
+      "combustible": 0,
+      "observaciones": "Sonamos",
+      "longitud": 1.8038793,
+      "velocidad": 0,
+      "latitud": 41.2381851,
+      "idTipoEmergencia": 1,
+      "idTipoEvento": 3
+    },
+    {
+      "idEvento": 35,
+      "fecha": "2016-09-28T13:03:18.000Z",
+      "idUsuario": 2,
+      "funcion": 1,
+      "idTren": 1,
+      "idEstacion": "SPD",
+      "combustible": 0,
+      "observaciones": "",
+      "longitud": 1.8038871,
+      "velocidad": 0,
+      "latitud": 41.2382194,
+      "idTipoEmergencia": 2,
+      "idTipoEvento": 2
+    }
+  ],
+  "select * from Eventos where idEvento = 23": [
+    {
+      "idEvento": 23,
+      "fecha": "2016-09-23T00:37:44.000Z",
+      "idUsuario": 2,
+      "funcion": 1,
+      "idTren": 1,
+      "idEstacion": "RET",
+      "combustible": 0,
+      "observaciones": "Acabo de salir, loco",
+      "longitud": -58.4344687,
+      "velocidad": 0,
+      "latitud": -34.6176428,
+      "idTipoEmergencia": 0,
+      "idTipoEvento": 1
+    }
+  ],
+  "select * from Itinerarios": [
+    {
+      "idItinerario": 1,
+      "nombre": "Retiro-Rosario"
+    },
+    {
+      "idItinerario": 2,
+      "nombre": "Probador"
+    }
+  ],
+  "select * from TipoEmergencias": [
+    {
+      "idTipoEmergencia": 1,
+      "descr": "Choque con vehículo"
+    },
+    {
+      "idTipoEmergencia": 2,
+      "descr": "Atropello de persona"
+    },
+    {
+      "idTipoEmergencia": 3,
+      "descr": "Atropello de ganado"
+    }
+  ],
+  "select * from TipoEmergencias where idTipoEmergencia = 1": [
+    {
+      "idTipoEmergencia": 1,
+      "descr": "Choque con vehículo"
+    }
+  ],
+  "select * from TipoEmergencias where idTipoEmergencia = 2": [
+    {
+      "idTipoEmergencia": 2,
+      "descr": "Atropello de persona"
+    }
+  ],
+  "select * from TipoEmergencias where idTipoEmergencia = 3": [
+    {
+      "idTipoEmergencia": 3,
+      "descr": "Atropello de ganado"
+    }
+  ],
+  "select * from TipoEvento where idTipoEvento = 1": [
+    {
+      "idTipoEvento": 1,
+      "preposicion": "de",
+      "descr": "Sale de terminal"
+    }
+  ],
+  "select * from TipoEvento": [
+    {
+      "idTipoEvento": 1,
+      "preposicion": "de",
+      "descr": "Sale de terminal"
+    },
+    {
+      "idTipoEvento": 2,
+      "preposicion": "a",
+      "descr": "Llega"
+    },
+    {
+      "idTipoEvento": 3,
+      "preposicion": "de",
+      "descr": "Sale"
+    }
+  ],
+  "SELECT Trenes.* FROM Escalas JOIN Trenes USING(idItinerario) WHERE idEstacion = 'RET'": [
+    {
+      "idTren": 1,
+      "idItinerario": 1,
+      "fecha": "2016-09-28T08:00:00.000Z",
+      "chapa": 45,
+      "idGuarda": 2,
+      "idAyudante": 7,
+      "idConductor": 3,
+      "locomotora": 9069,
+      "estado": 3,
+      "estadoAnterior": 1,
+      "numero": 303
+    },
+    {
+      "idTren": 2,
+      "idItinerario": 1,
+      "fecha": "2016-09-11T01:25:00.000Z",
+      "chapa": 11,
+      "idGuarda": 9,
+      "idAyudante": 7,
+      "idConductor": 8,
+      "locomotora": 8447,
+      "estado": 3,
+      "estadoAnterior": 0,
+      "numero": 300
+    },
+    {
+      "idTren": 7,
+      "idItinerario": 1,
+      "fecha": "2016-09-16T17:20:00.000Z",
+      "chapa": 45,
+      "idGuarda": 9,
+      "idAyudante": 7,
+      "idConductor": 8,
+      "locomotora": 9069,
+      "estado": 2,
+      "estadoAnterior": 0,
+      "numero": 303
+    }
+  ],
+  "select * from Trenes where idItinerario = 1": [
+    {
+      "idTren": 1,
+      "idItinerario": 1,
+      "fecha": "2016-09-28T08:00:00.000Z",
+      "chapa": 45,
+      "idGuarda": 2,
+      "idAyudante": 7,
+      "idConductor": 3,
+      "locomotora": 9069,
+      "estado": 3,
+      "estadoAnterior": 1,
+      "numero": 303
+    },
+    {
+      "idTren": 2,
+      "idItinerario": 1,
+      "fecha": "2016-09-11T01:25:00.000Z",
+      "chapa": 11,
+      "idGuarda": 9,
+      "idAyudante": 7,
+      "idConductor": 8,
+      "locomotora": 8447,
+      "estado": 3,
+      "estadoAnterior": 0,
+      "numero": 300
+    },
+    {
+      "idTren": 7,
+      "idItinerario": 1,
+      "fecha": "2016-09-16T17:20:00.000Z",
+      "chapa": 45,
+      "idGuarda": 9,
+      "idAyudante": 7,
+      "idConductor": 8,
+      "locomotora": 9069,
+      "estado": 2,
+      "estadoAnterior": 0,
+      "numero": 303
+    }
+  ],
+  "select * from UsuariosSimple ": [
+    {
+      "idUsuario": 1,
+      "usuario": "themistocles",
+      "nombre": "Ricardo Barreiro",
+      "nivel": 1,
+      "rolDios": 1,
+      "rolGuarda": 1,
+      "rolMecanico": 1,
+      "rolSupervisor": 1,
+      "funcion": 0
+    },
+    {
+      "idUsuario": 2,
+      "usuario": "juanperez",
+      "nombre": "Juan Pérez",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 1,
+      "rolMecanico": 0,
+      "rolSupervisor": 0,
+      "funcion": 1
+    },
+    {
+      "idUsuario": 3,
+      "usuario": "franciscosavio",
+      "nombre": "Francisco Savio",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 1,
+      "rolMecanico": 0,
+      "rolSupervisor": 0,
+      "funcion": 2
+    },
+    {
+      "idUsuario": 4,
+      "usuario": "marcelosoto",
+      "nombre": "Marcelo Soto",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 1,
+      "rolMecanico": 0,
+      "rolSupervisor": 0,
+      "funcion": 3
+    },
+    {
+      "idUsuario": 5,
+      "usuario": "emmetbrown",
+      "nombre": "Emmet Brown",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 0,
+      "rolMecanico": 1,
+      "rolSupervisor": 0,
+      "funcion": 0
+    },
+    {
+      "idUsuario": 6,
+      "usuario": "lich",
+      "nombre": "Lisandro Iturralde",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 0,
+      "rolMecanico": 0,
+      "rolSupervisor": 1,
+      "funcion": 0
+    },
+    {
+      "idUsuario": 7,
+      "usuario": "leandromelluso",
+      "nombre": "Leandro Melluso",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 1,
+      "rolMecanico": 0,
+      "rolSupervisor": 0,
+      "funcion": 3
+    },
+    {
+      "idUsuario": 8,
+      "usuario": "caseyjones",
+      "nombre": "Casey Jones",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 1,
+      "rolMecanico": 0,
+      "rolSupervisor": 0,
+      "funcion": 2
+    },
+    {
+      "idUsuario": 9,
+      "usuario": "juanmajic",
+      "nombre": "Juan Majic",
+      "nivel": 0,
+      "rolDios": 0,
+      "rolGuarda": 1,
+      "rolMecanico": 0,
+      "rolSupervisor": 0,
+      "funcion": 1
+    },
+    {
+      "idUsuario": 10,
+      "usuario": "satyam",
+      "nombre": "Daniel Barreiro",
+      "nivel": 1,
+      "rolDios": 1,
+      "rolGuarda": 1,
+      "rolMecanico": 1,
+      "rolSupervisor": 1,
+      "funcion": 0
+    }
+  ],
+  "select * from UsuariosSimple where usuario = 'satyam'": [
+    {
+      "idUsuario": 10,
+      "usuario": "satyam",
+      "nombre": "Daniel Barreiro",
+      "nivel": 1,
+      "rolDios": 1,
+      "rolGuarda": 1,
+      "rolMecanico": 1,
+      "rolSupervisor": 1,
+      "funcion": 0
+    }
+  ],
+  "select * from UsuariosSimple where idUsuario = 1": [
+    {
+      "idUsuario": 1,
+      "usuario": "themistocles",
+      "nombre": "Ricardo Barreiro",
+      "nivel": 1,
+      "rolDios": 1,
+      "rolGuarda": 1,
+      "rolMecanico": 1,
+      "rolSupervisor": 1,
+      "funcion": 0
+    }
+  ]
+}

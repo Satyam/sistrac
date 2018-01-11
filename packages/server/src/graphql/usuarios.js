@@ -31,6 +31,7 @@ export const resolvers = {
     usuario: (parent, { usuario, idUsuario }) => {
       if (usuario) return readUsuarioPorUsuario(usuario);
       if (idUsuario) return readUsuario(parseInt(idUsuario, 10));
+      return {};
     },
   },
 };
