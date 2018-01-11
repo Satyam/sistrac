@@ -18,14 +18,15 @@ export const typeDefs = `
 export const resolvers = {
   Query: {
     itinerarios: () => readItinerarios(),
-    itinerario: (parent, { idItinerario }) => readItinerario(idItinerario),
+    itinerario: (parent, { idItinerario }) =>
+      readItinerario(parseInt(idItinerario, 10)),
   },
   Itinerario: {
     escalas({ idItinerario }) {
-      return readEscalasPorItinerario(idItinerario);
+      return readEscalasPorItinerario(parseInt(idItinerario, 10));
     },
     trenes({ idItinerario }) {
-      return readTrenesPorItinerario(idItinerario);
+      return readTrenesPorItinerario(parseInt(idItinerario, 10));
     },
   },
 };

@@ -25,18 +25,19 @@ export const resolvers = {
   Query: {
     escalas: (parent, { idEstacion, idItinerario }) => {
       if (idEstacion) return readEscalasPorEstacion(idEstacion);
-      if (idItinerario) return readEscalasPorItinerario(idItinerario);
+      if (idItinerario)
+        return readEscalasPorItinerario(parseInt(idItinerario, 10));
       return [];
     },
 
-    escala: (parent, { idEscala }) => readEscala(idEscala),
+    escala: (parent, { idEscala }) => readEscala(parseInt(idEscala, 10)),
   },
   Escala: {
     estacion({ idEstacion }) {
       return readEstacion(idEstacion);
     },
     itinerario({ idItinerario }) {
-      return readItinerario(idItinerario);
+      return readItinerario(parseInt(idItinerario, 10));
     },
   },
 };

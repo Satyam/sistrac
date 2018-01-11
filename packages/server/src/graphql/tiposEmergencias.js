@@ -15,6 +15,6 @@ export const resolvers = {
   Query: {
     tiposEmergencias: () => readTiposEmergencias(),
     tipoEmergencia: (parent, { idTipoEmergencia }) =>
-      readTipoEmergencia(idTipoEmergencia),
+      readTipoEmergencia(parseInt(idTipoEmergencia, 10)),
   },
 };

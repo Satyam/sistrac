@@ -30,25 +30,26 @@ export const resolvers = {
   Query: {
     trenes: (parent, { idEstacion, idItinerario }) => {
       if (idEstacion) return readTrenesPorEstacion(idEstacion);
-      if (idItinerario) return readTrenesPorItinerario(idItinerario);
+      if (idItinerario)
+        return readTrenesPorItinerario(parseInt(idItinerario, 10));
       return [];
     },
 
-    tren: (parent, { idTren }) => readTren(idTren),
+    tren: (parent, { idTren }) => readTren(parseInt(idTren, 10)),
   },
 
   Tren: {
     guarda({ idGuarda }) {
-      return readUsuario(idGuarda);
+      return readUsuario(parseInt(idGuarda, 10));
     },
     ayudante({ idAyudante }) {
-      return readUsuario(idAyudante);
+      return readUsuario(parseInt(idAyudante, 10));
     },
     conductor({ idConductor }) {
-      return readUsuario(idConductor);
+      return readUsuario(parseInt(idConductor, 10));
     },
     itinerario({ idItinerario }) {
-      return readItinerario(idItinerario);
+      return readItinerario(parseInt(idItinerario, 10));
     },
   },
 };

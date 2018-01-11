@@ -25,8 +25,8 @@ export const resolvers = {
   Query: {
     usuarios: () => readUsuarios(),
     usuario: (parent, { usuario, idUsuario }) => {
-      console.log('Query: usuario', parent, usuario, idUsuario);
-      return readUsuarioPorUsuario(usuario);
+      if (usuario) return readUsuarioPorUsuario(usuario);
+      if (idUsuario) return readUsuario(parseInt(idUsuario, 10));
     },
   },
 };

@@ -32,12 +32,12 @@ export const typeDefs = `
 export const resolvers = {
   Query: {
     eventos: (parent, { idTren, idEstacion }) => {
-      if (idTren) return readEventosPorTren(idTren);
+      if (idTren) return readEventosPorTren(parseInt(idTren, 10));
       if (idEstacion) return readEventosPorEstacion(idEstacion);
       return [];
     },
 
-    evento: (parent, { idEvento }) => readEvento(idEvento),
+    evento: (parent, { idEvento }) => readEvento(parseInt(idEvento, 10)),
   },
 
   Evento: {

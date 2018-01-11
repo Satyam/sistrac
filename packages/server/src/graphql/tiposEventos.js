@@ -15,6 +15,7 @@ export const typeDefs = `
 export const resolvers = {
   Query: {
     tiposEventos: () => readTiposEventos(),
-    tipoEvento: (parent, { idTipoEvento }) => readTipoEvento(idTipoEvento),
+    tipoEvento: (parent, { idTipoEvento }) =>
+      readTipoEvento(parseInt(idTipoEvento, 10)),
   },
 };
