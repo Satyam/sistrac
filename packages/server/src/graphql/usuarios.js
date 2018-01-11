@@ -1,4 +1,8 @@
-import { readUsuarios, readUsuarioPorUsuario } from '../dbOps/usuarios';
+import {
+  readUsuarios,
+  readUsuarioPorUsuario,
+  readUsuario,
+} from '../dbOps/usuarios';
 
 export const typeDefs = `
 
