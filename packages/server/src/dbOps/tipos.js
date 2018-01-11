@@ -19,7 +19,8 @@ export function readTiposEmergencias() {
 }
 
 export function readTipoEmergencia(idTipoEmergencia) {
-  return db.query('select * from TipoEmergencias where idTipoEmergencia = ?', [
-    idTipoEmergencia,
-  ]);
+  return db.queryRow(
+    'select * from TipoEmergencias where idTipoEmergencia = ?',
+    [idTipoEmergencia],
+  );
 }
