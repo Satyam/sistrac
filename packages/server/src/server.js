@@ -6,6 +6,7 @@ import compression from 'compression';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import buildSchema from './utils/buildSchema';
 
@@ -31,27 +32,11 @@ app.use(compression());
 app.use(morgan('dev'));
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', `${APP_HOST}:${APP_PORT}`);
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-  );
-  res.header(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-  );
-  res.header('Access-Control-Allow-Credentials', true);
-  next();
-});
-
-app.use('/graphi?ql', (req, res, next) => {
-  if (req.method !== 'OPTIONS') {
-    next();
-    return;
-  }
-  res.status(200).end();
-});
+app.use(
+  cors({
+    origin: `${APP_HOST}:${APP_PORT}`,
+  }),
+);
 
 app.use(
   '/graphql',
