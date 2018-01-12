@@ -9,7 +9,7 @@ describe('graphsql -  escalas', () => {
     resolver = tester(buildSchema(resolve(__dirname, '..')));
   });
   it('escalas por estacion', async () => {
-    const { validate, errors, data, sql } = await resolver(
+    const { errors, data, sql } = await resolver(
       `
     { escalas(idEstacion: "RET") {
       idEscala
@@ -19,7 +19,6 @@ describe('graphsql -  escalas', () => {
     }}
     `,
     );
-    expect(validate).toBeUndefined();
     expect(errors).toBeUndefined();
     expect(data).toEqual({
       escalas: [{ idEscala: '1', llega: 0, orden: 1, sale: 0 }],
@@ -27,7 +26,7 @@ describe('graphsql -  escalas', () => {
     expect(sql).toEqual(["select * from Escalas where idEstacion = 'RET'"]);
   });
   it('escalas por itinerario', async () => {
-    const { validate, errors, data, sql } = await resolver(
+    const { errors, data, sql } = await resolver(
       `
     { escalas(idItinerario: 1) {
       idEscala
@@ -37,7 +36,6 @@ describe('graphsql -  escalas', () => {
     }}
     `,
     );
-    expect(validate).toBeUndefined();
     expect(errors).toBeUndefined();
     expect(data).toEqual({
       escalas: [
@@ -54,7 +52,7 @@ describe('graphsql -  escalas', () => {
     expect(sql).toEqual(['select * from Escalas where idItinerario = 1']);
   });
   it('escalas without arguments', async () => {
-    const { validate, errors, data, sql } = await resolver(
+    const { errors, data, sql } = await resolver(
       `
     { escalas {
       idEscala
@@ -64,7 +62,6 @@ describe('graphsql -  escalas', () => {
     }}
     `,
     );
-    expect(validate).toBeUndefined();
     expect(errors).toBeUndefined();
     expect(data).toEqual({
       escalas: [],
@@ -72,7 +69,7 @@ describe('graphsql -  escalas', () => {
     expect(sql).toEqual([]);
   });
   it('single escala with subordinates', async () => {
-    const { validate, errors, data, sql } = await resolver(
+    const { errors, data, sql } = await resolver(
       `
     { escala(idEscala:1) {
       idEscala
@@ -90,7 +87,6 @@ describe('graphsql -  escalas', () => {
     }}
     `,
     );
-    expect(validate).toBeUndefined();
     expect(errors).toBeUndefined();
     expect(data).toEqual({
       escala: {

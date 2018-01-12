@@ -9,7 +9,7 @@ describe('graphsql -  tiposEventos', () => {
     resolver = tester(buildSchema(resolve(__dirname, '..')));
   });
   it('list eventos', async () => {
-    const { validate, errors, data, sql } = await resolver(`
+    const { errors, data, sql } = await resolver(`
       {
         tiposEventos {
           idTipoEvento
@@ -18,7 +18,6 @@ describe('graphsql -  tiposEventos', () => {
         }
       }
     `);
-    expect(validate).toBeUndefined();
     expect(errors).toBeUndefined();
     expect(data).toEqual({
       tiposEventos: [
@@ -30,7 +29,7 @@ describe('graphsql -  tiposEventos', () => {
     expect(sql).toEqual(['select * from TipoEvento']);
   });
   it('tipoEvento 1', async () => {
-    const { validate, errors, data, sql } = await resolver(`
+    const { errors, data, sql } = await resolver(`
     {
       tipoEvento(idTipoEvento: 1) {
         idTipoEvento
@@ -39,7 +38,6 @@ describe('graphsql -  tiposEventos', () => {
       }
     }
     `);
-    expect(validate).toBeUndefined();
     expect(errors).toBeUndefined();
     expect(data).toEqual({
       tipoEvento: {

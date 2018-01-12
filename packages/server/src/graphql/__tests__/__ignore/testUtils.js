@@ -29,10 +29,6 @@ export const tester = schema => {
   const mockDb = new MockDb();
   initDb(mockDb);
   return async query => {
-    const val = validate(schema, query);
-    if (val.length) {
-      return { validate: val };
-    }
     const result = await graphql(schema, query);
     result.sql = mockDb.getQueries();
     mockDb.clearQueries();
@@ -40,6 +36,8 @@ export const tester = schema => {
   };
 };
 
+// The diagnostics is the same as given in results.errors
+// there is no extra info given by this routine
 export const validate = (schema, query) => {
   const source = new Source(query);
   const ast = parse(source);
