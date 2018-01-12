@@ -17,7 +17,7 @@ import restServers from './restServers';
 import { authenticate } from './restServers/usuarios';
 
 const app = express();
-const server = http.createServer(app);
+export const server = http.createServer(app);
 
 const listen = promisify(server.listen.bind(server));
 const httpClose = promisify(server.close.bind(server));

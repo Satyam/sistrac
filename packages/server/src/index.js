@@ -1,5 +1,16 @@
-import { start, stop } from './server';
+const terminus = require('@godaddy/terminus');
+import { server, start, stop } from './server';
 import { REST_HOST, REST_PORT } from './config';
+
+terminus(server, {
+  onSignal: () => {
+    console.log('closing ...');
+    return stop();
+  },
+  onShutdown: () => {
+    console.log(`Server at ${REST_HOST}:${REST_PORT}/ closed`);
+  },
+});
 
 async function startup() {
   try {
@@ -12,15 +23,6 @@ async function startup() {
 }
 
 startup();
-
-const shutdown = async () => {
-  console.log('Closing ...');
-  await stop();
-  console.log(`Server at ${REST_HOST}:${REST_PORT}/ closed`);
-  process.exit();
-};
-process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown);
 
 process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at:', p, 'reason:', reason);
