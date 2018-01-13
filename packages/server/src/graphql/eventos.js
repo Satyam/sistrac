@@ -6,6 +6,7 @@ import {
 import { readUsuario } from '../dbOps/usuarios';
 import { readEstacion } from '../dbOps/estaciones';
 import { readTipoEvento, readTipoEmergencia } from '../dbOps/tipos';
+import { readTren } from '../dbOps/trenes';
 
 export const typeDefs = `
   type Evento {
@@ -52,6 +53,9 @@ export const resolvers = {
     },
     tipoEvento({ idTipoEvento }) {
       return readTipoEvento(idTipoEvento);
+    },
+    tren({ idTren }) {
+      return readTren(idTren);
     },
   },
 };
