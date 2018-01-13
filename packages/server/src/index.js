@@ -1,4 +1,4 @@
-const terminus = require('@godaddy/terminus');
+import terminus from '@godaddy/terminus';
 import { server, start, stop } from './server';
 import { REST_HOST, REST_PORT } from './config';
 

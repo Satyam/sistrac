@@ -8,6 +8,7 @@ import { init as initDb } from '../../../dbOps';
 
 export class MockDb {
   constructor() {
+    // eslint-disable-next-line
     this.sqlQueries = require('./queries.json');
     this.sql = [];
   }
