@@ -2,6 +2,5 @@ import restAPI from '_store/utils/restAPI';
 
 import { NAME } from './constants';
 
-import { selEstacion } from '_store/selectors';
-
+// eslint-disable-next-line
 const api = restAPI(NAME);
