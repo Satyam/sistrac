@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import 'leaflet/dist/leaflet.css';
 import './index.css';
 import App from '_connectors/App';
+import Connector from '_connectors';
 import registerServiceWorker from './registerServiceWorker';
-import createStore from '_store/createStore';
 import L from 'leaflet';
 import ErrorBoundary from './components/ErrorBoundary';
 // patch:
@@ -23,14 +22,13 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 // end patch
-const store = createStore();
 ReactDOM.render(
   <ErrorBoundary>
-    <Provider store={store}>
+    <Connector>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Provider>
+    </Connector>
   </ErrorBoundary>,
   document.getElementById('root'),
 );

@@ -4,8 +4,8 @@ module.exports = {
   map: {
     rest: {
       _components: 'src/components',
-      _connectors: 'src/restConnectors',
-      _store: 'src/store',
+      _connectors: 'src/restClient/connectors',
+      _store: 'src/restClient/store',
       _src: 'src',
     },
     firebase: {
