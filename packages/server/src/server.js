@@ -35,6 +35,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: `${APP_HOST}:${APP_PORT}`,
+    credentials: true,
   }),
 );
 
