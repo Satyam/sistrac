@@ -18,20 +18,13 @@ export default graphql(
       }
     }
   `,
-  /*
-  {
-    "idTren": "10",
-    "itinerario": {
-      "nombre": "Retiro-Rosario"
-    },
-    "fecha": 1475763300000,
-    "chapa": 12,
-    "numero": 507
-  }      */
   {
     props: ({ data }) => ({
-      ...data,
-      ...data.itinerario,
+      trenes: (data.trenes || []).map(tren => ({
+        ...tren,
+        fecha: new Date(tren.fecha),
+        ...tren.itinerario,
+      })),
     }),
   },
 )(TrenesPorEstacion);

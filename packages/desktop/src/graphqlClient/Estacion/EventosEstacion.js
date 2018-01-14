@@ -29,38 +29,21 @@ export default graphql(
       }
     }
   `,
-  /*
-  {
-        "idEvento": "39",
-        "fecha": 1475770418000,
-        "usuario": {
-          "nombre": "Juan Pérez",
-          "idUsuario": "2"
-        },
-        "observaciones": "Salimos de Retiro",
-        "tren": {
-          "idTren": "10",
-          "numero": 507
-        },
-        "velocidad": 0,
-        "tipoEvento": {
-          "descr": "Sale de terminal",
-          "preposicion": "de"
-        },
-        "tipoEmergencia": {
-          "descr": "Problemas de salud con pasajero"
-        }
-      }
-      */
   {
     props: ({ data }) => ({
-      ...data,
-      usuario: data.usuario.nombre,
-      idUsuario: data.usuario.idUsuario,
-      descrEvento: data.tipoEvento.descr,
-      idTren: data.tren.idTren,
-      numeroTren: data.tren.numero,
-      descrEmergencia: data.tipoEmergencia.descr,
+      eventos: (data.eventos || []).map(evento => ({
+        ...evento,
+        fecha: new Date(evento.fecha),
+        usuario: evento.usuario.nombre,
+        idUsuario: evento.usuario.idUsuario,
+        descrEvento: evento.tipoEvento.descr,
+        idTren: evento.tren.idTren,
+        numeroTren: evento.tren.numero,
+        descrEmergencia: evento.tipoEmergencia && evento.tipoEmergencia.descr,
+      })),
+      getUsuarios(...args) {
+        console.log('getUsuarios', ...args);
+      },
     }),
   },
 )(Eventos);
