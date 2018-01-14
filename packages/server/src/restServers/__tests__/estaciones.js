@@ -14,7 +14,7 @@ import {
   NO_CONTENT,
   CONFLICT,
   CREATED,
-} from '../httpStatusCodes';
+} from '../../utils/httpStatusCodes';
 
 describe('restServers/estaciones', () => {
   beforeAll(() => {

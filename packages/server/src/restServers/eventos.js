@@ -1,4 +1,4 @@
-import join from './plainJoin';
+import join from '../utils/plainJoin';
 import { readEventosPorTren, readEventosPorEstacion } from '../dbOps/eventos';
 
 export default async function(dataRouter, path) {

@@ -1,8 +1,5 @@
-import jwt from 'jsonwebtoken';
 import md5 from 'md5';
-import join from './plainJoin';
-
-import { SECRET, SESSION_TIMEOUT, COOKIE_NAME } from '../config';
+import join from '../utils/plainJoin';
 
 import {
   readUsuarioPorUsuario,
@@ -20,35 +17,9 @@ import {
   UNAUTHORIZED,
   BAD_REQUEST,
   CONFLICT,
-} from './httpStatusCodes';
+} from '../utils/httpStatusCodes';
 
-export function setCookie(res, data) {
-  res.cookie(COOKIE_NAME, jwt.sign(data, SECRET), {
-    maxAge: SESSION_TIMEOUT,
-  });
-}
-
-const bypassAuthenticationPattern = /\/((login)|(signup))$/;
-
-export function authenticate(req, res, next) {
-  if (req.method === 'OPTIONS' || bypassAuthenticationPattern.test(req.path)) {
-    next();
-    return;
-  }
-  const cookie = req.cookies && req.cookies[COOKIE_NAME];
-  if (cookie) {
-    try {
-      const { iat, ...user } = jwt.verify(cookie, SECRET);
-      setCookie(res, user);
-      req.user = user;
-      next();
-      return;
-    } catch (err) {
-      res.status(UNAUTHORIZED).json(err);
-    }
-  }
-  res.status(UNAUTHORIZED).end();
-}
+import { setCookie, clearCookie } from '../utils/cookie';
 
 export default async function(dataRouter, path) {
   dataRouter.put(join(path, '/login'), async (req, res) => {
@@ -58,13 +29,13 @@ export default async function(dataRouter, path) {
       res.json(user);
       return;
     }
-    res.clearCookie(COOKIE_NAME);
+    clearCookie(res);
     res.status(UNAUTHORIZED).end();
   });
 
   dataRouter.post(join(path, '/signup'), async (req, res) => {
     const { usuario, password, nombre } = req.body;
-    res.clearCookie(COOKIE_NAME);
+    clearCookie(res);
     if (!usuario || !password || !nombre) {
       res
         .status(BAD_REQUEST)
@@ -81,7 +52,7 @@ export default async function(dataRouter, path) {
   });
 
   dataRouter.get(join(path, '/logout'), (req, res) => {
-    res.clearCookie(COOKIE_NAME);
+    clearCookie(res);
     res.status(NO_CONTENT).end();
   });
 

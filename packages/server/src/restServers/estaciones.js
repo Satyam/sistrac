@@ -1,4 +1,4 @@
-import join from './plainJoin';
+import join from '../utils/plainJoin';
 import {
   readEstaciones,
   existeEstacionPorNombre,
@@ -17,7 +17,7 @@ import {
   NOT_FOUND,
   NO_CONTENT,
   CONFLICT,
-} from './httpStatusCodes';
+} from '../utils/httpStatusCodes';
 
 export default async function(dataRouter, path) {
   const relPath = extra => join(path, extra);

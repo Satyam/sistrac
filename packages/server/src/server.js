@@ -15,7 +15,7 @@ import { REST_PORT, REST_API_PATH, APP_HOST, APP_PORT } from './config';
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
 
-import { authenticate } from './restServers/usuarios';
+import authenticate from './utils/authenticate';
 
 const app = express();
 export const server = http.createServer(app);

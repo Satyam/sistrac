@@ -20,16 +20,17 @@ import {
   NO_CONTENT,
   NOT_FOUND,
   CREATED,
-} from '../httpStatusCodes';
+} from '../../utils/httpStatusCodes';
 
 import {
-  authenticate,
   esDios,
   esGuarda,
   esSupervisor,
   esMecanico,
   tieneNivel,
 } from '../usuarios';
+
+import authenticate from '../../utils/authenticate';
 
 const NUEVO_USUARIO = {
   usuario: 'pepe',
