@@ -21,7 +21,6 @@ export default class Estaciones extends Component {
     if (!isPlainClick(ev)) return;
     const { sortField, sortAsc } = this.state;
     const name = ev.target.getAttribute('name');
-    console.log(sortField, sortAsc, name);
     if (name === sortField) {
       this.setState({ sortAsc: !sortAsc });
     } else {
@@ -30,7 +29,9 @@ export default class Estaciones extends Component {
   };
   getEstacionesSorted = () => {
     const { sortField, sortAsc } = this.state;
-    return this.props.estaciones.sort((a, b) => {
+    const { estaciones } = this.props;
+    if (!estaciones) return [];
+    return estaciones.concat().sort((a, b) => {
       let r = 0;
       if (a[sortField] < b[sortField]) r = -1;
       else if (a[sortField] > b[sortField]) r = 1;

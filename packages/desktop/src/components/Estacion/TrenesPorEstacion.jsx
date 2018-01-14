@@ -27,7 +27,7 @@ export default class TrenesPorEstacion extends Component {
     const { sortField, sortAsc } = this.state;
     const { trenes } = this.props;
     if (!trenes) return [];
-    return trenes.sort((a, b) => {
+    return trenes.concat().sort((a, b) => {
       let r = 0;
       if (a[sortField] < b[sortField]) r = -1;
       else if (a[sortField] > b[sortField]) r = 1;

@@ -27,7 +27,7 @@ export default class EventosPorEstacion extends Component {
     const { sortField, sortAsc } = this.state;
     const { eventos } = this.props;
     if (!eventos) return [];
-    return eventos.sort((a, b) => {
+    return eventos.concat().sort((a, b) => {
       let r = 0;
       if (a[sortField] < b[sortField]) r = -1;
       else if (a[sortField] > b[sortField]) r = 1;
