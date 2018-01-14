@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import './index.css';
 import App from '_connectors/App';
 import Connector from '_connectors';
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 import L from 'leaflet';
 import ErrorBoundary from './components/ErrorBoundary';
 // patch:
@@ -32,4 +32,4 @@ ReactDOM.render(
   </ErrorBoundary>,
   document.getElementById('root'),
 );
-registerServiceWorker();
+// registerServiceWorker();
