@@ -45,7 +45,7 @@ export function readEstacionPorNombre(nombre) {
 export async function createEstacion(data) {
   try {
     const resp = await db.query('insert into Estaciones set ?', data);
-    return resp.insertId > 0;
+    return resp.affectedRows > 0;
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') {
       return false;

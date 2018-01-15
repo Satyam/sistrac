@@ -167,7 +167,7 @@ describe('restServers/estaciones', () => {
       testREST({
         method: POST,
         path: '/estaciones/',
-        queryResult: { insertId: 42 },
+        queryResult: { affectedRows: 1 },
         statusCode: CREATED,
       }),
     );

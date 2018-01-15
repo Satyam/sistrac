@@ -28,7 +28,7 @@ describe('dbOps.estaciones', () => {
     );
     it(
       'createEstacion success',
-      testMethod(createEstacion, { insertId: 42 }, true, retiro),
+      testMethod(createEstacion, { affectedRows: 1 }, true, retiro),
     );
     it(
       'createEstacion fail duplicate record',
