@@ -8,29 +8,32 @@
     "formatcoords": "^1.1.3",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
-    "leaflet": "^1.2.0",
+    "leaflet": "^1.3.0",
     "parse-dms": "0.0.3",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
-    "react-bootstrap": "^0.31.5",
+    "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
-    "react-leaflet": "^1.7.8",
+    "react-leaflet": "^1.8.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17",
+    "react-scripts": "^1.1.0",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts start",
-    "build": "cross-env NODE_PATH=$NODE_PATH:./src/_ run-s build:clean build:compile",
+    "build":
+      "cross-env NODE_PATH=$NODE_PATH:./src/_ run-s build:clean build:compile",
     "build:clean": "rimraf build",
     "build:compile": "react-scripts build",
-    "test": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts test --env=jsdom",
-    "test:debug": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
+    "test":
+      "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts test --env=jsdom",
+    "test:debug":
+      "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .jsx,.js . || exit 0",
     "analyze": "source-map-explorer build/static/js/main.*"
@@ -48,9 +51,6 @@
     "source-map-explorer": "^1.5.0"
   },
   "jest": {
-    "coverageReporters": [
-      "html",
-      "text"
-    ]
+    "coverageReporters": ["html", "text"]
   }
 }
