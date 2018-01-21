@@ -9,9 +9,8 @@ import indexBy from '_store/utils/indexBy';
 import {
   GET_ESTACIONES,
   GET_ESTACION,
-
-  // UPDATE_ESTACION,
-  // CREATE_ESTACION,
+  UPDATE_ESTACION,
+  CREATE_ESTACION,
   // DELETE_ESTACION,
   GET_TRENES_ESTACION,
 } from './constants';
@@ -50,7 +49,16 @@ export default (state = {}, action) => {
         },
       };
     }
-
+    case CREATE_ESTACION: {
+      console.log('reducer create', action.payload);
+      return {
+        ...state,
+        [action.payload.idEstacion]: action.payload,
+      };
+    }
+    case UPDATE_ESTACION:
+      console.log('reducer create', action.payload);
+      return state;
     default:
       return state;
   }

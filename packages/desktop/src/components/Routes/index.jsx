@@ -12,6 +12,12 @@ export default function Routes() {
         )}
       />
       <Route
+        path="/estacion/editEstacion/:idEstacion?"
+        component={loadModule(() =>
+          import(/* webpackChunkName: "estacion" */ '_connectors/EditEstacion'),
+        )}
+      />
+      <Route
         path="/estacion/:idEstacion/:activeTab?"
         component={loadModule(() =>
           import(/* webpackChunkName: "estacion" */ '_connectors/Estacion'),

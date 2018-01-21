@@ -1,0 +1,9 @@
+.leaflet-container {
+  cursor: default;
+  height: 400px;
+  margin: 1em auto;
+}
+.coords {
+  font-size: large;
+  text-align: center;
+}

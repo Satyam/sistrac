@@ -4,3 +4,8 @@ th {
 th span {
   width: 16px;
 }
+
+.addButton {
+  float: right;
+  margin-bottom: 0.5em;
+}

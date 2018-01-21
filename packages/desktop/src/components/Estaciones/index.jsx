@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table, Glyphicon, Grid, Row, Col } from 'react-bootstrap';
+import { Table, Glyphicon, Grid, Row, Col, Button } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 
 import isPlainClick from '_components/utils/isPlainClick';
@@ -38,6 +38,10 @@ export default class Estaciones extends Component {
       return sortAsc ? r : -r;
     });
   };
+  addEstacion = () => {
+    const { history } = this.props;
+    history.push('/estacion/editEstacion');
+  };
   render() {
     const { sortField, sortAsc } = this.state;
     const estaciones = this.getEstacionesSorted();
@@ -56,10 +60,13 @@ export default class Estaciones extends Component {
     return (
       <Grid>
         <Helmet>
-          <title>Sistrac</title>
+          <title>Sistrac - estaciones</title>
         </Helmet>,
         <Row>
           <Col mdOffset={2} md={8} xs={12}>
+            <Button className="addButton" onClick={this.addEstacion}>
+              <Glyphicon glyph="plus" /> Add
+            </Button>
             <Table striped bordered condensed hover>
               <thead style={{ cursor: 'default' }}>
                 <tr>

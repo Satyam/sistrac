@@ -4,8 +4,8 @@ import {
   NAME,
   GET_ESTACIONES,
   GET_ESTACION,
-  // UPDATE_ESTACION,
-  // CREATE_ESTACION,
+  UPDATE_ESTACION,
+  CREATE_ESTACION,
   // DELETE_ESTACION,
   GET_TRENES_ESTACION,
 } from './constants';
@@ -53,4 +53,26 @@ export function getTrenesEstacion(idEstacion) {
       }),
     });
   };
+}
+
+export function createEstacion(data) {
+  console.log('createEstacion', data);
+  return dispatch =>
+    dispatch({
+      type: CREATE_ESTACION,
+      payload: data,
+      promise: api.create('/', data),
+    })
+      .then(() => true)
+      .catch(() => false);
+}
+
+export function updateEstacion(idEstacion, data) {
+  console.log('updateEstacion', idEstacion, data);
+  return dispatch =>
+    dispatch({
+      type: UPDATE_ESTACION,
+      payload: data,
+      promise: api.update(idEstacion, data),
+    });
 }
