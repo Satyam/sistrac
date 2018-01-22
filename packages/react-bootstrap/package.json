@@ -1,0 +1,46 @@
+{
+  "name": "@devasatyam/react-bootstrap",
+  "version": "1.0.0",
+  "description": "My limited version of React Bootstrap using Bootstrap 4",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "run-s build:clean build:compile",
+    "build:clean": "rimraf lib",
+    "build:compile": "babel src -d lib -s --ignore _*",
+    "lint": "eslint --ext .jsx,.js . || exit 0",
+    "parcel": "parcel index.html -o"
+  },
+  "keywords": [
+    "react",
+    "bootstrap",
+    "bootstrap@4"
+  ],
+  "author": "Daniel Barreiro",
+  "license": "MIT",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "parcel-bundler": "^1.4.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.1.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.16.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-react": "^7.5.1",
+    "jest": "^22.1.4",
+    "jest-enzyme": "^4.0.2",
+    "npm-run-all": "^4.1.2",
+    "prop-types": "^15.6.0",
+    "react-icons": "^2.2.7",
+    "rimraf": "^2.6.2"
+  }
+}
