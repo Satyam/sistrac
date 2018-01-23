@@ -1,5 +1,5 @@
 {
-  "name": "@devasatyam/react-bootstrap",
+  "name": "@devasatyam/controls",
   "version": "1.0.0",
   "description": "My limited version of React Bootstrap using Bootstrap 4",
   "main": "lib/index.js",
@@ -11,11 +11,7 @@
     "lint": "eslint --ext .jsx,.js . || exit 0",
     "parcel": "parcel index.html -o"
   },
-  "keywords": [
-    "react",
-    "bootstrap",
-    "bootstrap@4"
-  ],
+  "keywords": ["react", "bootstrap", "bootstrap@4"],
   "author": "Daniel Barreiro",
   "license": "MIT",
   "dependencies": {
