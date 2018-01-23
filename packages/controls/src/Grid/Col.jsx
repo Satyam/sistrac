@@ -16,35 +16,19 @@ const Col = ({ className, children, ...props }) => {
     const match = rex.exec(prop);
     if (match) {
       const [input, size, offset] = match;
-      console.log(prop, props[prop], size, offset, match);
-      if (size === 'xs') {
-        switch (offset) {
-          case 'Offset':
-            classes.push(`offset-${props[prop]}`);
-            break;
-          case 'Order':
-            classes.push(`offset-${props[prop]}`);
-            break;
-          case 'Hidden':
-            classes.push(`d-none d-sm-block`);
-            break;
-          default:
-            classes.push(`col-${props[prop]}`);
-        }
-      } else {
-        switch (offset) {
-          case 'Offset':
-            classes.push(`offset-${size}-${props[prop]}`);
-            break;
-          case 'Order':
-            classes.push(`order-${size}-${props[prop]}`);
-            break;
-          case 'Hidden':
-            classes.push(`d-${size}-none d-${next[size]}-block`);
-            break;
-          default:
-            classes.push(`col-${size}-${props[prop]}`);
-        }
+      const dashSize = size === 'xs' ? '' : `-${size}`;
+      switch (offset) {
+        case 'Offset':
+          classes.push(`offset${dashSize}-${props[prop]}`);
+          break;
+        case 'Order':
+          classes.push(`order${dashSize}-${props[prop]}`);
+          break;
+        case 'Hidden':
+          classes.push(`d${dashSize}-none d-${next[size]}-block`);
+          break;
+        default:
+          classes.push(`col${dashSize}-${props[prop]}`);
       }
     }
   });
