@@ -40,7 +40,7 @@ ReactDOM.render(
           Tab3 contents{' '}
         </Tabs.Tab>
       </Tabs>
-      <Grid>
+      <Grid fluid>
         <Row className="show-grid">
           <Col xs={12} md={8}>
             <code>&lt;{'Col xs={12} md={8}'} /&gt;</code>
