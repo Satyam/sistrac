@@ -25,7 +25,15 @@ exports[`NavBar with Brand should render within one another 1`] = `
     </button>
     <div
       className="collapse navbar-collapse show"
+      onClick={[Function]}
     />
   </nav>
+  <div
+    style={
+      Object {
+        "height": "4em",
+      }
+    }
+  />
 </NavBar>
 `;

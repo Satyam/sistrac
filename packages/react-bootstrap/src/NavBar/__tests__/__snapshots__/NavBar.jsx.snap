@@ -1,110 +1,150 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavBar bar with children and brand 1`] = `
-<nav
-  className="navbar fixed-top navbar-expand-md navbar-light bg-light"
->
+<React.Fragment>
+  <nav
+    className="navbar fixed-top navbar-expand-md navbar-light bg-light"
+  >
+    <div
+      className="navbar-brand"
+    >
+      pepe
+    </div>
+    <button
+      aria-expanded={false}
+      aria-label="Toggle navigation"
+      className="navbar-toggler collapsed"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse show"
+      onClick={[Function]}
+    >
+      something or other 
+    </div>
+  </nav>
   <div
-    className="navbar-brand"
-  >
-    pepe
-  </div>
-  <button
-    aria-expanded={false}
-    aria-label="Toggle navigation"
-    className="navbar-toggler collapsed"
-    onClick={[Function]}
-    type="button"
-  >
-    <span
-      className="navbar-toggler-icon"
-    />
-  </button>
-  <div
-    className="collapse navbar-collapse show"
-  >
-    something or other 
-  </div>
-</nav>
+    style={
+      Object {
+        "height": "4em",
+      }
+    }
+  />
+</React.Fragment>
 `;
 
 exports[`NavBar bar with children, brand and href 1`] = `
-<nav
-  className="navbar fixed-top navbar-expand-md navbar-light bg-light"
->
-  <Link
-    className="navbar-brand"
-    replace={false}
-    to="/pepe"
+<React.Fragment>
+  <nav
+    className="navbar fixed-top navbar-expand-md navbar-light bg-light"
   >
-    pepe
-  </Link>
-  <button
-    aria-expanded={false}
-    aria-label="Toggle navigation"
-    className="navbar-toggler collapsed"
-    onClick={[Function]}
-    type="button"
-  >
-    <span
-      className="navbar-toggler-icon"
-    />
-  </button>
+    <Link
+      className="navbar-brand"
+      replace={false}
+      to="/pepe"
+    >
+      pepe
+    </Link>
+    <button
+      aria-expanded={false}
+      aria-label="Toggle navigation"
+      className="navbar-toggler collapsed"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse show"
+      onClick={[Function]}
+    >
+      something or other
+       
+    </div>
+  </nav>
   <div
-    className="collapse navbar-collapse show"
-  >
-    something or other
-     
-  </div>
-</nav>
+    style={
+      Object {
+        "height": "4em",
+      }
+    }
+  />
+</React.Fragment>
 `;
 
 exports[`NavBar plain render bar 1`] = `
-<nav
-  className="navbar fixed-top navbar-expand-md navbar-light bg-light"
->
-  <div
-    className="navbar-brand"
-  />
-  <button
-    aria-expanded={false}
-    aria-label="Toggle navigation"
-    className="navbar-toggler collapsed"
-    onClick={[Function]}
-    type="button"
+<React.Fragment>
+  <nav
+    className="navbar fixed-top navbar-expand-md navbar-light bg-light"
   >
-    <span
-      className="navbar-toggler-icon"
+    <div
+      className="navbar-brand"
     />
-  </button>
+    <button
+      aria-expanded={false}
+      aria-label="Toggle navigation"
+      className="navbar-toggler collapsed"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse show"
+      onClick={[Function]}
+    />
+  </nav>
   <div
-    className="collapse navbar-collapse show"
+    style={
+      Object {
+        "height": "4em",
+      }
+    }
   />
-</nav>
+</React.Fragment>
 `;
 
 exports[`NavBar render bar with children 1`] = `
-<nav
-  className="navbar fixed-top navbar-expand-md navbar-light bg-light"
->
-  <div
-    className="navbar-brand"
-  />
-  <button
-    aria-expanded={false}
-    aria-label="Toggle navigation"
-    className="navbar-toggler collapsed"
-    onClick={[Function]}
-    type="button"
+<React.Fragment>
+  <nav
+    className="navbar fixed-top navbar-expand-md navbar-light bg-light"
   >
-    <span
-      className="navbar-toggler-icon"
+    <div
+      className="navbar-brand"
     />
-  </button>
+    <button
+      aria-expanded={false}
+      aria-label="Toggle navigation"
+      className="navbar-toggler collapsed"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse show"
+      onClick={[Function]}
+    >
+      something or other 
+    </div>
+  </nav>
   <div
-    className="collapse navbar-collapse show"
-  >
-    something or other 
-  </div>
-</nav>
+    style={
+      Object {
+        "height": "4em",
+      }
+    }
+  />
+</React.Fragment>
 `;

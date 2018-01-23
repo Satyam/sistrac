@@ -8,13 +8,12 @@ class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.state = { open: false };
-    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
-  toggleDropdown(ev) {
+  toggleDropdown = ev => {
     ev.preventDefault();
     if (this.props.disabled) return;
     this.setState({ open: !this.state.open });
-  }
+  };
   render() {
     const { children, label, icon, disabled } = this.props;
     return (
