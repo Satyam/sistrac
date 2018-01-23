@@ -1,2 +1,3 @@
 import NavBar from './NavBar';
-export { NavBar };
+import Tabs from './Tabs';
+export { NavBar, Tabs };
