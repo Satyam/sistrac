@@ -22,9 +22,9 @@ class Tab extends Component {
     history.replace(`?${params}`);
   };
   render() {
-    const { tabId, disabled, title, classNames } = this.props;
+    const { tabId, disabled, title, className } = this.props;
     return (
-      <li key={tabId} className={classNames('nav-item', classNames)}>
+      <li key={tabId} className={classNames('nav-item', className)}>
         <a
           onClick={this.onTabClick}
           className={classNames('nav-link', {
@@ -45,8 +45,8 @@ Tab.propTypes = {
   title: PropTypes.string,
   tabId: PropTypes.string.isRequired,
   tabGroup: PropTypes.string.isRequired,
-  history: PropTypes.node,
-  classNames: PropTypes.string,
+  history: PropTypes.object,
+  className: PropTypes.string,
 };
 
 export default withRouter(Tab);

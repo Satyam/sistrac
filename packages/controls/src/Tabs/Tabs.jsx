@@ -15,9 +15,12 @@ class Tabs extends Component {
     let tabContents;
     return (
       <React.Fragment>
-        <ul className={classNames('nav nav-tabs', this.props.classNames)}>
+        <ul className={classNames('nav nav-tabs', this.props.className)}>
           {Children.map(this.props.children, Child => {
             if (Child.props.tabId === activeTab) {
+              tabContents = Child.props.children;
+            }
+            if (!tabContents && Child.props.active) {
               tabContents = Child.props.children;
             }
             return cloneElement(Child, {
@@ -32,6 +35,6 @@ class Tabs extends Component {
 }
 Tabs.propTypes = {
   children: PropTypes.node,
-  classNames: PropTypes.string,
+  className: PropTypes.string,
 };
 export default Tabs;
