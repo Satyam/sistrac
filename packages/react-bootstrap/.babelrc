@@ -9,11 +9,12 @@
         "modules": false
       }
     ],
-    "react"
+    "react",
+    "stage-1"
   ],
   "env": {
     "test": {
-      "presets": [["env"], "react"]
+      "presets": [["env"], "react", "stage-1"]
     }
   }
 }
