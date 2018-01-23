@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { NavBar, Tabs } from './src';
+import { NavBar, Tabs, Grid, Row, Col } from './src';
 import FaBeer from 'react-icons/lib/fa/beer';
 
 ReactDOM.render(
@@ -40,6 +40,48 @@ ReactDOM.render(
           Tab3 contents{' '}
         </Tabs.Tab>
       </Tabs>
+      <Grid>
+        <Row className="show-grid">
+          <Col xs={12} md={8}>
+            <code>&lt;{'Col xs={12} md={8}'} /&gt;</code>
+          </Col>
+          <Col xs={6} md={4}>
+            <code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
+          </Col>
+        </Row>
+
+        <Row className="show-grid">
+          <Col xs={6} xsOffset={6}>
+            <code>&lt;{'Col xs={6} xsOffset={6}'} /&gt;</code>
+          </Col>
+        </Row>
+
+        <Row className="show-grid">
+          <Col md={6} mdOrder={6}>
+            <code>&lt;{'Col md={6} mdOrder={6}'} /&gt;</code>
+          </Col>
+          <Col md={6} mdOrder={0}>
+            <code>&lt;{'Col md={6} mdOrder={0}'} /&gt;</code>
+          </Col>
+        </Row>
+        <Row className="show-grid">
+          <Col xs={2} xsHidden>
+            xs
+          </Col>
+          <Col xs={2} smHidden>
+            sm
+          </Col>
+          <Col xs={2} mdHidden>
+            md
+          </Col>
+          <Col xs={2} lgHidden>
+            lg
+          </Col>
+          <Col xs={2} xlHidden>
+            xl
+          </Col>
+        </Row>
+      </Grid>
     </div>
   </BrowserRouter>,
   document.getElementById('root'),
