@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Row from './Row';
 
-const Grid = ({ children, className, fluid }) => (
+const Grid = ({ children, className, fixed }) => (
   <div
     className={classNames(
-      { container: !fluid, 'container-fluid': fluid },
+      { container: fixed, 'container-fluid': !fixed },
       className,
     )}
   >
@@ -21,6 +21,6 @@ const Grid = ({ children, className, fluid }) => (
 Grid.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  fluid: PropTypes.bool,
+  fixed: PropTypes.bool,
 };
 export default Grid;
