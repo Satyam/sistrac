@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { NavBar, Tabs, Grid, Row, Col, PageHeader, Table } from './src';
+import { NavBar, Tabs, Grid, Row, Col, Jumbotron, Table } from './src';
 import FaBeer from 'react-icons/lib/fa/beer';
 
 ReactDOM.render(
@@ -101,9 +101,9 @@ ReactDOM.render(
           </Col>
         </Row>
       </Grid>
-      <PageHeader>
-        Important info <small>not so much</small>
-      </PageHeader>
+      <Jumbotron>
+        <h1>Important info</h1> not so much
+      </Jumbotron>
       <Table hover dark>
         <thead>
           <tr>
