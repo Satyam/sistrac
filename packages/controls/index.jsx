@@ -40,7 +40,7 @@ ReactDOM.render(
           Tab3 contents{' '}
         </Tabs.Tab>
       </Tabs>
-      <Grid fluid>
+      <Grid>
         <Row className="show-grid">
           <Col xs={12} md={8}>
             <code>&lt;{'Col xs={12} md={8}'} /&gt;</code>
@@ -65,19 +65,38 @@ ReactDOM.render(
           </Col>
         </Row>
         <Row className="show-grid">
-          <Col xs={2} xsHidden>
+          <Col xs={2}>Below</Col>
+          <Col xs={2} xsHideBelow>
             xs
           </Col>
-          <Col xs={2} smHidden>
+          <Col xs={2} smHideBelow>
             sm
           </Col>
-          <Col xs={2} mdHidden>
+          <Col xs={2} mdHideBelow>
             md
           </Col>
-          <Col xs={2} lgHidden>
+          <Col xs={2} lgHideBelow>
             lg
           </Col>
-          <Col xs={2} xlHidden>
+          <Col xs={2} xlHideBelow>
+            xl
+          </Col>
+        </Row>
+        <Row className="show-grid">
+          <Col xs={2}>Above</Col>
+          <Col xs={2} xsHideAbove>
+            xs
+          </Col>
+          <Col xs={2} smHideAbove>
+            sm
+          </Col>
+          <Col xs={2} mdHideAbove>
+            md
+          </Col>
+          <Col xs={2} lgHideAbove>
+            lg
+          </Col>
+          <Col xs={2} xlHideAbove>
             xl
           </Col>
         </Row>
