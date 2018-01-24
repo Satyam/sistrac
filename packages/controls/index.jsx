@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { NavBar, Tabs, Grid, Row, Col } from './src';
+import { NavBar, Tabs, Grid, Row, Col, PageHeader, Table } from './src';
 import FaBeer from 'react-icons/lib/fa/beer';
 
 ReactDOM.render(
@@ -101,6 +101,39 @@ ReactDOM.render(
           </Col>
         </Row>
       </Grid>
+      <PageHeader>
+        Important info <small>not so much</small>
+      </PageHeader>
+      <Table hover dark>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   </BrowserRouter>,
   document.getElementById('root'),
