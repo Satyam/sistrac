@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { NavBar, Tabs, Grid, Row, Col, Jumbotron, Table } from './src';
+import { NavBar, Tabs, Grid, Row, Col, Jumbotron, Table, Form } from './src';
 import FaBeer from 'react-icons/lib/fa/beer';
 
 ReactDOM.render(
@@ -29,6 +29,26 @@ ReactDOM.render(
           </NavBar.Dropdown>
         </NavBar.Menu>
       </NavBar>
+      <fieldset>
+        <legend>fieldset??</legend>
+        <Form>
+          <Form.Field type="text" name="uno" value="algo">
+            <Form.Label>Etiqueta</Form.Label>
+            <Form.Help>ayuda</Form.Help>
+          </Form.Field>
+          <Form.Field type="checkbox" name="uno" value="algo">
+            <Form.Label>Etiqueta</Form.Label>
+            <Form.Help>ayuda</Form.Help>
+          </Form.Field>
+          <Form.Field type="radio" name="grupo">
+            <Form.Label>Options:</Form.Label>
+            <Form.Option value="1">uno</Form.Option>
+            <Form.Option value="2">dos</Form.Option>
+            <Form.Option value="3">tres </Form.Option>
+            <Form.Help>ayuda</Form.Help>
+          </Form.Field>
+        </Form>
+      </fieldset>
       <Tabs>
         <Tabs.Tab tabId="tab1" title="Tab1" active>
           Tab1 contents
