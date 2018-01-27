@@ -1,7 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link } from 'react-router-dom';
-import { NavBar, Tabs, Grid, Row, Col, Jumbotron, Table, Form } from './src';
+import {
+  NavBar,
+  Tabs,
+  Grid,
+  Row,
+  Col,
+  Jumbotron,
+  Table,
+  Form,
+  Button,
+  ButtonGroup,
+} from './src';
 import FaBeer from 'react-icons/lib/fa/beer';
 
 ReactDOM.render(
@@ -29,6 +40,34 @@ ReactDOM.render(
           </NavBar.Dropdown>
         </NavBar.Menu>
       </NavBar>
+      <Button>nada</Button>
+      <Button color="secondary">secondary</Button>
+      <Button color="secondary" active>
+        secondary active
+      </Button>
+      <Button color="secondary" toggle>
+        secondary toggle
+      </Button>
+      <Button color="primary">primary</Button>
+      <Button href="algo" color="info">
+        href, info
+      </Button>
+      <Button color="warning" outline>
+        warning, outline
+      </Button>
+      <Button disabled>disabled</Button>
+      <Button size="sm">sm</Button>
+      <hr />
+      <ButtonGroup
+        color="primary"
+        outline
+        toggle
+        onToggle={name => console.log(name)}
+      >
+        <Button name="uno">uno</Button>
+        <Button name="dos">dos</Button>
+        <Button name="tres">tres</Button>
+      </ButtonGroup>
       <fieldset>
         <legend>fieldset??</legend>
         <Form>
@@ -43,9 +82,17 @@ ReactDOM.render(
           <Form.Field type="radio" name="grupo">
             <Form.Label>Options:</Form.Label>
             <Form.Option value="1">uno</Form.Option>
-            <Form.Option value="2">dos</Form.Option>
+            <Form.Option value="2" selected>
+              dos
+            </Form.Option>
             <Form.Option value="3">tres </Form.Option>
             <Form.Help>ayuda</Form.Help>
+          </Form.Field>
+          <Form.Field type="buttonGroup">
+            <Button type="submit" color="primary">
+              Ok
+            </Button>
+            <Button type="reset">Reset</Button>
           </Form.Field>
         </Form>
       </fieldset>
