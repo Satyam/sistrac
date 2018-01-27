@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import formShape from './formShape';
 
 class Form extends Component {
+  onChange = (name, value, ev) => {};
+  onBlur = (name, value, ev) => {};
   getChildContext = () => {
     return {
-      form: {},
+      form: { onChange: this.onChange, onBlur: this.onBlur },
     };
   };
   render() {

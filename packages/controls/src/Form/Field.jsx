@@ -23,11 +23,11 @@ class Field extends Component {
   onChange = ev => {
     const { value } = ev.target;
     this.setState({ value });
-    this.context.form.valueChange(name, value, ev);
+    this.context.form.onChange(name, value, ev);
   };
   onBlur = ev => {
     const { value } = ev.target;
-    this.context.form.blur(name, value, ev);
+    this.context.form.onBlur(name, value, ev);
   };
   render() {
     const {
@@ -89,12 +89,20 @@ class Field extends Component {
         input = <Radio {...commonProps}>{options}</Radio>;
         break;
       case 'select':
-        input = <select {...commonProps}>{options}</select>;
+        input = (
+          <select className="form-control" {...commonProps}>
+            {options}
+          </select>
+        );
+        break;
+      case 'buttonGroup':
+        input = <div className="form-buttons">{buttons}</div>;
         break;
       default:
         input = rows ? (
           <textarea
             {...commonProps}
+            className="form-control"
             value={value}
             placeholder={placeholder}
             rows={rows}
@@ -102,6 +110,7 @@ class Field extends Component {
         ) : (
           <input
             {...commonProps}
+            className="form-control"
             type={type}
             placeholder={placeholder}
             value={value}
@@ -127,7 +136,27 @@ class Field extends Component {
 Field.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  type: PropTypes.string,
+  type: PropTypes.oneOf([
+    'buttonGroup',
+    'text',
+    'select',
+    'checkbox',
+    'radio',
+    'color',
+    'date',
+    'datetime-local',
+    'email',
+    'file',
+    'hidden',
+    'image',
+    'month',
+    'number',
+    'password',
+    'tel',
+    'time',
+    'url',
+    'week',
+  ]),
   name: PropTypes.string,
   value: PropTypes.string,
   placeholder: PropTypes.string,

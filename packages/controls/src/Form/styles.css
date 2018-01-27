@@ -13,6 +13,8 @@ input[type='checkbox'] {
 
 fieldset {
   border: 1px solid #dee2e6;
+  border-radius: 0.5em;
+  padding: 0 1em;
 }
 legend {
   margin: 0 1em 0.5em 0.5em;
@@ -25,5 +27,10 @@ legend {
   padding-left: 0;
 }
 .form-radios input[type='radio'] {
+  margin-right: 1em;
+}
+
+.form-buttons button,
+.form-buttons a {
   margin-right: 1em;
 }
