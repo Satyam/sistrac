@@ -6,11 +6,15 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
+import WarningIcon from 'react-icons/lib/go/alert';
+import StopIcon from 'react-icons/lib/go/stop';
 import formShape from './formShape';
 
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 
+import { OK, WARN, ERROR } from './';
 import './styles.css';
 
 let counter = 0;
@@ -18,16 +22,20 @@ let counter = 0;
 class Field extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { value: props.value };
+    this.state = context.onInit(props);
   }
+  onFocus = ev => {
+    const { name } = this.props;
+    this.setState(this.context.form.onBlur(name, ev));
+  };
   onChange = ev => {
     const { value } = ev.target;
-    this.setState({ value });
-    this.context.form.onChange(name, value, ev);
+    const { name } = this.props;
+    this.setState(this.context.form.onChange(name, value, ev));
   };
   onBlur = ev => {
-    const { value } = ev.target;
-    this.context.form.onBlur(name, value, ev);
+    const { name } = this.props;
+    this.setState(this.context.form.onBlur(name, ev));
   };
   render() {
     const {
@@ -35,7 +43,6 @@ class Field extends Component {
       className,
       type,
       name,
-      value,
       placeholder,
       id,
       rows,
@@ -43,10 +50,13 @@ class Field extends Component {
     const commonProps = {
       id,
       name,
+      onFocus: this.onFocus,
       onChange: this.onChange,
       onBlur: this.onBlur,
+      ...this.state,
     };
-    let label, help, input, validation;
+    const { status, error } = this.status;
+    let label, help, input;
     const options = [];
     const buttons = [];
     const labelLeft = type !== 'checkbox';
@@ -103,7 +113,6 @@ class Field extends Component {
           <textarea
             {...commonProps}
             className="form-control"
-            value={value}
             placeholder={placeholder}
             rows={rows}
           />
@@ -113,7 +122,6 @@ class Field extends Component {
             className="form-control"
             type={type}
             placeholder={placeholder}
-            value={value}
           />
         );
     }
@@ -126,7 +134,18 @@ class Field extends Component {
         <div className={classNames('col-sm-12 col-md-8')}>{input}</div>
         <div className="offset-sm-0 offset-md-4 col-sm-12 col-md-8">
           {help}
-          {validation}
+          {status !== OK && (
+            <div
+              className={classNames('form-status', {
+                'field-warning': status === WARN,
+                'field-error': status === ERROR,
+              })}
+            >
+              {(status === WARN && WarningIcon) ||
+                (status === ERROR && StopIcon)}
+              {error}
+            </div>
+          )}
         </div>
       </div>
     );
