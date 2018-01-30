@@ -1,5 +1,7 @@
 import React from 'react';
-import { PageHeader, Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
+import { Grid, Row, Col } from '@devasatyam/controls/lib/Grid';
+import Jumbotron from '@devasatyam/controls/lib/Jumbotron';
 import { Helmet } from 'react-helmet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
@@ -27,9 +29,11 @@ export default function Estacion({ estacion, match, history }) {
       </Helmet>,
       <Row>
         <Col xs={12} mdOffset={2} md={8}>
-          <PageHeader>
-            {idEstacion} <small>{nombre}</small>
-          </PageHeader>
+          <Jumbotron>
+            <h1>
+              {idEstacion} <small>{nombre}</small>
+            </h1>
+          </Jumbotron>
           <Map center={position} zoom={13}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

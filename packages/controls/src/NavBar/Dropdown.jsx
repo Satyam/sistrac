@@ -15,9 +15,9 @@ class Dropdown extends Component {
     this.setState({ open: !this.state.open });
   };
   render() {
-    const { children, label, icon, disabled } = this.props;
+    const { children, label, icon, disabled, className } = this.props;
     return (
-      <li className="nav-item  dropdown">
+      <li className={classNames('nav-item  dropdown', className)}>
         <a
           className={classNames('nav-link dropdown-toggle', { disabled })}
           style={{ cursor: disabled ? 'default' : 'pointer' }}

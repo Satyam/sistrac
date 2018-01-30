@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Glyphicon } from 'react-bootstrap';
+import Table from '@devasatyam/controls/lib/Table';
+import SortDesc from 'react-icons/lib/fa/sort-alpha-desc';
+import SortAsc from 'react-icons/lib/fa/sort-alpha-asc';
 import isPlainClick from '_components/utils/isPlainClick';
 
 import './styles.css';
@@ -39,13 +41,9 @@ export default class TrenesPorEstacion extends Component {
     const trenes = this.getTrenesSorted();
     const th = (name, label) => (
       <th onClick={this.changeSort} name={name}>
-        <Glyphicon
-          glyph={
-            sortField === name
-              ? sortAsc ? 'sort-by-alphabet' : 'sort-by-alphabet-alt'
-              : ''
-          }
-        />
+        <span>
+          {sortField === name && (sortAsc ? <SortAsc /> : <SortDesc />)}
+        </span>
         {label}
       </th>
     );

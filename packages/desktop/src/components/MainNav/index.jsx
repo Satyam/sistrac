@@ -1,14 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  NavItem as RawNavItem,
-} from 'react-bootstrap';
 
-import { NavItem, MenuItem } from '_components/BootstrapLink';
-
+import NavBar from '@devasatyam/controls/lib/NavBar';
+import Person from 'react-icons/lib/go/person';
+import Stop from 'react-icons/lib/go/stop';
 import {
   // STATUS_INITIAL,
   STATUS_UNAUTHORIZED,
@@ -23,42 +17,28 @@ import './styles.css';
 export default function MainNav({ usuario, statusUsuario, location }) {
   return (
     <div className="MainNav">
-      <Navbar staticTop>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <Link to="/">Sistrac</Link>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-          <NavItem
-            eventKey={1}
-            href="/estaciones"
-            active={location.pathname === '/estaciones'}
-          >
-            Estaciones
-          </NavItem>
-          <RawNavItem eventKey={2} href="http://localhost:8080/graphiql">
+      <NavBar brand="Sistract" href="/">
+        <NavBar.Menu>
+          <NavBar.Item href="/estaciones">Estaciones</NavBar.Item>
+          <NavBar.Item href="http://localhost:8080/graphiql" external>
             graphiql
-          </RawNavItem>
-        </Nav>
-        {usuario.nombre ? (
-          <Nav pullRight>
-            <NavDropdown
-              eventKey={3}
-              title={usuario.nombre}
-              className="userDropdown"
-              id="userId"
-            >
-              <MenuItem href="/logout">Logout</MenuItem>
-              <MenuItem href="/preferences">Preferences</MenuItem>
-            </NavDropdown>
-          </Nav>
-        ) : statusUsuario === STATUS_UNAUTHORIZED ? (
-          <Nav pullRight>
-            <NavItem className="unauthorized">No autorizado</NavItem>
-          </Nav>
-        ) : null}
-      </Navbar>
+          </NavBar.Item>
+        </NavBar.Menu>
+        <NavBar.Menu right>
+          {usuario.nombre ? (
+            <NavBar.Dropdown label={usuario.nombre} icon={<Person />}>
+              <NavBar.DropdownItem href="/logout">Logout</NavBar.DropdownItem>
+              <NavBar.DropdownItem href="/preferences">
+                Preferences
+              </NavBar.DropdownItem>
+            </NavBar.Dropdown>
+          ) : statusUsuario === STATUS_UNAUTHORIZED ? (
+            <NavBar.Item className="unauthorized">
+              <Stop /> No autorizado
+            </NavBar.Item>
+          ) : null}
+        </NavBar.Menu>
+      </NavBar>
     </div>
   );
 }
