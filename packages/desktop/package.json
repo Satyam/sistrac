@@ -14,7 +14,6 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
-    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",
@@ -28,11 +27,14 @@
   },
   "scripts": {
     "start": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts start",
-    "build": "cross-env NODE_PATH=$NODE_PATH:./src/_ run-s build:clean build:compile",
+    "build":
+      "cross-env NODE_PATH=$NODE_PATH:./src/_ run-s build:clean build:compile",
     "build:clean": "rimraf build",
     "build:compile": "react-scripts build",
-    "test": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts test --env=jsdom",
-    "test:debug": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
+    "test":
+      "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts test --env=jsdom",
+    "test:debug":
+      "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .jsx,.js . || exit 0",
     "analyze": "source-map-explorer build/static/js/main.*"
@@ -50,9 +52,6 @@
     "source-map-explorer": "^1.5.0"
   },
   "jest": {
-    "coverageReporters": [
-      "html",
-      "text"
-    ]
+    "coverageReporters": ["html", "text"]
   }
 }
