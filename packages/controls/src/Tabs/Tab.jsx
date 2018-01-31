@@ -22,7 +22,7 @@ class Tab extends Component {
     history.replace(`?${params}`);
   };
   render() {
-    const { tabId, disabled, title, className } = this.props;
+    const { tabId, disabled, label, className } = this.props;
     return (
       <li key={tabId} className={classNames('nav-item', className)}>
         <a
@@ -33,7 +33,7 @@ class Tab extends Component {
           })}
           href="#"
         >
-          {title}
+          {label}
         </a>
       </li>
     );
@@ -42,7 +42,7 @@ class Tab extends Component {
 Tab.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
-  title: PropTypes.string,
+  label: PropTypes.string,
   tabId: PropTypes.string.isRequired,
   tabGroup: PropTypes.string.isRequired,
   history: PropTypes.object,

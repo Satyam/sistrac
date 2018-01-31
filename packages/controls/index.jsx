@@ -96,14 +96,14 @@ ReactDOM.render(
           </Form.Field>
         </Form>
       </fieldset>
-      <Tabs>
-        <Tabs.Tab tabId="tab1" title="Tab1" active>
+      <Tabs tabGroup="tabGroup">
+        <Tabs.Tab tabId="tab1" label="Tab1" active>
           Tab1 contents
         </Tabs.Tab>
-        <Tabs.Tab tabId="tab2" title="Tab2">
+        <Tabs.Tab tabId="tab2" label="Tab2">
           Tab2 contents{' '}
         </Tabs.Tab>
-        <Tabs.Tab tabId="tab3" title="Tab3">
+        <Tabs.Tab tabId="tab3" label="Tab3">
           Tab3 contents{' '}
         </Tabs.Tab>
       </Tabs>
