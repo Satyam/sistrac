@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
+import Tabs from '@devasatyam/controls/lib/Tabs';
 import { Grid, Row, Col } from '@devasatyam/controls/lib/Grid';
 import Jumbotron from '@devasatyam/controls/lib/Jumbotron';
 import { Helmet } from 'react-helmet';
@@ -15,9 +15,6 @@ import './styles.css';
 
 export default function Estacion({ estacion, match, history }) {
   if (!estacion) return null;
-  const tabClick = activeTab => {
-    history.push(`/estacion/${match.params.idEstacion}/${activeTab}`);
-  };
   const { idEstacion, nombre, latitud, longitud } = estacion;
   const position = [latitud, longitud];
   return (
@@ -47,21 +44,16 @@ export default function Estacion({ estacion, match, history }) {
               </Popup>
             </Marker>
           </Map>
-          <Tabs
-            activeKey={match.params.activeTab || 'basic'}
-            onSelect={tabClick}
-            id="trenes-por-estacion"
-            mountOnEnter={true}
-          >
-            <Tab eventKey="basic" title="Sumario">
+          <Tabs tabGroup="estacionTab">
+            <Tabs.Tab tabId="basic" label="Sumario" active>
               <Sumario estacion={estacion} />
-            </Tab>
-            <Tab eventKey="trenes" title="Trenes">
+            </Tabs.Tab>
+            <Tabs.Tab tabId="trenes" label="Trenes">
               <TrenesPorEstacion idEstacion={idEstacion} />
-            </Tab>
-            <Tab eventKey="eventos" title="Eventos">
+            </Tabs.Tab>
+            <Tabs.Tab tabId="eventos" label="Eventos">
               <EventosEstacion idEstacion={idEstacion} />
-            </Tab>
+            </Tabs.Tab>
           </Tabs>
         </Col>
       </Row>
