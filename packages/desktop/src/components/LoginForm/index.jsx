@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Form,
-  FormGroup,
-  Col,
-  FormControl,
-  ControlLabel,
-  Button,
-} from 'react-bootstrap';
 
+import { Button } from '@devasatyam/controls/lib/Button';
+import Form from '@devasatyam/controls/lib/Form';
 import isPlainClick from '_components/utils/isPlainClick';
 
 import { withRouterTypes, usuarioShape } from '_src/shapes';
@@ -48,47 +42,32 @@ export default class LoginForm extends Component {
   };
   render() {
     return (
-      <Form horizontal>
-        <FormGroup controlId="usuario" validationState={this.validateUsuario()}>
-          <Col componentClass={ControlLabel} mdOffset={2} md={2} xs={3}>
-            Usuario
-          </Col>
-          <Col md={6} xs={9}>
-            <FormControl
-              type="text"
-              placeholder="Usuario"
-              value={this.state.usuario}
-              onChange={this.usuarioChange}
-            />
-            <FormControl.Feedback />
-          </Col>
-        </FormGroup>
-
-        <FormGroup
-          controlId="password"
-          validationState={this.validatePassword()}
+      <Form>
+        <Form.Field
+          type="text"
+          name="usuario"
+          value={this.state.usuario}
+          onChange={this.usuarioChange}
+          placeholder="usuario"
         >
-          <Col componentClass={ControlLabel} mdOffset={2} md={2} xs={3}>
-            Password
-          </Col>
-          <Col md={6} xs={9}>
-            <FormControl
-              type="password"
-              placeholder="Contraseña"
-              value={this.state.password}
-              onChange={this.passwordChange}
-            />
-            <FormControl.Feedback />
-          </Col>
-        </FormGroup>
-
-        <FormGroup>
-          <Col mdOffset={4} md={6} xsOffset={3} xs={9}>
-            <Button type="submit" onClick={this.formSubmit}>
-              Sign in
-            </Button>
-          </Col>
-        </FormGroup>
+          <Form.Label>Usuario</Form.Label>
+          <Form.Help>ayuda</Form.Help>
+        </Form.Field>
+        <Form.Field
+          type="password"
+          name="password"
+          value={this.state.password}
+          onChange={this.passwordChange}
+          placeholder="contraseña"
+        >
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Help>ayuda</Form.Help>
+        </Form.Field>
+        <Form.Field type="buttonGroup">
+          <Button type="submit" onClick={this.formSubmit} color="primary">
+            Sign in
+          </Button>
+        </Form.Field>
       </Form>
     );
   }

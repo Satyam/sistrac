@@ -9,7 +9,6 @@ import classNames from 'classnames';
 
 import WarningIcon from 'react-icons/lib/go/alert';
 import StopIcon from 'react-icons/lib/go/stop';
-import formShape from './formShape';
 
 import Radio from './Radio';
 import Checkbox from './Checkbox';
@@ -22,21 +21,7 @@ let counter = 0;
 class Field extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = context.onInit(props);
   }
-  onFocus = ev => {
-    const { name } = this.props;
-    this.setState(this.context.form.onBlur(name, ev));
-  };
-  onChange = ev => {
-    const { value } = ev.target;
-    const { name } = this.props;
-    this.setState(this.context.form.onChange(name, value, ev));
-  };
-  onBlur = ev => {
-    const { name } = this.props;
-    this.setState(this.context.form.onBlur(name, ev));
-  };
   render() {
     const {
       children,
@@ -46,16 +31,13 @@ class Field extends Component {
       placeholder,
       id,
       rows,
+      ...props
     } = this.props;
     const commonProps = {
+      ...props,
       id,
       name,
-      onFocus: this.onFocus,
-      onChange: this.onChange,
-      onBlur: this.onBlur,
-      ...this.state,
     };
-    const { status, error } = this.status;
     let label, help, input;
     const options = [];
     const buttons = [];
@@ -134,18 +116,20 @@ class Field extends Component {
         <div className={classNames('col-sm-12 col-md-8')}>{input}</div>
         <div className="offset-sm-0 offset-md-4 col-sm-12 col-md-8">
           {help}
-          {status !== OK && (
-            <div
-              className={classNames('form-status', {
-                'field-warning': status === WARN,
-                'field-error': status === ERROR,
-              })}
-            >
-              {(status === WARN && WarningIcon) ||
-                (status === ERROR && StopIcon)}
-              {error}
-            </div>
-          )}
+          {
+            // {status !== OK && (
+            //   <div
+            //     className={classNames('form-status', {
+            //       'field-warning': status === WARN,
+            //       'field-error': status === ERROR,
+            //     })}
+            //   >
+            //     {(status === WARN && WarningIcon) ||
+            //       (status === ERROR && StopIcon)}
+            //     {error}
+            //   </div>
+            // )}
+          }
         </div>
       </div>
     );
@@ -184,5 +168,4 @@ Field.propTypes = {
   rows: PropTypes.number,
 };
 
-Field.contextTypes = formShape;
 export default Field;
