@@ -10,6 +10,7 @@
     "postinstall": "npm run config && npm run vroots"
   },
   "devDependencies": {
+    "deep-object-diff": "^1.1.0",
     "lerna": "^2.7.1",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.2"
