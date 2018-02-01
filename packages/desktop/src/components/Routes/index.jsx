@@ -10,7 +10,7 @@ const LoadableEstaciones = Loadable({
 });
 
 const LoadableEditEstacion = Loadable({
-  loader: () => import(/* webpackChunkName: "estacion" */ '_connectors/EditEstacion'),
+  loader: () => import(/* webpackChunkName: "editEstacion" */ '_connectors/EditEstacion'),
   loading() {
     return <div>Loading...</div>
   }
