@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 
 import MainNav from '_connectors/MainNav';
 import Routes from '_components/Routes';
-
 import { withRouterTypes, usuarioShape } from '_src/shapes';
 
 import {
@@ -60,6 +59,12 @@ export default class App extends Component {
   componentDidUpdate = () => {
     this.checkLoggedIn();
   };
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.props.statusUsuario !== nextProps.statusUsuario ||
+      this.props.location.pathname !== nextProps.location.pathname
+    );
+  }
   render() {
     return (
       <div className="App">
