@@ -36,7 +36,12 @@
     "test:debug": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .jsx,.js . || exit 0",
-    "analyze": "source-map-explorer build/static/js/main.*"
+    "analyze": "run-p analyze:main analyze:login analyze:estaciones analyze:estacion analyze:editEstacion",
+    "analyze:main": "source-map-explorer build/static/js/main.*",
+    "analyze:login": "source-map-explorer build/static/js/login.*",
+    "analyze:estaciones": "source-map-explorer build/static/js/estaciones.*",
+    "analyze:estacion": "source-map-explorer build/static/js/estacion.*",
+    "analyze:editEstacion": "source-map-explorer build/static/js/editEstacion.*"
   },
   "devDependencies": {
     "cross-env": "^5.1.3",
