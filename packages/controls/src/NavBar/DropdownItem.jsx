@@ -25,6 +25,8 @@ DropdownItem.propTypes = {
   children: PropTypes.node,
   href: PropTypes.string,
   disabled: PropTypes.bool,
+  external: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default DropdownItem;

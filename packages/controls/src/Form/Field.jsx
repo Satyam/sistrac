@@ -11,7 +11,6 @@ import WarningIcon from 'react-icons/lib/go/alert';
 import StopIcon from 'react-icons/lib/go/stop';
 
 import Radio from './Radio';
-import Checkbox from './Checkbox';
 
 import { OK, WARN, ERROR } from './';
 import './styles.css';
@@ -75,7 +74,12 @@ class Field extends Component {
     }
     switch (type) {
       case 'checkbox':
-        input = <Checkbox {...commonProps}>{label}</Checkbox>;
+        input = (
+          <div>
+            <input type="checkbox" {...commonProps} />
+            {label}
+          </div>
+        );
         break;
       case 'radio':
         input = <Radio {...commonProps}>{options}</Radio>;

@@ -44,6 +44,7 @@ Dropdown.propTypes = {
   label: PropTypes.string,
   icon: PropTypes.node,
   disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Dropdown;

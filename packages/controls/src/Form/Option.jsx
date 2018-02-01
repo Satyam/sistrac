@@ -1,12 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Option = ({ children, ...props }) => (
-  <option {...props}>{children}</option>
-);
-
-Option.propTypes = {
-  children: PropTypes.node,
-};
+const Option = ({ ...props }) => <option {...props} />;
 
 export default Option;

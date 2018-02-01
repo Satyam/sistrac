@@ -1,10 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Label = ({ children, ...props }) => <label {...props}>{children}</label>;
-
-Label.propTypes = {
-  children: PropTypes.node,
-};
+const Label = ({ ...props }) => <label {...props} />;
 
 export default Label;

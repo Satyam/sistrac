@@ -50,6 +50,7 @@ ButtonGroup.propTypes = {
   ]),
   size: PropTypes.oneOf(['sm', 'lg', 'block']),
   outline: PropTypes.bool,
+  active: PropTypes.bool,
 };
 
 export default ButtonGroup;

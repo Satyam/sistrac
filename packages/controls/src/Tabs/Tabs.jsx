@@ -31,5 +31,6 @@ const Tabs = ({ className, tabGroup, children }) => {
 Tabs.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  tabGroup: PropTypes.string,
 };
 export default Tabs;

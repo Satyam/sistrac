@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 
 import './styles.css';
 
+const Item = ({ selected, children, ...props }) => (
+  <li>
+    <input {...props} type="radio" checked={selected} />
+    {children}
+  </li>
+);
+
+Item.propTypes = {
+  selected: PropTypes.bool,
+  children: PropTypes.node,
+};
+
 const Radio = ({ children, ...commonProps }) => (
   <ul className="form-radios">
-    {children.map(({ props }) => (
-      <li key={props.value}>
-        <input
-          type="radio"
-          value={props.value}
-          checked={props.selected}
-          {...commonProps}
-        />
-        {props.children}
-      </li>
+    {children.map(({ props: { value, type, ...optionProps } }) => (
+      <Item {...commonProps} {...optionProps} key={value} value={value} />
     ))}
   </ul>
 );
