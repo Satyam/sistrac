@@ -1,23 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import { reduxForm } from 'redux-form';
 import { OK, WARN, ERROR } from './';
 
+const SimpleForm = ({ handleSubmit, children }) => (
+  <form onSubmit={handleSubmit}>{children}</form>
+);
+SimpleForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  children: PropTypes.node,
+};
 class Form extends Component {
   constructor(props, context) {
     super(props, context);
+    const { children, name, ...rProps } = props;
+    this.state = {
+      ReducedForm: reduxForm({ form: props.name, ...rProps })(SimpleForm),
+    };
   }
   render() {
-    return this.props.children;
+    const { children, onSubmit } = this.props;
+    const { ReducedForm } = this.state;
+    return <ReducedForm onSubmit={onSubmit} children={children} />;
   }
 }
 
 Form.propTypes = {
   children: PropTypes.node,
-  values: PropTypes.object,
-  validateOnChange: PropTypes.objectOf(PropTypes.func),
-  validateOnBlur: PropTypes.objectOf(PropTypes.func),
-  onSubmit: PropTypes.func,
+  name: PropTypes.string,
 };
 
 export default Form;

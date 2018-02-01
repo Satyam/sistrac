@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import { Field as ReduxFormField } from 'redux-form';
 import WarningIcon from 'react-icons/lib/go/alert';
 import StopIcon from 'react-icons/lib/go/stop';
 
@@ -103,11 +103,12 @@ class Field extends Component {
             rows={rows}
           />
         ) : (
-          <input
+          <ReduxFormField
             {...commonProps}
             className="form-control"
             type={type}
             placeholder={placeholder}
+            component="input"
           />
         );
     }

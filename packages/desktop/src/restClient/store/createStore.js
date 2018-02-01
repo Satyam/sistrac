@@ -2,6 +2,8 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 import promiseMiddleware from './utils/promiseMiddleware';
 
+import { reducer as formReducer } from 'redux-form';
+
 import usuarios from './usuarios/reducer';
 import estaciones from './estaciones/reducer';
 import tipos from './tipos/reducer';
@@ -9,6 +11,7 @@ import eventos from './eventos/reducer';
 import trenes from './trenes/reducer';
 
 const reducers = combineReducers({
+  form: formReducer,
   usuarios,
   estaciones,
   tipos,
