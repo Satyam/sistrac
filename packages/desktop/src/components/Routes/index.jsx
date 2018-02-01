@@ -1,33 +1,53 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import loadModule from '_components/utils/loadModule';
+import Loadable from 'react-loadable';
+
+const LoadableEstaciones = Loadable({
+  loader: () => import(/* webpackChunkName: "estaciones" */ '_connectors/Estaciones'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const LoadableEditEstacion = Loadable({
+  loader: () => import(/* webpackChunkName: "estacion" */ '_connectors/EditEstacion'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const LoadableEstacion = Loadable({
+  loader: () => import(/* webpackChunkName: "estacion" */ '_connectors/Estacion'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
+
+const LoadableLogin = Loadable({
+  loader: () => import(/* webpackChunkName: "login" */ '_connectors/LoginForm'),
+  loading() {
+    return <div>Loading...</div>
+  }
+});
 
 export default function Routes() {
   return (
     <div>
       <Route
         path="/estaciones"
-        component={loadModule(() =>
-          import(/* webpackChunkName: "estaciones" */ '_connectors/Estaciones'),
-        )}
+        component={LoadableEstaciones}
       />
       <Route
         path="/estacion/editEstacion/:idEstacion?"
-        component={loadModule(() =>
-          import(/* webpackChunkName: "estacion" */ '_connectors/EditEstacion'),
-        )}
+        component={LoadableEditEstacion}
       />
       <Route
         path="/estacion/:idEstacion/:activeTab?"
-        component={loadModule(() =>
-          import(/* webpackChunkName: "estacion" */ '_connectors/Estacion'),
-        )}
+        component={LoadableEstacion}
       />
       <Route
         path="/login"
-        component={loadModule(() =>
-          import(/* webpackChunkName: "login" */ '_connectors/LoginForm'),
-        )}
+        component={LoadableLogin}
       />
     </div>
   );
