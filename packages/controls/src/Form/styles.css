@@ -7,7 +7,10 @@
 .left-label {
   padding-top: calc(0.375rem + 1px);
 }
-input[type='checkbox'] {
+.form-check {
+  padding-top: calc(0.375rem + 1px);
+}
+.form-check-input {
   margin-right: 1em;
 }
 

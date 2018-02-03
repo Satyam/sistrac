@@ -1,30 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
+import { formValues } from 'redux-form';
 import './styles.css';
 
-const Item = ({ selected, children, ...props }) => (
+const RadioItem = ({ children, grupo, value, ...props }) => (
   <li>
-    <input {...props} type="radio" checked={selected} />
+    <input {...props} checked={grupo === value} value={value} type="radio" />
     {children}
   </li>
 );
 
-Item.propTypes = {
+RadioItem.propTypes = {
   selected: PropTypes.bool,
   children: PropTypes.node,
+  grupo: PropTypes.string,
+  value: PropTypes.string,
 };
 
-const Radio = ({ children, ...commonProps }) => (
-  <ul className="form-radios">
-    {children.map(({ props: { value, type, ...optionProps } }) => (
-      <Item {...commonProps} {...optionProps} key={value} value={value} />
-    ))}
-  </ul>
-);
+const Radio = ({ name, options, ...props }) => {
+  console.log('Radio commonProps', props);
+  const RI = formValues(name)(RadioItem);
+  return (
+    <ul className="form-radios">
+      {options.map(({ props: { value, ...optionProps } }) => {
+        console.log('Radio children map', value, optionProps);
+        return (
+          <RI
+            {...props}
+            {...optionProps}
+            key={value}
+            value={value}
+            name={name}
+          />
+        );
+      })}
+    </ul>
+  );
+};
 
 Radio.propTypes = {
-  children: PropTypes.node,
+  options: PropTypes.node,
 };
 
 export default Radio;

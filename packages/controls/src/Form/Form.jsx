@@ -21,13 +21,14 @@ class Form extends Component {
   render() {
     const { children, onSubmit } = this.props;
     const { ReducedForm } = this.state;
-    return <ReducedForm onSubmit={onSubmit} children={children} />;
+    return <ReducedForm onSubmit={onSubmit}>{children}</ReducedForm>;
   }
 }
 
 Form.propTypes = {
   children: PropTypes.node,
   name: PropTypes.string,
+  onSubmit: PropTypes.func,
 };
 
 export default Form;
