@@ -15,6 +15,7 @@ import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Select from './Select';
 import TextInput from './TextInput';
+import FormButtons from './FormButtons';
 
 import RenderField from './RenderField';
 
@@ -57,26 +58,28 @@ const Field = ({ children, type, id, ...props }) => {
     label = cloneElement(label, {
       htmlFor: inputId,
     });
+    commonProps.id = inputId;
   }
   switch (type) {
     case 'checkbox':
       Contents = Checkbox;
       break;
-    case 'radio':
-      Contents = Radio;
-      commonProps.options = options;
-      break;
+
     case 'select':
       Contents = Select;
       commonProps.options = options;
       break;
+    case 'radio':
+      Contents = Radio;
+      commonProps.options = options;
+      break;
     case 'buttonGroup':
       return (
-        <div className="form-group row">
-          <div className="form-buttons col-sm-12 col-md-8 offset-md-4">
-            {buttons}
-          </div>
-        </div>
+        <ReduxFormField
+          {...commonProps}
+          component={FormButtons}
+          buttons={buttons}
+        />
       );
     default:
       Contents = TextInput;

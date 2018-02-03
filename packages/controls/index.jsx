@@ -25,6 +25,22 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
+const validate = values => {
+  const errors = {};
+  if (values.texto.length < 3) {
+    errors.texto = 'muy corto';
+  }
+  if (values.checkbox) {
+    errors.checkbox = 'debe ser falso';
+  }
+  if (values.grupo === '2') {
+    errors.grupo = 'no puede ser dos';
+  }
+  if (values.select === '2') {
+    errors.select = 'no puede ser dos';
+  }
+  return errors;
+};
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
@@ -89,6 +105,7 @@ ReactDOM.render(
               grupo: '2',
               select: '3',
             }}
+            validate={validate}
           >
             <Form.Field type="text" name="texto">
               <Form.Label>Etiqueta texto</Form.Label>
@@ -112,7 +129,7 @@ ReactDOM.render(
               <Form.Option value="3">tres </Form.Option>
               <Form.Help>ayuda select</Form.Help>
             </Form.Field>
-            <Form.Field type="buttonGroup">
+            <Form.Field type="buttonGroup" name="buttonGroup">
               <Button type="submit" color="primary">
                 Ok
               </Button>

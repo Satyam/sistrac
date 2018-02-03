@@ -23,19 +23,19 @@ const RenderField = ({
     <div className="col-sm-12 col-md-4 left-label">{label}</div>
 
     <div className={classNames('col-sm-12 col-md-8')}>
-      <Contents {...props} {...input} />
+      <Contents {...props} rxfProps={input} />
     </div>
     <div className="offset-sm-0 offset-md-4 col-sm-12 col-md-8">
       {help}
       {touched &&
         ((error && (
-          <div className="form-status form-error">
+          <div className="form-status form-error text-danger">
             <StopIcon />
             {error}
           </div>
         )) ||
           (warning && (
-            <div className="form-status form-error">
+            <div className="form-status form-error text-warning">
               <WarningIcon />
               {warning}
             </div>
@@ -45,7 +45,7 @@ const RenderField = ({
 );
 
 RenderField.propTypes = {
-  Contents: PropTypes.node,
+  Contents: PropTypes.func,
   label: PropTypes.node,
   help: PropTypes.node,
   className: PropTypes.string,

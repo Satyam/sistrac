@@ -37,3 +37,7 @@ legend {
 .form-buttons a {
   margin-right: 1em;
 }
+
+.form-status svg {
+  margin-right: 0.5rem;
+}
