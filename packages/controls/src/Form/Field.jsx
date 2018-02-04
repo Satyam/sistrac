@@ -74,13 +74,7 @@ const Field = ({ children, type, id, ...props }) => {
       commonProps.options = options;
       break;
     case 'buttonGroup':
-      return (
-        <ReduxFormField
-          {...commonProps}
-          component={FormButtons}
-          buttons={buttons}
-        />
-      );
+      return <FormButtons {...commonProps}>{buttons}</FormButtons>;
     default:
       Contents = TextInput;
   }
