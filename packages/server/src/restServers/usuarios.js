@@ -7,7 +7,7 @@ import {
   deleteUsuario,
   updateUsuario,
   readUsuarios,
-  loginUsuario,
+  loginUsuario
 } from '../dbOps/usuarios';
 
 import {
@@ -16,14 +16,15 @@ import {
   NO_CONTENT,
   UNAUTHORIZED,
   BAD_REQUEST,
-  CONFLICT,
+  CONFLICT
 } from '../utils/httpStatusCodes';
 
 import { setCookie, clearCookie } from '../utils/cookie';
 
 export default async function(dataRouter, path) {
   dataRouter.put(join(path, '/login'), async (req, res) => {
-    const user = await loginUsuario(req.body.usuario, md5(req.body.password));
+    const { usuario, password } = req.body;
+    const user = await loginUsuario(usuario, password ? md5(password) : null);
     if (user) {
       setCookie(res, user);
       res.json(user);
@@ -40,12 +41,12 @@ export default async function(dataRouter, path) {
       res
         .status(BAD_REQUEST)
         .send(
-          'Favor de indicar código de usuario, contraseña y nombre completo.',
+          'Favor de indicar código de usuario, contraseña y nombre completo.'
         );
     } else {
       const resp = await createUsuario({
         ...req.body,
-        password: md5(password),
+        password: md5(password)
       });
       res.status(resp ? CREATED : CONFLICT).end();
     }
@@ -82,7 +83,7 @@ export default async function(dataRouter, path) {
   dataRouter.put(join(path, '/:idUsuario'), async (req, res) => {
     const resp = await updateUsuario(
       parseInt(req.params.idUsuario, 10),
-      req.body,
+      req.body
     );
     res.status(resp ? NO_CONTENT : NOT_FOUND).end();
   });
