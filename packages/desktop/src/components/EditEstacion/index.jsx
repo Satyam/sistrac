@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from '@devasatyam/controls/lib/Button';
 import Form from '@devasatyam/controls/lib/Form';
-import { Grid, Row, Col } from '@devasatyam/controls/lib/Grid';
+import { Row, Col } from '@devasatyam/controls/lib/Grid';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import formatcoords from 'formatcoords';
 import isPlainClick from '_components/utils/isPlainClick';
@@ -121,19 +121,17 @@ export default class EditEstacion extends Component {
         >
           <Form.Label>Nombre</Form.Label>
         </Form.Field>
-        <Grid>
-          <Row>
-            <Col mdOffset={2} md={8} xs={12}>
-              <Map center={position} zoom={13} onclick={this.mapClick}>
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                />
-                <Marker position={position} />
-              </Map>
-            </Col>
-          </Row>
-        </Grid>
+        <Row>
+          <Col mdOffset={2} md={8} xs={12}>
+            <Map center={position} zoom={13} onclick={this.mapClick}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+              />
+              <Marker position={position} />
+            </Map>
+          </Col>
+        </Row>
         <Form.Field className="coords">
           <Form.Label>
             {formatcoords(parseFloat(latitud), parseFloat(longitud)).format(

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-
+import { Grid } from '@devasatyam/controls/lib/Grid';
 import MainNav from '_connectors/MainNav';
 import Routes from '_components/Routes';
 import { withRouterTypes, usuarioShape } from '_src/shapes';
@@ -72,7 +72,9 @@ export default class App extends Component {
           <title>Sistrac</title>
         </Helmet>
         <MainNav />
-        <Routes />
+        <Grid>
+          <Routes />
+        </Grid>
       </div>
     );
   }

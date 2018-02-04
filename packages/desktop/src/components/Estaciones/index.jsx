@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Table from '@devasatyam/controls/lib/Table';
-import { Grid, Row, Col } from '@devasatyam/controls/lib/Grid';
+import { Row, Col } from '@devasatyam/controls/lib/Grid';
 import { Button } from '@devasatyam/controls/lib/Button';
 import SortDesc from 'react-icons/lib/fa/sort-alpha-desc';
 import SortAsc from 'react-icons/lib/fa/sort-alpha-asc';
@@ -58,10 +58,12 @@ export default class Estaciones extends Component {
       </th>
     );
     return (
-      <Grid>
+      (
         <Helmet>
           <title>Sistrac - estaciones</title>
-        </Helmet>,
+        </Helmet>
+      ),
+      (
         <Row>
           <Col mdOffset={2} md={8} xs={12}>
             <Button className="addButton" onClick={this.addEstacion}>
@@ -89,7 +91,7 @@ export default class Estaciones extends Component {
             </Table>
           </Col>
         </Row>
-      </Grid>
+      )
     );
   }
 }

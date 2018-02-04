@@ -1,6 +1,6 @@
 import React from 'react';
 import Tabs from '@devasatyam/controls/lib/Tabs';
-import { Grid, Row, Col } from '@devasatyam/controls/lib/Grid';
+import { Row, Col } from '@devasatyam/controls/lib/Grid';
 import Jumbotron from '@devasatyam/controls/lib/Jumbotron';
 import { Helmet } from 'react-helmet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
@@ -18,12 +18,14 @@ export default function Estacion({ estacion, match, history }) {
   const { idEstacion, nombre, latitud, longitud } = estacion;
   const position = [latitud, longitud];
   return (
-    <Grid>
+    (
       <Helmet>
         <title>
           Sistrac - {idEstacion} - {nombre}
         </title>
-      </Helmet>,
+      </Helmet>
+    ),
+    (
       <Row>
         <Col xs={12} mdOffset={2} md={8}>
           <Jumbotron>
@@ -57,7 +59,7 @@ export default function Estacion({ estacion, match, history }) {
           </Tabs>
         </Col>
       </Row>
-    </Grid>
+    )
   );
 }
 
