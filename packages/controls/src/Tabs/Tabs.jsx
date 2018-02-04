@@ -1,36 +1,54 @@
-import React, { Component, Children, cloneElement } from 'react';
+import React, { Component, Fragment, Children, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import { withRouter } from 'react-router-dom';
 import './styles.css';
 
-const Tabs = ({ className, tabGroup, children }) => {
-  const url = new URL(location);
-  const activeTab = url.searchParams.get(tabGroup);
-  let tabContents;
-  return (
-    <React.Fragment>
-      <ul className={classNames('nav nav-tabs', className)}>
-        {Children.map(children, Child => {
-          if (Child.props.tabId === activeTab) {
-            tabContents = Child.props.children;
-          }
-          if (!tabContents && Child.props.active) {
-            tabContents = Child.props.children;
-          }
-          return cloneElement(Child, {
-            tabGroup: tabGroup,
-          });
-        })}
-      </ul>
-      <div className="border border-top-0 p-3">{tabContents}</div>
-    </React.Fragment>
-  );
-};
+class Tabs extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  handleTabClick = tabId => {
+    const { tabGroup, history } = this.props;
+    const url = new URL(location);
+    const params = url.searchParams;
+    params.set(tabGroup, tabId);
+    history.replace(`?${params}`);
+    this.setState({ activeTab: tabId });
+  };
+  render() {
+    const { className, tabGroup, children } = this.props;
+    const { activeTab } = this.state;
+    let tabContents;
+    return (
+      <Fragment>
+        <ul className={classNames('nav nav-tabs', className)}>
+          {Children.map(children, Child => {
+            const { tabId, active, children } = Child.props;
+
+            if (tabId === activeTab) {
+              tabContents = children;
+            }
+            if (!tabContents && active) {
+              tabContents = children;
+            }
+            return cloneElement(Child, {
+              onTabClick: this.handleTabClick,
+              active: activeTab ? tabId === activeTab : active,
+            });
+          })}
+        </ul>
+        <div className="border border-top-0 p-3">{tabContents}</div>
+      </Fragment>
+    );
+  }
+}
 
 Tabs.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   tabGroup: PropTypes.string,
+  history: PropTypes.object,
 };
-export default Tabs;
+export default withRouter(Tabs);
