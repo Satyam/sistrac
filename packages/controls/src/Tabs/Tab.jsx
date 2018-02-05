@@ -7,7 +7,7 @@ const Tab = ({ tabId, disabled, label, className, onTabClick, active }) => (
     <a
       onClick={ev => {
         ev.preventDefault();
-        onTabClick(tabId);
+        if (!disabled) onTabClick(tabId);
       }}
       className={classNames('nav-link', {
         active,
@@ -23,7 +23,7 @@ const Tab = ({ tabId, disabled, label, className, onTabClick, active }) => (
 Tab.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.node,
   tabId: PropTypes.string.isRequired,
   onTabClick: PropTypes.func,
   className: PropTypes.string,

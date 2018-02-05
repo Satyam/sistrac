@@ -41,6 +41,11 @@ const validate = values => {
   }
   return errors;
 };
+
+const handleTabClick = (tabId, activeTab) => {
+  console.log('onTabClick', tabId, activeTab);
+  return; // tabId !== 'tab2';
+};
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
@@ -137,15 +142,22 @@ ReactDOM.render(
             </Form.Field>
           </Form>
         </fieldset>
-        <Tabs tabGroup="tabGroup">
-          <Tabs.Tab tabId="tab1" label="Tab1" active>
+        <Tabs tabGroup="tabGroup" onTabClick={handleTabClick}>
+          <Tabs.Tab
+            tabId="tab1"
+            label={
+              <div>
+                <FaBeer />tab1
+              </div>
+            }
+          >
             Tab1 contents
           </Tabs.Tab>
           <Tabs.Tab tabId="tab2" label="Tab2">
-            Tab2 contents{' '}
+            Tab2 contents
           </Tabs.Tab>
           <Tabs.Tab tabId="tab3" label="Tab3">
-            Tab3 contents{' '}
+            Tab3 contents
           </Tabs.Tab>
         </Tabs>
         <Grid>

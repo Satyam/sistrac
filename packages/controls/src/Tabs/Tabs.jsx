@@ -7,10 +7,17 @@ import './styles.css';
 class Tabs extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    let { activeTab } = props;
+    if (!activeTab) {
+      activeTab = Children.toArray(props.children)[0].props.tabId;
+    }
+    this.state = { activeTab };
   }
   handleTabClick = tabId => {
-    const { tabGroup, history } = this.props;
+    const { tabGroup, history, onTabClick } = this.props;
+    const { activeTab } = this.state;
+    if (tabId === activeTab) return;
+    if (onTabClick && onTabClick(tabId, activeTab) === false) return;
     if (tabGroup) {
       const url = new URL(location);
       const params = url.searchParams;
@@ -32,9 +39,6 @@ class Tabs extends Component {
             if (tabId === activeTab) {
               tabContents = children;
             }
-            if (!tabContents && active) {
-              tabContents = children;
-            }
             return cloneElement(Child, {
               onTabClick: this.handleTabClick,
               active: activeTab ? tabId === activeTab : active,
@@ -51,6 +55,8 @@ Tabs.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   tabGroup: PropTypes.string,
+  activeTab: PropTypes.string,
+  onTabClick: PropTypes.func,
   history: PropTypes.object,
 };
 export default withRouter(Tabs);
