@@ -11,14 +11,16 @@ class Tabs extends Component {
   }
   handleTabClick = tabId => {
     const { tabGroup, history } = this.props;
-    const url = new URL(location);
-    const params = url.searchParams;
-    params.set(tabGroup, tabId);
-    history.replace(`?${params}`);
+    if (tabGroup) {
+      const url = new URL(location);
+      const params = url.searchParams;
+      params.set(tabGroup, tabId);
+      history.replace(`?${params}`);
+    }
     this.setState({ activeTab: tabId });
   };
   render() {
-    const { className, tabGroup, children } = this.props;
+    const { className, children } = this.props;
     const { activeTab } = this.state;
     let tabContents;
     return (
