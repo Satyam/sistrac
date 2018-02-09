@@ -16,7 +16,7 @@ The first will provide separate `Tabs` and `Tab` component, the last two will pr
 
 ```
 <Tabs activeTab="basic" tabGroup="estacionTab">
-  <Tabs.Tab tabId="basic" label="Sumario" active>
+  <Tabs.Tab tabId="basic" label="Sumario">
     <Sumario estacion={estacion} />
   </Tabs.Tab>
   <Tabs.Tab tabId="trenes" label="Trenes">
@@ -36,7 +36,7 @@ The `Tabs` component accepts the following attributes:
 
 #### `activeTab`
 
-Contains the identifier of the tab [`tabId`](#tabId) to be shown as active. If not present, the first tab will be active.
+Contains the identifier of the tab [`tabId`](#tabid) to be shown as active. If not present, the first tab will be active.
 
 #### `tabGroup`
 
@@ -54,9 +54,9 @@ A function that will be called when a tab is clicked and before it actually swit
 
 #### `tabId`
 
-A string, unique within this tab group, to identify this tab. It is the one the [`activeTab`](#activeTab) attribute may refer to.
+A string, unique within this tab group, to identify this tab. It is the one the [`activeTab`](#activetab) attribute may refer to.
 
-It will be used as the `key` attribute for the list item used to represent the tab and it is the one reported in the arguments to the [`onTabClick`](#onTabClick) function, if present and serves as argument to the URL search parameter given by the [`tabGroup`](#tabGroup) attribute.
+It will be used as the `key` attribute for the list item used to represent the tab and it is the one reported in the arguments to the [`onTabClick`](#ontabclick) function, if present and serves as argument to the URL search parameter given by the [`tabGroup`](#tabgroup) attribute.
 
 #### `label`
 
