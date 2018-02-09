@@ -7,11 +7,21 @@ import './styles.css';
 class Tabs extends Component {
   constructor(props) {
     super(props);
-    let { activeTab } = props;
-    if (!activeTab) {
-      activeTab = Children.toArray(props.children)[0].props.tabId;
+    const { activeTab, tabGroup, children } = props;
+    let actTab;
+
+    if (tabGroup) {
+      const url = new URL(location);
+      const params = url.searchParams;
+      actTab = params.get(tabGroup);
     }
-    this.state = { activeTab };
+    if (!actTab) {
+      actTab = activeTab;
+    }
+    if (!actTab) {
+      actTab = Children.toArray(children)[0].props.tabId;
+    }
+    this.state = { activeTab: actTab };
   }
   handleTabClick = tabId => {
     const { tabGroup, history, onTabClick } = this.props;
