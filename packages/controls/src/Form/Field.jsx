@@ -14,8 +14,12 @@ import {
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Select from './Select';
+import Option from './Option';
 import TextInput from './TextInput';
 import FormButtons from './FormButtons';
+import Label from './Label';
+import Help from './Help';
+import Button from '../Button/Button';
 
 import RenderField from './RenderField';
 
@@ -35,22 +39,15 @@ const Field = ({ children, type, id, ...props }) => {
   Children.forEach(children, child => {
     if (!isValidElement(child))
       throw new Error(`Not a valid element in a Form.Field ${child}`);
-    switch (child.type.name) {
-      case 'Button':
-        buttons.push(child);
-        break;
-      case 'Label':
-        label = child;
-        break;
-      case 'Help':
-        help = child;
-        break;
-      case 'Option':
-        options.push(child);
-        break;
-      default:
-        throw new Error(`Invalid child in a Form.Field ${type}`);
-    }
+    if (child.type === Button) {
+      buttons.push(child);
+    } else if (child.type === Label) {
+      label = child;
+    } else if (child.type === Help) {
+      help = child;
+    } else if (child.type === Option) {
+      options.push(child);
+    } else throw new Error(`Invalid child in a Form.Field ${type}`);
   });
   inputId = id;
   if (label) {
