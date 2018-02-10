@@ -7,13 +7,3 @@
   border-top: none;
   padding: 1em;
 }
-th span {
-  width: 16px;
-  display: inline-block;
-  margin-right: 3px;
-  margin-left: -0.5rem;
-}
-
-th {
-  cursor: ns-resize;
-}
