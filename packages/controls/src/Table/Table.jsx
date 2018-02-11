@@ -2,29 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const Table = ({ children, className, ...props }) => {
+const attrs = ['dark', 'hover', 'striped', 'bordered'];
+const Table = ({
+  children,
+  className,
+  dark,
+  hover,
+  striped,
+  bordered,
+  small,
+  xsResponsive,
+  smResponsive,
+  mdResponsive,
+  lgResponsive,
+  xlResponsive,
+  ...props
+}) => {
   const classes = classNames(
     'table',
-    Object.keys(props).map(prop => {
-      switch (prop) {
-        case 'small':
-          return 'table-sm';
-        case 'smResponsive':
-          return 'table-responsive-sm';
-        case 'mdResponsive':
-          return 'table-responsive-md';
-        case 'lgResponsive':
-          return 'table-responsive-lg';
-        case 'xlResponsive':
-          return 'table-responsive-xl';
-        default:
-          return `table-${prop}`;
-      }
-    }),
+    {
+      'table-dark': dark,
+      'table-hover': hover,
+      'table-striped': striped,
+      'table-bordered': bordered,
+      'table-sm': small,
+      'table-responsive': xsResponsive,
+      'table-responsive-sm': smResponsive,
+      'table-responsive-md': mdResponsive,
+      'table-responsive-lg': lgResponsive,
+      'table-responsive-xl': xlResponsive,
+    },
     className,
   );
 
-  return <table className={classes}>{children}</table>;
+  return (
+    <table className={classes} {...props}>
+      {children}
+    </table>
+  );
 };
 
 Table.propTypes = {
