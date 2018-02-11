@@ -103,14 +103,16 @@ Allows grouping several [`Button`](#button) components together. If the [`toggle
 
 The `ButtonGroup` component only accepts [`Button`](#button) components.
 
-<a name="bg-toggle" />
+<a name="bg-toggle" ></a>
+
 ### `toggle`
 
 Turns the `ButtonGroup` into a set of mutually exclusive pushbuttons. Only one of them will be active at a time.
 
 If [`onToggle`](#bg-ontoggle) is set, it will be called. For visual reasons, [`outline`](#outline) buttons are visually better.
 
-<a name="bg-ontoggle"/>
+<a name="bg-ontoggle"></a>
+
 ### `onToggle`
 
 A function to be called when the active button changes in a toggled group. The function will receive:
