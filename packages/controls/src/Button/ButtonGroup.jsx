@@ -22,6 +22,7 @@ class ButtonGroup extends Component {
           ? Children.map(children, child =>
               cloneElement(child, {
                 ...props,
+                ...child.props,
                 onClick: this.onClick,
                 active: this.state.active === child.props.name,
               }),

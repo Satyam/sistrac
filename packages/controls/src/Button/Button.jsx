@@ -16,8 +16,12 @@ class Button extends Component {
       this.setState({ active: nextProps.active });
   }
   onClick = ev => {
-    const { toggle, onClick } = this.props;
-    if (toggle) this.setState({ active: !this.state.active });
+    const { toggle, onClick, onToggle } = this.props;
+    const { active } = this.state;
+    if (toggle) {
+      this.setState({ active: !active });
+      if (onToggle) onToggle(!active, ev.target.name, ev);
+    }
     if (onClick) onClick(ev);
   };
   render() {
@@ -81,7 +85,9 @@ Button.propTypes = {
   href: PropTypes.string,
   active: PropTypes.bool,
   toggle: PropTypes.bool,
+  onToggle: PropTypes.func,
   disabled: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 export default Button;

@@ -9,8 +9,14 @@ const example = () => (
     <Button color="secondary" active>
       secondary active
     </Button>
-    <Button color="secondary" toggle>
-      secondary toggle
+    <Button
+      color="primary"
+      outline
+      toggle
+      name="toggly"
+      onToggle={(active, name) => console.log(active, name)}
+    >
+      primary toggle outline
     </Button>
     <Button color="primary">primary</Button>
     <Button href="algo" color="info">
@@ -30,7 +36,9 @@ const example = () => (
     >
       <Button name="uno">uno</Button>
       <Button name="dos">dos</Button>
-      <Button name="tres">tres</Button>
+      <Button name="tres" color="danger">
+        tres
+      </Button>
     </ButtonGroup>
   </div>
 );
