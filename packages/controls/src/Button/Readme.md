@@ -84,10 +84,12 @@ Whether a [`toggle`](#toggle) button is active or not.
 Function to be called when the button toggles by clicking on it. The function receives:
 
 * `active`: the new state of the [`active`](#active) property
-* `name`: the [`name`](#name) given to the button, useful if several toggle buttons are handled by the same function.
+* `name`: the [`name`](#b-name) given to the button, useful if several toggle buttons are handled by the same function.
 * `ev`: the event object.
 
 It will only be called on buttons with the [`toggle`](#toggle) attribute set. It does not preclude the regular `onClick` listener from being called, if present.
+
+<a name="b-name"></a>
 
 #### `name`
 
@@ -117,12 +119,12 @@ If [`onToggle`](#bg-ontoggle) is set, it will be called. For visual reasons, [`o
 
 A function to be called when the active button changes in a toggled group. The function will receive:
 
-* `name`: the [`name`](#name) attribute provided to the button currently active.
+* `name`: the [`name`](#b-name) attribute provided to the button currently active.
 * `ev`: the regular event object.
 
 ### `active`
 
-The [`name`](#name) of the button that should initially be active.
+The [`name`](#b-name) of the button that should initially be active.
 
 ### Other
 
