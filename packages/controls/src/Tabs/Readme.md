@@ -7,7 +7,7 @@ Any of the following will work:
 ```
 import { Tabs, Tab } from '@devasatyam/controls/lib/Tabs';
 import Tabs from '@devasatyam/controls/lib/Tabs';
-import Tabs from '@devasatyam/controls';
+import { Tabs } from '@devasatyam/controls';
 ```
 
 The first will provide separate `Tabs` and `Tab` component, the last two will provide `Tabs` and `Tabs.Tab`.

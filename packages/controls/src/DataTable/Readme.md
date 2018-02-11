@@ -7,7 +7,7 @@ Any of the following will work:
 ```
 import { DataTable, TableCol } from '@devasatyam/controls/lib/DataTable';
 import DataTable from '@devasatyam/controls/lib/DataTable';
-import DataTable from '@devasatyam/controls';
+import { DataTable } from '@devasatyam/controls';
 ```
 
 The first will provide separate `DataTable` and `TableCol` component, the last two will provide `DataTable` and `DataTable.Col` (`DataTable.TableCol` would have been redundant).
