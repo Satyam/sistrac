@@ -25,14 +25,16 @@ ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <div style={{ margin: '0 1em' }}>
-        <NavBarExample />
         <DataTableExample />
+        {/*
+        <NavBarExample />
         <TableExample />
         <ButtonExample />
         <JumbotronExample />
         <FormsExample />
         <TabsExample />
         <GridsExample />
+      */}
       </div>
     </Provider>
   </BrowserRouter>,

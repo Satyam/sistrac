@@ -9,6 +9,9 @@ TableCol.propTypes = {
   sortCompare: PropTypes.func,
   label: PropTypes.node.isRequired,
   format: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  onCellClick: PropTypes.func,
 };
 
 export default TableCol;
