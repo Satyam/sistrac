@@ -13,7 +13,7 @@ const formatUsuario = (value, evento) => (
 const formatTren = (value, evento) => (
   <Link to={`/trenes/${evento.idTren}`}>{value}</Link>
 );
-const EventosPorEstacion = ({ sortField, sortAsc, eventos, getUsuarios }) => {
+const EventosPorEstacion = ({ sortCol, sortDesc, eventos, getUsuarios }) => {
   if (eventos.length) {
     const idUsuarios = eventos.map(evento => evento.idUsuario);
     getUsuarios(idUsuarios);
@@ -26,8 +26,8 @@ const EventosPorEstacion = ({ sortField, sortAsc, eventos, getUsuarios }) => {
       hover
       keyName="idEvento"
       data={eventos}
-      sortField={sortField || 'fecha'}
-      sortAsc={sortAsc || true}
+      sortCol={sortCol || 'fecha'}
+      sortDesc={sortDesc}
     >
       <DataTable.Col name="fecha" label="Fecha" sortable format={formatFecha} />
       <DataTable.Col
@@ -56,8 +56,8 @@ const EventosPorEstacion = ({ sortField, sortAsc, eventos, getUsuarios }) => {
 };
 
 EventosPorEstacion.propTypes = {
-  sortField: PropTypes.string,
-  sortAsc: PropTypes.bool,
+  sortCol: PropTypes.string,
+  sortDesc: PropTypes.bool,
   eventos: PropTypes.arrayOf(PropTypes.object),
   getUsuarios: PropTypes.func,
 };

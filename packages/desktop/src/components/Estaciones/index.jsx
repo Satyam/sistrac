@@ -14,7 +14,7 @@ const formatEstacion = (value, estacion) => (
   <Link to={`/estacion/${estacion.idEstacion}`}>{value}</Link>
 );
 
-const Estaciones = ({ sortField, sortAsc, estaciones, history }) => {
+const Estaciones = ({ sortCol, sortDesc, estaciones, history }) => {
   const addEstacion = () => {
     history.push('/estacion/editEstacion');
   };
@@ -35,8 +35,8 @@ const Estaciones = ({ sortField, sortAsc, estaciones, history }) => {
             hover
             keyName="idEstacion"
             data={estaciones}
-            sortField={sortField || 'nombre'}
-            sortAsc={sortAsc || true}
+            sortCol={sortCol || 'nombre'}
+            sortDesc={sortDesc}
           >
             <DataTable.Col
               name="idEstacion"

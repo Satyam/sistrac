@@ -11,7 +11,7 @@ const formatFecha = value => value.toLocaleString();
 const formatLinkToTren = (value, tren) => (
   <Link to={`/trenes/${tren.idTren}`}>{value}</Link>
 );
-const TrenesPorEstacion = ({ sortField, sortAsc, trenes }) => (
+const TrenesPorEstacion = ({ sortCol, sortDesc, trenes }) => (
   <DataTable
     striped
     bordered
@@ -19,8 +19,8 @@ const TrenesPorEstacion = ({ sortField, sortAsc, trenes }) => (
     hover
     keyName="idTren"
     data={trenes}
-    sortField={sortField || 'fecha'}
-    sortAsc={sortAsc || true}
+    sortCol={sortCol || 'fecha'}
+    sortDesc={sortDesc}
   >
     <DataTable.Col
       name="nombre"
@@ -47,8 +47,8 @@ const TrenesPorEstacion = ({ sortField, sortAsc, trenes }) => (
 );
 
 TrenesPorEstacion.propTypes = {
-  sortField: PropTypes.string,
-  sortAsc: PropTypes.bool,
+  sortCol: PropTypes.string,
+  sortDesc: PropTypes.bool,
   trenes: PropTypes.arrayOf(PropTypes.object),
 };
 export default TrenesPorEstacion;
