@@ -13,6 +13,8 @@ import {
   // STATUS_GETTING_CURRENT_USER,
 } from '_store/usuarios/reducer';
 
+import './styles.css';
+
 export default class App extends Component {
   constructor(...args) {
     super(...args);

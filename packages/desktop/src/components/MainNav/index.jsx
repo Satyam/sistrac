@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import NavBar from '@devasatyam/controls/lib/NavBar';
 import Person from 'react-icons/lib/go/person';
@@ -16,8 +16,14 @@ import { withRouterTypes, usuarioShape } from '_src/shapes';
 import './styles.css';
 export default function MainNav({ usuario, statusUsuario, location }) {
   return (
-    <div className="MainNav">
-      <NavBar brand="Sistract" href="/">
+    <Fragment>
+      <NavBar
+        brand="Sistract"
+        href="/"
+        position="top"
+        breakpoint="md"
+        background="light"
+      >
         <NavBar.Menu>
           <NavBar.Item href="/estaciones">Estaciones</NavBar.Item>
           <NavBar.Item href="http://localhost:8080/graphiql" external>
@@ -39,7 +45,7 @@ export default function MainNav({ usuario, statusUsuario, location }) {
           ) : null}
         </NavBar.Menu>
       </NavBar>
-    </div>
+    </Fragment>
   );
 }
 
