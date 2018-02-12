@@ -16,46 +16,89 @@ class NavBar extends Component {
     if (ev.target.href) this.setState({ open: false });
   };
   render() {
-    const { children, brand, href } = this.props;
+    const {
+      children,
+      brand,
+      href,
+      position,
+      dark,
+      background,
+      breakpoint,
+      external,
+      onClick,
+    } = this.props;
     const { open } = this.state;
     return (
-      <React.Fragment>
-        <nav className="navbar fixed-top navbar-expand-md navbar-light bg-light">
-          {href ? (
+      <nav
+        className={classNames(
+          'navbar',
+          {
+            'fixed-top': position === 'top',
+            'fixed-bottom': position === 'bottom',
+            'sticky-top': position === 'sticky-top',
+            'navbar-light': !dark,
+            'navbar-dark': dark,
+          },
+          background && `bg-${background}`,
+          breakpoint && `navbar-expand-${breakpoint}`,
+        )}
+      >
+        {href ? (
+          external ? (
+            <a href={href} className="navbar-brand">
+              {brand}
+            </a>
+          ) : (
             <Link to={href} className="navbar-brand">
               {brand}
             </Link>
-          ) : (
-            <div className="navbar-brand">{brand}</div>
-          )}
-          <button
-            className={classNames('navbar-toggler', { collapsed: open })}
-            type="button"
-            onClick={this.toggle}
-            aria-expanded={!open}
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div
-            className={classNames('collapse', 'navbar-collapse', {
-              show: open,
-            })}
-            onClick={this.dismiss}
-          >
-            {children}
+          )
+        ) : (
+          <div className="navbar-brand" onClick={onClick}>
+            {brand}
           </div>
-        </nav>
-        <div style={{ height: '4em' }} />
-      </React.Fragment>
+        )}
+        <button
+          className={classNames('navbar-toggler', { collapsed: open })}
+          type="button"
+          onClick={this.toggle}
+          aria-expanded={!open}
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div
+          className={classNames('collapse', 'navbar-collapse', {
+            show: open,
+          })}
+          onClick={this.dismiss}
+        >
+          {children}
+        </div>
+      </nav>
     );
   }
 }
 
 NavBar.propTypes = {
   children: PropTypes.node,
-  brand: PropTypes.string,
+  brand: PropTypes.node,
   href: PropTypes.string,
+  external: PropTypes.bool,
+  position: PropTypes.oneOf(['top', 'bottom', 'sticky-top']),
+  dark: PropTypes.bool,
+  background: PropTypes.oneOf([
+    'primary',
+    'secondary',
+    'info',
+    'warning',
+    'danger',
+    'light',
+    'white',
+    'dark',
+  ]),
+  breakpoint: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  onClick: PropTypes.func,
 };
 
 export default NavBar;

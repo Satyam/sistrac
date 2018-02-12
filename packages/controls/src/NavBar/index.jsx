@@ -10,4 +10,4 @@ NavBar.Dropdown = Dropdown;
 NavBar.DropdownItem = DropdownItem;
 
 export default NavBar;
-export { Menu, Item, Dropdown, DropdownItem };
+export { NavBar, Menu, Item, Dropdown, DropdownItem };

@@ -6,5 +6,6 @@ These components are a minimal implementation, as required by my own needs for t
 * [DataTable](src/DataTable/Readme.md)
 * [Grid, Row and Col](src/Grid/Readme.md)
 * [Jumbotron](src/Jumbotron/Readme.md)
+* [NavBar](src/NavBar/Readme.md)
 * [Table](src/Table/Readme.md)
 * [Tabs](src/Tabs/Readme.md)
