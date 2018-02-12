@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const rex = /(lg|md|sm|xs|xl)(Offset|Order|HideAbove|HideBelow)?/;
-const Col = ({ className, children, ...props }) => {
+const Col = ({ className, children, vAlign = {}, ...props }) => {
   const classes = [];
   let hasHide;
   Object.keys(props).forEach(prop => {
@@ -40,12 +40,23 @@ const Col = ({ className, children, ...props }) => {
     }
   });
 
-  return <div className={classNames(classes, className)}>{children}</div>;
+  return (
+    <div
+      className={classNames(classes, className, {
+        'align-self-start': vAlign === 'top',
+        'align-self-center': vAlign === 'middle',
+        'align-self-end': vAlign === 'bottom',
+      })}
+    >
+      {children}
+    </div>
+  );
 };
 
 Col.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
 };
 
 export default Col;
