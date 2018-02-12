@@ -45,6 +45,16 @@ const Table = ({
 Table.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  dark: PropTypes.bool,
+  hover: PropTypes.bool,
+  striped: PropTypes.bool,
+  bordered: PropTypes.bool,
+  small: PropTypes.bool,
+  xsResponsive: PropTypes.bool,
+  smResponsive: PropTypes.bool,
+  mdResponsive: PropTypes.bool,
+  lgResponsive: PropTypes.bool,
+  xlResponsive: PropTypes.bool,
 };
 
 export default Table;
