@@ -42,6 +42,7 @@ const example = () => (
           <NavBar.Item href="pepe2" disabled>
             pepe2
           </NavBar.Item>
+          <NavBar.Divider />
           <NavBar.Item href="pepe3">pepe3</NavBar.Item>
         </NavBar.Menu>
       </NavBar.Group>

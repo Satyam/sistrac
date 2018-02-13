@@ -49,9 +49,9 @@ The `NavBar` will collapse on a small screen so that only the brand and the expa
 
 It may have a brand identifying the application, which can be a link, usually to the home page, plus menus either aligned left or right. Each menu may be composed of one or more buttons or dropdowns containing menu options. Each of those must contain links either to internal routes (handled by `Link` elements of `react-router`) or external links elsewhere.
 
-A NavBar may have one or more `NavBar.Group` children which will groups the various navigation options. By default, the group is left-justified, next to the brand. A group can be right-justified.
+A NavBar may have one or more [`NavBar.Group`](#navbargroup) children which will groups the various navigation options. By default, the group is left-justified, next to the brand. A group can be right-justified.
 
-Each group may have one or more `NavBar.Button` and `NavBar.Menu`. The later is a dropdown-style menu which can have any number of `NavBar.Item`s.
+Each group may have one or more [`NavBar.Button`](#navbarbutton) and [`NavBar.Menu`](#navbarmenu). The later is a dropdown-style menu which can have any number of [`NavBar.Item`](#navbaritem)s and possibly [`NavBar.Divider`](#navbardivider)s.
 
 ## NavBar
 
@@ -163,3 +163,11 @@ Pretty much like [`NavBar.Button`](#navbarbutton) but folded within a dropdown m
 ### Attributes
 
 The same as [`NavBar.Button`](#navbarbutton).
+
+## `NavBar.Divider`
+
+It draws a simple line across the expanded menu, to separate items.
+
+### Attributes
+
+It passes all the attribute it gets to the underlying element, but hardly any will be of any use since it can hold no visible content.
