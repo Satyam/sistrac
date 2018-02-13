@@ -31,7 +31,7 @@ const Estaciones = ({ sortCol, sortDesc, estaciones, history }) => {
           <DataTable
             striped
             bordered
-            condensed
+            compact
             hover
             keyName="idEstacion"
             data={estaciones}

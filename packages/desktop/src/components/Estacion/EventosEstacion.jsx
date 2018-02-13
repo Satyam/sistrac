@@ -22,7 +22,7 @@ const EventosPorEstacion = ({ sortCol, sortDesc, eventos, getUsuarios }) => {
     <DataTable
       striped
       bordered
-      condensed
+      compact
       hover
       keyName="idEvento"
       data={eventos}
