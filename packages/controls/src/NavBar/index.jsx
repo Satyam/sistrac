@@ -1,13 +1,13 @@
 import NavBar from './NavBar';
+import Group from './Group';
+import Button from './Button';
 import Menu from './Menu';
 import Item from './Item';
-import Dropdown from './Dropdown';
-import DropdownItem from './DropdownItem';
 
+NavBar.Group = Group;
+NavBar.Button = Button;
 NavBar.Menu = Menu;
 NavBar.Item = Item;
-NavBar.Dropdown = Dropdown;
-NavBar.DropdownItem = DropdownItem;
 
 export default NavBar;
-export { NavBar, Menu, Item, Dropdown, DropdownItem };
+export { NavBar, Group, Button, Menu, Item };

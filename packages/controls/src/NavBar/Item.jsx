@@ -1,30 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-const Item = ({ children, href, disabled, external, className }) =>
-  disabled ? (
-    <li className={classNames('nav-item', className)}>
-      <a className="nav-link disabled">{children}</a>
-    </li>
-  ) : external || !href ? (
-    <li className={classNames('nav-item', className)}>
-      <a className="nav-link" href={href}>
+const Item = ({ children, href, disabled, className, external, onClick }) => {
+  if (disabled) {
+    return (
+      <a
+        className={classNames('dropdown-item disabled', className)}
+        style={{ opacity: 0.3 }}
+      >
         {children}
       </a>
-    </li>
-  ) : (
-    <Route path={href}>
-      {({ match }) => (
-        <li className={classNames('nav-item', className, { active: match })}>
-          <Link className="nav-link" to={href}>
-            {children}
-          </Link>
-        </li>
-      )}
-    </Route>
+    );
+  }
+  if (external) {
+    return (
+      <a
+        className={classNames('dropdown-item', className)}
+        href={href}
+        onClick={onClick}
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link className={classNames('dropdown-item', className)} to={href}>
+      {children}
+    </Link>
   );
+};
 
 Item.propTypes = {
   children: PropTypes.node,
@@ -32,6 +38,7 @@ Item.propTypes = {
   disabled: PropTypes.bool,
   external: PropTypes.bool,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Item;

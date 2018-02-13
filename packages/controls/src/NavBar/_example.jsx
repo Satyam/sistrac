@@ -18,26 +18,33 @@ const example = () => (
       background="light"
       external
     >
-      <NavBar.Menu>
-        <NavBar.Item href="/jose">Menu 1</NavBar.Item>
-        <NavBar.Item href="/jose" disabled>
+      <NavBar.Group>
+        <NavBar.Button href="/jose">Menu 1</NavBar.Button>
+        <NavBar.Button href="/jose" disabled>
           Menu 2
-        </NavBar.Item>
-        <NavBar.Dropdown label="drpdwn" icon={<FaBeer />} disabled>
-          <NavBar.DropdownItem href="pepe1">pepe1</NavBar.DropdownItem>
-          <NavBar.DropdownItem href="pepe2">pepe2</NavBar.DropdownItem>
-          <NavBar.DropdownItem href="pepe3">pepe3</NavBar.DropdownItem>
-        </NavBar.Dropdown>
-      </NavBar.Menu>
-      <NavBar.Menu right>
-        <NavBar.Dropdown label="drpdwnR">
-          <NavBar.DropdownItem href="pepe1">pepe1</NavBar.DropdownItem>
-          <NavBar.DropdownItem href="pepe2" disabled>
+        </NavBar.Button>
+        <NavBar.Menu
+          label={
+            <span>
+              <FaBeer /> drpdwn
+            </span>
+          }
+          disabled
+        >
+          <NavBar.Item href="pepe1">pepe1</NavBar.Item>
+          <NavBar.Item href="pepe2">pepe2</NavBar.Item>
+          <NavBar.Item href="pepe3">pepe3</NavBar.Item>
+        </NavBar.Menu>
+      </NavBar.Group>
+      <NavBar.Group right>
+        <NavBar.Menu label="drpdwnR">
+          <NavBar.Item href="pepe1">pepe1</NavBar.Item>
+          <NavBar.Item href="pepe2" disabled>
             pepe2
-          </NavBar.DropdownItem>
-          <NavBar.DropdownItem href="pepe3">pepe3</NavBar.DropdownItem>
-        </NavBar.Dropdown>
-      </NavBar.Menu>
+          </NavBar.Item>
+          <NavBar.Item href="pepe3">pepe3</NavBar.Item>
+        </NavBar.Menu>
+      </NavBar.Group>
     </NavBar>
     <p>start of bottom</p>
     <p>lots of nonsense</p>

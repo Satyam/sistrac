@@ -1,20 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const Menu = ({ children, right }) => (
-  <ul
-    className={classNames('navbar-nav', {
-      'd-flex justify-content-end ml-auto': right,
-    })}
-  >
-    {children}{' '}
-  </ul>
-);
+let counter = 0;
 
+class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { open: false };
+  }
+  toggleDropdown = ev => {
+    ev.preventDefault();
+    if (this.props.disabled) return;
+    this.setState({ open: !this.state.open });
+  };
+  render() {
+    const { children, label, disabled, className } = this.props;
+    return (
+      <li className={classNames('nav-item  dropdown', className)}>
+        <a
+          className={classNames('nav-link dropdown-toggle', { disabled })}
+          style={{ cursor: disabled ? 'default' : 'pointer' }}
+          aria-disabled={disabled}
+          onClick={this.toggleDropdown}
+          id={`navbarDropdownMenuLink${counter}`}
+        >
+          {label}
+        </a>
+        <div
+          className={classNames('dropdown-menu', { show: this.state.open })}
+          aria-labelledby={`navbarDropdownMenuLink${counter++}`}
+          onClick={this.toggleDropdown}
+        >
+          {children}
+        </div>
+      </li>
+    );
+  }
+}
 Menu.propTypes = {
   children: PropTypes.node,
-  right: PropTypes.bool,
+  label: PropTypes.node,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 export default Menu;
