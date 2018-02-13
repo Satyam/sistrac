@@ -106,7 +106,7 @@ A function that will be called when the [`brand`](#brand) is clicked. It will no
 
 ## `NavBar.Group`
 
-Provides a container for any number of [`NavBar.Button`](#navbar_button) buttons or [`NavBar.Menu`](#navbar_menu) dropdown menus.
+Provides a container for any number of [`NavBar.Button`](#navbarbutton) buttons or [`NavBar.Menu`](#navbarmenu) dropdown menus.
 
 ### Attributes
 
@@ -144,7 +144,7 @@ As expected...
 
 ## `NavBar.Menu`
 
-Creates a dropdown menu filled with [`Menu.Item`](#menu_item) components.
+Creates a dropdown menu filled with [`Menu.Item`](#menuitem) components.
 
 ### Attributes
 
@@ -158,8 +158,8 @@ As expected.
 
 ## `NavBar.Item`
 
-Pretty much like [`NavBar.Button`](#navbar_button) but folded within a dropdown menu.
+Pretty much like [`NavBar.Button`](#navbarbutton) but folded within a dropdown menu.
 
 ### Attributes
 
-The same as [`NavBar.Button`](#navbar_button).
+The same as [`NavBar.Button`](#navbarbutton).
