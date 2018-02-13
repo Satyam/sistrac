@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import NavBar from '@devasatyam/controls/lib/NavBar';
 import Person from 'react-icons/lib/go/person';
@@ -16,36 +16,32 @@ import { withRouterTypes, usuarioShape } from '_src/shapes';
 import './styles.css';
 export default function MainNav({ usuario, statusUsuario, location }) {
   return (
-    <Fragment>
-      <NavBar
-        brand="Sistract"
-        href="/"
-        position="top"
-        breakpoint="md"
-        background="light"
-      >
-        <NavBar.Menu>
-          <NavBar.Item href="/estaciones">Estaciones</NavBar.Item>
-          <NavBar.Item href="http://localhost:8080/graphiql" external>
-            graphiql
-          </NavBar.Item>
-        </NavBar.Menu>
-        <NavBar.Menu right>
-          {usuario.nombre ? (
-            <NavBar.Dropdown label={usuario.nombre} icon={<Person />}>
-              <NavBar.DropdownItem href="/logout">Logout</NavBar.DropdownItem>
-              <NavBar.DropdownItem href="/preferences">
-                Preferences
-              </NavBar.DropdownItem>
-            </NavBar.Dropdown>
-          ) : statusUsuario === STATUS_UNAUTHORIZED ? (
-            <NavBar.Item className="unauthorized">
-              <Stop /> No autorizado
-            </NavBar.Item>
-          ) : null}
-        </NavBar.Menu>
-      </NavBar>
-    </Fragment>
+    <NavBar
+      brand="Sistract"
+      href="/"
+      position="top"
+      breakpoint="md"
+      background="light"
+    >
+      <NavBar.Group>
+        <NavBar.Button href="/estaciones">Estaciones</NavBar.Button>
+        <NavBar.Button href="http://localhost:8080/graphiql" external>
+          graphiql
+        </NavBar.Button>
+      </NavBar.Group>
+      <NavBar.Group right>
+        {usuario.nombre ? (
+          <NavBar.Menu label={usuario.nombre} icon={<Person />}>
+            <NavBar.Item href="/logout">Logout</NavBar.Item>
+            <NavBar.Item href="/preferences">Preferences</NavBar.Item>
+          </NavBar.Menu>
+        ) : statusUsuario === STATUS_UNAUTHORIZED ? (
+          <NavBar.Button className="unauthorized">
+            <Stop /> No autorizado
+          </NavBar.Button>
+        ) : null}
+      </NavBar.Group>
+    </NavBar>
   );
 }
 
