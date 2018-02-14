@@ -5,12 +5,12 @@
 Any of the following will work:
 
 ```
-import { NavBar, Group, Button, Menu, Item } from '@devasatyam/controls/lib/NavBar';
+import { NavBar, Group, Button, Menu, Item, Search, Divider } from '@devasatyam/controls/lib/NavBar';
 import NavBar from '@devasatyam/controls/lib/NavBar';
 import { NavBar } from '@devasatyam/controls';
 ```
 
-The first will provide separate `NavBar`, `Group`, `Button`, `Menu`, `Item` components, the last two will provide `NavBar` and `NavBar.Group`, `NavBar.Button`, `NavBar.Menu`, `NavBar.Item`.
+The first will provide separate `NavBar`, `Group`, `Button`, `Menu`, `Item`, `Search` and `Divider` components, the last two will provide `NavBar` and `NavBar.Group`, `NavBar.Button`, `NavBar.Menu`, `NavBar.Item`, `NavBar.Search` and `NavBar.Divider`.
 
 ## Usage
 
@@ -26,11 +26,15 @@ The first will provide separate `NavBar`, `Group`, `Button`, `Menu`, `Item` comp
     <NavBar.Menu label="drpdwn">
       <NavBar.Item href="item1">item 1</NavBar.Item>
       <NavBar.Item href="item2">item 2</NavBar.Item>
+      <NavBar.Divider />
       <NavBar.Item href="item3">item 3</NavBar.Item>
     </NavBar.Menu>
   </NavBar.Group>
 
   <NavBar.Group right>
+  <NavBar.Search onSearch={handleSearch}>
+    Search
+  </NavBar.Search>
     <NavBar.Menu label="drpdwnR">
       <NavBar.Item href="item21">item 21</NavBar.Item>
       <NavBar.Item href="item22" disabled>
@@ -51,7 +55,11 @@ It may have a brand identifying the application, which can be a link, usually to
 
 A NavBar may have one or more [`NavBar.Group`](#navbargroup) children which will groups the various navigation options. By default, the group is left-justified, next to the brand. A group can be right-justified.
 
-Each group may have one or more [`NavBar.Button`](#navbarbutton) and [`NavBar.Menu`](#navbarmenu). The later is a dropdown-style menu which can have any number of [`NavBar.Item`](#navbaritem)s and possibly [`NavBar.Divider`](#navbardivider)s.
+Each group may have one or more:
+
+* [`NavBar.Button`](#navbarbutton) a clickable element.
+* [`NavBar.Menu`](#navbarmenu) a dropdown-style menu which can have any number of [`NavBar.Item`](#navbaritem)s and possibly [`NavBar.Divider`](#navbardivider)s.
+* [`NavBar.Search`](#navbarsearch) A simple search form made of an input box and a button.
 
 ## NavBar
 
@@ -171,3 +179,42 @@ It draws a simple line across the expanded menu, to separate items.
 ### Attributes
 
 It passes all the attribute it gets to the underlying element, but hardly any will be of any use since it can hold no visible content.
+
+## `NavBar.Search`
+
+Renders a simple input box with an attached action button. Though it can be used for any sort of textual entry from the NavBar, it is mostly mean to provide a search box, thus the name.
+
+The contents of the component provide the label for the pushbutton, it can be text, an icon or any JSX.
+
+### Attributes
+
+#### `placeholder`
+
+Placeholder text to be shown in the input box when empty.
+
+#### `onSearch`
+
+Function to be called when the button is clicked. It receives:
+
+* `value`: the text from the input box
+* `ev`: the event object.
+
+#### `color`
+
+One of the standard Bootstrap colors to be applied to the button.
+
+#### `outline`
+
+If present, the button will be outlined instead of filled.
+
+#### `className`
+
+A className that applies to the `form` element that encloses the input box and button.
+
+#### `btnClassName`
+
+A className that applies to the button, beyond color and outline.
+
+#### `inputClassName`
+
+A className that applies to the input box.

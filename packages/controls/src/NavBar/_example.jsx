@@ -1,7 +1,11 @@
 import React from 'react';
 import NavBar from './';
 import FaBeer from 'react-icons/lib/fa/beer';
+import Search from 'react-icons/lib/go/search';
 
+const handlSearch = value => {
+  console.log('search for', value);
+};
 const example = () => (
   <div style={{ paddingTop: '4em' }}>
     <p>first item</p>
@@ -37,6 +41,9 @@ const example = () => (
         </NavBar.Menu>
       </NavBar.Group>
       <NavBar.Group right>
+        <NavBar.Search onSearch={handlSearch} color="success" outline>
+          <Search />
+        </NavBar.Search>
         <NavBar.Menu label="drpdwnR">
           <NavBar.Item href="pepe1">pepe1</NavBar.Item>
           <NavBar.Item href="pepe2" disabled>
