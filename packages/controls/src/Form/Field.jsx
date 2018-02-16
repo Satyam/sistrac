@@ -69,6 +69,7 @@ const Field = ({ children, type, id, ...props }) => {
     case 'radio':
       Contents = Radio;
       commonProps.options = options;
+      commonProps.type = 'select';
       break;
     case 'buttonGroup':
       return <FormButtons {...commonProps}>{buttons}</FormButtons>;

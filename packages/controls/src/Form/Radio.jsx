@@ -22,20 +22,26 @@ RadioItem.propTypes = {
   meta: PropTypes.shape(fieldMetaPropTypes),
 };
 
-const Radio = ({ options, name, rxfProps, ...props }) => (
-  <ul className="form-radios">
-    {options.map(({ props: { value, ...optionProps } }) => (
-      <ReduxFormField
-        name={rxfProps.name}
-        {...props}
-        {...optionProps}
-        key={value}
-        value={value}
-        component={RadioItem}
-      />
-    ))}
-  </ul>
-);
+const Radio = ({ options, name, rxfProps, ...props }) => {
+  const handleChange = ev => {
+    rxfProps.onChange(ev);
+  };
+  return (
+    <ul className="form-radios">
+      {options.map(({ props: { value, ...optionProps } }) => (
+        <RadioItem
+          name={rxfProps.name}
+          {...props}
+          {...optionProps}
+          key={value}
+          value={value}
+          onChange={handleChange}
+          checked={value == rxfProps.value}
+        />
+      ))}
+    </ul>
+  );
+};
 
 Radio.propTypes = {
   options: PropTypes.node,
