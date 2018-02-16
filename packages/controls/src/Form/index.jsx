@@ -17,4 +17,4 @@ Form.WARN = WARN;
 Form.ERROR = ERROR;
 
 export default Form;
-export { Field, Option, Label, Help, OK, WARN, ERROR };
+export { Form, Field, Option, Label, Help, OK, WARN, ERROR };
