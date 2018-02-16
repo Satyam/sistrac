@@ -13,7 +13,7 @@ exports[`restServers/usuarios login fail password 1`] = `Object {}`;
 exports[`restServers/usuarios login fail password 2`] = `
 "select idUsuario, usuario, nombre, nivel, 
     rolDios, rolGuarda, rolMecanico, rolSupervisor, funcion 
-    from Usuarios where usuario = 'pepe' and password = '93b885adfe0da089cdf634904fd59f71'"
+    from Usuarios where usuario = 'pepe' and password = NULL"
 `;
 
 exports[`restServers/usuarios login fail usuario 1`] = `Object {}`;
@@ -21,7 +21,7 @@ exports[`restServers/usuarios login fail usuario 1`] = `Object {}`;
 exports[`restServers/usuarios login fail usuario 2`] = `
 "select idUsuario, usuario, nombre, nivel, 
     rolDios, rolGuarda, rolMecanico, rolSupervisor, funcion 
-    from Usuarios where usuario = 'pepe' and password = '93b885adfe0da089cdf634904fd59f71'"
+    from Usuarios where usuario = 'pepe' and password = NULL"
 `;
 
 exports[`restServers/usuarios login success 1`] = `
