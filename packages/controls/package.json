@@ -14,18 +14,21 @@
     "watch": "nodemon --watch src/ --exec npm run rebuild",
     "rebuild": "run-s build:compile build:copyCss"
   },
-  "keywords": ["react", "bootstrap", "bootstrap@4"],
+  "keywords": [
+    "react",
+    "bootstrap",
+    "bootstrap@4"
+  ],
   "author": "Daniel Barreiro",
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.5",
-    "parcel-bundler": "^1.6.1",
+    "final-form": "^4.2.0",
+    "parcel-bundler": "^1.5.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2",
-    "redux-form": "^7.2.3"
+    "react-final-form": "^3.1.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
