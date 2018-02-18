@@ -10,66 +10,60 @@ import { withRouterTypes, estacionShape } from '_src/shapes';
 
 import './styles.css';
 
-export default class EditEstacion extends Component {
-  constructor(props, context) {
-    super(props, context);
-    const { match, estacion, duplicado } = this.props;
-    const idEstacion = match.params.idEstacion;
-    this.state = {
-      add: !idEstacion,
-      nombre: (estacion && estacion.nombre) || '',
-      idEstacion: (estacion && estacion.idEstacion) || '',
-      latitud: (estacion && estacion.latitud) || 0,
-      longitud: (estacion && estacion.longitud) || 0,
-      duplicado,
-    };
-    if (!idEstacion && navigator.geolocation) {
+const validate = ({ idEstacion, nombre, latitud, longitud }) => {
+  const errors = {};
+  if (latitud > 90 || latitud < -90) {
+    errors.latitud = 'Latitud debe ser menor que 90 norte o sur';
+  }
+  if (longitud > 180 || longitud < -180) {
+    errors.longitud = 'Longitud debe ser menor que 180 este u oeste';
+  }
+  if (idEstacion.length !== 3) {
+    errors.idEstacion = 'La sigla de la estación debe ser de 3 caracteres';
+  }
+  return errors;
+};
+const warn = ({ idEstacion, nombre, latitud, longitud }) => {
+  const warnings = {};
+  if (nombre.length < 3) {
+    warnings.nombre = 'No son recomendables nombres de estación tan cortos';
+  }
+  return warnings;
+};
+const asyncValidate = (values, dispatch, props, field) => {
+  console.log('asyncValidate', values, props, field);
+  // return Promise.reject({ idEstacion: 'duplicado' });
+  return Promise.resolve();
+};
+
+const formSubmit = (values, dispatch, props) => {
+  console.log('submit', values, props);
+};
+class EditEstacion extends Component {
+  constructor(props) {
+    super(props);
+    const { latitud = 0, longitud = 0, match } = props;
+    const nueva = !match.params.idEstacion;
+    if (nueva && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         this.setState({ latitud: coords.latitude, longitud: coords.longitude });
       });
     }
+    this.state = {
+      latitud,
+      longitud,
+      nueva,
+    };
   }
-
-  idEstacionChange = ev => {
-    this.setState({
-      idEstacion: ev.target.value.toUpperCase(),
-      duplicado: false,
-    });
-  };
-  validateIdEstacion = () => {
-    const { idEstacion, duplicado } = this.state;
-    if (duplicado) return 'error';
-    if (idEstacion.length !== 3) {
-      return 'warning';
-    }
-    return 'success';
-  };
-  nombreChange = ev => {
-    this.setState({ nombre: ev.target.value });
-  };
-  validateNombre = () => {
-    const { nombre } = this.state;
-    if (nombre.length < 3) {
-      return 'warning';
-    }
-    return 'success';
-  };
-  latitudChange = ev => {
-    this.setState({ latitud: ev.target.value.replace(',', '.') });
-  };
-  validateLatitud = () => {
-    const { latitud } = this.state;
-    if (latitud < -90 || latitud > 90) return 'warning';
-    return 'success';
-  };
-  longitudChange = ev => {
-    this.setState({ longitud: ev.target.value.replace(',', '.') });
-  };
-  validateLongitud = () => {
-    const { longitud } = this.state;
-    if (longitud < -180 || longitud > 180) return 'warning';
-    return 'success';
-  };
+  //    const idEstacion = match.params.idEstacion;
+  // }
+  //
+  // latitudChange = ev => {
+  //   this.setState({ latitud: ev.target.value.replace(',', '.') });
+  // };
+  // longitudChange = ev => {
+  //   this.setState({ longitud: ev.target.value.replace(',', '.') });
+  // };
   mapClick = ev => {
     const { latlng: { lat, lng } } = ev;
     this.setState({
@@ -77,52 +71,57 @@ export default class EditEstacion extends Component {
       longitud: lng,
     });
   };
-  validates = () => {
-    if (this.validateNombre() !== 'success') return false;
-    if (this.validateIdEstacion() !== 'success') return false;
-    if (this.validateLatitud() !== 'success') return false;
-    if (this.validateLongitud() !== 'success') return false;
-    return true;
-  };
-  formSubmit = ev => {
-    if (isPlainClick(ev)) {
-      if (!this.validates()) return;
-      const st = this.state;
-      delete st.duplicado;
-      this.props
-        .onSave({
-          ...st,
-          latitud: parseFloat(st.latitud),
-          longitud: parseFloat(st.longitud),
-        })
-        .then(exito => this.setState({ duplicado: !exito }));
-    }
-  };
+  // formSubmit = ev => {
+  //   if (isPlainClick(ev)) {
+  //     if (!this.validates()) return;
+  //     const st = this.state;
+  //     delete st.duplicado;
+  //     this.props
+  //       .onSave({
+  //         ...st,
+  //         latitud: parseFloat(st.latitud),
+  //         longitud: parseFloat(st.longitud),
+  //       })
+  //       .then(exito => this.setState({ duplicado: !exito }));
+  //   }
+  // };
+
   render() {
-    const { idEstacion, nombre, latitud, longitud, duplicado } = this.state;
+    const { latitud, longitud, nueva } = this.state;
+    const { idEstacion = '', nombre = '' } = this.props;
     const position = [parseFloat(latitud), parseFloat(longitud)];
     return (
-      <Form>
+      <Form
+        name="editEstacion"
+        initialValues={{
+          idEstacion,
+          nombre,
+          latitud,
+          longitud,
+        }}
+        validate={validate}
+        warn={warn}
+        asyncValidate={asyncValidate}
+        asyncBlurFields={['idEstacion']}
+        enableReinitialize
+        keepDirtyOnReinitialize
+        onSubmit={formSubmit}
+      >
         <Form.Field
           type="text"
           placeholder="Sigla"
-          value={idEstacion}
-          onChange={this.idEstacionChange}
+          name="idEstacion"
+          parse={value => value.toUpperCase()}
         >
           <Form.Label>Sigla</Form.Label>
-          <Form.Help>duplicado={duplicado}</Form.Help>
+          <Form.Help>Sigla de 3 caracteres de la estación</Form.Help>
         </Form.Field>
 
-        <Form.Field
-          type="text"
-          placeholder="Nombre Completo"
-          value={nombre}
-          onChange={this.nombreChange}
-        >
+        <Form.Field type="text" placeholder="Nombre Completo" name="nombre">
           <Form.Label>Nombre</Form.Label>
         </Form.Field>
-        <Row>
-          <Col mdOffset={2} md={8} xs={12}>
+        <Row className="mb-4">
+          <Col mdOffset={4} md={8} xs={12}>
             <Map center={position} zoom={13} onclick={this.mapClick}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -130,43 +129,27 @@ export default class EditEstacion extends Component {
               />
               <Marker position={position} />
             </Map>
+            <div className="coords badge badge-pill badge-secondary">
+              {formatcoords(parseFloat(latitud), parseFloat(longitud)).format(
+                'FFf',
+                {
+                  latLonSeparator: ' -- ',
+                  decimalPlaces: 2,
+                },
+              )}
+            </div>
           </Col>
         </Row>
-        <Form.Field className="coords">
-          <Form.Label>
-            {formatcoords(parseFloat(latitud), parseFloat(longitud)).format(
-              'FFf',
-              {
-                latLonSeparator: ' -- ',
-                decimalPlaces: 2,
-              },
-            )}
-          </Form.Label>
-        </Form.Field>
-        <Form.Field
-          type="text"
-          placeholder="Latitud"
-          value={latitud}
-          onChange={this.latitudChange}
-        >
+        <Form.Field type="text" placeholder="Latitud" name="latitud">
           <Form.Label>Latitud</Form.Label>
         </Form.Field>
 
-        <Form.Field
-          type="text"
-          placeholder="Longitud"
-          value={longitud}
-          onChange={this.longitudChange}
-        >
+        <Form.Field type="text" placeholder="Longitud" name="longitud">
           <Form.Label>Longitud</Form.Label>
         </Form.Field>
 
-        <Form.Field type="buttonGroup">
-          <Button
-            type="submit"
-            onClick={this.formSubmit}
-            disabled={!this.validates()}
-          >
+        <Form.Field type="buttonGroup" name="buttons">
+          <Button type="submit" color="primary">
             Agregar
           </Button>
         </Form.Field>
@@ -174,8 +157,9 @@ export default class EditEstacion extends Component {
     );
   }
 }
-
 EditEstacion.propTypes = {
   ...withRouterTypes,
   estacion: estacionShape,
 };
+
+export default EditEstacion;
