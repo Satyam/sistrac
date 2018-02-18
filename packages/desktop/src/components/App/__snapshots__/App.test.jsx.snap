@@ -13,7 +13,9 @@ exports[`App component raw component should render (shallow) 1`] = `
     </title>
   </HelmetWrapper>
   <withRouter(Connect(MainNav)) />
-  <Routes />
+  <Grid>
+    <Routes />
+  </Grid>
 </div>
 `;
 
@@ -30,6 +32,8 @@ exports[`App component raw component should render a blank screen when there is 
     </title>
   </HelmetWrapper>
   <withRouter(Connect(MainNav)) />
-  <Routes />
+  <Grid>
+    <Routes />
+  </Grid>
 </div>
 `;
