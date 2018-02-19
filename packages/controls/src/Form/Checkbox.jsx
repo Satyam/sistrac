@@ -1,25 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { fieldInputPropTypes } from 'redux-form/es/propTypes';
-
 import './styles.css';
 
-const Checkbox = ({ placeholder, rxfProps, ...props }) => (
+const Checkbox = ({ placeholder, meta, input, ...props }) => (
   <div className="form-check">
-    <input
-      {...props}
-      {...rxfProps}
-      className="form-check-input"
-      type="checkbox"
-    />
+    <input {...props} {...input} className="form-check-input" type="checkbox" />
     {placeholder && <span className="form-check-label">{placeholder}</span>}
   </div>
 );
 
 Checkbox.propTypes = {
   placeholder: PropTypes.node,
-  rxfProps: PropTypes.shape(fieldInputPropTypes),
 };
 
 export default Checkbox;

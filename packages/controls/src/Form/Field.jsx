@@ -5,20 +5,13 @@ import React, {
   cloneElement,
 } from 'react';
 import PropTypes from 'prop-types';
-import { Field as ReduxFormField } from 'redux-form';
-import {
-  fieldInputPropTypes,
-  fieldMetaPropTypes,
-} from 'redux-form/es/propTypes';
+import { Field as ReactFormField } from 'react-final-form';
 
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Select from './Select';
-import Option from './Option';
 import TextInput from './TextInput';
 import FormButtons from './FormButtons';
-import Label from './Label';
-import Help from './Help';
 import Button from '../Button/Button';
 
 import RenderField from './RenderField';
@@ -26,13 +19,13 @@ import RenderField from './RenderField';
 import './styles.css';
 let counter = 0;
 
-const Field = ({ children, type, id, ...props }) => {
+const Field = ({ children, type, id, label, ...props }) => {
   const commonProps = {
     ...props,
     id,
     type,
   };
-  let label, help, Contents;
+  let Contents;
   const options = [];
   const buttons = [];
   let inputId;
@@ -41,20 +34,13 @@ const Field = ({ children, type, id, ...props }) => {
       throw new Error(`Not a valid element in a Form.Field ${child}`);
     if (child.type === Button) {
       buttons.push(child);
-    } else if (child.type === Label) {
-      label = child;
-    } else if (child.type === Help) {
-      help = child;
-    } else if (child.type === Option) {
+    } else if (child.type === 'option') {
       options.push(child);
     } else throw new Error(`Invalid child in a Form.Field ${type}`);
   });
   inputId = id;
   if (label) {
     if (!inputId) inputId = `field-${++counter}`;
-    label = cloneElement(label, {
-      htmlFor: inputId,
-    });
     commonProps.id = inputId;
   }
   switch (type) {
@@ -72,16 +58,18 @@ const Field = ({ children, type, id, ...props }) => {
       commonProps.type = 'select';
       break;
     case 'buttonGroup':
-      return <FormButtons {...commonProps}>{buttons}</FormButtons>;
+      Contents = FormButtons;
+      commonProps.children = buttons;
+      commonProps.type = undefined;
+      break;
     default:
       Contents = TextInput;
   }
   return (
-    <ReduxFormField
+    <ReactFormField
       {...commonProps}
       Contents={Contents}
       label={label}
-      help={help}
       component={RenderField}
     />
   );

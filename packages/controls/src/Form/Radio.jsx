@@ -1,42 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field as ReduxFormField } from 'redux-form';
-
-import {
-  fieldInputPropTypes,
-  fieldMetaPropTypes,
-} from 'redux-form/es/propTypes';
 
 import './styles.css';
 
-const RadioItem = ({ input, meta, children, ...props }) => (
+const RadioItem = ({ children, ...props }) => (
   <li>
-    <input {...props} {...input} type="radio" />
+    <input {...props} type="radio" />
     {children}
   </li>
 );
 
 RadioItem.propTypes = {
   children: PropTypes.node,
-  input: PropTypes.shape(fieldInputPropTypes),
-  meta: PropTypes.shape(fieldMetaPropTypes),
 };
 
-const Radio = ({ options, name, rxfProps, ...props }) => {
+const Radio = ({ options, name, meta, input, ...props }) => {
   const handleChange = ev => {
-    rxfProps.onChange(ev);
+    input.onChange(ev);
   };
   return (
-    <ul className="form-radios">
+    <ul className="form-radios" {...input}>
       {options.map(({ props: { value, ...optionProps } }) => (
         <RadioItem
-          name={rxfProps.name}
-          {...props}
+          name={input.name}
           {...optionProps}
           key={value}
           value={value}
           onChange={handleChange}
-          checked={value == rxfProps.value}
+          checked={value == input.value}
         />
       ))}
     </ul>
@@ -46,7 +37,6 @@ const Radio = ({ options, name, rxfProps, ...props }) => {
 Radio.propTypes = {
   options: PropTypes.node,
   name: PropTypes.string,
-  rxfProps: PropTypes.shape(fieldInputPropTypes),
 };
 
 export default Radio;
