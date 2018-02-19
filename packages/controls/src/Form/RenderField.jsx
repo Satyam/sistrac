@@ -50,6 +50,9 @@ RenderField.propTypes = {
   label: PropTypes.node,
   help: PropTypes.node,
   className: PropTypes.string,
+  meta: PropTypes.object,
+  input: PropTypes.object,
+  id: PropTypes.string,
 };
 
 export default RenderField;

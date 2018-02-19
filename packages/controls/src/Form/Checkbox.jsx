@@ -12,6 +12,8 @@ const Checkbox = ({ placeholder, meta, input, ...props }) => (
 
 Checkbox.propTypes = {
   placeholder: PropTypes.node,
+  meta: PropTypes.object,
+  input: PropTypes.object,
 };
 
 export default Checkbox;

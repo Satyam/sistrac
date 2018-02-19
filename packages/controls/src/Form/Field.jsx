@@ -104,6 +104,7 @@ Field.propTypes = {
   id: PropTypes.string,
   selected: PropTypes.bool,
   rows: PropTypes.number,
+  label: PropTypes.node,
 };
 
 export default Field;

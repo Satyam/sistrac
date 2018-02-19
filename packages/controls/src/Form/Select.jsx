@@ -10,6 +10,8 @@ const Select = ({ options, meta, input, ...props }) => (
 
 Select.propTypes = {
   options: PropTypes.node,
+  meta: PropTypes.object,
+  input: PropTypes.object,
 };
 
 export default Select;

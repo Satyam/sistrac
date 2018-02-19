@@ -11,6 +11,8 @@ const TextInput = ({ rows, meta, input, ...props }) =>
 
 TextInput.propTypes = {
   rows: PropTypes.number,
+  meta: PropTypes.object,
+  input: PropTypes.object,
 };
 
 export default TextInput;

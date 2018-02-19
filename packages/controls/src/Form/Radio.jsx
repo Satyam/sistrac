@@ -37,6 +37,8 @@ const Radio = ({ options, name, meta, input, ...props }) => {
 Radio.propTypes = {
   options: PropTypes.node,
   name: PropTypes.string,
+  meta: PropTypes.object,
+  input: PropTypes.object,
 };
 
 export default Radio;
