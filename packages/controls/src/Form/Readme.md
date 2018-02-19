@@ -6,11 +6,13 @@ Any of the following will work:
 
 ```
 import { Form } from 'react-final-form';
-
-import { Field } from '@devasatyam/controls/lib/Form';
 import Field from '@devasatyam/controls/lib/Form';
-import { Field } from '@devasatyam/controls';
+
+import { Form, Field } from '@devasatyam/controls/lib/Form';
+import { Form, Field } from '@devasatyam/controls';
 ```
+
+The `<Form>` component from`react-final-form` is re-exported from the module for convenience, thus, they can be loaded separate or all at once from the same source file.
 
 ## Usage
 
