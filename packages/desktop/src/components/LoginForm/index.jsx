@@ -13,12 +13,12 @@ const LoginForm = ({ onLogin, usuario }) => {
     return onLogin(usuario, password);
   };
 
-  const validate = values => {
+  const validate = ({ usuario, password }) => {
     const errors = {};
-    if (!values.usuario) {
+    if (!usuario) {
       errors.usuario = 'No puede estar vacío';
     }
-    if (!values.password) {
+    if (!password) {
       errors.password = 'No puede estar vacío';
     }
     return errors;
