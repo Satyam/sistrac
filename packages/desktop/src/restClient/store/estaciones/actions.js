@@ -7,6 +7,7 @@ import {
   UPDATE_ESTACION,
   CREATE_ESTACION,
   // DELETE_ESTACION,
+  EXISTE_ESTACION,
   GET_TRENES_ESTACION,
 } from './constants';
 
@@ -30,6 +31,25 @@ export function getEstacion(idEstacion) {
         idEstacion,
       },
       promise: api.read(`/${idEstacion}`),
+    });
+}
+
+export function existeEstacion(idEstacion) {
+  return dispatch =>
+    dispatch({
+      type: EXISTE_ESTACION,
+      payload: {
+        idEstacion,
+      },
+      promise: api.read(`/existe/${idEstacion}`).then(
+        () => ({
+          exists: true,
+        }),
+        err => {
+          if (err.code === 404) return { exists: false };
+          throw err;
+        },
+      ),
     });
 }
 

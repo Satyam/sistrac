@@ -3,7 +3,12 @@ import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import initStore from '_connectors/utils/initStore';
 
-import { getEstacion, createEstacion, updateEstacion } from '_store/actions';
+import {
+  getEstacion,
+  createEstacion,
+  updateEstacion,
+  existeEstacion,
+} from '_store/actions';
 import { selEstacion } from '_store/selectors';
 
 import EditEstacion from '_components/EditEstacion';
@@ -22,13 +27,14 @@ export const mapStateToProps = (state, { match }) => {
   return {};
 };
 export const mapDispatchToProps = (dispatch, { history }) => ({
-  onSave: async ({ add, ...estacion }) => {
-    if (add) {
+  onSave: async (nueva, estacion) => {
+    if (nueva) {
       return dispatch(createEstacion(estacion));
     }
     const { idEstacion, ...data } = estacion;
     return dispatch(updateEstacion(idEstacion, data));
   },
+  existeEstacion: idEstacion => dispatch(existeEstacion(idEstacion)),
 });
 
 export default compose(
