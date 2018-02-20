@@ -16,7 +16,7 @@ const formatEstacion = (value, estacion) => (
 
 const Estaciones = ({ sortCol, sortDesc, estaciones, history }) => {
   const addEstacion = () => {
-    history.push('/estacion/editEstacion');
+    history.push('/editEstacion');
   };
   return (
     <Fragment>
