@@ -7,7 +7,7 @@ import { selEstaciones } from '_store/selectors';
 import Estaciones from '_components/Estaciones';
 
 export const storeInitializer = (dispatch, getState) =>
-  !!selEstaciones(getState()).length || dispatch(getEstaciones());
+  dispatch(getEstaciones());
 
 export const mapStateToProps = state => ({ estaciones: selEstaciones(state) });
 
