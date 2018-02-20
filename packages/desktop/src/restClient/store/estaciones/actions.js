@@ -92,7 +92,7 @@ export function updateEstacion(idEstacion, data) {
   return dispatch =>
     dispatch({
       type: UPDATE_ESTACION,
-      payload: data,
+      payload: { idEstacion, ...data },
       promise: api.update(idEstacion, data),
     });
 }
@@ -101,7 +101,7 @@ export function deleteEstacion(idEstacion) {
   return dispatch =>
     dispatch({
       type: DELETE_ESTACION,
-      payload: idEstacion,
+      payload: { idEstacion },
       promise: api.delete(idEstacion),
     });
 }

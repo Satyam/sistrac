@@ -49,16 +49,17 @@ export default (state = {}, action) => {
         },
       };
     }
-    case CREATE_ESTACION: {
-      console.log('reducer create', action.payload);
+    case CREATE_ESTACION:
       return {
         ...state,
         [action.payload.idEstacion]: action.payload,
       };
-    }
+
     case UPDATE_ESTACION:
-      console.log('reducer create', action.payload);
-      return state;
+      return {
+        ...state,
+        [action.payload.idEstacion]: action.payload,
+      };
     case DELETE_ESTACION: {
       const { [action.payload.idEstacion]: deleted, ...rest } = state;
       return rest;

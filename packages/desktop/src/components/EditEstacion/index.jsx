@@ -31,7 +31,13 @@ const warn = ({ idEstacion, nombre, latitud, longitud }) => {
   return warnings;
 };
 
-const EditEstacion = ({ estacion = {}, match, existeEstacion, onSave }) => {
+const EditEstacion = ({
+  estacion = {},
+  match,
+  history,
+  existeEstacion,
+  onSave,
+}) => {
   const { idEstacion = '', nombre = '', latitud = 0, longitud = 0 } = estacion;
   const nueva = !match.params.idEstacion;
   const validateIdEstacion = simpleMemoize(async idEstacion => {
@@ -42,6 +48,7 @@ const EditEstacion = ({ estacion = {}, match, existeEstacion, onSave }) => {
   const formSubmit = (values, dispatch, props) => {
     console.log('submit', values);
     onSave(nueva, values);
+    history.push(nueva ? '/estaciones' : `/estacion/${values.idEstacion}`);
   };
   // formSubmit = ev => {
   //   if (isPlainClick(ev)) {
@@ -175,7 +182,7 @@ const EditEstacion = ({ estacion = {}, match, existeEstacion, onSave }) => {
                 color="primary"
                 disabled={submitting || invalid || pristine}
               >
-                Agregar
+                {nueva ? 'Agregar' : 'Modificar'}
               </Button>
             </Field>
           </form>

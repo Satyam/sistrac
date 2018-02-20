@@ -40,9 +40,16 @@ const Estaciones = ({
   const addEstacion = () => {
     history.push('/editEstacion');
   };
-  const handleCellClick = (name, idEstacion) => {
-    if (window.confirm(`Seguro que quiere borrar la estación ${idEstacion}`)) {
+  const handleCellClick = (name, idEstacion, value, row) => {
+    if (
+      window.confirm(
+        `Seguro que quiere borrar la estación ${idEstacion}:\n\n "${
+          row.nombre
+        }"`,
+      )
+    ) {
       deleteEstacion(idEstacion);
+      history.replace('/estaciones');
     }
   };
   return (
