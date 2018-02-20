@@ -6,7 +6,7 @@ import {
   GET_ESTACION,
   UPDATE_ESTACION,
   CREATE_ESTACION,
-  // DELETE_ESTACION,
+  DELETE_ESTACION,
   EXISTE_ESTACION,
   GET_TRENES_ESTACION,
 } from './constants';
@@ -94,5 +94,14 @@ export function updateEstacion(idEstacion, data) {
       type: UPDATE_ESTACION,
       payload: data,
       promise: api.update(idEstacion, data),
+    });
+}
+
+export function deleteEstacion(idEstacion) {
+  return dispatch =>
+    dispatch({
+      type: DELETE_ESTACION,
+      payload: idEstacion,
+      promise: api.delete(idEstacion),
     });
 }
