@@ -121,9 +121,9 @@ class DataTable extends Component {
               key: `${key}-${name}`,
               className,
               style,
-              onClick: onCellClick
-                ? ev => onCellClick(name, row[keyName], row[name], ev)
-                : undefined,
+              onClick:
+                onCellClick &&
+                (ev => onCellClick(name, row[keyName], row[name], row, ev)),
             };
             return (
               <td {...props}>{format ? format(row[name], row) : row[name]}</td>

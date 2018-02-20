@@ -147,6 +147,7 @@ A function that is called when the cell is clicked. It will receive:
 * `colName`: The [`name`](#name) of the column clicked.
 * `rowId`: The value of the [`keyName`](#keyname) column for the row clicked
 * `value`: The value in the cell.
+* `row`: An object with the values for the full row.
 * `ev`: The event object.
 
 The first two are meant to serve as the column and row coordinates to where the click occurred.
