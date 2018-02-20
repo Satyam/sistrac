@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 const LoadableEstaciones = Loadable({
@@ -35,7 +35,7 @@ const LoadableLogin = Loadable({
 
 export default function Routes() {
   return (
-    <div>
+    <Switch>
       <Route path="/estaciones" component={LoadableEstaciones} />
       <Route
         path="/editEstacion/:idEstacion?"
@@ -46,6 +46,6 @@ export default function Routes() {
         component={LoadableEstacion}
       />
       <Route path="/login" component={LoadableLogin} />
-    </div>
+    </Switch>
   );
 }
