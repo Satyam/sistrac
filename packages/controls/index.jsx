@@ -10,12 +10,14 @@ import JumbotronExample from './src/Jumbotron/_example';
 import FormsExample from './src/Form/_example';
 import TabsExample from './src/Tabs/_example';
 import GridsExample from './src/Grid/_example';
+import ModalExample from './src/Modal/_example';
 
 ReactDOM.render(
   <BrowserRouter>
     <div style={{ margin: '0 1em' }}>
-      <FormsExample />
+      <ModalExample />
       {/*
+        <FormsExample />
           <NavBarExample />
           <JumbotronExample />
           <GridsExample />
