@@ -6,9 +6,11 @@ import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
 
+import './styles.css';
+
 const isCloseButton = /(^|\s)close-button($|\s)/;
 
-const Modal = ({ children, open, onClose }) => {
+const Modal = ({ children, open, onClose, centered, size }) => {
   const handleClick = ev => {
     if (
       typeof onClose === 'function' &&
@@ -19,13 +21,19 @@ const Modal = ({ children, open, onClose }) => {
   };
   return (
     <div
-      className="modal close-button"
+      className={classNames('modal close-button', { open })}
       tabIndex="-1"
       role="dialog"
-      style={{ display: open ? 'block' : 'none' }}
       onClick={handleClick}
     >
-      <div className="modal-dialog" role="document">
+      <div
+        className={classNames('modal-dialog', {
+          'modal-dialog-centered': centered,
+          'modal-lg': size === 'lg',
+          'modal-sm': size === 'sm',
+        })}
+        role="document"
+      >
         <div className="modal-content">{children}</div>
       </div>
     </div>
@@ -36,6 +44,8 @@ Modal.propTypes = {
   children: PropTypes.node,
   open: PropTypes.bool,
   onClose: PropTypes.func,
+  centered: PropTypes.bool,
+  size: PropTypes.oneOf(['sm', 'lg']),
 };
 
 export default Modal;

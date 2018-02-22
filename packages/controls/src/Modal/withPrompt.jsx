@@ -13,8 +13,9 @@ const withPrompt = BaseComponent =>
           title = '',
           body = '',
           initialValue = '',
-          yesLabel = 'Ok',
-          noLabel = 'Cancel',
+          yesLabel,
+          yesColor,
+          noLabel,
           placeholder = '',
         } = args;
         const self = this;
@@ -23,7 +24,9 @@ const withPrompt = BaseComponent =>
             title,
             initialValue,
             yesLabel,
+            yesColor,
             noLabel,
+            noColor,
             placeholder,
             children: body,
             open: true,

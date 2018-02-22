@@ -9,13 +9,14 @@ const withAlert = BaseComponent =>
     }
     showAlert = args => {
       if (args) {
-        const { title, body, buttonLabel } = args;
+        const { title, body, buttonLabel, buttonColor } = args;
         const self = this;
         return new Promise(resolve => {
           self.setState({
             title,
             children: body,
             buttonLabel,
+            buttonColor,
             open: true,
           });
           self.resolve = resolve;
