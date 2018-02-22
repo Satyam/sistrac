@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import DataTable from '@devasatyam/controls/lib/DataTable';
 import { Row, Col } from '@devasatyam/controls/lib/Grid';
 import { Button } from '@devasatyam/controls/lib/Button';
+import { Modal } from '@devasatyam/controls/lib/Modal';
 import Plus from 'react-icons/lib/go/plus';
 import Trashcan from 'react-icons/lib/go/trashcan';
 import Pencil from 'react-icons/lib/go/pencil';
@@ -36,21 +37,26 @@ const Estaciones = ({
   estaciones,
   history,
   deleteEstacion,
+  showConfirm,
 }) => {
   const addEstacion = () => {
     history.push('/editEstacion');
   };
   const handleCellClick = (name, idEstacion, value, row) => {
-    if (
-      window.confirm(
-        `Seguro que quiere borrar la estación ${idEstacion}:\n\n "${
-          row.nombre
-        }"`,
-      )
-    ) {
-      deleteEstacion(idEstacion);
-      history.replace('/estaciones');
-    }
+    showConfirm({
+      title: ' Confirmar',
+      body: `Seguro que quiere borrar la estación ${idEstacion}:\n\n "${
+        row.nombre
+      }"`,
+      yesLabel: 'Sí',
+      yesColor: 'danger',
+      noLabel: 'No',
+    }).then(resp => {
+      if (resp) {
+        deleteEstacion(idEstacion);
+        history.replace('/estaciones');
+      }
+    });
   };
   return (
     <Fragment>
@@ -101,6 +107,7 @@ const Estaciones = ({
 
 Estaciones.propTypes = {
   estaciones: PropTypes.arrayOf(estacionShape),
+  showConfirm: PropTypes.func,
 };
 
-export default Estaciones;
+export default Modal.withConfirm(Estaciones);
