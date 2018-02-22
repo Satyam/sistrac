@@ -261,7 +261,12 @@ export default Modal.withPrompt(Example);
 
 The component to show the modal box should be wrapped with the HoC version of the modal required. All of them can be used in the same component by composing them using any of the `compose` methods available in modules such as Recompose or Redux, that is why each of them have their `showXxxx` named differently.
 
-Each of the `showXxxx` functions takes an object with the same properties as the attributes on the corresponding modal helper. They all return a Promise which will resolve to the value that would be expected from the original helper, that is:
+Each of the `showXxxx` functions takes an object with the same properties as the attributes on the corresponding modal helper, except:
+
+* `open` is obviously ignored, since you are calling a function to show it.
+* `body` an extra property to set the contents of the center box, it replaces the `children` in the regular components.
+
+They all return a Promise which will resolve to the value that would be expected from the original helper, that is:
 
 * nothing from `showAlert` since the alert box can only be closed and offers no options.
 * `true`, `false` or `null` from `showConfirm`.
