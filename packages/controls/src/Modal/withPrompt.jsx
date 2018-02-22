@@ -9,25 +9,11 @@ const withPrompt = BaseComponent =>
     }
     showPrompt = args => {
       if (args) {
-        const {
-          title = '',
-          body = '',
-          initialValue = '',
-          yesLabel,
-          yesColor,
-          noLabel,
-          placeholder = '',
-        } = args;
+        const { body, ...rest } = args;
         const self = this;
         return new Promise(resolve => {
           self.setState({
-            title,
-            initialValue,
-            yesLabel,
-            yesColor,
-            noLabel,
-            noColor,
-            placeholder,
+            ...rest,
             children: body,
             open: true,
             reset: true,

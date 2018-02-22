@@ -9,23 +9,11 @@ const withConfirm = BaseComponent =>
     }
     showConfirm = args => {
       if (args) {
-        const {
-          title = '',
-          body = '',
-          initialValue = '',
-          yesLabel,
-          yesColor,
-          noLabel,
-          placeholder = '',
-        } = args;
+        const { body, ...rest } = args;
         const self = this;
         return new Promise(resolve => {
           self.setState({
-            title,
-            yesLabel,
-            yesColor,
-            noLabel,
-            noColor,
+            ...rest,
             children: body,
             open: true,
           });
