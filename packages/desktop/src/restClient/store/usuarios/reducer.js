@@ -8,6 +8,8 @@ import {
 
 import {
   // NAME,
+
+  // --- Actions
   GET_USUARIOS,
   GET_USUARIO,
   // UPDATE_USUARIO,
@@ -16,15 +18,16 @@ import {
   LOGIN,
   LOGOUT,
   GET_USUARIO_ACTUAL,
+
+  // -- Various
+  STATUS_INITIAL,
+  STATUS_UNAUTHORIZED,
+  STATUS_LOGGED_IN,
+  STATUS_GETTING_CURRENT_USER,
+  STATUS_LOGGED_OUT,
 } from './constants';
 
 import { SESSION_TIMEOUT } from '_src/config';
-
-export const STATUS_INITIAL = 0;
-export const STATUS_UNAUTHORIZED = 1;
-export const STATUS_LOGGED_IN = 2;
-export const STATUS_GETTING_CURRENT_USER = 3;
-export const STATUS_LOGGED_OUT = 4;
 
 export default (
   state = { hash: {}, activo: null, vence: null, status: STATUS_INITIAL },

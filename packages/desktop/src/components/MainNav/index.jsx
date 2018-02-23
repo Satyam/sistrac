@@ -9,7 +9,7 @@ import {
   // STATUS_LOGGED_IN,
   // STATUS_GETTING_CURRENT_USER,
   // STATUS_LOGGED_OUT,
-} from '_store/usuarios/reducer';
+} from '_store/usuarios/constants';
 
 import { withRouterTypes, usuarioShape } from '_src/shapes';
 

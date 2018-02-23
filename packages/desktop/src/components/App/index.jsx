@@ -11,7 +11,7 @@ import {
   STATUS_LOGGED_OUT,
   // STATUS_LOGGED_IN,
   // STATUS_GETTING_CURRENT_USER,
-} from '_store/usuarios/reducer';
+} from '_store/usuarios/constants';
 
 import './styles.css';
 
