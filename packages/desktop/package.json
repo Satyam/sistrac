@@ -26,22 +26,19 @@
     "react-scripts": "^1.1.1",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "unstated": "^1.0.3"
   },
   "scripts": {
     "start": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts start",
-    "build":
-      "cross-env NODE_PATH=$NODE_PATH:./src/_ run-s build:clean build:compile",
+    "build": "cross-env NODE_PATH=$NODE_PATH:./src/_ run-s build:clean build:compile",
     "build:clean": "rimraf build",
     "build:compile": "react-scripts build",
-    "test":
-      "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts test --env=jsdom",
-    "test:debug":
-      "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
+    "test": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts test --env=jsdom",
+    "test:debug": "cross-env NODE_PATH=$NODE_PATH:./src/_ react-scripts --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .jsx,.js . || exit 0",
-    "analyze":
-      "run-p analyze:main analyze:login analyze:estaciones analyze:estacion analyze:editEstacion",
+    "analyze": "run-p analyze:main analyze:login analyze:estaciones analyze:estacion analyze:editEstacion",
     "analyze:main": "source-map-explorer build/static/js/main.*",
     "analyze:login": "source-map-explorer build/static/js/login.*",
     "analyze:estaciones": "source-map-explorer build/static/js/estaciones.*",
@@ -61,6 +58,9 @@
     "source-map-explorer": "^1.5.0"
   },
   "jest": {
-    "coverageReporters": ["html", "text"]
+    "coverageReporters": [
+      "html",
+      "text"
+    ]
   }
 }

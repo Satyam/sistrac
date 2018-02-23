@@ -20,5 +20,11 @@ module.exports = {
       _store: 'src/restClient/store',
       _src: 'src',
     },
+    unstated: {
+      _components: 'src/components',
+      _connectors: 'src/unstated/connectors',
+      _store: 'src/unstated/store',
+      _src: 'src',
+    },
   },
 };
