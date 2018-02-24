@@ -72,26 +72,26 @@ export default class Usuarios extends Container {
   };
 
   // these are mostly like actions:
-  login = (usuario, password) => {
+  login(usuario, password) {
     return api
       .update('/login', { usuario, password })
       .then(this.loggedIn)
       .catch(this.failureReceived);
-  };
-  logout = () => {
+  }
+  logout() {
     return api
       .read('/logout')
       .then(this.loggedOut)
       .catch(this.failureReceived);
-  };
-  getUsuarioActual = () => {
+  }
+  getUsuarioActual() {
     this.usuarioActualRequested();
     return api
       .read('/__actual')
       .then(this.loggedIn)
       .catch(this.failureReceived);
-  };
-  getUsuarios = usuarios => {
+  }
+  getUsuarios(usuarios) {
     let faltantes = [];
     if (usuarios) {
       faltantes = usuarios.filter(idUsuario => !this.state.hash[idUsuario]);
@@ -102,7 +102,8 @@ export default class Usuarios extends Container {
       .read(`/${faltantes.join(',')}`)
       .then(this.usuariosRead)
       .catch(this.failureReceived);
-  };
+  }
+
   // and these, the selectors:
   selUsuarioActivo() {
     const { activo, vence, hash } = this.state;
