@@ -54,7 +54,7 @@ const Estaciones = ({
     }).then(resp => {
       if (resp) {
         deleteEstacion(idEstacion);
-        history.replace('/estaciones');
+        // history.replace('/estaciones');
       }
     });
   };

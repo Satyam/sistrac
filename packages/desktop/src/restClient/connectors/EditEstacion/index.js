@@ -26,7 +26,7 @@ export const mapStateToProps = (state, { match }) => {
   if (estacion) return { estacion };
   return {};
 };
-export const mapDispatchToProps = (dispatch, { history }) => ({
+export const mapDispatchToProps = dispatch => ({
   onSave: async (nueva, estacion) => {
     if (nueva) {
       return dispatch(createEstacion(estacion));
