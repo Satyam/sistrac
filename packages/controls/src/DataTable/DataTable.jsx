@@ -23,12 +23,7 @@ class DataTable extends Component {
     this.readCols(props.children);
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps !== this.props) {
-      if (nextProps.children !== this.props.children) {
-        console.log('DataTable new children');
-        this.readCols(nextProps.children);
-      }
-    }
+    this.readCols(nextProps.children);
   }
   static defaultCompare(sortCol, a, b) {
     if (a[sortCol] < b[sortCol]) return -1;
