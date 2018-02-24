@@ -7,10 +7,11 @@ import { Row, Col } from '@devasatyam/controls/lib/Grid';
 
 import { withRouterTypes, usuarioShape } from '_src/shapes';
 
-const LoginForm = ({ onLogin, usuario }) => {
-  const formSubmit = values => {
+const LoginForm = ({ onLogin, usuario, history }) => {
+  const formSubmit = async values => {
     const { usuario, password } = values;
-    return onLogin(usuario, password);
+    await onLogin(usuario, password);
+    history.goBack();
   };
 
   const validate = ({ usuario, password }) => {

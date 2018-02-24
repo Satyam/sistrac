@@ -11,10 +11,7 @@ const connect = BaseComp => otherProps => (
     {usuarios => {
       const props = {
         usuario: usuarios.selUsuarioActivo(),
-        onLogin: async (username, password) => {
-          await usuarios.login(username, password);
-          await otherProps.history.goBack();
-        },
+        onLogin: (username, password) => usuarios.login(username, password),
       };
       return <BaseComp {...otherProps} {...props} />;
     }}

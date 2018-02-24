@@ -12,12 +12,8 @@ const connect = BaseComp => otherProps => (
       const props = {
         usuario: usuarios.selUsuarioActivo(),
         statusUsuario: usuarios.selStatusUsuario(),
-        logout: async () => {
-          await usuarios.logout();
-          await otherProps.history.replace('/');
-          return null;
-        },
-        getUsuarioActual: usuarios.getUsuarioActual,
+        logout: () => usuarios.logout(),
+        getUsuarioActual: () => usuarios.getUsuarioActual(),
       };
       return <BaseComp {...otherProps} {...props} />;
     }}

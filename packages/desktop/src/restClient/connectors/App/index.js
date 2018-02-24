@@ -13,12 +13,8 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch, { history }) => ({
-  logout: async () => {
-    await dispatch(logout());
-    await history.replace('/');
-    return null;
-  },
-  getUsuarioActual: async () => await dispatch(getUsuarioActual()),
+  logout: () => dispatch(logout()),
+  getUsuarioActual: () => dispatch(getUsuarioActual()),
 });
 
 export default compose(

@@ -35,7 +35,7 @@ export default class App extends Component {
       case '/logout':
         if (this.state.logingOut) break;
         this.setState({ logingOut: true });
-        logout();
+        logout().then(() => history.replace('/'));
         break;
       default:
         switch (statusUsuario) {
