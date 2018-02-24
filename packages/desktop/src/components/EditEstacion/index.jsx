@@ -42,8 +42,8 @@ const EditEstacion = ({
   const nueva = !match.params.idEstacion;
   const validateIdEstacion = simpleMemoize(async idEstacion => {
     if (!nueva || idEstacion.length < 3) return;
-    const action = await existeEstacion(idEstacion);
-    if (action.payload.exists) return 'Sigla en uso';
+    const existe = await existeEstacion(idEstacion);
+    if (existe) return 'Sigla en uso';
   });
   const formSubmit = (values, dispatch, props) => {
     console.log('submit', values);
