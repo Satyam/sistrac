@@ -29,7 +29,7 @@ export default class Usuarios extends Container {
             : STATUS_UNAUTHORIZED,
         prevStatus: null,
       });
-    } else throw new Error(err);
+    } else throw err;
   };
   usuarioActualRequested = () => {
     this.setState({
@@ -89,6 +89,9 @@ export default class Usuarios extends Container {
     return api
       .read('/__actual')
       .then(this.loggedIn)
+      .catch(err => {
+        if (err.code !== 404) throw err;
+      })
       .catch(this.failureReceived);
   }
   getUsuarios(usuarios) {
