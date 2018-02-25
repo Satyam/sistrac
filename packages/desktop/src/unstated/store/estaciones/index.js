@@ -7,16 +7,18 @@ import { NAME } from './constants';
 const api = restAPI(NAME);
 
 export default class Estaciones extends Container {
-  state = {};
+  state = { estaciones: {}, trenes: {} };
 
   getEstaciones() {
     return api.read('/').then(estaciones => {
-      this.setState(indexBy(estaciones, 'idEstacion', this.state));
+      this.setState({
+        estaciones: indexBy(estaciones, 'idEstacion', this.state.estaciones),
+      });
     });
   }
   getEstacion(idEstacion) {
     return api.read(`/${idEstacion}`).then(estacion => {
-      this.setState({ [estacion.idEstacion]: estacion });
+      this.setState({ estaciones: { [estacion.idEstacion]: estacion } });
     });
   }
   existeEstacion(idEstacion) {
@@ -31,13 +33,11 @@ export default class Estaciones extends Container {
   }
 
   getTrenesEstacion(idEstacion) {
-    const estacion = this.state[idEstacion];
-    if (estacion.trenes) return;
     return api.read(`/trenes/${idEstacion}`).then(trenes => {
       this.setState({
-        [idEstacion]: {
-          ...this.state[idEstacion],
-          trenes: trenes.map(tren => ({
+        trenes: {
+          ...this.state.trenes,
+          [idEstacion]: trenes.map(tren => ({
             ...tren,
             fecha: new Date(tren.fecha),
             idEstacion,
@@ -53,8 +53,10 @@ export default class Estaciones extends Container {
       .then(success => {
         if (success) {
           this.setState({
-            ...this.state,
-            [estacion.idEstacion]: estacion,
+            estaciones: {
+              ...this.state.estaciones,
+              [estacion.idEstacion]: estacion,
+            },
           });
         }
         return success;
@@ -64,28 +66,30 @@ export default class Estaciones extends Container {
   updateEstacion(idEstacion, estacion) {
     return api.update(idEstacion, estacion).then(() => {
       this.setState({
-        ...this.state,
-        [estacion.idEstacion]: estacion,
+        estaciones: {
+          ...this.state.estaciones,
+          [estacion.idEstacion]: estacion,
+        },
       });
     });
   }
 
   deleteEstacion(idEstacion) {
     return api.delete(idEstacion).then(() => {
-      const { [idEstacion]: deleted, ...rest } = this.state;
-      this.setState(rest, true);
+      const { [idEstacion]: deleted, ...rest } = this.state.estaciones;
+      this.setState({ estaciones: rest });
     });
   }
 
   selEstaciones() {
-    return Object.values(this.state);
+    return Object.values(this.state.estaciones);
   }
 
   selEstacion(idEstacion) {
-    return this.state[idEstacion];
+    return this.state.estaciones[idEstacion];
   }
 
   selTrenesPorEstacion(idEstacion) {
-    return this.state[idEstacion].trenes;
+    return this.state.trenes[idEstacion];
   }
 }
