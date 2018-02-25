@@ -11,8 +11,6 @@ import {
   GET_TRENES_ESTACION,
 } from './constants';
 
-import { selEstacion } from './selectors';
-
 const api = restAPI(NAME);
 
 export function getEstaciones() {
@@ -54,10 +52,8 @@ export function existeEstacion(idEstacion) {
 }
 
 export function getTrenesEstacion(idEstacion) {
-  return (dispatch, getState) => {
-    const estacion = selEstacion(getState(), idEstacion);
-    if (estacion.trenes) return;
-    return dispatch({
+  return (dispatch, getState) =>
+    dispatch({
       type: GET_TRENES_ESTACION,
       payload: {
         idEstacion,
@@ -72,11 +68,9 @@ export function getTrenesEstacion(idEstacion) {
         return ts;
       }),
     });
-  };
 }
 
 export function createEstacion(data) {
-  console.log('createEstacion', data);
   return dispatch =>
     dispatch({
       type: CREATE_ESTACION,
@@ -88,7 +82,6 @@ export function createEstacion(data) {
 }
 
 export function updateEstacion(idEstacion, data) {
-  console.log('updateEstacion', idEstacion, data);
   return dispatch =>
     dispatch({
       type: UPDATE_ESTACION,
