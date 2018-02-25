@@ -50,7 +50,7 @@ export function existeEstacion(idEstacion) {
           throw err;
         },
       ),
-    });
+    }).then(action => action.payload.exists);
 }
 
 export function getTrenesEstacion(idEstacion) {
