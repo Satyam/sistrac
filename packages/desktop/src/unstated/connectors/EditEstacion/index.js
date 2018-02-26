@@ -16,12 +16,11 @@ export const mapProps = (estaciones, { match }) => {
   const idEstacion = match && match.params.idEstacion;
   return {
     estacion: estaciones.selEstacion(idEstacion),
-    onSave: async (nueva, estacion) => {
+    onSave: (nueva, estacion) => {
       if (nueva) {
         return estaciones.createEstacion(estacion);
       }
-      const { idEstacion, ...data } = estacion;
-      return estaciones.updateEstacion(idEstacion, data);
+      return estaciones.updateEstacion(estacion);
     },
     existeEstacion: idEstacion => estaciones.existeEstacion(idEstacion),
   };

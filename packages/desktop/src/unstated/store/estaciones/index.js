@@ -63,8 +63,8 @@ export default class Estaciones extends Container {
       });
   }
 
-  updateEstacion(idEstacion, estacion) {
-    return api.update(idEstacion, estacion).then(() => {
+  updateEstacion(estacion) {
+    return api.update(estacion.idEstacion, estacion).then(() => {
       this.setState({
         estaciones: {
           ...this.state.estaciones,
