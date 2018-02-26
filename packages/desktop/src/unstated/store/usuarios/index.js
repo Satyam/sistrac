@@ -56,6 +56,7 @@ export default class Usuarios extends Container {
     this.setState({
       hash: indexBy(usuarios, 'idUsuario', this.state.hash),
     });
+    return usuarios;
   };
   loggedIn = usuario => {
     const { idUsuario } = usuario;
@@ -65,6 +66,7 @@ export default class Usuarios extends Container {
       hash: { ...this.state.hash, [idUsuario]: usuario },
       status: STATUS_LOGGED_IN,
     });
+    return usuario;
   };
   loggedOut = () => {
     this.setState({

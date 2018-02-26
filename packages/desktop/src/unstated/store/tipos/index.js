@@ -15,6 +15,7 @@ export default class Tipos extends Container {
       this.setState({
         eventos: indexBy(eventos, 'idTipoEvento'),
       });
+      return eventos;
     });
   }
 
@@ -24,6 +25,7 @@ export default class Tipos extends Container {
       this.setState({
         emergencias: indexBy(emergencias, 'idTipoEmergencia'),
       });
+      return emergencias;
     });
   }
 

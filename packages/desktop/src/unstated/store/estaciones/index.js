@@ -14,11 +14,13 @@ export default class Estaciones extends Container {
       this.setState({
         estaciones: indexBy(estaciones, 'idEstacion', this.state.estaciones),
       });
+      return estaciones;
     });
   }
   getEstacion(idEstacion) {
     return api.read(`/${idEstacion}`).then(estacion => {
       this.setState({ estaciones: { [estacion.idEstacion]: estacion } });
+      return estacion;
     });
   }
   existeEstacion(idEstacion) {
@@ -44,6 +46,7 @@ export default class Estaciones extends Container {
           })),
         },
       });
+      return trenes;
     });
   }
   createEstacion(estacion) {

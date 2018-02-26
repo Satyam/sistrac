@@ -19,6 +19,7 @@ export default class Eventos extends Container {
   getEventosPorTren(idTren) {
     return api.read(`/tren/${idTren}`).then(eventos => {
       this.setState({ eventos: indexBy(eventos, 'idEvento') });
+      return eventos;
     });
   }
 
