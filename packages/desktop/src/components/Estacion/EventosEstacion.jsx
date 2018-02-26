@@ -13,7 +13,7 @@ const formatUsuario = (value, evento) => (
 const formatTren = (value, evento) => (
   <Link to={`/trenes/${evento.idTren}`}>{value}</Link>
 );
-const EventosPorEstacion = ({ sortCol, sortDesc, eventos, getUsuarios }) => (
+const EventosPorEstacion = ({ sortCol, sortDesc, eventos }) => (
   <DataTable
     striped
     bordered
@@ -53,7 +53,6 @@ EventosPorEstacion.propTypes = {
   sortCol: PropTypes.string,
   sortDesc: PropTypes.bool,
   eventos: PropTypes.arrayOf(PropTypes.object),
-  getUsuarios: PropTypes.func,
 };
 
 export default EventosPorEstacion;

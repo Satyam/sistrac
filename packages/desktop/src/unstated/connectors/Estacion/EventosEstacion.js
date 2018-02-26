@@ -25,7 +25,6 @@ export const mapProps = (eventos, usuarios, tipos, { idEstacion }) => {
       numeroTren: evento.idTren,
       usuario: (usuarios.selUsuario(evento.idUsuario) || {}).nombre,
     })),
-    getUsuarios: idUsuarios => usuarios.getUsuarios(idUsuarios),
   };
 };
 

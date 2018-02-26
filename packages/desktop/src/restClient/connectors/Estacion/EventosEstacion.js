@@ -21,7 +21,9 @@ import Eventos from '_components/Estacion/EventosEstacion';
 
 export const storeInitializer = (dispatch, getState, { idEstacion }, prev) =>
   Promise.all([
-    dispatch(getEventosPorEstacion(idEstacion)),
+    dispatch(getEventosPorEstacion(idEstacion)).then(action =>
+      dispatch(getUsuarios(action.payload.map(evento => evento.idUsuario))),
+    ),
     dispatch(loadTiposEventos()),
     dispatch(loadTiposEmergencias()),
   ]);
@@ -39,11 +41,6 @@ export const mapStateToProps = (state, { idEstacion }) => {
   };
 };
 
-export const mapDispatchToProps = dispatch => ({
-  getUsuarios: idUsuarios => dispatch(getUsuarios(idUsuarios)),
-});
-
-export default compose(
-  initStore(storeInitializer),
-  connect(mapStateToProps, mapDispatchToProps),
-)(Eventos);
+export default compose(initStore(storeInitializer), connect(mapStateToProps))(
+  Eventos,
+);
