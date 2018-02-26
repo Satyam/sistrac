@@ -46,24 +46,9 @@ const EditEstacion = ({
     if (existe) return 'Sigla en uso';
   });
   const formSubmit = (values, dispatch, props) => {
-    console.log('submit', values);
     onSave(nueva, values);
     history.push(nueva ? '/estaciones' : `/estacion/${values.idEstacion}`);
   };
-  // formSubmit = ev => {
-  //   if (isPlainClick(ev)) {
-  //     if (!this.validates()) return;
-  //     const st = this.state;
-  //     delete st.duplicado;
-  //     this.props
-  //       .onSave({
-  //         ...st,
-  //         latitud: parseFloat(st.latitud),
-  //         longitud: parseFloat(st.longitud),
-  //       })
-  //       .then(exito => this.setState({ duplicado: !exito }));
-  //   }
-  // };
 
   return (
     <Form
