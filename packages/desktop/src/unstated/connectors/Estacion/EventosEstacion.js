@@ -1,8 +1,36 @@
-import React from 'react';
-// import { Subscribe } from 'unstated';
+import connect from '_connectors/utils/connect';
 
 import Eventos from '_components/Estacion/EventosEstacion';
+import eventosStore from '_store/eventos';
+import usuariosStore from '_store/usuarios';
+import tiposStore from '_store/tipos';
 
-const connect = BaseComp => otherProps => <BaseComp {...otherProps} />;
+export const init = (eventos, usuarios, tipos, { idEstacion }) =>
+  Promise.all([
+    eventos
+      .getEventosPorEstacion(idEstacion)
+      .then(eventos =>
+        usuarios.getUsuarios(eventos.map(evento => evento.idUsuario)),
+      ),
+    tipos.loadTiposEventos(),
+    tipos.loadTiposEmergencias(),
+  ]);
 
-export default connect(Eventos);
+export const mapProps = (eventos, usuarios, tipos, { idEstacion }) => {
+  return {
+    eventos: eventos.selEventosPorEstacion(idEstacion).map(evento => ({
+      ...evento,
+      descrEvento: tipos.selDescrEvento(evento.idTipoEvento),
+      descrEmergencia: tipos.selDescrEmergencia(evento.idTipoEmergencia),
+      numeroTren: evento.idTren,
+      usuario: (usuarios.selUsuario(evento.idUsuario) || {}).nombre,
+    })),
+    getUsuarios: idUsuarios => usuarios.getUsuarios(idUsuarios),
+  };
+};
+
+export default connect(
+  [eventosStore, usuariosStore, tiposStore],
+  mapProps,
+  init,
+)(Eventos);

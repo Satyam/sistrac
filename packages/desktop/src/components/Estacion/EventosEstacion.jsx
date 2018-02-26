@@ -13,47 +13,41 @@ const formatUsuario = (value, evento) => (
 const formatTren = (value, evento) => (
   <Link to={`/trenes/${evento.idTren}`}>{value}</Link>
 );
-const EventosPorEstacion = ({ sortCol, sortDesc, eventos, getUsuarios }) => {
-  if (eventos.length) {
-    const idUsuarios = eventos.map(evento => evento.idUsuario);
-    getUsuarios(idUsuarios);
-  }
-  return (
-    <DataTable
-      striped
-      bordered
-      compact
-      hover
-      keyName="idEvento"
-      data={eventos}
-      sortCol={sortCol || 'fecha'}
-      sortDesc={sortDesc}
-    >
-      <DataTable.Col name="fecha" label="Fecha" sortable format={formatFecha} />
-      <DataTable.Col
-        name="descrEvento"
-        label="Evento"
-        sortable
-        format={formatDescrEvento}
-      />
-      <DataTable.Col
-        name="usuario"
-        label="Usuario"
-        sortable
-        format={formatUsuario}
-      />
-      <DataTable.Col
-        name="numeroTren"
-        label="Tren"
-        sortable
-        format={formatTren}
-      />
-      <DataTable.Col name="observaciones" label="Observaciones" sortable />
-      <DataTable.Col name="velocidad" label="Velocidad" sortable />
-      <DataTable.Col name="descrEmergencia" label="Emergencia" sortable />
-    </DataTable>
-  );
-};
+const EventosPorEstacion = ({ sortCol, sortDesc, eventos, getUsuarios }) => (
+  <DataTable
+    striped
+    bordered
+    compact
+    hover
+    keyName="idEvento"
+    data={eventos}
+    sortCol={sortCol || 'fecha'}
+    sortDesc={sortDesc}
+  >
+    <DataTable.Col name="fecha" label="Fecha" sortable format={formatFecha} />
+    <DataTable.Col
+      name="descrEvento"
+      label="Evento"
+      sortable
+      format={formatDescrEvento}
+    />
+    <DataTable.Col
+      name="usuario"
+      label="Usuario"
+      sortable
+      format={formatUsuario}
+    />
+    <DataTable.Col
+      name="numeroTren"
+      label="Tren"
+      sortable
+      format={formatTren}
+    />
+    <DataTable.Col name="observaciones" label="Observaciones" sortable />
+    <DataTable.Col name="velocidad" label="Velocidad" sortable />
+    <DataTable.Col name="descrEmergencia" label="Emergencia" sortable />
+  </DataTable>
+);
 
 EventosPorEstacion.propTypes = {
   sortCol: PropTypes.string,
