@@ -49,7 +49,7 @@ export default class Usuarios extends Container {
       ),
     });
   };
-  usuariosRead = () => usuarios => {
+  usuariosRead = usuarios => {
     this.setState({
       hash: indexBy(usuarios, 'idUsuario', this.state.hash),
     });
