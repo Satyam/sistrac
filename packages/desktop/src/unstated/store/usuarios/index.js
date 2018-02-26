@@ -20,17 +20,20 @@ export default class Usuarios extends Container {
   state = { hash: {}, activo: null, vence: null, status: STATUS_INITIAL };
   failureReceived = err => {
     if (err.code === 401) {
-      this.setState({
-        activo: null,
-        vence: null,
-        status:
-          this.state.prevStatus === STATUS_INITIAL
-            ? STATUS_LOGGED_OUT
-            : STATUS_UNAUTHORIZED,
-        prevStatus: null,
-      });
+      this.noUsuarioActual();
     } else throw err;
   };
+  noUsuarioActual() {
+    this.setState({
+      activo: null,
+      vence: null,
+      status:
+        this.state.prevStatus === STATUS_INITIAL
+          ? STATUS_LOGGED_OUT
+          : STATUS_UNAUTHORIZED,
+      prevStatus: null,
+    });
+  }
   usuarioActualRequested = () => {
     this.setState({
       status: STATUS_GETTING_CURRENT_USER,
@@ -90,9 +93,12 @@ export default class Usuarios extends Container {
       .read('/__actual')
       .then(this.loggedIn)
       .catch(err => {
-        if (err.code !== 404) throw err;
-      })
-      .catch(this.failureReceived);
+        if (err.code === 404 || err.code === 401) {
+          this.noUsuarioActual();
+        } else {
+          throw err;
+        }
+      });
   }
   getUsuarios(usuarios) {
     let faltantes = [];
