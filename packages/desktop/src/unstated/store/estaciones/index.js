@@ -1,3 +1,4 @@
+// @flow
 import { Container } from 'unstated';
 import restAPI from '_store/utils/restAPI';
 import indexBy from '_store/utils/indexBy';
@@ -6,10 +7,14 @@ import { NAME } from './constants';
 
 const api = restAPI(NAME);
 
-export default class Estaciones extends Container {
+type EstacionesState = {
+  estaciones: { [IdEstacion]: Estacion },
+  trenes: { [IdEstacion]: Array<Tren> },
+};
+export default class Estaciones extends Container<EstacionesState> {
   state = { estaciones: {}, trenes: {} };
 
-  getEstaciones() {
+  getEstaciones(): Promise<Array<Estacion>> {
     return api.read('/').then(estaciones => {
       this.setState({
         estaciones: indexBy(estaciones, 'idEstacion', this.state.estaciones),
@@ -17,13 +22,13 @@ export default class Estaciones extends Container {
       return estaciones;
     });
   }
-  getEstacion(idEstacion) {
+  getEstacion(idEstacion: IdEstacion): Promise<Estacion> {
     return api.read(`/${idEstacion}`).then(estacion => {
       this.setState({ estaciones: { [estacion.idEstacion]: estacion } });
       return estacion;
     });
   }
-  existeEstacion(idEstacion) {
+  existeEstacion(idEstacion: IdEstacion): Promise<boolean> {
     return api.read(`/existe/${idEstacion}`).then(
       () => true,
 
@@ -34,7 +39,7 @@ export default class Estaciones extends Container {
     );
   }
 
-  getTrenesEstacion(idEstacion) {
+  getTrenesEstacion(idEstacion: IdEstacion): Promise<Array<Tren>> {
     return api.read(`/trenes/${idEstacion}`).then(trenes => {
       this.setState({
         trenes: {
@@ -49,7 +54,7 @@ export default class Estaciones extends Container {
       return trenes;
     });
   }
-  createEstacion(estacion) {
+  createEstacion(estacion: Estacion): Promise<boolean> {
     return api
       .create('/', estacion)
       .then(() => true, () => false)
@@ -66,7 +71,7 @@ export default class Estaciones extends Container {
       });
   }
 
-  updateEstacion(estacion) {
+  updateEstacion(estacion: Estacion): Promise<boolean> {
     return api.update(estacion.idEstacion, estacion).then(() => {
       this.setState({
         estaciones: {
@@ -77,22 +82,22 @@ export default class Estaciones extends Container {
     });
   }
 
-  deleteEstacion(idEstacion) {
+  deleteEstacion(idEstacion: IdEstacion): Promise<boolean> {
     return api.delete(idEstacion).then(() => {
       const { [idEstacion]: deleted, ...rest } = this.state.estaciones;
       this.setState({ estaciones: rest });
     });
   }
 
-  selEstaciones() {
+  selEstaciones(): Array<Estacion> {
     return Object.values(this.state.estaciones);
   }
 
-  selEstacion(idEstacion) {
+  selEstacion(idEstacion: IdEstacion): Estacion {
     return this.state.estaciones[idEstacion];
   }
 
-  selTrenesPorEstacion(idEstacion) {
+  selTrenesPorEstacion(idEstacion: IdEstacion): Array<Tren> {
     return this.state.trenes[idEstacion];
   }
 }

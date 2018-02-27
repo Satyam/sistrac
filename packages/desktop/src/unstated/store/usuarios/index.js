@@ -1,3 +1,4 @@
+// @flow
 import { Container } from 'unstated';
 import restAPI from '_store/utils/restAPI';
 import indexBy from '_store/utils/indexBy';
@@ -15,15 +16,28 @@ import {
 
 const api = restAPI(NAME);
 
-export default class Usuarios extends Container {
+type UsuariosState = {
+  hash: { [IdUsuario]: Usuario },
+  activo: ?IdUsuario,
+  vence: ?number,
+  status: number,
+  prevStatus: ?number,
+};
+export default class Usuarios extends Container<UsuariosState> {
   // these are mostly like the reducers
-  state = { hash: {}, activo: null, vence: null, status: STATUS_INITIAL };
-  failureReceived = err => {
+  state = {
+    hash: {},
+    activo: null,
+    vence: null,
+    status: STATUS_INITIAL,
+    prevStatus: null,
+  };
+  failureReceived = (err: Error): void => {
     if (err.code === 401) {
       this.noUsuarioActual();
     } else throw err;
   };
-  noUsuarioActual() {
+  noUsuarioActual(): void {
     this.setState({
       activo: null,
       vence: null,
@@ -34,13 +48,13 @@ export default class Usuarios extends Container {
       prevStatus: null,
     });
   }
-  usuarioActualRequested = () => {
+  usuarioActualRequested = (): void => {
     this.setState({
       status: STATUS_GETTING_CURRENT_USER,
       prevStatus: this.state.status,
     });
   };
-  usuariosRequested = idUsuarios => {
+  usuariosRequested = (idUsuarios: Array<IdUsuario>): void => {
     if (!idUsuarios) return;
     this.setState({
       hash: idUsuarios.reduce(
@@ -52,13 +66,13 @@ export default class Usuarios extends Container {
       ),
     });
   };
-  usuariosRead = usuarios => {
+  usuariosRead = (usuarios: Array<Usuario>): Array<Usuario> => {
     this.setState({
       hash: indexBy(usuarios, 'idUsuario', this.state.hash),
     });
     return usuarios;
   };
-  loggedIn = usuario => {
+  loggedIn = (usuario: Usuario): Usuario => {
     const { idUsuario } = usuario;
     this.setState({
       activo: idUsuario,
@@ -68,7 +82,7 @@ export default class Usuarios extends Container {
     });
     return usuario;
   };
-  loggedOut = () => {
+  loggedOut = (): void => {
     this.setState({
       activo: null,
       vence: null,
@@ -77,19 +91,19 @@ export default class Usuarios extends Container {
   };
 
   // these are mostly like actions:
-  login(usuario, password) {
+  login(usuario: string, password: string): Promise<Usuario> {
     return api
       .update('/login', { usuario, password })
       .then(this.loggedIn)
       .catch(this.failureReceived);
   }
-  logout() {
+  logout(): Promise<void> {
     return api
       .read('/logout')
       .then(this.loggedOut)
       .catch(this.failureReceived);
   }
-  getUsuarioActual() {
+  getUsuarioActual(): Promise<Usuario> {
     this.usuarioActualRequested();
     return api
       .read('/__actual')
@@ -102,11 +116,11 @@ export default class Usuarios extends Container {
         }
       });
   }
-  getUsuarios(usuarios) {
+  getUsuarios(usuarios: Array<IdUsuario>): Promise<Array<Usuario>> {
     let faltantes = [];
     if (usuarios) {
       faltantes = usuarios.filter(idUsuario => !this.state.hash[idUsuario]);
-      if (!faltantes.length) return;
+      if (!faltantes.length) return Promise.resolve([]);
       this.usuariosRequested(faltantes);
     }
     return api
@@ -116,17 +130,17 @@ export default class Usuarios extends Container {
   }
 
   // and these, the selectors:
-  selUsuarioActivo() {
+  selUsuarioActivo(): Usuario | Object {
     const { activo, vence, hash } = this.state;
 
-    if (vence < Date.now()) return {};
+    if (vence && vence < Date.now()) return {};
     if (!activo) return {};
     return hash[activo];
   }
-  selStatusUsuario() {
+  selStatusUsuario(): number {
     return this.state.status;
   }
-  selUsuario(idUsuario) {
+  selUsuario(idUsuario: IdUsuario): Usuario {
     return this.state.hash[idUsuario];
   }
 }

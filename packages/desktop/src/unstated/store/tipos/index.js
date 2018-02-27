@@ -1,3 +1,4 @@
+// @flow
 import { Container } from 'unstated';
 import restAPI from '_store/utils/restAPI';
 import indexBy from '_store/utils/indexBy';
@@ -6,11 +7,16 @@ import { NAME } from './constants';
 
 const api = restAPI(NAME);
 
-export default class Tipos extends Container {
+type TiposState = {
+  eventos: { [IdTipoEvento]: TipoEvento },
+  emergencias: { [IdTipoEmergencia]: TipoEmergencia },
+};
+
+export default class Tipos extends Container<TiposState> {
   state = { eventos: {}, emergencias: {} };
 
-  loadTiposEventos() {
-    if (this.selHayTiposEventos()) return;
+  loadTiposEventos(): Promise<Array<TipoEvento>> {
+    if (this.selHayTiposEventos()) return Promise.resolve([]);
     return api.read('/eventos').then(eventos => {
       this.setState({
         eventos: indexBy(eventos, 'idTipoEvento'),
@@ -19,8 +25,8 @@ export default class Tipos extends Container {
     });
   }
 
-  loadTiposEmergencias() {
-    if (this.selHayTiposEmergencias()) return;
+  loadTiposEmergencias(): Promise<Array<TipoEmergencia>> {
+    if (this.selHayTiposEmergencias()) return Promise.resolve([]);
     return api.read('/emergencias').then(emergencias => {
       this.setState({
         emergencias: indexBy(emergencias, 'idTipoEmergencia'),
@@ -29,19 +35,19 @@ export default class Tipos extends Container {
     });
   }
 
-  selTiposEventos() {
+  selTiposEventos(): { [IdTipoEvento]: TipoEvento } {
     return this.state.eventos;
   }
 
-  selTiposEmergencias() {
+  selTiposEmergencias(): { [IdTipoEmergencia]: TipoEmergencia } {
     return this.state.emergencias;
   }
 
-  selTipoEvento(idTipoEvento) {
+  selTipoEvento(idTipoEvento: IdTipoEvento): TipoEvento {
     return this.state.eventos[idTipoEvento];
   }
 
-  selDescrEvento(idTipoEvento) {
+  selDescrEvento(idTipoEvento: IdTipoEvento): string {
     const ev = this.state.eventos[idTipoEvento];
     if (ev) {
       return `${ev.descr} ${ev.preposicion}`;
@@ -49,13 +55,16 @@ export default class Tipos extends Container {
     return '';
   }
 
-  selTipoEmergencia(idTipoEmergencia) {
+  selTipoEmergencia(idTipoEmergencia: IdTipoEmergencia): TipoEmergencia {
     return idTipoEmergencia
       ? this.state.emergencias[idTipoEmergencia]
-      : { descr: '' };
+      : {
+          idTipoEmergencia: 0,
+          descr: '-- falta descripción para esta emergencia --',
+        };
   }
 
-  selDescrEmergencia(idTipoEmergencia) {
+  selDescrEmergencia(idTipoEmergencia: IdTipoEmergencia): string {
     if (!idTipoEmergencia) return '';
     const em = this.state.emergencias[idTipoEmergencia];
     if (em) {
@@ -64,11 +73,11 @@ export default class Tipos extends Container {
     return '';
   }
 
-  selHayTiposEventos() {
+  selHayTiposEventos(): boolean {
     return Object.keys(this.state.eventos).length > 0;
   }
 
-  selHayTiposEmergencias() {
+  selHayTiposEmergencias(): boolean {
     return Object.keys(this.state.emergencias).length > 0;
   }
 }

@@ -7,5 +7,5 @@
 [lints]
 
 [options]
-
+module.name_mapper='^_\(.*\)' -> '<PROJECT_ROOT>/src/_/_\1'
 [strict]
