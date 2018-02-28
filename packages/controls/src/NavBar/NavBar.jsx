@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 class NavBar extends Component {
-  constructor(...args) {
-    super(...args);
-    this.state = { open: true };
-  }
+  state = { open: true };
   toggle = ev => {
     ev.preventDefault();
     this.setState({ open: !this.state.open });

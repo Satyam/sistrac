@@ -3,10 +3,7 @@ import Confirm from './Confirm';
 
 const withConfirm = BaseComponent =>
   class ConfirmToggler extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {};
-    }
+    state = {};
     showConfirm = args => {
       if (args) {
         const { body, ...rest } = args;

@@ -29,10 +29,7 @@ type AppState = {
   logingOut: boolean,
 };
 export default class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-    this.state = { logingOut: false };
-  }
+  state = { logingOut: false };
   checkLoggedIn = () => {
     const {
       usuario,

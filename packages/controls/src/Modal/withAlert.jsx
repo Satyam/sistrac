@@ -3,10 +3,7 @@ import Alert from './Alert';
 
 const withAlert = BaseComponent =>
   class AlertToggler extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {};
-    }
+    state = {};
     showAlert = args => {
       if (args) {
         const { body, ...rest } = args;

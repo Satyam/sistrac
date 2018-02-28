@@ -2,10 +2,7 @@
 import React, { Component } from 'react';
 
 export default class ErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: null, errorInfo: null };
-  }
+  state = { error: null, errorInfo: null };
 
   componentDidCatch(error, errorInfo) {
     // Catch errors in any components below and re-render with error message
@@ -34,4 +31,3 @@ export default class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-

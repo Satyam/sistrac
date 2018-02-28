@@ -5,10 +5,7 @@ import classNames from 'classnames';
 let counter = 0;
 
 class Menu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { open: false };
-  }
+  state = { open: false };
   toggleDropdown = ev => {
     ev.preventDefault();
     if (this.props.disabled) return;

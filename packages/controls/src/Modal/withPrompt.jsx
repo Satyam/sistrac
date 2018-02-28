@@ -3,10 +3,7 @@ import Prompt from './Prompt';
 
 const withPrompt = BaseComponent =>
   class PromptToggler extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {};
-    }
+    state = {};
     showPrompt = args => {
       if (args) {
         const { body, ...rest } = args;
