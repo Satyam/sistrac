@@ -1,7 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, type ComponentType } from 'react';
 import { Subscribe } from 'unstated';
+import type { ContainerType, ContainersType } from 'unstated';
 
-class Renderer extends Component {
+type States = ContainersType;
+type MapProps = States => {};
+type OrigProps = {};
+type Init = (States, OrigProps) => any;
+type RenrederProps = {
+  init: Init,
+  states: States,
+  origProps: OrigProps,
+  BaseComp: ComponentType<{}>,
+  mapProps: MapProps,
+};
+class Renderer extends Component<RenrederProps> {
   componentDidMount() {
     const { init, states, origProps } = this.props;
     if (init) {
@@ -14,7 +26,14 @@ class Renderer extends Component {
     return <BaseComp {...origProps} {...props} />;
   }
 }
-const connect = (to, mapProps, init) => BaseComp => origProps => (
+
+const connect = (
+  to: ContainerType | ContainersType,
+  mapProps: MapProps,
+  init?: Init,
+) => (BaseComp: ComponentType<any>): ComponentType<any> => (
+  origProps: OrigProps,
+) => (
   <Subscribe to={Array.isArray(to) ? to : [to]}>
     {(...states) => {
       const props = {

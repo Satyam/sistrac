@@ -25,9 +25,10 @@ export default class Eventos extends Container<EventosState> {
       return eventos;
     });
   }
-
+  // $FlowFixMe
   selEventosPorEstacion(idEstacion: IdEstacion): Array<Evento> {
     return Object.values(this.state.eventos).filter(
+      // $FlowFixMe
       evento => evento.idEstacion === idEstacion,
     );
     // The following works with flow, but it is otherwise absurd
@@ -36,9 +37,10 @@ export default class Eventos extends Container<EventosState> {
     //   .filter(idEvento => evts[Number(idEvento)].idEstacion === idEstacion)
     //   .map(idEvento => evts[Number(idEvento)]);
   }
-
+  // $FlowFixMe
   selEventosPorTren(idTren: IdTren): Array<Evento> {
     return Object.values(this.state.eventos).filter(
+      // $FlowFixMe
       evento => evento.idTren === idTren,
     );
   }

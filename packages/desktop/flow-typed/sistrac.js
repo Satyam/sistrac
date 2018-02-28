@@ -65,3 +65,21 @@ declare type Usuario = {|
   funcion: number,
   nombre: string,
 |};
+
+// for unstated connect:
+// import type { ContainerType, ContainersType } from 'unstated';
+//
+// type ConnectMapProps = ContainersType => {};
+// type ConnectInit = (ContainersType, OrigProps) => any;
+
+// Usuario actions:
+
+declare type Usuario_Login = (string, string) => Promise<Usuario>;
+declare type Usuario_Logout = () => Promise<void>;
+declare type Usuario_GetUsuarioActual = () => Promise<Usuario>;
+declare type Usuario_GetUsuarios = (
+  Array<IdUsuario>,
+) => Promise<Array<Usuario>>;
+declare type Usuario_SelUsuarioActivo = () => Usuario | Object;
+declare type Usuario_SelStatusUsuario = () => number;
+declare type Usuario_SelUsuario = (IdUsuario) => Usuario;

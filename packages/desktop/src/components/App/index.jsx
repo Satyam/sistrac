@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Grid } from '@devasatyam/controls/lib/Grid';
@@ -14,11 +15,23 @@ import {
 } from '_store/usuarios/constants';
 
 import './styles.css';
+import type { StatusUsuario } from '_store/usuarios/constants';
 
-export default class App extends Component {
-  constructor(...args) {
-    super(...args);
-    this.state = {};
+type AppProps = {
+  usuario: Usuario,
+  location: Location,
+  history: RouterHistory,
+  logout: () => Promise<void>,
+  statusUsuario: StatusUsuario,
+  getUsuarioActual: () => Promise<Usuario>,
+};
+type AppState = {
+  logingOut: boolean,
+};
+export default class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = { logingOut: false };
   }
   checkLoggedIn = () => {
     const {
@@ -61,7 +74,7 @@ export default class App extends Component {
   componentDidUpdate = () => {
     this.checkLoggedIn();
   };
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: AppProps) {
     return (
       this.props.statusUsuario !== nextProps.statusUsuario ||
       this.props.location.pathname !== nextProps.location.pathname

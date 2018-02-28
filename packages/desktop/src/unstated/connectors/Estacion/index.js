@@ -1,3 +1,4 @@
+// @flow
 import connect from '_connectors/utils/connect';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -5,7 +6,10 @@ import { compose } from 'recompose';
 import Estacion from '_components/Estacion';
 import estacionesStore from '_store/estaciones';
 
-export const init = (estaciones, { match }) => {
+export const init = (
+  estaciones: estacionesStore,
+  { match }: { match: Match },
+) => {
   const idEstacion = match && match.params.idEstacion;
   if (idEstacion) {
     return (
@@ -14,7 +18,10 @@ export const init = (estaciones, { match }) => {
   }
 };
 
-export const mapProps = (estaciones, { match }) =>
+export const mapProps = (
+  estaciones: estacionesStore,
+  { match }: { match: Match },
+) =>
   match
     ? {
         estacion: estaciones.selEstacion(match.params.idEstacion),

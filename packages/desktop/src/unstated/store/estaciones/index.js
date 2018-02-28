@@ -89,6 +89,7 @@ export default class Estaciones extends Container<EstacionesState> {
     });
   }
 
+  // $FlowFixMe
   selEstaciones(): Array<Estacion> {
     return Object.values(this.state.estaciones);
   }

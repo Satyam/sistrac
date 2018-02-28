@@ -1,3 +1,4 @@
+// @flow
 import connect from '_connectors/utils/connect';
 
 import Eventos from '_components/Estacion/EventosEstacion';
@@ -5,7 +6,12 @@ import eventosStore from '_store/eventos';
 import usuariosStore from '_store/usuarios';
 import tiposStore from '_store/tipos';
 
-export const init = (eventos, usuarios, tipos, { idEstacion }) =>
+export const init = (
+  eventos: eventosStore,
+  usuarios: usuariosStore,
+  tipos: tiposStore,
+  { idEstacion }: { idEstacion: IdEstacion },
+) =>
   Promise.all([
     eventos
       .getEventosPorEstacion(idEstacion)
@@ -16,7 +22,12 @@ export const init = (eventos, usuarios, tipos, { idEstacion }) =>
     tipos.loadTiposEmergencias(),
   ]);
 
-export const mapProps = (eventos, usuarios, tipos, { idEstacion }) => {
+export const mapProps = (
+  eventos: eventosStore,
+  usuarios: usuariosStore,
+  tipos: tiposStore,
+  { idEstacion }: { idEstacion: IdEstacion },
+) => {
   return {
     eventos: eventos.selEventosPorEstacion(idEstacion).map(evento => ({
       ...evento,
