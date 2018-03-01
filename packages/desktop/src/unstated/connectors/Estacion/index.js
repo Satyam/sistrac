@@ -1,12 +1,13 @@
 // @flow
 import connect from '_connectors/utils/connect';
+import type { MapProps, Init } from '_connectors/utils/connect';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import Estacion from '_components/Estacion';
 import estacionesStore from '_store/estaciones';
 
-export const init = (
+export const init: Init = (
   estaciones: estacionesStore,
   { match }: { match: Match },
 ) => {
@@ -18,7 +19,7 @@ export const init = (
   }
 };
 
-export const mapProps = (
+export const mapProps: MapProps = (
   estaciones: estacionesStore,
   { match }: { match: Match },
 ) =>

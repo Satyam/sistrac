@@ -14,14 +14,13 @@ import {
   STATUS_LOGGED_OUT,
 } from './constants';
 
-import type { StatusUsuario } from './constants';
 const api = restAPI(NAME);
 
 type UsuariosState = {
   hash: { [IdUsuario]: Usuario },
   activo: ?IdUsuario,
   vence: ?number,
-  status: StatusUsuario,
+  status: Usuario_Status,
   prevStatus: ?number,
 };
 export default class Usuarios extends Container<UsuariosState> {

@@ -15,15 +15,14 @@ import {
 } from '_store/usuarios/constants';
 
 import './styles.css';
-import type { StatusUsuario } from '_store/usuarios/constants';
 
 type AppProps = {
   usuario: Usuario,
   location: Location,
   history: RouterHistory,
-  logout: () => Promise<void>,
-  statusUsuario: StatusUsuario,
-  getUsuarioActual: () => Promise<Usuario>,
+  logout: Usuario_Logout,
+  statusUsuario: Usuario_Status,
+  getUsuarioActual: Usuario_GetUsuarioActual,
 };
 type AppState = {
   logingOut: boolean,

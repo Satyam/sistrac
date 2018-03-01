@@ -1,10 +1,11 @@
 // @flow
 import connect from '_connectors/utils/connect';
+import type { MapProps, Init } from '_connectors/utils/connect';
 
 import TrenesPorEstacion from '_components/Estacion/TrenesPorEstacion';
 import estacionesStore from '_store/estaciones';
 
-export const init = (
+export const init: Init = (
   estaciones: estacionesStore,
   { idEstacion }: { idEstacion: IdEstacion },
 ) => {
@@ -12,7 +13,7 @@ export const init = (
     return estaciones.getTrenesEstacion(idEstacion);
 };
 
-export const mapProps = (
+export const mapProps: MapProps = (
   estaciones: estacionesStore,
   { idEstacion }: { idEstacion: IdEstacion },
 ) => ({
