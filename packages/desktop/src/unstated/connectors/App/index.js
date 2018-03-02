@@ -7,7 +7,7 @@ import { compose } from 'recompose';
 import usuariosStore from '_store/usuarios';
 import App from '_components/App';
 
-export const mapProps: MapProps = (usuarios: usuariosStore) => ({
+export const mapProps: MapProps<usuariosStore> = usuarios => ({
   usuario: usuarios.selUsuarioActivo(),
   statusUsuario: usuarios.selStatusUsuario(),
   logout: () => usuarios.logout(),

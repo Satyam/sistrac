@@ -5,8 +5,8 @@ import type { ContainerType, ContainersType } from 'unstated';
 
 type OrigProps = Object;
 
-export type MapProps = (ContainersType, OrigProps | void) => {};
-export type Init = (ContainersType, OrigProps | void) => any;
+export type MapProps<Container: ContainerType> = (Container, OrigProps) => {};
+export type Init<Container: ContainerType> = (Container, OrigProps) => any;
 
 type RendererProps = {
   init?: Init,

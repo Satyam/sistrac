@@ -1,13 +1,13 @@
-// @flow
+// @ flow
 import connect from '_connectors/utils/connect';
-import type { MapProps, Init } from '_connectors/utils/connect';
+import type { MapProps3, Init3 } from '_connectors/utils/connect';
 
 import Eventos from '_components/Estacion/EventosEstacion';
 import eventosStore from '_store/eventos';
 import usuariosStore from '_store/usuarios';
 import tiposStore from '_store/tipos';
 
-export const init: Init = (
+export const init: Init3 = (
   eventos: eventosStore,
   usuarios: usuariosStore,
   tipos: tiposStore,
@@ -23,7 +23,7 @@ export const init: Init = (
     tipos.loadTiposEmergencias(),
   ]);
 
-export const mapProps: MapProps = (
+export const mapProps: MapProps3 = (
   eventos: eventosStore,
   usuarios: usuariosStore,
   tipos: tiposStore,

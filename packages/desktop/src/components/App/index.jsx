@@ -5,6 +5,10 @@ import { Grid } from '@devasatyam/controls/lib/Grid';
 import MainNav from '_connectors/MainNav';
 import Routes from '_components/Routes';
 import { withRouterTypes, usuarioShape } from '_src/shapes';
+import type {
+  RouterHistory,
+  Location as RouterLocation,
+} from 'react-router-dom';
 
 import {
   STATUS_INITIAL,
@@ -18,7 +22,7 @@ import './styles.css';
 
 type AppProps = {
   usuario: Usuario,
-  location: Location,
+  location: RouterLocation,
   history: RouterHistory,
   logout: Usuario_Logout,
   statusUsuario: Usuario_Status,

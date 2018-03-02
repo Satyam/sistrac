@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import usuariosStore from '_store/usuarios';
 import LoginForm from '_components/LoginForm';
 
-export const mapProps: MapProps = (usuarios: usuariosStore) => ({
+export const mapProps: MapProps<usuariosStore> = usuarios => ({
   usuario: usuarios.selUsuarioActivo(),
   onLogin: (username: string, password: string) =>
     usuarios.login(username, password),

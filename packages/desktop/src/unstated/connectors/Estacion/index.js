@@ -6,12 +6,12 @@ import { compose } from 'recompose';
 
 import Estacion from '_components/Estacion';
 import estacionesStore from '_store/estaciones';
-
-export const init: Init = (
-  estaciones: estacionesStore,
-  { match }: { match: Match },
+import type { Match } from 'react-router-dom';
+export const init: Init<estacionesStore> = (
+  estaciones,
+  { match }: { match?: Match },
 ) => {
-  const idEstacion = match && match.params.idEstacion;
+  const idEstacion: ?IdEstacion = match && match.params.idEstacion;
   if (idEstacion) {
     return (
       estaciones.selEstacion(idEstacion) || estaciones.getEstacion(idEstacion)
@@ -19,16 +19,18 @@ export const init: Init = (
   }
 };
 
-export const mapProps: MapProps = (
-  estaciones: estacionesStore,
-  { match }: { match: Match },
-) =>
-  match
+export const mapProps: MapProps<estacionesStore> = (
+  estaciones,
+  { match }: { match?: Match },
+) => {
+  const idEstacion: ?IdEstacion = match && match.params.idEstacion;
+
+  return idEstacion
     ? {
-        estacion: estaciones.selEstacion(match.params.idEstacion),
+        estacion: estaciones.selEstacion(idEstacion),
       }
     : {};
-
+};
 export default compose(withRouter, connect(estacionesStore, mapProps, init))(
   Estacion,
 );
