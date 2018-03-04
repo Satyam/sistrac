@@ -17,11 +17,27 @@ type RendererProps = {
 };
 
 class Renderer extends Component<RendererProps> {
+  shouldRender = true;
+  mounted = false;
+  shouldComponentUpdate() {
+    return this.shouldRender;
+  }
   componentDidMount() {
     const { init, states, origProps } = this.props;
+    this.mounted = true;
     if (init) {
-      init(...states, origProps);
+      const p = init(...states, origProps);
+      if (p && typeof p.then === 'function') {
+        this.shouldRender = false;
+        p.then(() => {
+          this.shouldRender = true;
+          if (this.mounted) this.forceUpdate();
+        });
+      }
     }
+  }
+  componentWillUnmount() {
+    this.mounted = false;
   }
   render() {
     const { BaseComp, origProps, mapProps, states } = this.props;
@@ -29,6 +45,10 @@ class Renderer extends Component<RendererProps> {
     return <BaseComp {...origProps} {...props} />;
   }
 }
+
+const SimpleRenderer = ({ BaseComp, origProps, mapProps, states }) => (
+  <BaseComp {...origProps} {...mapProps(...states, origProps)} />
+);
 
 const connect = (
   to: Class<ContainerType> | Array<Class<ContainerType>>,
@@ -46,7 +66,7 @@ const connect = (
         origProps,
         states,
       };
-      return <Renderer {...props} />;
+      return init ? <Renderer {...props} /> : <SimpleRenderer {...props} />;
     }}
   </Subscribe>
 );
