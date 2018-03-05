@@ -11,7 +11,7 @@ export function readEstaciones() {
 export async function existeEstacionPorNombre(nombre) {
   const result = await db.queryRow(
     'select count(*) as hay from Estaciones where nombre = ?',
-    [nombre],
+    [nombre]
   );
   return result.hay === 1;
 }
@@ -19,7 +19,7 @@ export async function existeEstacionPorNombre(nombre) {
 export async function existeEstacion(idEstacion) {
   const result = await db.queryRow(
     'select count(*) as hay from Estaciones where idEstacion = ?',
-    [idEstacion],
+    [idEstacion]
   );
   return result.hay === 1;
 }
@@ -27,14 +27,14 @@ export async function existeEstacion(idEstacion) {
 export async function updateEstacion(idEstacion, data) {
   const result = await db.query(
     'update Estaciones set ? where idEstacion = ?',
-    [data, idEstacion],
+    [data, idEstacion]
   );
   return result.affectedRows === 1;
 }
 
 export function readEstacion(idEstacion) {
   return db.queryRow('select * from Estaciones where idEstacion = ?', [
-    idEstacion,
+    idEstacion
   ]);
 }
 
@@ -56,7 +56,7 @@ export async function createEstacion(data) {
 
 export async function deleteEstacion(idEstacion) {
   const result = await db.query('delete from Estaciones where idEstacion = ?', [
-    idEstacion,
+    idEstacion
   ]);
   return result.affectedRows === 1;
 }
@@ -84,6 +84,9 @@ WHERE
 ORDER BY
   idItinerario,
   llega`,
-    idEstacion,
+    idEstacion
   );
+}
+export function readEventosPorEstacion(idEstacion) {
+  return db.query('SELECT * FROM `Eventos` WHERE idEstacion = ?', [idEstacion]);
 }

@@ -9,6 +9,7 @@ import {
   createEstacion,
   deleteEstacion,
   readBreveTrenesPorEstacion,
+  readEventosPorEstacion
 } from '../dbOps/estaciones';
 
 import {
@@ -16,7 +17,7 @@ import {
   CREATED,
   NOT_FOUND,
   NO_CONTENT,
-  CONFLICT,
+  CONFLICT
 } from '../utils/httpStatusCodes';
 
 export default async function(dataRouter, path) {
@@ -67,6 +68,10 @@ export default async function(dataRouter, path) {
 
   dataRouter.get(relPath('/trenes/:idEstacion'), async (req, res) => {
     const resp = await readBreveTrenesPorEstacion(req.params.idEstacion);
+    res.json(resp);
+  });
+  dataRouter.get(relPath('/eventos/:idEstacion'), async (req, res) => {
+    const resp = await readEventosPorEstacion(req.params.idEstacion);
     res.json(resp);
   });
 }

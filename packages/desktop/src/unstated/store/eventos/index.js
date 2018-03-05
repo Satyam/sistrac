@@ -12,13 +12,6 @@ type EventosState = {
 export default class Eventos extends Container<EventosState> {
   state = { eventos: {} };
 
-  getEventosPorEstacion(idEstacion: IdEstacion): Promise<Array<Evento>> {
-    return api.read(`/estacion/${idEstacion}`).then(eventos => {
-      this.setState({ eventos: indexBy(eventos, 'idEvento') });
-      return eventos;
-    });
-  }
-
   getEventosPorTren(idTren: IdTren): Promise<Array<Evento>> {
     return api.read(`/tren/${idTren}`).then(eventos => {
       this.setState({ eventos: indexBy(eventos, 'idEvento') });
@@ -26,22 +19,21 @@ export default class Eventos extends Container<EventosState> {
     });
   }
   // $FlowFixMe
-  selEventosPorEstacion(idEstacion: IdEstacion): Array<Evento> {
-    return Object.values(this.state.eventos).filter(
-      // $FlowFixMe
-      evento => evento.idEstacion === idEstacion,
-    );
-    // The following works with flow, but it is otherwise absurd
-    // const evts = this.state.eventos;
-    // return Object.keys(evts)
-    //   .filter(idEvento => evts[Number(idEvento)].idEstacion === idEstacion)
-    //   .map(idEvento => evts[Number(idEvento)]);
-  }
-  // $FlowFixMe
   selEventosPorTren(idTren: IdTren): Array<Evento> {
     return Object.values(this.state.eventos).filter(
       // $FlowFixMe
       evento => evento.idTren === idTren,
     );
+  }
+
+  loadEventos: (Array<Evento>) => Array<Evento> = eventos => {
+    this.setState({
+      eventos: indexBy(eventos, 'idEvento', this.state.eventos),
+    });
+    return eventos;
+  };
+
+  selEvento(idEvento: IdEvento): Evento {
+    return this.state.eventos[idEvento];
   }
 }

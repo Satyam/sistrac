@@ -10,9 +10,10 @@ const api = restAPI(NAME);
 type EstacionesState = {
   estaciones: { [IdEstacion]: Estacion },
   trenes: { [IdEstacion]: Array<IdTren> },
+  eventos: { [IdEstacion]: Array<IdEvento> },
 };
 export default class Estaciones extends Container<EstacionesState> {
-  state = { estaciones: {}, trenes: {} };
+  state = { estaciones: {}, trenes: {}, eventos: {} };
 
   getEstaciones(): Promise<Array<Estacion>> {
     return api.read('/').then(estaciones => {
@@ -55,6 +56,24 @@ export default class Estaciones extends Container<EstacionesState> {
         return trenes;
       });
   }
+
+  getEventosPorEstacion(idEstacion: IdEstacion): Promise<Array<Evento>> {
+    return api
+      .read(`/eventos/${idEstacion}`)
+      .then(eventos =>
+        eventos.map(evento => ({ ...evento, fecha: new Date(evento.fecha) })),
+      )
+      .then(eventos => {
+        this.setState({
+          eventos: {
+            ...this.state.eventos,
+            [idEstacion]: eventos.map(evento => evento.idEvento),
+          },
+        });
+        return eventos;
+      });
+  }
+
   createEstacion(estacion: Estacion): Promise<boolean> {
     return api
       .create('/', estacion)
@@ -101,5 +120,9 @@ export default class Estaciones extends Container<EstacionesState> {
 
   selTrenesPorEstacion(idEstacion: IdEstacion): Array<IdTren> {
     return this.state.trenes[idEstacion];
+  }
+
+  selEventosPorEstacion(idEstacion: IdEstacion): Array<IdEvento> {
+    return this.state.eventos[idEstacion];
   }
 }
