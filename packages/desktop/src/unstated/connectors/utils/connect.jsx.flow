@@ -1,0 +1,43 @@
+
+import type { ContainerType, ContainersType } from 'unstated';
+import * as React from 'react';
+
+type OrigProps = Object;
+
+declare type MapProps<Container: ContainerType> = (Container, OrigProps) => {};
+declare type Init<Container: ContainerType> = (Container, OrigProps) => any;
+
+declare type RendererProps = {
+  BaseComp: React.ComponentType<{}>,
+  mapProps: MapProps<ContainerType>,
+  init?: Init<ContainerType>,
+  states: ContainersType,
+  origProps: OrigProps,
+};
+
+declare class Renderer extends React.Component<RendererProps> {
+shouldRender: boolean,
+mounted: boolean
+}
+
+declare function SimpleRenderer  (RendererProps):React.Node;
+
+declare function connect<ST1: Class<ContainerType>>  (
+  to: ST1,
+  mapProps: (ST1, OrigProps) => {},
+  init?: (ST1, OrigProps) => any,
+): React.ComponentType<any>
+
+declare function connect<ST1: Class<ContainerType>, ST2: Class<ContainerType>>  (
+  to: Array<Class<ContainerType>>,
+  mapProps: (ST1, ST2, OrigProps) => {},
+  init?: (ST1, ST2, OrigProps) => any,
+): React.ComponentType<any>
+
+declare function connect<ST1: Class<ContainerType>, ST2: Class<ContainerType>, ST3: Class<ContainerType>>  (
+  to: Array<Class<ContainerType>>,
+  mapProps: (ST1, ST2, ST3, OrigProps) => {},
+  init?: (ST1, ST2, ST3, OrigProps) => any,
+): React.ComponentType<any>
+
+declare type BaseComp = (OrigProps) => React.Node;

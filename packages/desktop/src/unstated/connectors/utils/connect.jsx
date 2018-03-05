@@ -1,22 +1,7 @@
-// @flow
-import React, { Component, type ComponentType } from 'react';
+import React, { Component } from 'react';
 import { Subscribe } from 'unstated';
-import type { ContainerType, ContainersType } from 'unstated';
 
-type OrigProps = Object;
-
-export type MapProps<Container: ContainerType> = (Container, OrigProps) => {};
-export type Init<Container: ContainerType> = (Container, OrigProps) => any;
-
-type RendererProps = {
-  init?: Init,
-  states: ContainersType,
-  origProps: OrigProps,
-  BaseComp: ComponentType<{}>,
-  mapProps: MapProps,
-};
-
-class Renderer extends Component<RendererProps> {
+class Renderer extends Component {
   shouldRender = true;
   mounted = false;
   shouldComponentUpdate() {
@@ -50,25 +35,20 @@ const SimpleRenderer = ({ BaseComp, origProps, mapProps, states }) => (
   <BaseComp {...origProps} {...mapProps(...states, origProps)} />
 );
 
-const connect = (
-  to: Class<ContainerType> | Array<Class<ContainerType>>,
-  mapProps: MapProps,
-  init?: Init,
-) => (BaseComp: ComponentType<any>): ComponentType<any> => (
-  origProps: OrigProps,
-) => (
-  <Subscribe to={Array.isArray(to) ? to : [to]}>
-    {(...states) => {
-      const props: RendererProps = {
-        init,
-        mapProps,
-        BaseComp,
-        origProps,
-        states,
-      };
-      return init ? <Renderer {...props} /> : <SimpleRenderer {...props} />;
-    }}
-  </Subscribe>
-);
-
+function connect(to, mapProps, init) {
+  return BaseComp => origProps => (
+    <Subscribe to={Array.isArray(to) ? to : [to]}>
+      {(...states) => {
+        const props = {
+          init,
+          mapProps,
+          BaseComp,
+          origProps,
+          states,
+        };
+        return init ? <Renderer {...props} /> : <SimpleRenderer {...props} />;
+      }}
+    </Subscribe>
+  );
+}
 export default connect;
