@@ -1,6 +1,7 @@
 import { REPLY_RECEIVED } from '_store/utils/promiseMiddleware';
 
-import { GET_EVENTOS_POR_ESTACION, GET_EVENTOS_POR_TREN } from './constants';
+import { GET_EVENTOS_POR_TREN } from './constants';
+import { GET_EVENTOS_POR_ESTACION } from '../estaciones/constants';
 
 import indexBy from '_store/utils/indexBy';
 

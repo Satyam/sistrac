@@ -21,9 +21,10 @@ import Eventos from '_components/Estacion/EventosEstacion';
 
 export const storeInitializer = (dispatch, getState, { idEstacion }, prev) =>
   Promise.all([
-    dispatch(getEventosPorEstacion(idEstacion)).then(action =>
-      dispatch(getUsuarios(action.payload.map(evento => evento.idUsuario))),
-    ),
+    selEventosPorEstacion(getState(), idEstacion).length ||
+      dispatch(getEventosPorEstacion(idEstacion)).then(action =>
+        dispatch(getUsuarios(action.payload.map(evento => evento.idUsuario))),
+      ),
     dispatch(loadTiposEventos()),
     dispatch(loadTiposEmergencias()),
   ]);

@@ -9,7 +9,7 @@ import { selTrenesPorEstacion } from '_store/selectors';
 import TrenesPorEstacion from '_components/Estacion/TrenesPorEstacion';
 
 export const storeInitializer = (dispatch, getState, { idEstacion }) => {
-  if (!selTrenesPorEstacion(getState(), idEstacion))
+  if (!selTrenesPorEstacion(getState(), idEstacion).length)
     return dispatch(getTrenesEstacion(idEstacion));
 };
 

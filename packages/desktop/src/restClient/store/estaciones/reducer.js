@@ -13,9 +13,8 @@ import {
   CREATE_ESTACION,
   DELETE_ESTACION,
   GET_TRENES_ESTACION,
+  GET_EVENTOS_POR_ESTACION,
 } from './constants';
-
-import { GET_EVENTOS_POR_ESTACION } from '_store/eventos/constants';
 
 export default (state = {}, action) => {
   if (action && action.stage && action.stage !== REPLY_RECEIVED) return state;
@@ -35,7 +34,7 @@ export default (state = {}, action) => {
         ...state,
         [idEstacion]: {
           ...state[idEstacion],
-          trenes: action.payload,
+          trenes: action.payload.map(tren => tren.idTren),
         },
       };
     }

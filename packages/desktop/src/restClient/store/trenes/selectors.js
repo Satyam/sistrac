@@ -1,2 +1,5 @@
-// eslint-disable-next-line
 import { NAME } from './constants';
+
+export function selTren(state, idTren) {
+  return state[NAME][idTren];
+}
