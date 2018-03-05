@@ -1,6 +1,6 @@
 import {
   REPLY_RECEIVED,
-  // REQUEST_SENT,
+  REQUEST_SENT,
   // FAILURE_RECEIVED,
 } from '_store/utils/promiseMiddleware';
 
@@ -17,53 +17,86 @@ import {
 } from './constants';
 
 export default (state = {}, action) => {
-  if (action && action.stage && action.stage !== REPLY_RECEIVED) return state;
-  switch (action.type) {
-    case GET_ESTACIONES:
-      return indexBy(action.payload, 'idEstacion', state);
-    case GET_ESTACION: {
-      const estacion = action.payload;
-      return {
-        ...state,
-        [estacion.idEstacion]: estacion,
-      };
-    }
-    case GET_TRENES_ESTACION: {
-      const idEstacion = action.payload.idEstacion;
-      return {
-        ...state,
-        [idEstacion]: {
-          ...state[idEstacion],
-          trenes: action.payload.map(tren => tren.idTren),
-        },
-      };
-    }
-    case GET_EVENTOS_POR_ESTACION: {
-      const idEstacion = action.payload.idEstacion;
-      return {
-        ...state,
-        [idEstacion]: {
-          ...state[idEstacion],
-          eventos: action.payload.map(evento => evento.idEvento),
-        },
-      };
-    }
-    case CREATE_ESTACION:
-      return {
-        ...state,
-        [action.payload.idEstacion]: action.payload,
-      };
-
-    case UPDATE_ESTACION:
-      return {
-        ...state,
-        [action.payload.idEstacion]: action.payload,
-      };
-    case DELETE_ESTACION: {
-      const { [action.payload.idEstacion]: deleted, ...rest } = state;
-      return rest;
+  const stage = action && action.stage;
+  switch (stage) {
+    case REQUEST_SENT: {
+      switch (action.type) {
+        case GET_TRENES_ESTACION: {
+          const idEstacion = action.payload.idEstacion;
+          return {
+            ...state,
+            [idEstacion]: {
+              ...state[idEstacion],
+              trenes: [],
+            },
+          };
+        }
+        case GET_EVENTOS_POR_ESTACION: {
+          const idEstacion = action.payload.idEstacion;
+          return {
+            ...state,
+            [idEstacion]: {
+              ...state[idEstacion],
+              eventos: [],
+            },
+          };
+        }
+        default:
+          return state;
+      }
     }
 
+    case REPLY_RECEIVED: {
+      switch (action.type) {
+        case GET_ESTACIONES:
+          return indexBy(action.payload, 'idEstacion', state);
+        case GET_ESTACION: {
+          const estacion = action.payload;
+          return {
+            ...state,
+            [estacion.idEstacion]: estacion,
+          };
+        }
+        case GET_TRENES_ESTACION: {
+          const idEstacion = action.payload.idEstacion;
+          return {
+            ...state,
+            [idEstacion]: {
+              ...state[idEstacion],
+              trenes: action.payload.map(tren => tren.idTren),
+            },
+          };
+        }
+        case GET_EVENTOS_POR_ESTACION: {
+          const idEstacion = action.payload.idEstacion;
+          return {
+            ...state,
+            [idEstacion]: {
+              ...state[idEstacion],
+              eventos: action.payload.map(evento => evento.idEvento),
+            },
+          };
+        }
+        case CREATE_ESTACION:
+          return {
+            ...state,
+            [action.payload.idEstacion]: action.payload,
+          };
+
+        case UPDATE_ESTACION:
+          return {
+            ...state,
+            [action.payload.idEstacion]: action.payload,
+          };
+        case DELETE_ESTACION: {
+          const { [action.payload.idEstacion]: deleted, ...rest } = state;
+          return rest;
+        }
+
+        default:
+          return state;
+      }
+    }
     default:
       return state;
   }

@@ -9,12 +9,14 @@ import { selTrenesPorEstacion } from '_store/selectors';
 import TrenesPorEstacion from '_components/Estacion/TrenesPorEstacion';
 
 export const storeInitializer = (dispatch, getState, { idEstacion }) => {
-  if (!selTrenesPorEstacion(getState(), idEstacion).length)
-    return dispatch(getTrenesEstacion(idEstacion));
+  return (
+    selTrenesPorEstacion(getState(), idEstacion) ||
+    dispatch(getTrenesEstacion(idEstacion))
+  );
 };
 
 export const mapStateToProps = (state, { idEstacion }) => {
-  return { trenes: selTrenesPorEstacion(state, idEstacion) };
+  return { trenes: selTrenesPorEstacion(state, idEstacion) || [] };
 };
 
 export default compose(initStore(storeInitializer), connect(mapStateToProps))(

@@ -12,11 +12,11 @@ export function selEstacion(state, idEstacion) {
 
 export function selTrenesPorEstacion(state, idEstacion) {
   const trenes = state[NAME][idEstacion].trenes;
-  return trenes ? trenes.map(idTren => selTren(state, idTren)) : [];
+  return trenes && trenes.map(idTren => selTren(state, idTren));
 }
 
 export function selEventosPorEstacion(state, idEstacion) {
   const eventos = state[NAME][idEstacion].eventos;
 
-  return eventos ? eventos.map(idEvento => selEvento(state, idEvento)) : [];
+  return eventos && eventos.map(idEvento => selEvento(state, idEvento));
 }

@@ -21,7 +21,7 @@ import Eventos from '_components/Estacion/EventosEstacion';
 
 export const storeInitializer = (dispatch, getState, { idEstacion }, prev) =>
   Promise.all([
-    selEventosPorEstacion(getState(), idEstacion).length ||
+    selEventosPorEstacion(getState(), idEstacion) ||
       dispatch(getEventosPorEstacion(idEstacion)).then(action =>
         dispatch(getUsuarios(action.payload.map(evento => evento.idUsuario))),
       ),
@@ -30,7 +30,7 @@ export const storeInitializer = (dispatch, getState, { idEstacion }, prev) =>
   ]);
 
 export const mapStateToProps = (state, { idEstacion }) => {
-  const eventos = selEventosPorEstacion(state, idEstacion);
+  const eventos = selEventosPorEstacion(state, idEstacion) || [];
   return {
     eventos: eventos.map(evento => ({
       ...evento,
