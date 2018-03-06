@@ -5,8 +5,8 @@ import Eventos from '_components/Estacion/EventosEstacion';
 
 export default graphql(
   gql`
-    query {
-      eventos(idEstacion: "RET") {
+    query($idEstacion: ID!) {
+      eventos(idEstacion: $idEstacion) {
         idEvento
         fecha
         usuario {
@@ -43,6 +43,11 @@ export default graphql(
       })),
       getUsuarios(...args) {
         console.log('getUsuarios', ...args);
+      },
+    }),
+    options: props => ({
+      variables: {
+        idEstacion: props.idEstacion,
       },
     }),
   },

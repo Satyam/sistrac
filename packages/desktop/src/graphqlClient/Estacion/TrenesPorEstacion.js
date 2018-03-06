@@ -5,8 +5,8 @@ import TrenesPorEstacion from '_components/Estacion/TrenesPorEstacion';
 
 export default graphql(
   gql`
-    query {
-      trenes(idEstacion: "RET") {
+    query($idEstacion: ID!) {
+      trenes(idEstacion: $idEstacion) {
         idTren
         itinerario {
           idItinerario
@@ -25,6 +25,11 @@ export default graphql(
         fecha: new Date(tren.fecha),
         ...tren.itinerario,
       })),
+    }),
+    options: props => ({
+      variables: {
+        idEstacion: props.idEstacion,
+      },
     }),
   },
 )(TrenesPorEstacion);

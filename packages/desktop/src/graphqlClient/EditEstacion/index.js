@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import Estacion from '_components/Estacion';
+import EditEstacion from '_components/EditEstacion';
 
 export default compose(
   withRouter,
@@ -27,4 +27,4 @@ export default compose(
       }),
     },
   ),
-)(Estacion);
+)(EditEstacion);
