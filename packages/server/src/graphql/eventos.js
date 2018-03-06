@@ -1,10 +1,6 @@
-import {
-  readEventosPorTren,
-  readEventosPorEstacion,
-  readEvento,
-} from '../dbOps/eventos';
+import { readEventosPorTren, readEvento } from '../dbOps/eventos';
 import { readUsuario } from '../dbOps/usuarios';
-import { readEstacion } from '../dbOps/estaciones';
+import { readEstacion, readEventosPorEstacion } from '../dbOps/estaciones';
 import { readTipoEvento, readTipoEmergencia } from '../dbOps/tipos';
 import { readTren } from '../dbOps/trenes';
 
@@ -38,7 +34,7 @@ export const resolvers = {
       return [];
     },
 
-    evento: (parent, { idEvento }) => readEvento(parseInt(idEvento, 10)),
+    evento: (parent, { idEvento }) => readEvento(parseInt(idEvento, 10))
   },
 
   Evento: {
@@ -56,6 +52,6 @@ export const resolvers = {
     },
     tren({ idTren }) {
       return readTren(idTren);
-    },
-  },
+    }
+  }
 };
