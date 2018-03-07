@@ -14,7 +14,7 @@ import {
   STATUS_LOGGED_OUT,
   STATUS_LOGGED_IN,
   STATUS_GETTING_CURRENT_USER,
-} from '../reducer';
+} from '../constants';
 
 const usuario = {
   idUsuario: 20,
