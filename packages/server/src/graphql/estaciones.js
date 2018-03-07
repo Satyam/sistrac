@@ -18,12 +18,22 @@ extend type Query {
   estaciones: [Estacion]
   estacion(idEstacion: ID): Estacion
 }
+
+extend type Mutation {
+  createEstacion(idEstacion: ID!, nombre: String, latitud: Float, longitud: Float): Estacion
+}
 `;
 
 export const resolvers = {
   Query: {
     estaciones: () => readEstaciones(),
-    estacion: (parent, { idEstacion }) => readEstacion(idEstacion),
+    estacion: (parent, { idEstacion }) => readEstacion(idEstacion)
+  },
+  Mutation: {
+    createEstacion: (parent, props) => {
+      console.log('createEstacion', props);
+      return readEstacion('RET');
+    }
   },
   Estacion: {
     itinerarios({ idEstacion }) {
@@ -34,6 +44,6 @@ export const resolvers = {
     },
     eventos({ idEstacion }) {
       return readEventosPorEstacion(idEstacion);
-    },
-  },
+    }
+  }
 };
