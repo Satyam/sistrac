@@ -45,7 +45,7 @@ const EditEstacion = ({
     const existe = await existeEstacion(idEstacion);
     if (existe) return 'Sigla en uso';
   });
-  const formSubmit = (values, dispatch, props) => {
+  const formSubmit = values => {
     onSave(nueva, values);
     history.push(nueva ? '/estaciones' : `/estacion/${values.idEstacion}`);
   };
