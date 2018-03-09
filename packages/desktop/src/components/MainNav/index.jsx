@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NavBar from '@devasatyam/controls/lib/NavBar';
+import { NavBar } from '@devasatyam/react-bootstrap-4-controls';
 import Person from 'react-icons/lib/go/person';
 import Stop from 'react-icons/lib/go/stop';
 import {

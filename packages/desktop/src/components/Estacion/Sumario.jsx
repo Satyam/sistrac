@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from '@devasatyam/controls/lib/Grid';
+import { Row, Col } from '@devasatyam/react-bootstrap-4-controls';
 import formatCoords from 'formatcoords';
 
 export default function SumarioEstacion({ estacion }) {

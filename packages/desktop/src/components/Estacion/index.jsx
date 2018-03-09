@@ -1,7 +1,10 @@
 import React from 'react';
-import Tabs from '@devasatyam/controls/lib/Tabs';
-import { Row, Col } from '@devasatyam/controls/lib/Grid';
-import Jumbotron from '@devasatyam/controls/lib/Jumbotron';
+import {
+  Tabs,
+  Row,
+  Col,
+  Jumbotron,
+} from '@devasatyam/react-bootstrap-4-controls';
 import { Helmet } from 'react-helmet';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 

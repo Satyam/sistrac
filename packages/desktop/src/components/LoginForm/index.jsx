@@ -1,9 +1,12 @@
 import React from 'react';
 
-import { Form, Field } from '@devasatyam/controls/lib/Form';
-import { Button } from '@devasatyam/controls/lib/Button';
-
-import { Row, Col } from '@devasatyam/controls/lib/Grid';
+import {
+  Form,
+  Field,
+  Row,
+  Col,
+  Button,
+} from '@devasatyam/react-bootstrap-4-controls';
 
 import { withRouterTypes, usuarioShape } from '_src/shapes';
 

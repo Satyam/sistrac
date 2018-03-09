@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import DataTable from '@devasatyam/controls/lib/DataTable';
-import { Row, Col } from '@devasatyam/controls/lib/Grid';
-import { Button } from '@devasatyam/controls/lib/Button';
-import { Modal } from '@devasatyam/controls/lib/Modal';
+import {
+  DataTable,
+  Row,
+  Col,
+  Button,
+  Modal,
+} from '@devasatyam/react-bootstrap-4-controls';
 import Plus from 'react-icons/lib/go/plus';
 import Trashcan from 'react-icons/lib/go/trashcan';
 import Pencil from 'react-icons/lib/go/pencil';

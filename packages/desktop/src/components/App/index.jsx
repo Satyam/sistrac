@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { Grid } from '@devasatyam/controls/lib/Grid';
+import { Grid } from '@devasatyam/react-bootstrap-4-controls';
 import MainNav from '_connectors/MainNav';
 import Routes from '_components/Routes';
 import { withRouterTypes, usuarioShape } from '_src/shapes';

@@ -1,7 +1,11 @@
 import React from 'react';
-import { Button } from '@devasatyam/controls/lib/Button';
-import { Form, Field } from '@devasatyam/controls/lib/Form';
-import { Row, Col } from '@devasatyam/controls/lib/Grid';
+import {
+  Button,
+  Form,
+  Field,
+  Row,
+  Col,
+} from '@devasatyam/react-bootstrap-4-controls';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import formatcoords from 'formatcoords';
 import simpleMemoize from '_components/utils/simpleMemoize';

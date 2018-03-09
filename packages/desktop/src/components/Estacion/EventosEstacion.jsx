@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import DataTable from '@devasatyam/controls/lib/DataTable';
+import { DataTable } from '@devasatyam/react-bootstrap-4-controls';
 
 const formatFecha = value => value.toLocaleString();
 const formatDescrEvento = (value, evento) => (
