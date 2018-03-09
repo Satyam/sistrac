@@ -13,7 +13,7 @@ import {
   STATUS_LOGGED_OUT,
   STATUS_LOGGED_IN,
   // STATUS_GETTING_CURRENT_USER,
-} from '_store/usuarios/reducer';
+} from '_store/usuarios/constants';
 
 const mockStore = configureStore([reduxThunk, promiseMiddleware]);
 
@@ -134,12 +134,20 @@ describe('App component', () => {
     });
 
     it('logging out', () => {
+      const logout = jest.fn();
+      const then = jest.fn();
+      const replace = jest.fn();
+      logout.mockReturnValue({ then });
       const props = {
         ...initialProps,
         usuario: {},
         statusUsuario: STATUS_LOGGED_IN,
         location: {
           pathname: '/logout',
+        },
+        logout,
+        history: {
+          replace,
         },
       };
       mount(
@@ -150,8 +158,12 @@ describe('App component', () => {
         </Provider>,
       );
       expect(getUsuarioActual.mock.calls.length).toBe(0);
-      expect(push.mock.calls.length).toBe(0);
       expect(logout.mock.calls.length).toBe(1);
+      expect(then.mock.calls.length).toBe(1);
+      expect(typeof then.mock.calls[0][0]).toBe('function');
+      then.mock.calls[0][0]();
+      expect(replace.mock.calls.length).toBe(1);
+      expect(replace.mock.calls[0][0]).toBe('/');
     });
 
     it('should push to /login when unauthorized', () => {

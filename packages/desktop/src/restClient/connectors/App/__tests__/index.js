@@ -10,7 +10,7 @@ import { REPLY_RECEIVED, REQUEST_SENT } from '_store/utils/promiseMiddleware';
 import {
   STATUS_LOGGED_OUT,
   // STATUS_GETTING_CURRENT_USER,
-} from '_store/usuarios/reducer';
+} from '_store/usuarios/constants';
 
 import { mapStateToProps, mapDispatchToProps } from '..';
 
@@ -68,13 +68,8 @@ describe('App REST Connector', () => {
     });
 
     it('provide logout prop', async () => {
-      const replace = jest.fn();
       fetchMock.getOnce(`${HOST}/logout`, {});
-      const props = mapDispatchToProps(emptyStore.dispatch, {
-        history: {
-          replace,
-        },
-      });
+      const props = mapDispatchToProps(emptyStore.dispatch, {});
       expect(typeof props.logout).toBe('function');
       await props.logout();
       const actions = emptyStore.getActions();
@@ -88,9 +83,6 @@ describe('App REST Connector', () => {
         stage: REPLY_RECEIVED,
         payload: {},
       });
-      const calls = replace.mock.calls;
-      expect(calls.length).toBe(1);
-      expect(calls[0][0]).toBe('/');
     });
 
     it('provide getUsuarioActual prop no one', async () => {
