@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "description": "Sistrac - Desktop Client Version",
   "dependencies": {
-    "@devasatyam/react-bootstrap-4-controls": "^0.1.1",
+    "@devasatyam/react-bootstrap-4-controls": "^0.1.3",
     "apollo-client-preset": "^1.0.8",
-    "bootstrap": "^4.0.0",
     "bootswatch": "^4.0.0",
     "final-form": "^4.2.1",
     "formatcoords": "^1.1.3",
