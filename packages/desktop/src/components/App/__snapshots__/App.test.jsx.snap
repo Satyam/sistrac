@@ -4,7 +4,10 @@ exports[`App component raw component should render (shallow) 1`] = `
 <div
   className="App"
 >
-  <HelmetWrapper>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+  >
     <title>
       Sistrac
     </title>
@@ -20,7 +23,10 @@ exports[`App component raw component should render a blank screen when there is 
 <div
   className="App"
 >
-  <HelmetWrapper>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+  >
     <title>
       Sistrac
     </title>
