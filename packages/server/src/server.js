@@ -41,6 +41,7 @@ app.use(
 
 app.use(
   '/graphql',
+  // authenticate,
   bodyParser.json(),
   graphqlExpress({
     schema: buildSchema(resolve(__dirname, './graphql')),
