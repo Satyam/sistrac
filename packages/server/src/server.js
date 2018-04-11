@@ -8,9 +8,8 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import buildSchema from './utils/buildSchema';
 
-import { REST_PORT, REST_API_PATH, APP_HOST, APP_PORT } from './config';
+import buildSchema from './utils/buildSchema';
 
 import { init as dbInit, close as dbClose } from './dbOps';
 import restServers from './restServers';
@@ -34,7 +33,9 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: `${APP_HOST}:${APP_PORT}`,
+    origin: `${process.env.REACT_APP_APP_HOST}:${
+      process.env.REACT_APP_APP_PORT
+    }`,
     credentials: true,
   }),
 );
@@ -57,7 +58,12 @@ app.use(
 
 const dataRouter = createRouter();
 
-app.use(REST_API_PATH, authenticate, bodyParser.json(), dataRouter);
+app.use(
+  process.env.REACT_APP_REST_PATH,
+  authenticate,
+  bodyParser.json(),
+  dataRouter,
+);
 
 app.get('/kill', (req, res) => {
   res.send('I am dead');
@@ -81,5 +87,5 @@ app.get('*', (req, res) => {
 export async function start() {
   await dbInit();
   await restServers(dataRouter);
-  await listen(REST_PORT);
+  await listen(process.env.REACT_APP_REST_PORT);
 }

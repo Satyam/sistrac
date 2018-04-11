@@ -1,7 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-import { SECRET, COOKIE_NAME } from '../../config';
-
 import {
   initRoutes,
   testREST,
@@ -197,7 +195,10 @@ describe('restServers/usuarios', () => {
         method: GET,
         path: 'whatever',
         cookies: {
-          [COOKIE_NAME]: jwt.sign({ ...NUEVO_USUARIO, ...roles }, SECRET),
+          [process.env.REACT_APP_COOKIE_NAME]: jwt.sign(
+            { ...NUEVO_USUARIO, ...roles },
+            process.env.REACT_APP_COOKIE_SECRET,
+          ),
         },
       };
 
@@ -217,7 +218,10 @@ describe('restServers/usuarios', () => {
         method: GET,
         path: '.... /login',
         cookies: {
-          [COOKIE_NAME]: jwt.sign({ ...NUEVO_USUARIO, ...roles }, SECRET),
+          [process.env.REACT_APP_COOKIE_NAME]: jwt.sign(
+            { ...NUEVO_USUARIO, ...roles },
+            process.env.REACT_APP_COOKIE_SECRET,
+          ),
         },
       };
       authenticate(
@@ -236,7 +240,10 @@ describe('restServers/usuarios', () => {
         method: GET,
         path: '.... /login',
         cookies: {
-          [COOKIE_NAME]: jwt.sign({ ...NUEVO_USUARIO, ...roles }, SECRET),
+          [process.env.REACT_APP_COOKIE_NAME]: jwt.sign(
+            { ...NUEVO_USUARIO, ...roles },
+            process.env.REACT_APP_COOKIE_SECRET,
+          ),
         },
       };
       authenticate(
@@ -255,9 +262,9 @@ describe('restServers/usuarios', () => {
         method: GET,
         path: 'whatever',
         cookies: {
-          [COOKIE_NAME]: jwt.sign(
+          [process.env.REACT_APP_COOKIE_NAME]: jwt.sign(
             { ...NUEVO_USUARIO, ...roles },
-            `${SECRET} asdf`,
+            `${process.env.REACT_APP_COOKIE_SECRET} asdf`,
           ),
         },
       };

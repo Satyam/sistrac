@@ -27,8 +27,6 @@ import {
   STATUS_LOGGED_OUT,
 } from './constants';
 
-import { SESSION_TIMEOUT } from '_src/config';
-
 export default (
   state = { hash: {}, activo: null, vence: null, status: STATUS_INITIAL },
   action,
@@ -84,7 +82,7 @@ export default (
           return {
             ...state,
             activo: idUsuario,
-            vence: Date.now() + SESSION_TIMEOUT * 1000,
+            vence: Date.now() + process.env.REACT_APP_SESSION_TIMEOUT * 1000,
             hash: { ...state.hash, [idUsuario]: usuario },
             status: STATUS_LOGGED_IN,
           };

@@ -2,7 +2,6 @@
 // import { resolve } from 'path';
 
 import mysql from 'node-mysql-promise2';
-import { SQL_HOST, DB_NAME, SQL_USER, SQL_PASSWORD } from '../config';
 import initEstaciones from './estaciones';
 import initUsuarios from './usuarios';
 import initTipos from './tipos';
@@ -23,10 +22,10 @@ export async function init(mock) {
   db =
     mock ||
     (await mysql.createConnection({
-      host: SQL_HOST,
-      user: SQL_USER,
-      password: SQL_PASSWORD,
-      database: DB_NAME,
+      host: process.env.REACT_APP_SQL_HOST,
+      user: process.env.REACT_APP_SQL_USER,
+      password: process.env.REACT_APP_SQL_PASSWORD,
+      database: process.env.REACT_APP_DB_NAME,
       charset: 'utf8_spanish_ci',
     }));
 

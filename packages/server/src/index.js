@@ -1,6 +1,5 @@
 import terminus from '@godaddy/terminus';
 import { server, start, stop } from './server';
-import { REST_HOST, REST_PORT } from './config';
 
 terminus(server, {
   onSignal: () => {
@@ -8,14 +7,22 @@ terminus(server, {
     return stop();
   },
   onShutdown: () => {
-    console.log(`Server at ${REST_HOST}:${REST_PORT}/ closed`);
+    console.log(
+      `Server at ${process.env.REACT_APP_REST_HOST}:${
+        process.env.REACT_APP_REST_PORT
+      }/ closed`,
+    );
   },
 });
 
 async function startup() {
   try {
     await start();
-    console.log(`Server running at ${REST_HOST}:${REST_PORT}/`);
+    console.log(
+      `Server running at ${process.env.REACT_APP_REST_HOST}:${
+        process.env.REACT_APP_REST_PORT
+      }/`,
+    );
   } catch (err) {
     console.error(err);
     process.exit(1);

@@ -3,8 +3,6 @@ import reduxThunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import promiseMiddleware from '_store/utils/promiseMiddleware';
 
-import { REST_PORT, REST_HOST, REST_API_PATH } from '_src/config';
-
 import { LOGIN, LOGOUT, GET_USUARIO_ACTUAL } from '../constants';
 import { login, logout, getUsuarioActual } from '../actions';
 import {
@@ -13,7 +11,9 @@ import {
   FAILURE_RECEIVED,
 } from '_store/utils/promiseMiddleware';
 
-const HOST = `${REST_HOST}:${REST_PORT}${REST_API_PATH}/usuarios`;
+const HOST = `${process.env.REACT_APP_REST_HOST}:${
+  process.env.REACT_APP_REST_PORT
+}${process.env.REACT_APP_REST_PATH}/usuarios`;
 
 const usuario = {
   idUsuario: 20,

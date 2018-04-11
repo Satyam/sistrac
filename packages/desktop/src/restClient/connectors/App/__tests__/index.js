@@ -3,8 +3,6 @@ import configureStore from 'redux-mock-store';
 import reduxThunk from 'redux-thunk';
 import promiseMiddleware from '_store/utils/promiseMiddleware';
 
-import { REST_PORT, REST_HOST, REST_API_PATH } from '_src/config';
-
 import { LOGOUT, GET_USUARIO_ACTUAL } from '_store/usuarios/constants';
 import { REPLY_RECEIVED, REQUEST_SENT } from '_store/utils/promiseMiddleware';
 import {
@@ -14,7 +12,9 @@ import {
 
 import { mapStateToProps, mapDispatchToProps } from '..';
 
-const HOST = `${REST_HOST}:${REST_PORT}${REST_API_PATH}/usuarios`;
+const HOST = `${process.env.REACT_APP_REST_HOST}:${
+  process.env.REACT_APP_REST_PORT
+}${process.env.REACT_APP_REST_PATH}/usuarios`;
 const mockStore = configureStore([reduxThunk, promiseMiddleware]);
 
 const usuario = {

@@ -4,23 +4,20 @@
   "description": "Sistrac - server",
   "main": "lib/index.js",
   "scripts": {
-    "test": "jest",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test": "env-cmd --fallback ./.env.test jest",
+    "test:debug":
+      "env-cmd --fallback ./.env.test node --inspect-brk node_modules/.bin/jest --runInBand",
     "build": "run-s build:clean build:compile",
     "build:clean": "rimraf lib",
-    "build:compile": "babel src -d lib -s --ignore _*",
+    "build:compile":
+      "env-cmd --fallback ./.env.local babel src -d lib -s --ignore _*",
     "start": "nodemon --watch src/ --ignore _* --exec npm run buildAndRun",
     "buildAndRun": "run-s build run",
-    "run": "node lib/index.js",
-    "debug": "node --inspect-brk lib/index.js",
+    "run": "env-cmd --fallback ./.env.local node lib/index.js",
+    "debug": "env-cmd --fallback ./.env.local node --inspect-brk lib/index.js",
     "lint": "eslint --ext .jsx,.js . || exit 0"
   },
-  "keywords": [
-    "rastreo",
-    "control",
-    "trenes",
-    "ferroviario"
-  ],
+  "keywords": ["rastreo", "control", "trenes", "ferroviario"],
   "author": "Daniel Barreiro",
   "license": "MIT",
   "devDependencies": {
@@ -47,6 +44,7 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "debug": "^3.1.0",
+    "env-cmd": "^7.0.0",
     "express": "^4.16.3",
     "graphql": "^0.13.2",
     "graphql-tools": "^2.23.1",

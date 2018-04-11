@@ -1,5 +1,4 @@
 import { start, stop } from '../server';
-import { REST_HOST, REST_PORT, REST_API_PATH } from '../config';
 
 const fetch = require('node-fetch');
 
@@ -8,7 +7,11 @@ describe('server integration test', () => {
   afterAll(stop);
 
   it('echo', async () => {
-    const resp = await fetch(`${REST_HOST}:${REST_PORT}/echo`);
+    const resp = await fetch(
+      `${process.env.REACT_APP_REST_HOST}:${
+        process.env.REACT_APP_REST_PORT
+      }/echo`,
+    );
     expect(resp.ok).toBeTruthy();
     expect(resp.status).toBe(200);
     const req = await resp.json();
@@ -18,7 +21,9 @@ describe('server integration test', () => {
 
   it('login', async () => {
     const resp = await fetch(
-      `${REST_HOST}:${REST_PORT}${REST_API_PATH}/usuarios/login`,
+      `${process.env.REACT_APP_REST_HOST}:${process.env.REACT_APP_REST_PORT}${
+        process.env.REACT_APP_REST_PATH
+      }/usuarios/login`,
       {
         method: 'PUT',
         body: JSON.stringify({

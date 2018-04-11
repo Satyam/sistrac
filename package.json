@@ -5,9 +5,9 @@
     "bootstrap": "lerna bootstrap --hoist",
     "test": "CI=true lerna run test --stream",
     "lint": "lerna run lint --stream",
-    "config": "node ./scripts/copyConfig.js",
+    "env": "node ./scripts/copyEnv.js",
     "vroots": "lerna exec node \\$LERNA_ROOT_PATH/scripts/vRoots.js",
-    "postinstall": "npm run config && npm run vroots"
+    "postinstall": "npm run env && npm run vroots"
   },
   "devDependencies": {
     "deep-object-diff": "^1.1.0",

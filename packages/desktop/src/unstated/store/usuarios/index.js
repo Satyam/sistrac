@@ -3,8 +3,6 @@ import { Container } from 'unstated';
 import restAPI from '_store/utils/restAPI';
 import indexBy from '_store/utils/indexBy';
 
-import { SESSION_TIMEOUT } from '_src/config';
-
 import {
   NAME,
   STATUS_INITIAL,
@@ -76,7 +74,7 @@ export default class Usuarios extends Container<UsuariosState> {
     const { idUsuario } = usuario;
     this.setState({
       activo: idUsuario,
-      vence: Date.now() + SESSION_TIMEOUT * 1000,
+      vence: Date.now() + process.env.REACT_APP_SESSION_TIMEOUT * 1000,
       hash: { ...this.state.hash, [idUsuario]: usuario },
       status: STATUS_LOGGED_IN,
     });

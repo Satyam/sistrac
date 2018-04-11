@@ -1,16 +1,19 @@
 import jwt from 'jsonwebtoken';
-import { SECRET, SESSION_TIMEOUT, COOKIE_NAME } from '../config';
 
 export function getCookie(req) {
-  return req.cookies && req.cookies[COOKIE_NAME];
+  return req.cookies && req.cookies[process.env.REACT_APP_COOKIE_NAME];
 }
 
 export function setCookie(res, data) {
-  res.cookie(COOKIE_NAME, jwt.sign(data, SECRET), {
-    maxAge: SESSION_TIMEOUT,
-  });
+  res.cookie(
+    process.env.REACT_APP_COOKIE_NAME,
+    jwt.sign(data, process.env.REACT_APP_COOKIE_SECRET),
+    {
+      maxAge: process.env.REACT_APP_SESSION_TIMEOUT,
+    },
+  );
 }
 
 export function clearCookie(res) {
-  res.clearCookie(COOKIE_NAME);
+  res.clearCookie(process.env.REACT_APP_COOKIE_NAME);
 }

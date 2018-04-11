@@ -6,8 +6,6 @@ import {
   FAILURE_RECEIVED,
 } from '_store/utils/promiseMiddleware';
 
-import { SESSION_TIMEOUT } from '_src/config';
-
 import {
   STATUS_INITIAL,
   STATUS_UNAUTHORIZED,
@@ -68,7 +66,7 @@ describe('usuarios reducer', () => {
       hash: {
         [usuario.idUsuario]: { ...usuario, ...roles },
       },
-      vence: Date.now() + SESSION_TIMEOUT * 1000,
+      vence: Date.now() + process.env.REACT_APP_SESSION_TIMEOUT * 1000,
       status: STATUS_LOGGED_IN,
     };
     expect(reducer(state, action)).toEqual(newState);
@@ -79,7 +77,7 @@ describe('usuarios reducer', () => {
       hash: {
         [usuario.idUsuario]: { ...usuario, ...roles },
       },
-      vence: Date.now() + SESSION_TIMEOUT * 1000,
+      vence: Date.now() + process.env.REACT_APP_SESSION_TIMEOUT * 1000,
     };
     const action = {
       type: LOGOUT,
@@ -197,7 +195,7 @@ describe('usuarios reducer', () => {
         hash: {
           [usuario.idUsuario]: { ...usuario, ...roles },
         },
-        vence: Date.now() + SESSION_TIMEOUT * 1000,
+        vence: Date.now() + process.env.REACT_APP_SESSION_TIMEOUT * 1000,
         status: STATUS_LOGGED_IN,
       };
       expect(reducer(state, action)).toEqual(newState);

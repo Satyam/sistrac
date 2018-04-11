@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { UNAUTHORIZED } from './httpStatusCodes';
 import { setCookie, getCookie } from './cookie';
-import { SECRET } from '../config';
 
 const bypassAuthenticationPattern = /\/((login)|(signup))$/;
 
@@ -13,7 +12,10 @@ export default function authenticate(req, res, next) {
   const cookie = getCookie(req);
   if (cookie) {
     try {
-      const { iat, ...user } = jwt.verify(cookie, SECRET);
+      const { iat, ...user } = jwt.verify(
+        cookie,
+        process.env.REACT_APP_COOKIE_SECRET,
+      );
       setCookie(res, user);
       req.user = user;
       next();

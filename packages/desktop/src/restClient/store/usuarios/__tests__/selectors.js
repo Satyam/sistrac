@@ -7,8 +7,6 @@ export function selUsuarioActivo(state) {
   return usuarios.hash[usuarios.activo];
 }
 */
-import { SESSION_TIMEOUT } from '_src/config';
-
 import { NAME } from '../constants';
 
 const usuario = {
@@ -27,7 +25,7 @@ describe('selectors usuario', () => {
           hash: {
             [usuario.idUsuario]: usuario,
           },
-          vence: Date.now() + SESSION_TIMEOUT * 1000,
+          vence: Date.now() + process.env.REACT_APP_SESSION_TIMEOUT * 1000,
         },
       };
       expect(selUsuarioActivo(state)).toEqual(usuario);
@@ -39,7 +37,7 @@ describe('selectors usuario', () => {
           hash: {
             [usuario.idUsuario]: usuario,
           },
-          vence: Date.now() + SESSION_TIMEOUT * 1000,
+          vence: Date.now() + process.env.REACT_APP_SESSION_TIMEOUT * 1000,
         },
       };
       expect(selUsuarioActivo(state)).toEqual({});
