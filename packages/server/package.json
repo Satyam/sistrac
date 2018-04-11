@@ -5,19 +5,22 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "env-cmd --fallback ./.env.test jest",
-    "test:debug":
-      "env-cmd --fallback ./.env.test node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test:debug": "env-cmd --fallback ./.env.test node --inspect-brk node_modules/.bin/jest --runInBand",
     "build": "run-s build:clean build:compile",
     "build:clean": "rimraf lib",
-    "build:compile":
-      "env-cmd --fallback ./.env.local babel src -d lib -s --ignore _*",
+    "build:compile": "env-cmd --fallback ./.env.local babel src -d lib -s --ignore _*",
     "start": "nodemon --watch src/ --ignore _* --exec npm run buildAndRun",
     "buildAndRun": "run-s build run",
     "run": "env-cmd --fallback ./.env.local node lib/index.js",
     "debug": "env-cmd --fallback ./.env.local node --inspect-brk lib/index.js",
     "lint": "eslint --ext .jsx,.js . || exit 0"
   },
-  "keywords": ["rastreo", "control", "trenes", "ferroviario"],
+  "keywords": [
+    "rastreo",
+    "control",
+    "trenes",
+    "ferroviario"
+  ],
   "author": "Daniel Barreiro",
   "license": "MIT",
   "devDependencies": {
@@ -28,17 +31,17 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "jest": "^22.4.3",
-    "nodemon": "^1.17.2",
+    "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
     "@godaddy/terminus": "^2.2.0",
-    "apollo-server-express": "^1.3.2",
+    "apollo-server-express": "^1.3.4",
     "body-parser": "^1.18.2",
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
@@ -47,13 +50,13 @@
     "env-cmd": "^7.0.0",
     "express": "^4.16.3",
     "graphql": "^0.13.2",
-    "graphql-tools": "^2.23.1",
-    "jsonwebtoken": "^8.2.0",
+    "graphql-tools": "^2.24.0",
+    "jsonwebtoken": "^8.2.1",
     "lodash": "^4.17.5",
     "md5": "^2.2.1",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
-    "node-fetch": "^2.1.1",
+    "node-fetch": "^2.1.2",
     "node-mysql-promise2": "^0.1.2"
   }
 }

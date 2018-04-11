@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "deep-object-diff": "^1.1.0",
-    "lerna": "^2.9.0",
+    "lerna": "^2.10.1",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.2"
   },
